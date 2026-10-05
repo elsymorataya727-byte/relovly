@@ -11,20 +11,20 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --coral:        #E85A4F;
-    --coral-dark:   #D14A40;
-    --coral-soft:   #FDE9E7;
-    --bg:           #FAFAF8;
-    --card:         #FFFFFF;
-    --border:       #EBE8E3;
-    --border-strong:#DDD8D0;
-    --text:         #1A1A1A;
-    --text-2:       #6B6B6B;
-    --text-3:       #9A9A9A;
-    --green:        #2E7D5B;
-    --green-soft:   #E4F2EB;
-    --amber:        #C7873B;
-    --amber-soft:   #FAEFDD;
+    --coral: #E85A4F;
+    --coral-dark: #D14A40;
+    --coral-soft: #FDE9E7;
+    --bg: #FAFAF8;
+    --card: #FFFFFF;
+    --border: #EBE8E3;
+    --border-strong: #DDD8D0;
+    --text: #1A1A1A;
+    --text-2: #6B6B6B;
+    --text-3: #9A9A9A;
+    --green: #2E7D5B;
+    --green-soft: #E4F2EB;
+    --amber: #C7873B;
+    --amber-soft: #FAEFDD;
     --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
     --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
     --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
@@ -42,144 +42,46 @@
   /* ============================================
      NAVIGATION
      ============================================ */
-  .nav {
-    position: sticky; top: 0; z-index: 100;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    padding: 0 16px;
-  }
+  .nav { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 0 16px; }
   .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 20px; height: 64px; }
-
-  /* LOGO — Option B: loop symbol + wordmark */
   .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .logo-mark {
-    width: 34px; height: 34px;
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-  }
+  .logo-mark { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
   .logo-mark svg { width: 34px; height: 34px; }
-  .logo-text {
-    font-family: var(--font-display);
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.6px;
-    line-height: 1;
-  }
+  .logo-text { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--text); letter-spacing: -0.6px; line-height: 1; }
   .logo-text em { font-style: normal; color: var(--coral); }
 
   .nav-search { flex: 1; max-width: 560px; position: relative; display: none; }
-  .nav-search input {
-    width: 100%; height: 42px; padding: 0 16px 0 44px;
-    border: 1px solid var(--border); background: var(--bg);
-    border-radius: var(--r-pill); font-size: 14px; font-family: inherit;
-    color: var(--text); outline: none;
-    transition: border-color 0.15s, background 0.15s;
-  }
+  .nav-search input { width: 100%; height: 42px; padding: 0 16px 0 44px; border: 1px solid var(--border); background: var(--bg); border-radius: var(--r-pill); font-size: 14px; font-family: inherit; color: var(--text); outline: none; transition: border-color 0.15s, background 0.15s; }
   .nav-search input:focus { border-color: var(--coral); background: var(--card); }
   .nav-search input::placeholder { color: var(--text-3); }
   .nav-search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-3); pointer-events: none; }
 
   .nav-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
-  .icon-btn {
-    width: 40px; height: 40px; border-radius: var(--r-pill);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--text-2); transition: background 0.15s, color 0.15s; position: relative;
-  }
+  .icon-btn { width: 40px; height: 40px; border-radius: var(--r-pill); display: flex; align-items: center; justify-content: center; color: var(--text-2); transition: background 0.15s, color 0.15s; position: relative; }
   .icon-btn:hover { background: var(--bg); color: var(--text); }
   .icon-btn .dot { position: absolute; top: 8px; right: 8px; width: 8px; height: 8px; background: var(--coral); border-radius: 50%; border: 2px solid var(--card); }
 
-  /* BUY button (changed from Sell) */
-  .btn-buy {
-    display: flex; align-items: center; gap: 6px;
-    height: 40px; padding: 0 18px;
-    background: var(--coral); color: white;
-    border-radius: var(--r-pill); font-weight: 600; font-size: 14px;
-    transition: background 0.15s, transform 0.1s;
-  }
+  .btn-buy { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; background: var(--coral); color: white; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; transition: background 0.15s, transform 0.1s; }
   .btn-buy:hover { background: var(--coral-dark); }
   .btn-buy:active { transform: scale(0.98); }
 
   /* ============================================
-     HERO — IMAGE-ONLY SLIDER (short height)
+     HERO SLIDER
      ============================================ */
-  .hero-slider {
-    position: relative;
-    max-width: 1400px;
-    margin: 16px auto 0;
-    padding: 0 16px;
-  }
-  .slider-viewport {
-    position: relative;
-    width: 100%;
-    height: 280px;
-    border-radius: var(--r-lg);
-    overflow: hidden;
-    background: #EFEBE4;
-    box-shadow: var(--shadow-md);
-  }
-  .slides-track {
-    display: flex;
-    height: 100%;
-    transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
-    will-change: transform;
-  }
-  .slide {
-    flex: 0 0 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-  }
-  .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+  .hero-slider { position: relative; max-width: 1400px; margin: 16px auto 0; padding: 0 16px; }
+  .slider-viewport { position: relative; width: 100%; height: 280px; border-radius: var(--r-lg); overflow: hidden; background: #EFEBE4; box-shadow: var(--shadow-md); }
+  .slides-track { display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); will-change: transform; }
+  .slide { flex: 0 0 100%; height: 100%; position: relative; overflow: hidden; }
+  .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  /* Arrows (desktop) */
-  .slider-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 42px; height: 42px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(8px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    color: var(--text);
-    box-shadow: var(--shadow-md);
-    transition: background 0.15s, transform 0.15s;
-    z-index: 5;
-  }
+  .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; color: var(--text); box-shadow: var(--shadow-md); transition: background 0.15s, transform 0.15s; z-index: 5; }
   .slider-arrow:hover { background: white; transform: translateY(-50%) scale(1.06); }
   .slider-arrow.prev { left: 16px; }
   .slider-arrow.next { right: 16px; }
 
-  /* Dots */
-  .slider-dots {
-    position: absolute;
-    bottom: 14px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 5;
-  }
-  .slider-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.55);
-    transition: background 0.2s, width 0.2s;
-    cursor: pointer;
-  }
-  .slider-dot.active {
-    background: white;
-    width: 24px;
-    border-radius: var(--r-pill);
-  }
+  .slider-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; }
+  .slider-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.55); transition: background 0.2s, width 0.2s; cursor: pointer; }
+  .slider-dot.active { background: white; width: 24px; border-radius: var(--r-pill); }
 
   /* ============================================
      CATEGORIES
@@ -234,8 +136,7 @@
     font-size: 10px; font-weight: 600; letter-spacing: 0.2px;
     text-transform: uppercase; backdrop-filter: blur(6px);
   }
-  .badge-protect  { background: rgba(232, 90, 79, 0.92); color: white; }
-  .badge-verified { background: rgba(46, 125, 91, 0.92); color: white; }
+  .badge-protect { background: rgba(232, 90, 79, 0.92); color: white; }
   .badge-featured { background: rgba(26, 26, 26, 0.85); color: white; }
 
   .card-like {
@@ -286,6 +187,94 @@
   .cat-tile-count { font-size: 12px; opacity: 0.85; margin-top: 2px; }
 
   /* ============================================
+     EMPTY STATE
+     ============================================ */
+  .empty-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+    background: var(--card);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--r-lg);
+    text-align: center;
+    grid-column: 1 / -1;
+  }
+  .empty-icon {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--coral-soft);
+    color: var(--coral);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+  }
+  .empty-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.4px;
+    margin-bottom: 6px;
+  }
+  .empty-desc {
+    font-size: 14px;
+    color: var(--text-2);
+    max-width: 400px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .empty-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 42px;
+    padding: 0 20px;
+    background: var(--coral);
+    color: white;
+    border-radius: var(--r-md);
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.15s;
+  }
+  .empty-btn:hover { background: var(--coral-dark); }
+
+  /* Loading skeleton */
+  .skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .skeleton {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  .skeleton-media {
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(90deg, #F5F2ED, #EBE7E0, #F5F2ED);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  .skeleton-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .skeleton-line {
+    height: 12px;
+    background: linear-gradient(90deg, #F5F2ED, #EBE7E0, #F5F2ED);
+    background-size: 200% 100%;
+    border-radius: 4px;
+    animation: shimmer 1.5s infinite;
+  }
+  .skeleton-line.short { width: 60%; }
+  .skeleton-line.price { height: 20px; width: 40%; }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* ============================================
      FOOTER
      ============================================ */
   .footer { background: var(--card); border-top: 1px solid var(--border); margin-top: 48px; padding: 48px 16px 32px; }
@@ -301,19 +290,10 @@
   .footer-trending { padding-top: 32px; border-top: 1px solid var(--border); }
   .footer-trending h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-2); margin-bottom: 14px; }
   .trend-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .trend-chip {
-    padding: 6px 12px; background: var(--bg); border: 1px solid var(--border);
-    border-radius: var(--r-pill); font-size: 12px; color: var(--text-2);
-    transition: border-color 0.15s, color 0.15s; cursor: pointer;
-  }
+  .trend-chip { padding: 6px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-pill); font-size: 12px; color: var(--text-2); transition: border-color 0.15s, color 0.15s; cursor: pointer; }
   .trend-chip:hover { border-color: var(--coral); color: var(--coral); }
 
-  .footer-bottom {
-    margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border);
-    display: flex; flex-wrap: wrap; gap: 12px 24px;
-    align-items: center; justify-content: space-between;
-    font-size: 13px; color: var(--text-3);
-  }
+  .footer-bottom { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text-3); }
   .footer-bottom-links { display: flex; flex-wrap: wrap; gap: 16px; }
   .footer-bottom-links a:hover { color: var(--coral); }
 
@@ -326,11 +306,7 @@
     display: flex; justify-content: space-around; align-items: center;
     padding: 8px 0 10px; z-index: 99;
   }
-  .mobile-bar-item {
-    display: flex; flex-direction: column; align-items: center; gap: 3px;
-    font-size: 10px; color: var(--text-3); padding: 4px 12px;
-    transition: color 0.15s;
-  }
+  .mobile-bar-item { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; color: var(--text-3); padding: 4px 12px; transition: color 0.15s; }
   .mobile-bar-item.active { color: var(--coral); }
   .mobile-bar-buy {
     width: 48px; height: 48px; border-radius: 50%;
@@ -350,6 +326,7 @@
   @media (min-width: 768px) {
     .nav-search { display: block; }
     .grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .skeleton-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .cat-tiles { grid-template-columns: repeat(3, 1fr); }
     .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
     .mobile-bar { display: none; }
@@ -360,6 +337,7 @@
 
   @media (min-width: 1200px) {
     .grid { grid-template-columns: repeat(4, 1fr); }
+    .skeleton-grid { grid-template-columns: repeat(4, 1fr); }
     .cat-tiles { grid-template-columns: repeat(4, 1fr); }
     .section { padding: 40px 24px; }
     .slider-viewport { height: 420px; }
@@ -382,7 +360,7 @@
      ============================================ -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="/" class="logo">
+    <a href="index.html" class="logo">
       <span class="logo-mark">
         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -404,21 +382,21 @@
       <span class="nav-search-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       </span>
-      <input type="text" placeholder="Search cameras, watches, bicycles...">
+      <input type="text" id="navSearchInput" placeholder="Search cameras, watches, bicycles..." onkeydown="if(event.key==='Enter'){window.location.href='catalog.html?q='+encodeURIComponent(this.value)}">
     </div>
 
     <div class="nav-actions">
       <button class="icon-btn" aria-label="Notifications">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-        <span class="dot"></span>
+        <span class="dot" id="notifDot" style="display:none;"></span>
       </button>
       <button class="icon-btn" aria-label="Messages">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       </button>
-      <button class="icon-btn" aria-label="Profile">
+      <a href="account.html" class="icon-btn" aria-label="Profile" id="profileBtn">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </button>
-      <a href="#" class="btn-buy">
+      </a>
+      <a href="catalog.html" class="btn-buy">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         Buy
       </a>
@@ -427,7 +405,7 @@
 </nav>
 
 <!-- ============================================
-     HERO — IMAGE-ONLY SLIDER
+     HERO SLIDER
      ============================================ -->
 <section class="hero-slider">
   <div class="slider-viewport">
@@ -466,19 +444,8 @@
      CATEGORIES
      ============================================ -->
 <div class="categories">
-  <div class="categories-inner">
-    <a href="#" class="cat-pill"><span class="cat-icon">📱</span><span class="cat-label">Phones</span></a>
-    <a href="#" class="cat-pill"><span class="cat-icon">💻</span><span class="cat-label">Laptops</span></a>
-    <a href="#" class="cat-pill"><span class="cat-icon">📷</span><span class="cat-label">Cameras</span></a>
-    <a href="#" class="cat-pill"><span class="cat-icon">⌚</span><span class="cat-label">Watches</span></a>
-    <a href="#" class="cat-pill"><span class="cat-icon">🚲</span><span class="cat-label">Bicycles</span></a>
-    <a href="#" class="cat-pill"><span class="cat-icon">🛋️</span><span class="cat-label">Furniture</span></a>
-    <a href="#" class="cat-pill"><span class="cat-icon">👕</span><span class="cat-label">Fashion</span></a>
-    <a href="#" class="cat-pill"><span class="cat-icon">🎮</span><span class="cat-label">Gaming</span></a>
-    <a href="#" class="cat-pill"><span class="cat-icon">🎸</span><span class="cat-label">Music</span></a>
-    <a href="#" class="cat-pill"><span class="cat-icon">🏄</span><span class="cat-label">Sports</span></a>
-    <a href="#" class="cat-pill"><span class="cat-icon">🚗</span><span class="cat-label">Cars</span></a>
-    <a href="#" class="cat-pill"><span class="cat-icon">🛥️</span><span class="cat-label">Boats</span></a>
+  <div class="categories-inner" id="categoriesRow">
+    <!-- Loaded from Supabase -->
   </div>
 </div>
 
@@ -488,196 +455,39 @@
 <section class="section">
   <div class="section-head">
     <h2 class="section-title">Featured Products</h2>
-    <a href="#" class="section-link">View all →</a>
+    <a href="catalog.html" class="section-link">View all →</a>
   </div>
 
-  <div class="grid">
-
-    <article class="card">
-      <div class="card-media">
-        <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
-        <button class="card-like" aria-label="Save">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="card-body">
-        <div class="card-seller">
-          <span class="card-avatar">H</span>
-          <span class="card-seller-name">heinrie.studios</span>
-          <span class="card-time">2d ago</span>
-        </div>
-        <h3 class="card-title">Canon EOS 7D Mark II — Pristine Condition, Like New</h3>
-        <div class="card-price">£512</div>
-        <div class="card-meta">
-          <span class="chip chip-new">Like new</span>
-          <span class="chip chip-ship">Free delivery</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="card-media">
-        <div class="card-badges"><span class="badge badge-featured">Featured</span></div>
-        <button class="card-like" aria-label="Save">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="card-body">
-        <div class="card-seller">
-          <span class="card-avatar">L</span>
-          <span class="card-seller-name">lemonz</span>
-          <span class="card-time">6mo ago</span>
-        </div>
-        <h3 class="card-title">Studio Backdrop Cloth + Stand Bundle</h3>
-        <div class="card-price">£70</div>
-        <div class="card-meta"><span class="chip chip-new">Brand new</span></div>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="card-media">
-        <div class="card-badges"><span class="badge badge-verified">✓ Verified Seller</span></div>
-        <button class="card-like" aria-label="Save">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="card-body">
-        <div class="card-seller">
-          <span class="card-avatar">J</span>
-          <span class="card-seller-name">jjwangae</span>
-          <span class="card-time">4d ago</span>
-        </div>
-        <h3 class="card-title">Nikon D5300 + Tamron 18–270mm VC PZD Complete Set</h3>
-        <div class="card-price">£498</div>
-        <div class="card-meta">
-          <span class="chip chip-used">Well used</span>
-          <span class="chip chip-ship">Shipping</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="card-media">
-        <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
-        <button class="card-like" aria-label="Save">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="card-body">
-        <div class="card-seller">
-          <span class="card-avatar">S</span>
-          <span class="card-seller-name">spaceman118</span>
-          <span class="card-time">1mo ago</span>
-        </div>
-        <h3 class="card-title">Olympus 8–25mm f/4 OM System M43 Lens</h3>
-        <div class="card-price">£880</div>
-        <div class="card-meta">
-          <span class="chip chip-new">Lightly used</span>
-          <span class="chip chip-ship">Shipping</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="card-media">
-        <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
-        <button class="card-like" aria-label="Save">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="card-body">
-        <div class="card-seller">
-          <span class="card-avatar">C</span>
-          <span class="card-seller-name">cookies57</span>
-          <span class="card-time">1d ago</span>
-        </div>
-        <h3 class="card-title">Fujifilm XF 35mm f/1.4 R Lens</h3>
-        <div class="card-price">£699</div>
-        <div class="card-meta"><span class="chip chip-new">Lightly used</span></div>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="card-media">
-        <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
-        <button class="card-like" aria-label="Save">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="card-body">
-        <div class="card-seller">
-          <span class="card-avatar">K</span>
-          <span class="card-seller-name">keenwatersg</span>
-          <span class="card-time">1d ago</span>
-        </div>
-        <h3 class="card-title">Fujifilm Instax Mini 12 Instant Camera with Bag & Manual</h3>
-        <div class="card-price">£99</div>
-        <div class="card-meta"><span class="chip chip-new">Like new</span></div>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="card-media">
-        <div class="card-badges"><span class="badge badge-featured">Featured</span></div>
-        <button class="card-like" aria-label="Save">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="card-body">
-        <div class="card-seller">
-          <span class="card-avatar">T</span>
-          <span class="card-seller-name">tomcel</span>
-          <span class="card-time">4mo ago</span>
-        </div>
-        <h3 class="card-title">Nikon NIKKOR Z 135mm f/1.8 S Plena Lens</h3>
-        <div class="card-price">£2,300</div>
-        <div class="card-meta">
-          <span class="chip chip-new">Like new</span>
-          <span class="chip chip-ship">Shipping</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="card-media">
-        <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
-        <button class="card-like" aria-label="Save">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="card-body">
-        <div class="card-seller">
-          <span class="card-avatar">A</span>
-          <span class="card-seller-name">ayeesha</span>
-          <span class="card-time">1d ago</span>
-        </div>
-        <h3 class="card-title">Canon IXY Digital L Rose Gold Compact Camera</h3>
-        <div class="card-price">£200</div>
-        <div class="card-meta"><span class="chip chip-new">Lightly used</span></div>
-      </div>
-    </article>
-
+  <div class="grid" id="featuredGrid">
+    <!-- Loaded from Supabase -->
   </div>
 </section>
 
 <!-- ============================================
-     POPULAR CATEGORIES
+     POPULAR CATEGORIES (TILES)
      ============================================ -->
 <section class="section">
   <div class="section-head">
     <h2 class="section-title">Popular Categories</h2>
-    <a href="#" class="section-link">All categories →</a>
+    <a href="catalog.html" class="section-link">All categories →</a>
   </div>
 
-  <div class="cat-tiles">
-    <a href="#" class="cat-tile"><div class="cat-tile-content"><div class="cat-tile-name">Cameras</div><div class="cat-tile-count">12,480 items</div></div></a>
-    <a href="#" class="cat-tile"><div class="cat-tile-content"><div class="cat-tile-name">Watches</div><div class="cat-tile-count">8,320 items</div></div></a>
-    <a href="#" class="cat-tile"><div class="cat-tile-content"><div class="cat-tile-name">Bicycles</div><div class="cat-tile-count">6,145 items</div></div></a>
-    <a href="#" class="cat-tile"><div class="cat-tile-content"><div class="cat-tile-name">Laptops</div><div class="cat-tile-count">9,872 items</div></div></a>
-    <a href="#" class="cat-tile"><div class="cat-tile-content"><div class="cat-tile-name">Furniture</div><div class="cat-tile-count">4,209 items</div></div></a>
-    <a href="#" class="cat-tile"><div class="cat-tile-content"><div class="cat-tile-name">Phones</div><div class="cat-tile-count">15,340 items</div></div></a>
-    <a href="#" class="cat-tile"><div class="cat-tile-content"><div class="cat-tile-name">Fashion</div><div class="cat-tile-count">22,118 items</div></div></a>
-    <a href="#" class="cat-tile"><div class="cat-tile-content"><div class="cat-tile-name">Gaming</div><div class="cat-tile-count">7,654 items</div></div></a>
+  <div class="cat-tiles" id="categoryTiles">
+    <!-- Loaded from Supabase -->
+  </div>
+</section>
+
+<!-- ============================================
+     RECENTLY ADDED
+     ============================================ -->
+<section class="section">
+  <div class="section-head">
+    <h2 class="section-title">Recently Added</h2>
+    <a href="catalog.html" class="section-link">View all →</a>
+  </div>
+
+  <div class="grid" id="recentGrid">
+    <!-- Loaded from Supabase -->
   </div>
 </section>
 
@@ -689,7 +499,7 @@
 
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="/" class="logo">
+        <a href="index.html" class="logo">
           <span class="logo-mark">
             <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -743,16 +553,16 @@
     <div class="footer-trending">
       <h4>Trending Searches</h4>
       <div class="trend-chips">
-        <span class="trend-chip">Canon EOS</span>
-        <span class="trend-chip">iPhone 15 Pro</span>
-        <span class="trend-chip">MacBook Air M2</span>
-        <span class="trend-chip">Rolex Submariner</span>
-        <span class="trend-chip">Fujifilm X100V</span>
-        <span class="trend-chip">PlayStation 5</span>
-        <span class="trend-chip">Vintage Bicycle</span>
-        <span class="trend-chip">Mid-century Sofa</span>
-        <span class="trend-chip">Leica M</span>
-        <span class="trend-chip">Nintendo Switch</span>
+        <a href="catalog.html?q=canon" class="trend-chip">Canon EOS</a>
+        <a href="catalog.html?q=iphone" class="trend-chip">iPhone 15 Pro</a>
+        <a href="catalog.html?q=macbook" class="trend-chip">MacBook Air M2</a>
+        <a href="catalog.html?q=rolex" class="trend-chip">Rolex Submariner</a>
+        <a href="catalog.html?q=fujifilm" class="trend-chip">Fujifilm X100V</a>
+        <a href="catalog.html?q=playstation" class="trend-chip">PlayStation 5</a>
+        <a href="catalog.html?q=bicycle" class="trend-chip">Vintage Bicycle</a>
+        <a href="catalog.html?q=sofa" class="trend-chip">Mid-century Sofa</a>
+        <a href="catalog.html?q=leica" class="trend-chip">Leica M</a>
+        <a href="catalog.html?q=nintendo" class="trend-chip">Nintendo Switch</a>
       </div>
     </div>
 
@@ -773,7 +583,7 @@
      MOBILE BOTTOM BAR
      ============================================ -->
 <nav class="mobile-bar">
-  <a href="/" class="mobile-bar-item active">
+  <a href="index.html" class="mobile-bar-item active">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     Home
   </a>
@@ -781,7 +591,7 @@
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
     Saved
   </a>
-  <a href="#" class="mobile-bar-item">
+  <a href="catalog.html" class="mobile-bar-item">
     <span class="mobile-bar-buy">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
     </span>
@@ -790,23 +600,36 @@
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     Chat
   </a>
-  <a href="#" class="mobile-bar-item">
+  <a href="account.html" class="mobile-bar-item">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     Me
   </a>
 </nav>
 
+<!-- ============================================
+     SUPABASE CLIENT
+     ============================================ -->
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+  const SUPABASE_URL = 'https://osebqasifcnhyuajbyvv.supabase.co'
+  const SUPABASE_KEY = 'sb_publishable_vggy-_2xeONhcsSbiQklsw_hvLC_cgG'
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+  window.supabaseClient = supabase
+  window.dispatchEvent(new Event('supabase-ready'))
+</script>
+
+<!-- ============================================
+     SLIDER
+     ============================================ -->
 <script>
-  // ============================================
-  // SLIDER
-  // ============================================
   const track = document.getElementById('slidesTrack');
   const slides = track.querySelectorAll('.slide');
   const dotsWrap = document.getElementById('sliderDots');
   let current = 0;
   let autoTimer;
 
-  // Build dots
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
@@ -833,24 +656,336 @@
   }
   resetAuto();
 
-  // Swipe support
   let touchStartX = 0;
-  let touchEndX = 0;
   const viewport = document.querySelector('.slider-viewport');
 
   viewport.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
   viewport.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchStartX - touchEndX;
+    const diff = touchStartX - e.changedTouches[0].screenX;
     if (Math.abs(diff) > 40) {
       if (diff > 0) slideNext();
       else slidePrev();
     }
   }, { passive: true });
 
-  // Pause auto on hover (desktop)
   viewport.addEventListener('mouseenter', () => clearInterval(autoTimer));
   viewport.addEventListener('mouseleave', resetAuto);
+</script>
+
+<!-- ============================================
+     HOMEPAGE DATA LOADING
+     ============================================ -->
+<script>
+  // ============================================
+  // HELPERS
+  // ============================================
+  function formatPrice(price, currency) {
+    const n = parseFloat(price || 0)
+    const symbols = { GBP: '£', USD: '$', EUR: '€' }
+    const sym = symbols[currency] || ''
+    return sym + n.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 2 })
+  }
+
+  function timeAgo(dateStr) {
+    const date = new Date(dateStr)
+    const seconds = Math.floor((Date.now() - date.getTime()) / 1000)
+    if (seconds < 60) return 'just now'
+    if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago'
+    if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago'
+    if (seconds < 604800) return Math.floor(seconds / 86400) + 'd ago'
+    if (seconds < 2592000) return Math.floor(seconds / 604800) + 'w ago'
+    if (seconds < 31536000) return Math.floor(seconds / 2592000) + 'mo ago'
+    return Math.floor(seconds / 31536000) + 'y ago'
+  }
+
+  function escapeHtml(str) {
+    if (!str) return ''
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+  }
+
+  function conditionChip(condition) {
+    const map = {
+      brand_new: { label: 'Brand new', cls: 'chip-new' },
+      like_new: { label: 'Like new', cls: 'chip-new' },
+      lightly_used: { label: 'Lightly used', cls: 'chip-used' },
+      well_used: { label: 'Well used', cls: 'chip-used' }
+    }
+    const c = map[condition] || { label: 'Used', cls: 'chip-used' }
+    return `<span class="chip ${c.cls}">${c.label}</span>`
+  }
+
+  // ============================================
+  // SKELETON LOADER
+  // ============================================
+  function skeletonCards(count = 4) {
+    return Array.from({ length: count }).map(() => `
+      <div class="skeleton">
+        <div class="skeleton-media"></div>
+        <div class="skeleton-body">
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line price"></div>
+        </div>
+      </div>
+    `).join('')
+  }
+
+  // ============================================
+  // EMPTY STATE
+  // ============================================
+  function emptyState() {
+    return `
+      <div class="empty-block">
+        <div class="empty-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3 class="empty-title">Nothing here yet</h3>
+        <p class="empty-desc">Listings will appear here as soon as they're uploaded. Check back soon or browse our categories.</p>
+        <a href="catalog.html" class="empty-btn">
+          Browse all categories
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </div>
+    `
+  }
+
+  // ============================================
+  // PRODUCT CARD RENDER
+  // ============================================
+  function renderCard(listing) {
+    const img = Array.isArray(listing.images) && listing.images[0] ? listing.images[0] : ''
+    const isFeatured = listing.is_featured
+    const sellerName = listing.seller_name || 'relovly'
+    const sellerInitial = sellerName[0].toUpperCase()
+
+    return `
+      <article class="card" onclick="window.location.href='product.html?id=${listing.id}'">
+        <div class="card-media">
+          <div class="card-badges">
+            <span class="badge badge-protect">✓ Protected</span>
+            ${isFeatured ? '<span class="badge badge-featured">Featured</span>' : ''}
+          </div>
+          <button class="card-like" onclick="event.stopPropagation(); toggleWishlist(${listing.id}, this)" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+          ${img ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(listing.title)}" loading="lazy">` : ''}
+        </div>
+        <div class="card-body">
+          <div class="card-seller">
+            <span class="card-avatar">${escapeHtml(sellerInitial)}</span>
+            <span class="card-seller-name">${escapeHtml(sellerName)}</span>
+            <span class="card-time">${timeAgo(listing.created_at)}</span>
+          </div>
+          <h3 class="card-title">${escapeHtml(listing.title)}</h3>
+          <div class="card-price">${formatPrice(listing.price, listing.currency)}</div>
+          <div class="card-meta">
+            ${conditionChip(listing.condition)}
+            ${listing.shipping_available ? '<span class="chip chip-ship">Shipping</span>' : ''}
+            ${listing.pickup_available ? '<span class="chip chip-pickup">Pickup</span>' : ''}
+          </div>
+        </div>
+      </article>
+    `
+  }
+
+  // ============================================
+  // LOAD CATEGORIES
+  // ============================================
+  async function loadCategories() {
+    const { data, error } = await window.supabaseClient
+      .from('categories')
+      .select('id, name, slug, icon, sort_order')
+      .eq('is_active', true)
+      .order('sort_order', { ascending: true })
+
+    if (error) {
+      console.error('Categories error:', error)
+      return []
+    }
+    return data || []
+  }
+
+  function renderCategoryRow(categories) {
+    const row = document.getElementById('categoriesRow')
+    if (!categories.length) {
+      row.innerHTML = ''
+      return
+    }
+    row.innerHTML = categories.map(c => `
+      <a href="catalog.html?category=${encodeURIComponent(c.slug)}" class="cat-pill">
+        <span class="cat-icon">${escapeHtml(c.icon || '📦')}</span>
+        <span class="cat-label">${escapeHtml(c.name)}</span>
+      </a>
+    `).join('')
+  }
+
+  async function renderCategoryTiles(categories) {
+    const wrap = document.getElementById('categoryTiles')
+
+    // Get listing counts per category
+    const counts = {}
+    await Promise.all(categories.map(async c => {
+      const { count } = await window.supabaseClient
+        .from('listings')
+        .select('*', { count: 'exact', head: true })
+        .eq('category_id', c.id)
+        .eq('status', 'active')
+      counts[c.id] = count || 0
+    }))
+
+    if (!categories.length) {
+      wrap.innerHTML = ''
+      return
+    }
+
+    wrap.innerHTML = categories.slice(0, 8).map(c => `
+      <a href="catalog.html?category=${encodeURIComponent(c.slug)}" class="cat-tile">
+        <div class="cat-tile-content">
+          <div class="cat-tile-name">${escapeHtml(c.name)}</div>
+          <div class="cat-tile-count">${counts[c.id] || 0} items</div>
+        </div>
+      </a>
+    `).join('')
+  }
+
+  // ============================================
+  // LOAD LISTINGS
+  // ============================================
+  async function loadFeatured() {
+    const grid = document.getElementById('featuredGrid')
+    grid.innerHTML = skeletonCards(4)
+
+    const { data, error } = await window.supabaseClient
+      .from('listings')
+      .select('*')
+      .eq('status', 'active')
+      .eq('is_featured', true)
+      .order('created_at', { ascending: false })
+      .limit(8)
+
+    if (error) {
+      console.error('Featured error:', error)
+      grid.innerHTML = emptyState()
+      return
+    }
+
+    // If no featured listings, fall back to latest 4
+    let listings = data || []
+    if (!listings.length) {
+      const { data: fallback } = await window.supabaseClient
+        .from('listings')
+        .select('*')
+        .eq('status', 'active')
+        .order('created_at', { ascending: false })
+        .limit(4)
+      listings = fallback || []
+    }
+
+    if (!listings.length) {
+      grid.innerHTML = emptyState()
+      return
+    }
+
+    grid.innerHTML = listings.map(renderCard).join('')
+  }
+
+  async function loadRecent() {
+    const grid = document.getElementById('recentGrid')
+    grid.innerHTML = skeletonCards(4)
+
+    const { data, error } = await window.supabaseClient
+      .from('listings')
+      .select('*')
+      .eq('status', 'active')
+      .order('created_at', { ascending: false })
+      .limit(8)
+
+    if (error) {
+      console.error('Recent error:', error)
+      grid.innerHTML = emptyState()
+      return
+    }
+
+    if (!data || !data.length) {
+      grid.innerHTML = emptyState()
+      return
+    }
+
+    grid.innerHTML = data.map(renderCard).join('')
+  }
+
+  // ============================================
+  // WISHLIST TOGGLE
+  // ============================================
+  async function toggleWishlist(listingId, btn) {
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+
+    if (!session) {
+      // Not logged in — redirect to login
+      window.location.href = 'login.html'
+      return
+    }
+
+    // Check if already saved
+    const { data: existing } = await window.supabaseClient
+      .from('wishlists')
+      .select('id')
+      .eq('user_id', session.user.id)
+      .eq('listing_id', listingId)
+      .maybeSingle()
+
+    if (existing) {
+      // Remove
+      await window.supabaseClient.from('wishlists').delete().eq('id', existing.id)
+      btn.classList.remove('active')
+      btn.querySelector('svg').setAttribute('fill', 'none')
+    } else {
+      // Add
+      await window.supabaseClient.from('wishlists').insert({
+        user_id: session.user.id,
+        listing_id: listingId
+      })
+      btn.classList.add('active')
+      btn.querySelector('svg').setAttribute('fill', 'var(--coral)')
+    }
+  }
+
+  // ============================================
+  // CHECK AUTH (update nav state)
+  // ============================================
+  async function checkAuth() {
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (session) {
+      document.getElementById('notifDot').style.display = 'block'
+    }
+  }
+
+  // ============================================
+  // BOOT
+  // ============================================
+  window.addEventListener('supabase-ready', async () => {
+    // Wait for client to attach
+    let tries = 0
+    while (!window.supabaseClient && tries < 50) {
+      await new Promise(r => setTimeout(r, 100))
+      tries++
+    }
+    if (!window.supabaseClient) return
+
+    checkAuth()
+
+    const categories = await loadCategories()
+    renderCategoryRow(categories)
+    renderCategoryTiles(categories)
+
+    await Promise.all([loadFeatured(), loadRecent()])
+  })
 </script>
 
 </body>

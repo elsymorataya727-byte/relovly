@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RUHM 5DII Full Carbon Lightweight 6.6kg Trifold Bicycle — relovly</title>
+<title>Product — relovly</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
   button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
   /* ============================================
-     NAVIGATION
+     NAV
      ============================================ */
   .nav { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 0 16px; }
   .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 20px; height: 64px; }
@@ -63,7 +63,6 @@
 
   .btn-buy { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; background: var(--coral); color: white; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; transition: background 0.15s, transform 0.1s; }
   .btn-buy:hover { background: var(--coral-dark); }
-  .btn-buy:active { transform: scale(0.98); }
 
   /* ============================================
      BREADCRUMB
@@ -75,14 +74,68 @@
   .breadcrumb svg { color: var(--text-3); }
 
   /* ============================================
-     PRODUCT LAYOUT — BENTO GRID
+     PRODUCT LAYOUT
      ============================================ */
   .product-page { max-width: 1400px; margin: 0 auto; padding: 20px 16px 60px; }
 
-  .product-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
+  .product-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+
+  /* Loading */
+  .loading-center {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 20px;
+    color: var(--text-3);
+    gap: 16px;
+  }
+  .spinner {
+    width: 40px; height: 40px;
+    border: 3px solid var(--border);
+    border-top-color: var(--coral);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Not found */
+  .not-found {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+    text-align: center;
+    background: var(--card);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--r-lg);
+  }
+  .not-found h2 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .not-found p {
+    font-size: 15px;
+    color: var(--text-2);
+    margin-bottom: 24px;
+    max-width: 400px;
+  }
+  .not-found a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 46px;
+    padding: 0 24px;
+    background: var(--coral);
+    color: white;
+    border-radius: var(--r-md);
+    font-weight: 600;
+    font-size: 14px;
   }
 
   /* ---------- GALLERY ---------- */
@@ -93,68 +146,51 @@
     overflow: hidden;
     position: relative;
   }
-
   .gallery-main {
     position: relative;
     aspect-ratio: 1 / 1;
     background: linear-gradient(135deg, #F5F2ED 0%, #EBE7E0 100%);
     overflow: hidden;
-  }
-
-  .gallery-main img { width: 100%; height: 100%; object-fit: cover; }
-
-  .gallery-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 42px; height: 42px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text);
-    box-shadow: var(--shadow-md);
+  }
+  .gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+  .gallery-main .empty-media {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--text-3);
+    font-size: 13px;
+    gap: 10px;
+  }
+  .gallery-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text); box-shadow: var(--shadow-md);
     transition: background 0.15s, transform 0.15s;
     z-index: 3;
   }
   .gallery-arrow:hover { background: white; transform: translateY(-50%) scale(1.06); }
   .gallery-arrow.prev { left: 12px; }
   .gallery-arrow.next { right: 12px; }
-
   .gallery-counter {
-    position: absolute;
-    bottom: 14px;
-    right: 14px;
-    padding: 6px 12px;
-    background: rgba(26,26,26,0.75);
-    color: white;
-    border-radius: var(--r-pill);
-    font-size: 12px;
-    font-weight: 600;
+    position: absolute; bottom: 14px; right: 14px;
+    padding: 6px 12px; background: rgba(26,26,26,0.75); color: white;
+    border-radius: var(--r-pill); font-size: 12px; font-weight: 600;
     backdrop-filter: blur(6px);
   }
-
   .gallery-thumbs {
-    display: flex;
-    gap: 8px;
-    padding: 12px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    background: var(--card);
-    border-top: 1px solid var(--border);
+    display: flex; gap: 8px; padding: 12px;
+    overflow-x: auto; scrollbar-width: none;
+    background: var(--card); border-top: 1px solid var(--border);
   }
   .gallery-thumbs::-webkit-scrollbar { display: none; }
-
   .thumb {
-    flex-shrink: 0;
-    width: 64px;
-    height: 64px;
-    border-radius: var(--r-sm);
-    overflow: hidden;
-    border: 2px solid transparent;
-    cursor: pointer;
+    flex-shrink: 0; width: 64px; height: 64px;
+    border-radius: var(--r-sm); overflow: hidden;
+    border: 2px solid transparent; cursor: pointer;
     background: linear-gradient(135deg, #F5F2ED, #EBE7E0);
     transition: border-color 0.15s;
   }
@@ -169,23 +205,13 @@
     padding: 24px;
   }
 
-  .trust-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 14px;
-  }
+  .trust-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
 
   .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 5px 10px;
-    border-radius: var(--r-pill);
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 5px 10px; border-radius: var(--r-pill);
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.3px;
   }
   .badge-protect { background: var(--coral-soft); color: var(--coral); }
   .badge-verified { background: var(--green-soft); color: var(--green); }
@@ -200,407 +226,196 @@
     margin-bottom: 16px;
   }
 
-  .price-row {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 8px;
-  }
-
-  .price {
-    font-size: 34px;
-    font-weight: 800;
-    letter-spacing: -1px;
-    color: var(--text);
-  }
-
-  .price-note {
-    font-size: 13px;
-    color: var(--text-2);
-  }
+  .price-row { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+  .price { font-size: 34px; font-weight: 800; letter-spacing: -1px; color: var(--text); }
+  .price-note { font-size: 13px; color: var(--text-2); }
 
   .social-nudge {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    display: flex; align-items: center; gap: 8px;
     padding: 10px 14px;
     background: var(--coral-soft);
     border-radius: var(--r-md);
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 13px; font-weight: 500;
     color: var(--coral-dark);
     margin: 16px 0;
   }
 
-  /* Action buttons */
-  .actions {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 20px 0;
-  }
-
-  .actions-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
+  .actions { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+  .actions-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
   .btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    height: 48px;
-    border-radius: var(--r-md);
-    font-weight: 600;
-    font-size: 15px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    height: 48px; border-radius: var(--r-md);
+    font-weight: 600; font-size: 15px;
     transition: background 0.15s, transform 0.1s, border-color 0.15s;
     white-space: nowrap;
   }
   .btn:active { transform: scale(0.98); }
-
   .btn-primary { background: var(--coral); color: white; }
   .btn-primary:hover { background: var(--coral-dark); }
-
   .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border-strong); }
   .btn-secondary:hover { border-color: var(--text); }
-
+  .btn-secondary.active { background: var(--coral-soft); border-color: var(--coral); color: var(--coral); }
   .btn-ghost { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
   .btn-ghost:hover { border-color: var(--coral); color: var(--coral); }
-
   .btn-full { width: 100%; }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  /* ---------- DETAILS SECTION ---------- */
+  /* Detail section */
   .detail-section {
     border-top: 1px solid var(--border);
     padding-top: 20px;
     margin-top: 20px;
   }
-
   .section-label {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    color: var(--text-2);
-    margin-bottom: 14px;
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--text-2); margin-bottom: 14px;
   }
-
-  .detail-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px 24px;
-  }
-
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
   .detail-item label {
-    display: block;
-    font-size: 12px;
-    color: var(--text-3);
-    margin-bottom: 4px;
+    display: block; font-size: 12px; color: var(--text-3); margin-bottom: 4px;
   }
-
   .detail-item value {
-    display: block;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
+    display: block; font-size: 14px; font-weight: 500; color: var(--text);
   }
-
   .chip {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 10px;
-    border-radius: var(--r-pill);
-    font-size: 12px;
-    font-weight: 600;
+    display: inline-flex; align-items: center;
+    padding: 4px 10px; border-radius: var(--r-pill);
+    font-size: 12px; font-weight: 600;
   }
   .chip-new { background: var(--green-soft); color: var(--green); }
   .chip-used { background: var(--amber-soft); color: var(--amber); }
   .chip-ship { background: var(--coral-soft); color: var(--coral); }
 
-  /* Description */
   .description {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--text-2);
+    font-size: 14px; line-height: 1.7; color: var(--text-2);
     white-space: pre-line;
-    max-height: 180px;
-    overflow: hidden;
+    max-height: 180px; overflow: hidden;
     position: relative;
     transition: max-height 0.3s ease;
   }
-
   .description.expanded { max-height: 2000px; }
-
   .description-fade {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: absolute; bottom: 0; left: 0; right: 0;
     height: 60px;
     background: linear-gradient(transparent, var(--card));
     pointer-events: none;
   }
-
   .description:not(.expanded) + .description-fade { display: block; }
   .description.expanded + .description-fade { display: none; }
-
   .read-more {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    color: var(--coral);
-    font-weight: 600;
-    font-size: 13px;
-    margin-top: 8px;
-    transition: color 0.15s;
+    display: inline-flex; align-items: center; gap: 4px;
+    color: var(--coral); font-weight: 600; font-size: 13px;
+    margin-top: 8px; transition: color 0.15s;
   }
   .read-more:hover { color: var(--coral-dark); }
 
-  /* Delivery info */
-  .delivery-options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
+  /* Delivery */
+  .delivery-options { display: flex; flex-direction: column; gap: 10px; }
   .delivery-item {
-    display: flex;
-    gap: 12px;
-    padding: 12px 14px;
-    background: var(--bg);
-    border-radius: var(--r-md);
+    display: flex; gap: 12px; padding: 12px 14px;
+    background: var(--bg); border-radius: var(--r-md);
     border: 1px solid var(--border);
   }
-
   .delivery-icon {
-    width: 36px; height: 36px;
-    border-radius: var(--r-sm);
-    background: var(--coral-soft);
-    color: var(--coral);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 36px; height: 36px; border-radius: var(--r-sm);
+    background: var(--coral-soft); color: var(--coral);
+    display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-
   .delivery-content { flex: 1; min-width: 0; }
-
-  .delivery-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 2px;
-  }
-
-  .delivery-sub {
-    font-size: 13px;
-    color: var(--text-2);
-    line-height: 1.4;
-  }
+  .delivery-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .delivery-sub { font-size: 13px; color: var(--text-2); line-height: 1.4; }
 
   /* ---------- SELLER CARD ---------- */
   .seller-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--r-lg);
-    padding: 20px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--r-lg); padding: 20px;
     margin-top: 24px;
   }
-
-  .seller-head {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-
+  .seller-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
   .seller-avatar {
-    width: 56px; height: 56px;
-    border-radius: 50%;
+    width: 56px; height: 56px; border-radius: 50%;
     background: linear-gradient(135deg, var(--coral), var(--coral-dark));
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 20px;
-    flex-shrink: 0;
+    color: white; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 20px; flex-shrink: 0;
   }
-
   .seller-info { flex: 1; min-width: 0; }
-
   .seller-name {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    font-size: 16px; font-weight: 700; color: var(--text);
+    display: flex; align-items: center; gap: 6px;
   }
-
   .verified-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    padding: 2px 6px;
-    background: var(--green-soft);
-    color: var(--green);
-    border-radius: var(--r-pill);
-    font-size: 10px;
-    font-weight: 700;
+    display: inline-flex; align-items: center; gap: 3px;
+    padding: 2px 6px; background: var(--green-soft); color: var(--green);
+    border-radius: var(--r-pill); font-size: 10px; font-weight: 700;
     text-transform: uppercase;
   }
-
-  .seller-meta {
-    font-size: 13px;
-    color: var(--text-2);
-    margin-top: 2px;
-  }
-
+  .seller-meta { font-size: 13px; color: var(--text-2); margin-top: 2px; }
   .seller-stats {
-    display: flex;
-    gap: 20px;
-    padding: 14px 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    display: flex; gap: 20px; padding: 14px 0;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     margin-bottom: 16px;
   }
-
   .seller-stat { flex: 1; }
-
   .seller-stat-value {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    font-size: 16px; font-weight: 700; color: var(--text);
+    display: flex; align-items: center; gap: 4px;
   }
+  .seller-stat-label { font-size: 12px; color: var(--text-3); margin-top: 2px; }
 
-  .seller-stat-value svg { color: var(--coral); }
-
-  .seller-stat-label {
-    font-size: 12px;
-    color: var(--text-3);
-    margin-top: 2px;
-  }
-
-  /* Reviews */
   .reviews-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    font-size: 14px; font-weight: 700; color: var(--text);
+    margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;
   }
-
-  .reviews-title a {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--coral);
-  }
-
-  .review {
-    padding: 12px 0;
-    border-top: 1px solid var(--border);
-  }
-
+  .reviews-title a { font-size: 13px; font-weight: 600; color: var(--coral); }
+  .review { padding: 12px 0; border-top: 1px solid var(--border); }
   .review:first-of-type { border-top: none; padding-top: 0; }
-
-  .review-head {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
-  }
-
+  .review-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
   .review-avatar {
-    width: 28px; height: 28px;
-    border-radius: 50%;
+    width: 28px; height: 28px; border-radius: 50%;
     background: linear-gradient(135deg, #8B92A8, #6B7280);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
-    flex-shrink: 0;
+    color: white; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
   }
+  .review-name { font-size: 13px; font-weight: 600; color: var(--text); }
+  .review-time { font-size: 12px; color: var(--text-3); margin-left: auto; }
+  .review-stars { display: flex; gap: 1px; color: var(--coral); margin-bottom: 6px; }
+  .review-text { font-size: 13px; color: var(--text-2); line-height: 1.6; }
 
-  .review-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-  }
-
-  .review-time {
-    font-size: 12px;
-    color: var(--text-3);
-    margin-left: auto;
-  }
-
-  .review-stars {
-    display: flex;
-    gap: 1px;
-    color: var(--coral);
-    margin-bottom: 6px;
-  }
-
-  .review-text {
-    font-size: 13px;
-    color: var(--text-2);
-    line-height: 1.6;
-  }
-
-  /* ============================================
-     RELATED PRODUCTS
-     ============================================ */
-  .related-section {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 40px 16px 60px;
-  }
-
-  .section-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    gap: 16px;
-  }
-
-  .section-title {
+  /* ---------- RELATED ---------- */
+  .related-section { max-width: 1400px; margin: 0 auto; padding: 40px 16px 60px; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px; gap: 16px; }
+  .section-title-lg {
     font-family: var(--font-display);
     font-size: clamp(20px, 3vw, 26px);
-    font-weight: 700;
-    letter-spacing: -0.4px;
-    color: var(--text);
+    font-weight: 700; letter-spacing: -0.4px; color: var(--text);
   }
-
   .section-link { font-size: 14px; font-weight: 600; color: var(--coral); white-space: nowrap; }
   .section-link:hover { color: var(--coral-dark); }
 
   .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s; cursor: pointer; display: flex; flex-direction: column; }
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md);
+    overflow: hidden; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    cursor: pointer; display: flex; flex-direction: column;
+  }
   .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
   .card-media { position: relative; aspect-ratio: 1 / 1; background: linear-gradient(135deg, #F5F2ED 0%, #EBE7E0 100%); overflow: hidden; }
   .card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
   .card:hover .card-media img { transform: scale(1.03); }
   .card-badges { position: absolute; top: 10px; left: 10px; display: flex; gap: 6px; z-index: 2; }
-  .badge-pill { display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: var(--r-pill); font-size: 10px; font-weight: 600; letter-spacing: 0.2px; text-transform: uppercase; backdrop-filter: blur(6px); }
+  .badge-pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 8px; border-radius: var(--r-pill);
+    font-size: 10px; font-weight: 600; letter-spacing: 0.2px;
+    text-transform: uppercase; backdrop-filter: blur(6px);
+  }
   .badge-protect-pill { background: rgba(232, 90, 79, 0.92); color: white; }
   .badge-featured-pill { background: rgba(26, 26, 26, 0.85); color: white; }
   .card-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-  .card-seller { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-2); }
-  .card-avatar { width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, var(--coral), var(--coral-dark)); color: white; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; flex-shrink: 0; }
-  .card-seller-name { font-weight: 500; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .card-time { margin-left: auto; font-size: 11px; color: var(--text-3); flex-shrink: 0; }
   .card-title { font-size: 13px; font-weight: 500; line-height: 1.35; color: var(--text); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 35px; }
   .card-price { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
   .card-meta { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-2); flex-wrap: wrap; }
@@ -608,7 +423,7 @@
   /* ============================================
      FOOTER
      ============================================ */
-  .footer { background: var(--card); border-top: 1px solid var(--border); padding: 48px 16px 32px; }
+  .footer { background: var(--card); border-top: 1px solid var(--border); padding: 48px 16px 32px; margin-top: 40px; }
   .footer-inner { max-width: 1400px; margin: 0 auto; }
   .footer-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
   .footer-brand p { font-size: 14px; color: var(--text-2); margin-top: 12px; max-width: 300px; line-height: 1.6; }
@@ -621,12 +436,22 @@
   .footer-bottom-links { display: flex; flex-wrap: wrap; gap: 16px; }
 
   /* ============================================
-     MOBILE STICKY BAR
+     MOBILE BAR
      ============================================ */
-  .mobile-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card); border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr 1.4fr; gap: 8px; padding: 10px 12px; z-index: 99; }
-  .mobile-bar-btn { display: flex; align-items: center; justify-content: center; gap: 6px; height: 44px; border-radius: var(--r-md); font-weight: 600; font-size: 14px; }
+  .mobile-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--card); border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1fr 1fr 1.4fr; gap: 8px;
+    padding: 10px 12px; z-index: 99;
+  }
+  .mobile-bar-btn {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    height: 44px; border-radius: var(--r-md);
+    font-weight: 600; font-size: 14px;
+  }
   .mobile-bar-btn.ghost { background: var(--bg); border: 1px solid var(--border); color: var(--text); }
   .mobile-bar-btn.primary { background: var(--coral); color: white; }
+  .mobile-bar-btn.primary:disabled { opacity: 0.5; }
 
   @media (max-width: 767px) { body { padding-bottom: 80px; } }
 
@@ -653,7 +478,7 @@
 <body>
 
 <!-- ============================================
-     NAVIGATION
+     NAV
      ============================================ -->
 <nav class="nav">
   <div class="nav-inner">
@@ -679,21 +504,14 @@
       <span class="nav-search-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       </span>
-      <input type="text" placeholder="Search cameras, watches, bicycles...">
+      <input type="text" id="navSearchInput" placeholder="Search cameras, watches, bicycles...">
     </div>
 
     <div class="nav-actions">
-      <button class="icon-btn" aria-label="Notifications">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-        <span class="dot"></span>
-      </button>
-      <button class="icon-btn" aria-label="Messages">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </button>
-      <button class="icon-btn" aria-label="Profile">
+      <a href="account.html" class="icon-btn" aria-label="Profile">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </button>
-      <a href="index.html" class="btn-buy">
+      </a>
+      <a href="cart.html" class="btn-buy">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         Buy
       </a>
@@ -705,14 +523,10 @@
      BREADCRUMB
      ============================================ -->
 <div class="breadcrumb-wrap">
-  <div class="breadcrumb">
+  <div class="breadcrumb" id="breadcrumb">
     <a href="index.html">Home</a>
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-    <a href="#">Sports Equipment</a>
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-    <a href="#">Bicycles</a>
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-    <span>RUHM 5DII</span>
+    <span>Loading...</span>
   </div>
 </div>
 
@@ -720,340 +534,12 @@
      PRODUCT PAGE
      ============================================ -->
 <main class="product-page">
-  <div class="product-grid">
-
-    <!-- ---------- GALLERY ---------- -->
-    <div class="gallery">
-      <div class="gallery-main">
-        <img id="mainImage" src="https://media.karousell.com/media/photos/products/2026/7/3/preorder_ruhm_5dii_full_carbon_1783047548_cae891a5_progressive" alt="RUHM 5DII Full Carbon Bicycle">
-
-        <button class="gallery-arrow prev" aria-label="Previous image" onclick="prevImage()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-        </button>
-        <button class="gallery-arrow next" aria-label="Next image" onclick="nextImage()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
-
-        <span class="gallery-counter"><span id="currentIdx">1</span> / <span id="totalCount">10</span></span>
-      </div>
-
-      <div class="gallery-thumbs" id="thumbs"></div>
-    </div>
-
-    <!-- ---------- DETAILS ---------- -->
-    <div class="details">
-
-      <div class="trust-row">
-        <span class="badge badge-protect">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Buyer Protection
-        </span>
-        <span class="badge badge-verified">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-          Verified Seller
-        </span>
-      </div>
-
-      <h1 class="product-title">RUHM 5DII Full Carbon Lightweight 6.6kg 16 inch 349 Trifold Bicycle</h1>
-
-      <div class="price-row">
-        <div class="price">£2,530</div>
-        <span class="price-note">≈ €2,960 · $3,180</span>
-      </div>
-
-      <div class="social-nudge">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
-        3 people also want this — high demand
-      </div>
-
-      <!-- Action buttons -->
-      <div class="actions">
-        <button class="btn btn-primary btn-full">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Buy Now
-        </button>
-
-        <div class="actions-row">
-          <button class="btn btn-secondary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
-            Add to Cart
-          </button>
-          <button class="btn btn-secondary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            Make Offer
-          </button>
-        </div>
-
-        <button class="btn btn-ghost btn-full">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-          Request Shipping Quote
-        </button>
-      </div>
-
-      <!-- Product details -->
-      <div class="detail-section">
-        <div class="section-label">Product Details</div>
-        <div class="detail-grid">
-          <div class="detail-item">
-            <label>Condition</label>
-            <value><span class="chip chip-new">Brand new</span></value>
-          </div>
-          <div class="detail-item">
-            <label>Type</label>
-            <value>Foldable Bikes</value>
-          </div>
-          <div class="detail-item">
-            <label>Category</label>
-            <value><a href="#" style="color: var(--coral); font-weight: 600;">Bicycles</a></value>
-          </div>
-          <div class="detail-item">
-            <label>Listed</label>
-            <value>moments ago</value>
-          </div>
-        </div>
-      </div>
-
-      <!-- Description -->
-      <div class="detail-section">
-        <div class="section-label">Description</div>
-        <div class="description" id="description">Authorised RUHM Dealer for RUHM Bicycle.
-
-RUHM 5D II A True Full Carbon Ultra-light 6.6 kg 16inch 349 Tri-fold Bicycle
-- Only 6.6kg, redefine what a foldable can be.
-- The next level of trifold performance.
-- Featherlight. Full carbon. Pure performance.
-- A performance bike that folds.
-- From city streets to weekend climbs, lightness changes everything.
-- Where portability meets precision.
-- Minimal weight. Maximum response.
-- Crafted for city use: ride, fold, carry, repeat.
-
-Pre-orders are now open. Reserve your bike with a deposit.
-
-Price: £2,530 (Usual Price RRP £2,650) - Lead time 1 month
-
-Payment options accepted:
-1. Bank transfer
-2. Credit Card / Debit Card
-3. Instalment Plan (Klarna, Clearpay)
-
-How to deal?
-1) Self collect from Manchester, M1
-2) Adding £35 for UK-wide delivery
-
-tags ruhm bicycle 5d2 not brompton a c p t g mk2 java neo 3 jn3 j-air aceoffix pikes 3sixty mint camp royale</div>
-        <div class="description-fade"></div>
-        <button class="read-more" onclick="toggleDescription(this)">
-          Read more
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-        </button>
-      </div>
-
-      <!-- Delivery -->
-      <div class="detail-section">
-        <div class="section-label">Delivery Options</div>
-        <div class="delivery-options">
-
-          <div class="delivery-item">
-            <div class="delivery-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div class="delivery-content">
-              <div class="delivery-title">Local Pickup Available</div>
-              <div class="delivery-sub">Manchester, M1 · Exact address shared after purchase</div>
-            </div>
-          </div>
-
-          <div class="delivery-item">
-            <div class="delivery-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-            </div>
-            <div class="delivery-content">
-              <div class="delivery-title">UK-Wide Delivery — £35</div>
-              <div class="delivery-sub">Estimated 3–5 business days · Tracking provided</div>
-            </div>
-          </div>
-
-          <div class="delivery-item">
-            <div class="delivery-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            </div>
-            <div class="delivery-content">
-              <div class="delivery-title">International Shipping</div>
-              <div class="delivery-sub">Quote on request · Ships to EU, USA, and more</div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
+  <div class="product-grid" id="productGrid">
+    <div class="loading-center">
+      <div class="spinner"></div>
+      <span>Loading product...</span>
     </div>
   </div>
-
-  <!-- ---------- SELLER CARD ---------- -->
-  <div class="seller-card">
-    <div class="seller-head">
-      <div class="seller-avatar">S</div>
-      <div class="seller-info">
-        <div class="seller-name">
-          Sense Of Life
-          <span class="verified-badge">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-            Verified
-          </span>
-        </div>
-        <div class="seller-meta">Professional Seller · Manchester, UK</div>
-      </div>
-    </div>
-
-    <div class="seller-stats">
-      <div class="seller-stat">
-        <div class="seller-stat-value">
-          5.0
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="seller-stat-label">586 reviews</div>
-      </div>
-      <div class="seller-stat">
-        <div class="seller-stat-value">12 years</div>
-        <div class="seller-stat-label">on relovly</div>
-      </div>
-      <div class="seller-stat">
-        <div class="seller-stat-value">248</div>
-        <div class="seller-stat-label">items sold</div>
-      </div>
-    </div>
-
-    <div class="reviews-title">
-      Recent Reviews
-      <a href="#">Read all →</a>
-    </div>
-
-    <div class="review">
-      <div class="review-head">
-        <div class="review-avatar">B</div>
-        <span class="review-name">b_racer</span>
-        <span class="review-time">15 days ago</span>
-      </div>
-      <div class="review-stars">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      </div>
-      <p class="review-text">Excellent & Easy to remove! Least damage to presta or Schrader valves! Highly Recommended.</p>
-    </div>
-
-    <div class="review">
-      <div class="review-head">
-        <div class="review-avatar">P</div>
-        <span class="review-name">parthiban1993</span>
-        <span class="review-time">1 month ago</span>
-      </div>
-      <div class="review-stars">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      </div>
-      <p class="review-text">Very good seller and the seller was very nice to share information of the tool and also give his advice.</p>
-    </div>
-
-    <div class="review">
-      <div class="review-head">
-        <div class="review-avatar">W</div>
-        <span class="review-name">wanttobehappy</span>
-        <span class="review-time">2 months ago</span>
-      </div>
-      <div class="review-stars">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      </div>
-      <p class="review-text">Another purchase, another great experience! Highly recommend this seller.</p>
-    </div>
-  </div>
-
-  <!-- ---------- RELATED PRODUCTS ---------- -->
-  <div class="related-section" style="padding-left: 0; padding-right: 0;">
-    <div class="section-head">
-      <h2 class="section-title">Similar Bicycles</h2>
-      <a href="#" class="section-link">View all →</a>
-    </div>
-
-    <div class="grid">
-
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge-pill badge-protect-pill">✓ Protected</span></div>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">B</span>
-            <span class="card-seller-name">brompton_fan</span>
-            <span class="card-time">3d ago</span>
-          </div>
-          <h3 class="card-title">Brompton C Line Explore M6L Folding Bike</h3>
-          <div class="card-price">£1,450</div>
-          <div class="card-meta"><span class="chip chip-new">Like new</span></div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge-pill badge-featured-pill">Featured</span></div>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">K</span>
-            <span class="card-seller-name">kito_bikes</span>
-            <span class="card-time">1w ago</span>
-          </div>
-          <h3 class="card-title">Kito Folding Commuter Bike 16" Lightweight</h3>
-          <div class="card-price">£420</div>
-          <div class="card-meta"><span class="chip chip-used">Lightly used</span></div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge-pill badge-protect-pill">✓ Protected</span></div>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">M</span>
-            <span class="card-seller-name">mint_official</span>
-            <span class="card-time">2d ago</span>
-          </div>
-          <h3 class="card-title">Mint Compact 16" Trifold Bike — Premium</h3>
-          <div class="card-price">£1,180</div>
-          <div class="card-meta"><span class="chip chip-new">Brand new</span></div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge-pill badge-protect-pill">✓ Protected</span></div>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">A</span>
-            <span class="card-seller-name">aceoffix_uk</span>
-            <span class="card-time">5d ago</span>
-          </div>
-          <h3 class="card-title">Aceoffix Alloy Folding Bike — Upgraded Wheelset</h3>
-          <div class="card-price">£780</div>
-          <div class="card-meta"><span class="chip chip-new">Like new</span></div>
-        </div>
-      </article>
-
-    </div>
-  </div>
-
 </main>
 
 <!-- ============================================
@@ -1127,90 +613,720 @@ tags ruhm bicycle 5d2 not brompton a c p t g mk2 java neo 3 jn3 j-air aceoffix p
 </footer>
 
 <!-- ============================================
-     MOBILE STICKY BAR
+     MOBILE BAR (shown only when product loaded)
      ============================================ -->
-<div class="mobile-bar">
-  <button class="mobile-bar-btn ghost">
+<div class="mobile-bar" id="mobileBar" style="display:none;">
+  <button class="mobile-bar-btn ghost" onclick="scrollToSeller()">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    Chat
+    Seller
   </button>
-  <button class="mobile-bar-btn ghost">Offer</button>
-  <button class="mobile-bar-btn primary">Buy Now</button>
+  <button class="mobile-bar-btn ghost" onclick="handleMakeOffer()">Offer</button>
+  <button class="mobile-bar-btn primary" id="mobileBuyBtn" onclick="handleBuyNow()">Buy Now</button>
 </div>
 
+<!-- ============================================
+     SUPABASE CLIENT
+     ============================================ -->
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+  const SUPABASE_URL = 'https://osebqasifcnhyuajbyvv.supabase.co'
+  const SUPABASE_KEY = 'sb_publishable_vggy-_2xeONhcsSbiQklsw_hvLC_cgG'
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+  window.supabaseClient = supabase
+  window.dispatchEvent(new Event('supabase-ready'))
+</script>
+
+<!-- ============================================
+     PRODUCT PAGE LOGIC
+     ============================================ -->
 <script>
+  // ============================================
+  // STATE
+  // ============================================
+  const state = {
+    listing: null,
+    category: null,
+    images: [],
+    currentImageIndex: 0,
+    isSaved: false
+  }
+
+  // ============================================
+  // HELPERS
+  // ============================================
+  function formatPrice(price, currency) {
+    const n = parseFloat(price || 0)
+    const symbols = { GBP: '£', USD: '$', EUR: '€' }
+    const sym = symbols[currency] || ''
+    return sym + n.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 2 })
+  }
+
+  function escapeHtml(str) {
+    if (!str) return ''
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+  }
+
+  function conditionLabel(condition) {
+    const map = {
+      brand_new: { label: 'Brand new', cls: 'chip-new' },
+      like_new: { label: 'Like new', cls: 'chip-new' },
+      lightly_used: { label: 'Lightly used', cls: 'chip-used' },
+      well_used: { label: 'Well used', cls: 'chip-used' }
+    }
+    return map[condition] || { label: 'Used', cls: 'chip-used' }
+  }
+
+  function timeAgo(dateStr) {
+    const date = new Date(dateStr)
+    const seconds = Math.floor((Date.now() - date.getTime()) / 1000)
+    if (seconds < 60) return 'just now'
+    if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago'
+    if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago'
+    if (seconds < 604800) return Math.floor(seconds / 86400) + 'd ago'
+    if (seconds < 2592000) return Math.floor(seconds / 604800) + 'w ago'
+    if (seconds < 31536000) return Math.floor(seconds / 2592000) + 'mo ago'
+    return Math.floor(seconds / 31536000) + 'y ago'
+  }
+
+  function getListingIdFromUrl() {
+    const params = new URLSearchParams(window.location.search)
+    return params.get('id')
+  }
+
+  // ============================================
+  // NOT FOUND
+  // ============================================
+  function renderNotFound(msg = 'This item is no longer available.') {
+    document.getElementById('productGrid').innerHTML = `
+      <div class="not-found">
+        <h2>Item not found</h2>
+        <p>${escapeHtml(msg)}</p>
+        <a href="catalog.html">
+          Browse other items
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </div>
+    `
+    document.getElementById('mobileBar').style.display = 'none'
+  }
+
+  // ============================================
+  // LOAD LISTING
+  // ============================================
+  async function loadListing(id) {
+    const { data, error } = await window.supabaseClient
+      .from('listings')
+      .select('*, categories (id, name, slug)')
+      .eq('id', id)
+      .maybeSingle()
+
+    if (error) {
+      console.error('Listing error:', error)
+      renderNotFound('Something went wrong loading this item.')
+      return null
+    }
+
+    if (!data) {
+      renderNotFound()
+      return null
+    }
+
+    if (data.status !== 'active' && data.status !== 'sold') {
+      renderNotFound('This item is not currently available.')
+      return null
+    }
+
+    state.listing = data
+    state.category = data.categories
+    state.images = Array.isArray(data.images) ? data.images.filter(Boolean) : []
+    return data
+  }
+
+  // ============================================
+  // BREADCRUMB
+  // ============================================
+  function renderBreadcrumb(listing) {
+    const cat = state.category
+    const catHtml = cat
+      ? `<a href="catalog.html?category=${encodeURIComponent(cat.slug)}">${escapeHtml(cat.name)}</a>
+         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>`
+      : ''
+
+    // Truncate title to 40 chars for breadcrumb
+    const title = listing.title.length > 40 ? listing.title.slice(0, 40) + '…' : listing.title
+
+    document.getElementById('breadcrumb').innerHTML = `
+      <a href="index.html">Home</a>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      <a href="catalog.html">All Items</a>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      ${catHtml}
+      <span>${escapeHtml(title)}</span>
+    `
+  }
+
+  // ============================================
+  // RENDER PRODUCT
+  // ============================================
+  function renderProduct(listing) {
+    const currency = listing.currency || 'GBP'
+    const price = formatPrice(listing.price, currency)
+    const cond = conditionLabel(listing.condition)
+    const sellerName = listing.seller_name || 'relovly'
+    const sellerInitial = sellerName[0].toUpperCase()
+
+    const hasImages = state.images.length > 0
+    const firstImg = hasImages ? state.images[0] : ''
+
+    const galleryMainHtml = hasImages
+      ? `<img id="mainImage" src="${escapeHtml(firstImg)}" alt="${escapeHtml(listing.title)}">`
+      : `<div class="empty-media">
+           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+           No image available
+         </div>`
+
+    const thumbsHtml = state.images.map((src, i) => `
+      <div class="thumb ${i === 0 ? 'active' : ''}" onclick="goToImage(${i})">
+        <img src="${escapeHtml(src)}" alt="Image ${i + 1}">
+      </div>
+    `).join('')
+
+    const arrowsHtml = state.images.length > 1 ? `
+      <button class="gallery-arrow prev" aria-label="Previous" onclick="prevImage()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <button class="gallery-arrow next" aria-label="Next" onclick="nextImage()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+      <span class="gallery-counter"><span id="currentIdx">1</span> / ${state.images.length}</span>
+    ` : ''
+
+    const locationParts = [listing.location_city, listing.location_country].filter(Boolean)
+    const locationStr = locationParts.length ? locationParts.join(', ') : '—'
+
+    const listedTime = timeAgo(listing.created_at)
+
+    const isSold = listing.status === 'sold'
+
+    // Delivery options — only show what applies
+    const deliveryHtml = [];
+    if (listing.pickup_available) {
+      deliveryHtml.push(`
+        <div class="delivery-item">
+          <div class="delivery-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="delivery-content">
+            <div class="delivery-title">Local Pickup Available</div>
+            <div class="delivery-sub">${escapeHtml(locationStr)} · Exact address shared after purchase</div>
+          </div>
+        </div>
+      `)
+    }
+
+    if (listing.shipping_available) {
+      const shipPrice = listing.shipping_price
+        ? formatPrice(listing.shipping_price, currency)
+        : 'Free'
+      const shipLabel = listing.shipping_price
+        ? `Shipping — ${shipPrice}`
+        : `Shipping — Free`
+      deliveryHtml.push(`
+        <div class="delivery-item">
+          <div class="delivery-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div class="delivery-content">
+            <div class="delivery-title">${escapeHtml(shipLabel)}</div>
+            <div class="delivery-sub">${escapeHtml(listing.shipping_note || 'Estimated 3–5 business days · Tracking provided')}</div>
+          </div>
+        </div>
+      `)
+    }
+
+    if (!deliveryHtml.length) {
+      deliveryHtml.push(`
+        <div class="delivery-item">
+          <div class="delivery-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="delivery-content">
+            <div class="delivery-title">Contact seller for delivery options</div>
+            <div class="delivery-sub">Message the seller to arrange shipping or pickup</div>
+          </div>
+        </div>
+      `)
+    }
+
+    document.getElementById('productGrid').innerHTML = `
+      <!-- GALLERY -->
+      <div class="gallery">
+        <div class="gallery-main">
+          ${galleryMainHtml}
+          ${arrowsHtml}
+        </div>
+        ${state.images.length > 1 ? `<div class="gallery-thumbs" id="thumbs">${thumbsHtml}</div>` : ''}
+      </div>
+
+      <!-- DETAILS -->
+      <div class="details">
+
+        <div class="trust-row">
+          <span class="badge badge-protect">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Buyer Protection
+          </span>
+          <span class="badge badge-verified">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Verified Seller
+          </span>
+          ${isSold ? '<span class="badge" style="background:#EEF1F5;color:#5A6B7D;">Sold</span>' : ''}
+        </div>
+
+        <h1 class="product-title">${escapeHtml(listing.title)}</h1>
+
+        <div class="price-row">
+          <div class="price">${price}</div>
+        </div>
+
+        <div class="social-nudge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+          Listed ${listedTime} · ${listing.views_count || 0} views
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary btn-full" onclick="handleBuyNow()" ${isSold ? 'disabled' : ''}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            ${isSold ? 'Sold' : 'Buy Now'}
+          </button>
+
+          <div class="actions-row">
+            <button class="btn btn-secondary" onclick="handleAddToCart()" ${isSold ? 'disabled' : ''}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+              Add to Cart
+            </button>
+            <button class="btn btn-secondary" onclick="handleMakeOffer()" ${isSold ? 'disabled' : ''}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              Make Offer
+            </button>
+          </div>
+
+          <button class="btn btn-secondary btn-full" onclick="handleSaveToggle(this)" id="saveBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span id="saveBtnLabel">Save for later</span>
+          </button>
+
+          <button class="btn btn-ghost btn-full" onclick="handleRequestShipping()" ${isSold ? 'disabled' : ''}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            Request Shipping Quote
+          </button>
+        </div>
+
+        <!-- Product details -->
+        <div class="detail-section">
+          <div class="section-label">Product Details</div>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <label>Condition</label>
+              <value><span class="chip ${cond.cls}">${cond.label}</span></value>
+            </div>
+            <div class="detail-item">
+              <label>Category</label>
+              <value>${state.category ? `<a href="catalog.html?category=${encodeURIComponent(state.category.slug)}" style="color: var(--coral); font-weight: 600;">${escapeHtml(state.category.name)}</a>` : '—'}</value>
+            </div>
+            <div class="detail-item">
+              <label>Location</label>
+              <value>${escapeHtml(locationStr)}</value>
+            </div>
+            <div class="detail-item">
+              <label>Listed</label>
+              <value>${listedTime}</value>
+            </div>
+          </div>
+        </div>
+
+        ${listing.description ? `
+        <div class="detail-section">
+          <div class="section-label">Description</div>
+          <div class="description" id="description">${escapeHtml(listing.description)}</div>
+          <div class="description-fade"></div>
+          <button class="read-more" onclick="toggleDescription(this)">
+            Read more
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+        </div>` : ''}
+
+        <div class="detail-section">
+          <div class="section-label">Delivery Options</div>
+          <div class="delivery-options">
+            ${deliveryHtml.join('')}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SELLER CARD -->
+      <div class="seller-card" id="sellerCard" style="grid-column: 1 / -1;">
+        <div class="seller-head">
+          <div class="seller-avatar">${escapeHtml(sellerInitial)}</div>
+          <div class="seller-info">
+            <div class="seller-name">
+              ${escapeHtml(sellerName)}
+              <span class="verified-badge">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                Verified
+              </span>
+            </div>
+            <div class="seller-meta">${escapeHtml(locationStr)}</div>
+          </div>
+        </div>
+
+        <div class="seller-stats">
+          <div class="seller-stat">
+            <div class="seller-stat-value">
+              5.0
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <div class="seller-stat-label">Seller rating</div>
+          </div>
+          <div class="seller-stat">
+            <div class="seller-stat-value">Active</div>
+            <div class="seller-stat-label">Listings</div>
+          </div>
+          <div class="seller-stat">
+            <div class="seller-stat-value">Fast</div>
+            <div class="seller-stat-label">Response time</div>
+          </div>
+        </div>
+
+        <button class="btn btn-secondary btn-full" onclick="handleContactSeller()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Contact seller
+        </button>
+      </div>
+    `
+
+    // Show mobile bar
+    document.getElementById('mobileBar').style.display = 'grid'
+    if (isSold) {
+      const mobileBuy = document.getElementById('mobileBuyBtn')
+      if (mobileBuy) {
+        mobileBuy.disabled = true
+        mobileBuy.textContent = 'Sold'
+      }
+    }
+
+    // Increment view count (silently)
+    window.supabaseClient
+      .from('listings')
+      .update({ views_count: (listing.views_count || 0) + 1 })
+      .eq('id', listing.id)
+      .then(() => {}) // fire and forget
+  }
+
   // ============================================
   // IMAGE GALLERY
   // ============================================
-  const images = [
-    "https://media.karousell.com/media/photos/products/2026/7/3/preorder_ruhm_5dii_full_carbon_1783047548_cae891a5_progressive",
-    "https://media.karousell.com/media/photos/products/2026/7/6/preorder_ruhm_5dii_full_carbon_1783306315_91be9c73_progressive",
-    "https://media.karousell.com/media/photos/products/2026/7/3/preorder_ruhm_5dii_full_carbon_1783047548_4644e387_progressive",
-    "https://media.karousell.com/media/photos/products/2026/7/3/preorder_ruhm_5dii_full_carbon_1783047548_fdddfa49_progressive",
-    "https://media.karousell.com/media/photos/products/2026/7/6/preorder_ruhm_5dii_full_carbon_1783307500_3f21557a_progressive",
-    "https://media.karousell.com/media/photos/products/2026/7/6/preorder_ruhm_5dii_full_carbon_1783307500_71e7b340_progressive",
-    "https://media.karousell.com/media/photos/products/2026/7/6/preorder_ruhm_5dii_full_carbon_1783307500_740fb25b_progressive",
-    "https://media.karousell.com/media/photos/products/2026/7/6/preorder_ruhm_5dii_full_carbon_1783307500_3ab6ac42_progressive",
-    "https://media.karousell.com/media/photos/products/2026/7/6/preorder_ruhm_5dii_full_carbon_1783306315_71de5ead_progressive",
-    "https://media.karousell.com/media/photos/products/2026/7/6/preorder_ruhm_5dii_full_carbon_1783307500_8590b72c_progressive"
-  ];
-
-  let currentIdx = 0;
-  const mainImg = document.getElementById('mainImage');
-  const thumbsWrap = document.getElementById('thumbs');
-  const currentEl = document.getElementById('currentIdx');
-  const totalEl = document.getElementById('totalCount');
-
-  totalEl.textContent = images.length;
-
-  images.forEach((src, i) => {
-    const t = document.createElement('div');
-    t.className = 'thumb' + (i === 0 ? ' active' : '');
-    t.innerHTML = `<img src="${src}" alt="Thumbnail ${i + 1}">`;
-    t.addEventListener('click', () => goToImage(i));
-    thumbsWrap.appendChild(t);
-  });
-
-  const thumbs = thumbsWrap.querySelectorAll('.thumb');
-
   function goToImage(i) {
-    currentIdx = (i + images.length) % images.length;
-    mainImg.src = images[currentIdx];
-    currentEl.textContent = currentIdx + 1;
-    thumbs.forEach((t, idx) => t.classList.toggle('active', idx === currentIdx));
+    if (!state.images.length) return
+    state.currentImageIndex = (i + state.images.length) % state.images.length
+    const mainImg = document.getElementById('mainImage')
+    if (mainImg) mainImg.src = state.images[state.currentImageIndex]
+
+    const counter = document.getElementById('currentIdx')
+    if (counter) counter.textContent = state.currentImageIndex + 1
+
+    document.querySelectorAll('.thumb').forEach((t, idx) => {
+      t.classList.toggle('active', idx === state.currentImageIndex)
+    })
   }
 
-  function nextImage() { goToImage(currentIdx + 1); }
-  function prevImage() { goToImage(currentIdx - 1); }
+  function nextImage() { goToImage(state.currentImageIndex + 1) }
+  function prevImage() { goToImage(state.currentImageIndex - 1) }
 
-  // Swipe support
-  let touchStartX = 0;
-  const galleryMain = document.querySelector('.gallery-main');
-  galleryMain.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-  galleryMain.addEventListener('touchend', (e) => {
-    const diff = touchStartX - e.changedTouches[0].screenX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) nextImage();
-      else prevImage();
-    }
-  }, { passive: true });
+  // Swipe
+  document.addEventListener('DOMContentLoaded', () => {
+    const gallery = document.querySelector('.gallery-main')
+    if (!gallery) return
+    let touchX = 0
+    gallery.addEventListener('touchstart', e => { touchX = e.changedTouches[0].screenX }, { passive: true })
+    gallery.addEventListener('touchend', e => {
+      const diff = touchX - e.changedTouches[0].screenX
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) nextImage(); else prevImage()
+      }
+    }, { passive: true })
+  })
 
   // Keyboard
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') prevImage();
-    if (e.key === 'ArrowRight') nextImage();
-  });
+    if (e.key === 'ArrowLeft') prevImage()
+    if (e.key === 'ArrowRight') nextImage()
+  })
 
   // ============================================
   // DESCRIPTION TOGGLE
   // ============================================
   function toggleDescription(btn) {
-    const desc = document.getElementById('description');
-    desc.classList.toggle('expanded');
+    const desc = document.getElementById('description')
+    desc.classList.toggle('expanded')
     btn.innerHTML = desc.classList.contains('expanded')
       ? 'Read less <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>'
-      : 'Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+      : 'Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>'
   }
+
+  // ============================================
+  // WISHLIST
+  // ============================================
+  async function handleSaveToggle(btn) {
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (!session) {
+      window.location.href = 'login.html'
+      return
+    }
+
+    const listingId = state.listing.id
+
+    if (state.isSaved) {
+      // Remove
+      await window.supabaseClient
+        .from('wishlists')
+        .delete()
+        .eq('user_id', session.user.id)
+        .eq('listing_id', listingId)
+
+      state.isSaved = false
+      btn.classList.remove('active')
+      btn.querySelector('svg').setAttribute('fill', 'none')
+      btn.querySelector('svg').setAttribute('stroke', 'currentColor')
+      document.getElementById('saveBtnLabel').textContent = 'Save for later'
+    } else {
+      // Add
+      await window.supabaseClient.from('wishlists').insert({
+        user_id: session.user.id,
+        listing_id: listingId
+      })
+
+      state.isSaved = true
+      btn.classList.add('active')
+      btn.querySelector('svg').setAttribute('fill', 'var(--coral)')
+      btn.querySelector('svg').setAttribute('stroke', 'var(--coral)')
+      document.getElementById('saveBtnLabel').textContent = 'Saved'
+    }
+  }
+
+  async function checkIsSaved() {
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (!session) return
+
+    const { data } = await window.supabaseClient
+      .from('wishlists')
+      .select('id')
+      .eq('user_id', session.user.id)
+      .eq('listing_id', state.listing.id)
+      .maybeSingle()
+
+    if (data) {
+      state.isSaved = true
+      const btn = document.getElementById('saveBtn')
+      if (btn) {
+        btn.classList.add('active')
+        btn.querySelector('svg').setAttribute('fill', 'var(--coral)')
+        btn.querySelector('svg').setAttribute('stroke', 'var(--coral)')
+        document.getElementById('saveBtnLabel').textContent = 'Saved'
+      }
+    }
+  }
+
+  // ============================================
+  // ACTION HANDLERS
+  // ============================================
+  async function handleBuyNow() {
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (!session) {
+      window.location.href = 'login.html'
+      return
+    }
+    // Add to cart then go to checkout
+    addToLocalCart(state.listing.id)
+    window.location.href = 'checkout.html'
+  }
+
+  async function handleAddToCart() {
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (!session) {
+      window.location.href = 'login.html'
+      return
+    }
+
+    addToLocalCart(state.listing.id)
+
+    // Show a brief confirmation
+    const btn = event.target.closest('button')
+    const originalHTML = btn.innerHTML
+    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Added`
+    btn.style.borderColor = 'var(--green)'
+    btn.style.color = 'var(--green)'
+    setTimeout(() => {
+      btn.innerHTML = originalHTML
+      btn.style.borderColor = ''
+      btn.style.color = ''
+    }, 2000)
+  }
+
+  async function handleMakeOffer() {
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (!session) {
+      window.location.href = 'login.html'
+      return
+    }
+    alert('Make Offer will be available soon. For now, use the chat button to message the seller.')
+  }
+
+  async function handleRequestShipping() {
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (!session) {
+      window.location.href = 'login.html'
+      return
+    }
+    alert('Shipping quote request will be available soon.')
+  }
+
+  async function handleContactSeller() {
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (!session) {
+      window.location.href = 'login.html'
+      return
+    }
+    alert('Messaging will be available soon.')
+  }
+
+  function scrollToSeller() {
+    document.getElementById('sellerCard')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
+
+  function addToLocalCart(listingId) {
+    try {
+      const cart = JSON.parse(localStorage.getItem('relovly_cart') || '[]')
+      if (!cart.includes(listingId)) {
+        cart.push(listingId)
+        localStorage.setItem('relovly_cart', JSON.stringify(cart))
+      }
+    } catch (e) {
+      localStorage.setItem('relovly_cart', JSON.stringify([listingId]))
+    }
+  }
+
+  // ============================================
+  // RELATED PRODUCTS
+  // ============================================
+  async function loadRelated() {
+    if (!state.listing) return
+
+    let q = window.supabaseClient
+      .from('listings')
+      .select('*')
+      .eq('status', 'active')
+      .neq('id', state.listing.id)
+      .limit(4)
+
+    if (state.listing.category_id) {
+      q = q.eq('category_id', state.listing.category_id)
+    }
+
+    const { data, error } = await q
+
+    if (error || !data || !data.length) {
+      // No related items — hide the whole section
+      document.getElementById('relatedWrap')?.remove()
+      return
+    }
+
+    // Build related section HTML
+    const section = document.createElement('section')
+    section.className = 'related-section'
+    section.id = 'relatedWrap'
+    section.innerHTML = `
+      <div class="section-head">
+        <h2 class="section-title-lg">Similar Items</h2>
+        <a href="catalog.html${state.category ? '?category=' + encodeURIComponent(state.category.slug) : ''}" class="section-link">View all →</a>
+      </div>
+      <div class="grid">
+        ${data.map(renderRelatedCard).join('')}
+      </div>
+    `
+
+    document.querySelector('.product-page').appendChild(section)
+  }
+
+  function renderRelatedCard(listing) {
+    const img = Array.isArray(listing.images) && listing.images[0] ? listing.images[0] : ''
+    const cond = conditionLabel(listing.condition)
+    const currency = listing.currency || 'GBP'
+
+    return `
+      <article class="card" onclick="window.location.href='product.html?id=${listing.id}'">
+        <div class="card-media">
+          <div class="card-badges">
+            <span class="badge-pill badge-protect-pill">✓ Protected</span>
+            ${listing.is_featured ? '<span class="badge-pill badge-featured-pill">Featured</span>' : ''}
+          </div>
+          ${img ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(listing.title)}" loading="lazy">` : ''}
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">${escapeHtml(listing.title)}</h3>
+          <div class="card-price">${formatPrice(listing.price, currency)}</div>
+          <div class="card-meta">
+            <span class="chip ${cond.cls}">${cond.label}</span>
+          </div>
+        </div>
+      </article>
+    `
+  }
+
+  // ============================================
+  // NAV SEARCH
+  // ============================================
+  document.getElementById('navSearchInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const val = e.target.value.trim()
+      if (val) window.location.href = 'catalog.html?q=' + encodeURIComponent(val)
+    }
+  })
+
+  // ============================================
+  // BOOT
+  // ============================================
+  window.addEventListener('supabase-ready', async () => {
+    let tries = 0
+    while (!window.supabaseClient && tries < 50) {
+      await new Promise(r => setTimeout(r, 100))
+      tries++
+    }
+    if (!window.supabaseClient) return
+
+    const id = getListingIdFromUrl()
+
+    if (!id) {
+      renderNotFound('No product ID was provided.')
+      return
+    }
+
+    const listing = await loadListing(id)
+    if (!listing) return
+
+    renderBreadcrumb(listing)
+    renderProduct(listing)
+    await checkIsSaved()
+    await loadRelated()
+  })
 </script>
 
 </body>

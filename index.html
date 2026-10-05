@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>relovly — Quality Pre-Owned Items. Better Value.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================
+     RELOVLY — GLOBAL RESET & TOKENS
+     ============================================ */
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    /* Brand colors — Carousell-inspired, premium shift */
+    --coral:        #E85A4F;
+    --coral-dark:   #D14A40;
+    --coral-soft:   #FDE9E7;
+
+    /* Surfaces */
+    --bg:           #FAFAF8;
+    --card:         #FFFFFF;
+    --border:       #EBE8E3;
+    --border-strong:#DDD8D0;
+
+    /* Text */
+    --text:         #1A1A1A;
+    --text-2:       #6B6B6B;
+    --text-3:       #9A9A9A;
+
+    /* Signals */
+    --green:        #2E7D5B;
+    --green-soft:   #E4F2EB;
+    --amber:        #C7873B;
+    --amber-soft:   #FAEFDD;
+
+    /* Radius & shadow */
+    --r-sm: 8px;
+    --r-md: 12px;
+    --r-lg: 16px;
+    --r-pill: 999px;
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+    --shadow-lg: 0 12px 32px rgba(0,0,0,0.10);
+
+    /* Typography */
+    --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Lora', Georgia, serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-ui);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  /* ============================================
+     TOP NAVIGATION
+     ============================================ */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+  }
+
+  .nav-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: 64px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+  }
+
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+    background: var(--coral);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .nav-search {
+    flex: 1;
+    max-width: 560px;
+    position: relative;
+    display: none;
+  }
+
+  .nav-search input {
+    width: 100%;
+    height: 42px;
+    padding: 0 16px 0 44px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    border-radius: var(--r-pill);
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .nav-search input:focus {
+    border-color: var(--coral);
+    background: var(--card);
+  }
+
+  .nav-search input::placeholder { color: var(--text-3); }
+
+  .nav-search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-3);
+    pointer-events: none;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  .icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--r-pill);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-2);
+    transition: background 0.15s, color 0.15s;
+    position: relative;
+  }
+
+  .icon-btn:hover { background: var(--bg); color: var(--text); }
+
+  .icon-btn .dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    background: var(--coral);
+    border-radius: 50%;
+    border: 2px solid var(--card);
+  }
+
+  .btn-sell {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 40px;
+    padding: 0 18px;
+    background: var(--coral);
+    color: white;
+    border-radius: var(--r-pill);
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.15s, transform 0.1s;
+  }
+
+  .btn-sell:hover { background: var(--coral-dark); }
+  .btn-sell:active { transform: scale(0.98); }
+
+  /* ============================================
+     HERO
+     ============================================ */
+  .hero {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 56px 16px 40px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    color: var(--text);
+    max-width: 780px;
+    margin: 0 auto 16px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--coral);
+  }
+
+  .hero p {
+    font-size: clamp(15px, 2vw, 17px);
+    color: var(--text-2);
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+
+  /* Big search */
+  .hero-search {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-pill);
+    padding: 6px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .hero-search-loc {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    padding: 0 16px;
+    border-right: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text-2);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .hero-search input {
+    flex: 1;
+    height: 48px;
+    padding: 0 16px;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--text);
+    outline: none;
+    min-width: 0;
+  }
+
+  .hero-search input::placeholder { color: var(--text-3); }
+
+  .hero-search-btn {
+    height: 48px;
+    padding: 0 28px;
+    background: var(--coral);
+    color: white;
+    border-radius: var(--r-pill);
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+
+  .hero-search-btn:hover { background: var(--coral-dark); }
+
+  /* Trust strip */
+  .trust-strip {
+    max-width: 900px;
+    margin: 32px auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 28px;
+    font-size: 13px;
+    color: var(--text-2);
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .trust-item svg { color: var(--green); flex-shrink: 0; }
+
+  /* ============================================
+     CATEGORY ROW
+     ============================================ */
+  .categories {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 8px 0 32px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .categories::-webkit-scrollbar { display: none; }
+
+  .categories-inner {
+    display: flex;
+    gap: 12px;
+    padding: 0 16px;
+    min-width: max-content;
+  }
+
+  .cat-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 88px;
+    padding: 14px 8px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+  }
+
+  .cat-pill:hover {
+    border-color: var(--coral);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .cat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--r-sm);
+    background: var(--coral-soft);
+    color: var(--coral);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .cat-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  /* ============================================
+     SECTION
+     ============================================ */
+  .section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 16px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 16px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: var(--text);
+  }
+
+  .section-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--coral);
+    white-space: nowrap;
+  }
+
+  .section-link:hover { color: var(--coral-dark); }
+
+  /* ============================================
+     PRODUCT GRID
+     ============================================ */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  /* Product card */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--border-strong);
+  }
+
+  .card-media {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(135deg, #F5F2ED 0%, #EBE7E0 100%);
+    overflow: hidden;
+  }
+
+  .card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover .card-media img { transform: scale(1.03); }
+
+  .card-badges {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: var(--r-pill);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    backdrop-filter: blur(6px);
+  }
+
+  .badge-protect {
+    background: rgba(232, 90, 79, 0.92);
+    color: white;
+  }
+
+  .badge-verified {
+    background: rgba(46, 125, 91, 0.92);
+    color: white;
+  }
+
+  .badge-featured {
+    background: rgba(26, 26, 26, 0.85);
+    color: white;
+  }
+
+  .card-like {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-2);
+    z-index: 2;
+    transition: color 0.15s, transform 0.15s;
+    backdrop-filter: blur(6px);
+  }
+
+  .card-like:hover { color: var(--coral); transform: scale(1.08); }
+
+  .card-body {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .card-seller {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-2);
+  }
+
+  .card-avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--coral), var(--coral-dark));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .card-seller-name {
+    font-weight: 500;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .card-time {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--text-3);
+    flex-shrink: 0;
+  }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--text);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 35px;
+  }
+
+  .card-price {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-2);
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: var(--r-pill);
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .chip-new    { background: var(--green-soft); color: var(--green); }
+  .chip-used   { background: var(--amber-soft); color: var(--amber); }
+  .chip-ship   { background: var(--coral-soft); color: var(--coral); }
+  .chip-pickup { background: #EEF1F5; color: #5A6B7D; }
+
+  /* ============================================
+     CATEGORY TILES
+     ============================================ */
+  .cat-tiles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .cat-tile {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--r-md);
+    overflow: hidden;
+    background: linear-gradient(135deg, #F5F2ED, #E4DFD6);
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .cat-tile:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .cat-tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.55) 100%);
+  }
+
+  .cat-tile-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+  }
+
+  .cat-tile-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+
+  .cat-tile-count {
+    font-size: 12px;
+    opacity: 0.85;
+    margin-top: 2px;
+  }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .footer {
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+    padding: 48px 16px 32px;
+  }
+
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 40px;
+  }
+
+  .footer-brand p {
+    font-size: 14px;
+    color: var(--text-2);
+    margin-top: 12px;
+    max-width: 300px;
+    line-height: 1.6;
+  }
+
+  .footer-col h4 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
+  .footer-col ul { list-style: none; }
+
+  .footer-col li { margin-bottom: 10px; }
+
+  .footer-col a {
+    font-size: 14px;
+    color: var(--text-2);
+    transition: color 0.15s;
+  }
+
+  .footer-col a:hover { color: var(--coral); }
+
+  .footer-trending {
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-trending h4 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-2);
+    margin-bottom: 14px;
+  }
+
+  .trend-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .trend-chip {
+    padding: 6px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-pill);
+    font-size: 12px;
+    color: var(--text-2);
+    transition: border-color 0.15s, color 0.15s;
+    cursor: pointer;
+  }
+
+  .trend-chip:hover { border-color: var(--coral); color: var(--coral); }
+
+  .footer-bottom {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-3);
+  }
+
+  .footer-bottom-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-bottom-links a:hover { color: var(--coral); }
+
+  /* ============================================
+     MOBILE BOTTOM BAR
+     ============================================ */
+  .mobile-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 0 10px;
+    z-index: 99;
+  }
+
+  .mobile-bar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    color: var(--text-3);
+    padding: 4px 12px;
+    transition: color 0.15s;
+  }
+
+  .mobile-bar-item.active { color: var(--coral); }
+
+  .mobile-bar-sell {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--coral);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -18px;
+    box-shadow: 0 4px 12px rgba(232,90,79,0.35);
+    transition: transform 0.15s;
+  }
+
+  .mobile-bar-sell:active { transform: scale(0.94); }
+
+  /* Body padding for mobile bar */
+  @media (max-width: 767px) {
+    body { padding-bottom: 72px; }
+  }
+
+  /* ============================================
+     RESPONSIVE — TABLET
+     ============================================ */
+  @media (min-width: 768px) {
+    .nav-search { display: block; }
+
+    .grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+    .cat-tiles { grid-template-columns: repeat(3, 1fr); }
+
+    .hero-search-loc { display: flex; }
+
+    .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+
+    .mobile-bar { display: none; }
+    body { padding-bottom: 0; }
+  }
+
+  /* ============================================
+     RESPONSIVE — DESKTOP
+     ============================================ */
+  @media (min-width: 1200px) {
+    .grid { grid-template-columns: repeat(4, 1fr); }
+
+    .cat-tiles { grid-template-columns: repeat(4, 1fr); }
+
+    .hero { padding: 72px 24px 48px; }
+
+    .section { padding: 40px 24px; }
+  }
+
+  /* ============================================
+     ACCESSIBILITY
+     ============================================ */
+  :focus-visible {
+    outline: 2px solid var(--coral);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION
+     ============================================ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <span class="logo-mark">r</span>
+      relovly
+    </a>
+
+    <div class="nav-search">
+      <span class="nav-search-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </span>
+      <input type="text" placeholder="Search cameras, watches, bicycles...">
+    </div>
+
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Notifications">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+        <span class="dot"></span>
+      </button>
+      <button class="icon-btn" aria-label="Messages">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Profile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="btn-sell">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        Sell
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<section class="hero">
+  <h1>Quality pre-owned items.<br><em>Better value.</em></h1>
+  <p>Discover thousands of quality second-hand products from trusted sellers across the UK and Europe.</p>
+
+  <form class="hero-search" onsubmit="event.preventDefault();">
+    <button type="button" class="hero-search-loc">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      All UK
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <input type="text" placeholder="What are you looking for?">
+    <button type="submit" class="hero-search-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      Search
+    </button>
+  </form>
+
+  <div class="trust-strip">
+    <span class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      Verified Sellers
+    </span>
+    <span class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      Buyer Protection
+    </span>
+    <span class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      Secure Payments
+    </span>
+    <span class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      International Shipping
+    </span>
+  </div>
+</section>
+
+<!-- ============================================
+     CATEGORIES
+     ============================================ -->
+<div class="categories">
+  <div class="categories-inner">
+    <a href="#" class="cat-pill"><span class="cat-icon">📱</span><span class="cat-label">Phones</span></a>
+    <a href="#" class="cat-pill"><span class="cat-icon">💻</span><span class="cat-label">Laptops</span></a>
+    <a href="#" class="cat-pill"><span class="cat-icon">📷</span><span class="cat-label">Cameras</span></a>
+    <a href="#" class="cat-pill"><span class="cat-icon">⌚</span><span class="cat-label">Watches</span></a>
+    <a href="#" class="cat-pill"><span class="cat-icon">🚲</span><span class="cat-label">Bicycles</span></a>
+    <a href="#" class="cat-pill"><span class="cat-icon">🛋️</span><span class="cat-label">Furniture</span></a>
+    <a href="#" class="cat-pill"><span class="cat-icon">👕</span><span class="cat-label">Fashion</span></a>
+    <a href="#" class="cat-pill"><span class="cat-icon">🎮</span><span class="cat-label">Gaming</span></a>
+    <a href="#" class="cat-pill"><span class="cat-icon">🎸</span><span class="cat-label">Music</span></a>
+    <a href="#" class="cat-pill"><span class="cat-icon">🏄</span><span class="cat-label">Sports</span></a>
+    <a href="#" class="cat-pill"><span class="cat-icon">🚗</span><span class="cat-label">Cars</span></a>
+    <a href="#" class="cat-pill"><span class="cat-icon">🛥️</span><span class="cat-label">Boats</span></a>
+  </div>
+</div>
+
+<!-- ============================================
+     FEATURED PRODUCTS
+     ============================================ -->
+<section class="section">
+  <div class="section-head">
+    <h2 class="section-title">Featured Products</h2>
+    <a href="#" class="section-link">View all →</a>
+  </div>
+
+  <div class="grid">
+
+    <!-- Card 1 -->
+    <article class="card">
+      <div class="card-media">
+        <div class="card-badges">
+          <span class="badge badge-protect">✓ Protected</span>
+        </div>
+        <button class="card-like" aria-label="Save">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-seller">
+          <span class="card-avatar">H</span>
+          <span class="card-seller-name">heinrie.studios</span>
+          <span class="card-time">2d ago</span>
+        </div>
+        <h3 class="card-title">Canon EOS 7D Mark II — Pristine Condition, Like New</h3>
+        <div class="card-price">£512</div>
+        <div class="card-meta">
+          <span class="chip chip-new">Like new</span>
+          <span class="chip chip-ship">Free delivery</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="card">
+      <div class="card-media">
+        <div class="card-badges">
+          <span class="badge badge-featured">Featured</span>
+        </div>
+        <button class="card-like" aria-label="Save">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-seller">
+          <span class="card-avatar">L</span>
+          <span class="card-seller-name">lemonz</span>
+          <span class="card-time">6mo ago</span>
+        </div>
+        <h3 class="card-title">Studio Backdrop Cloth + Stand Bundle</h3>
+        <div class="card-price">£70</div>
+        <div class="card-meta">
+          <span class="chip chip-new">Brand new</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="card">
+      <div class="card-media">
+        <div class="card-badges">
+          <span class="badge badge-verified">✓ Verified Seller</span>
+        </div>
+        <button class="card-like" aria-label="Save">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-seller">
+          <span class="card-avatar">J</span>
+          <span class="card-seller-name">jjwangae</span>
+          <span class="card-time">4d ago</span>
+        </div>
+        <h3 class="card-title">Nikon D5300 + Tamron 18–270mm VC PZD Complete Set</h3>
+        <div class="card-price">£498</div>
+        <div class="card-meta">
+          <span class="chip chip-used">Well used</span>
+          <span class="chip chip-ship">Shipping</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 4 -->
+    <article class="card">
+      <div class="card-media">
+        <div class="card-badges">
+          <span class="badge badge-protect">✓ Protected</span>
+        </div>
+        <button class="card-like" aria-label="Save">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-seller">
+          <span class="card-avatar">S</span>
+          <span class="card-seller-name">spaceman118</span>
+          <span class="card-time">1mo ago</span>
+        </div>
+        <h3 class="card-title">Olympus 8–25mm f/4 OM System M43 Lens</h3>
+        <div class="card-price">£880</div>
+        <div class="card-meta">
+          <span class="chip chip-new">Lightly used</span>
+          <span class="chip chip-ship">Shipping</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 5 -->
+    <article class="card">
+      <div class="card-media">
+        <div class="card-badges">
+          <span class="badge badge-protect">✓ Protected</span>
+        </div>
+        <button class="card-like" aria-label="Save">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-seller">
+          <span class="card-avatar">C</span>
+          <span class="card-seller-name">cookies57</span>
+          <span class="card-time">1d ago</span>
+        </div>
+        <h3 class="card-title">Fujifilm XF 35mm f/1.4 R Lens</h3>
+        <div class="card-price">£699</div>
+        <div class="card-meta">
+          <span class="chip chip-new">Lightly used</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 6 -->
+    <article class="card">
+      <div class="card-media">
+        <div class="card-badges">
+          <span class="badge badge-protect">✓ Protected</span>
+        </div>
+        <button class="card-like" aria-label="Save">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-seller">
+          <span class="card-avatar">K</span>
+          <span class="card-seller-name">keenwatersg</span>
+          <span class="card-time">1d ago</span>
+        </div>
+        <h3 class="card-title">Fujifilm Instax Mini 12 Instant Camera with Bag & Manual</h3>
+        <div class="card-price">£99</div>
+        <div class="card-meta">
+          <span class="chip chip-new">Like new</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 7 -->
+    <article class="card">
+      <div class="card-media">
+        <div class="card-badges">
+          <span class="badge badge-featured">Featured</span>
+        </div>
+        <button class="card-like" aria-label="Save">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-seller">
+          <span class="card-avatar">T</span>
+          <span class="card-seller-name">tomcel</span>
+          <span class="card-time">4mo ago</span>
+        </div>
+        <h3 class="card-title">Nikon NIKKOR Z 135mm f/1.8 S Plena Lens</h3>
+        <div class="card-price">£2,300</div>
+        <div class="card-meta">
+          <span class="chip chip-new">Like new</span>
+          <span class="chip chip-ship">Shipping</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 8 -->
+    <article class="card">
+      <div class="card-media">
+        <div class="card-badges">
+          <span class="badge badge-protect">✓ Protected</span>
+        </div>
+        <button class="card-like" aria-label="Save">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-seller">
+          <span class="card-avatar">A</span>
+          <span class="card-seller-name">ayeesha</span>
+          <span class="card-time">1d ago</span>
+        </div>
+        <h3 class="card-title">Canon IXY Digital L Rose Gold Compact Camera</h3>
+        <div class="card-price">£200</div>
+        <div class="card-meta">
+          <span class="chip chip-new">Lightly used</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================
+     POPULAR CATEGORIES
+     ============================================ -->
+<section class="section">
+  <div class="section-head">
+    <h2 class="section-title">Popular Categories</h2>
+    <a href="#" class="section-link">All categories →</a>
+  </div>
+
+  <div class="cat-tiles">
+    <a href="#" class="cat-tile">
+      <div class="cat-tile-content">
+        <div class="cat-tile-name">Cameras</div>
+        <div class="cat-tile-count">12,480 items</div>
+      </div>
+    </a>
+    <a href="#" class="cat-tile">
+      <div class="cat-tile-content">
+        <div class="cat-tile-name">Watches</div>
+        <div class="cat-tile-count">8,320 items</div>
+      </div>
+    </a>
+    <a href="#" class="cat-tile">
+      <div class="cat-tile-content">
+        <div class="cat-tile-name">Bicycles</div>
+        <div class="cat-tile-count">6,145 items</div>
+      </div>
+    </a>
+    <a href="#" class="cat-tile">
+      <div class="cat-tile-content">
+        <div class="cat-tile-name">Laptops</div>
+        <div class="cat-tile-count">9,872 items</div>
+      </div>
+    </a>
+    <a href="#" class="cat-tile">
+      <div class="cat-tile-content">
+        <div class="cat-tile-name">Furniture</div>
+        <div class="cat-tile-count">4,209 items</div>
+      </div>
+    </a>
+    <a href="#" class="cat-tile">
+      <div class="cat-tile-content">
+        <div class="cat-tile-name">Phones</div>
+        <div class="cat-tile-count">15,340 items</div>
+      </div>
+    </a>
+    <a href="#" class="cat-tile">
+      <div class="cat-tile-content">
+        <div class="cat-tile-name">Fashion</div>
+        <div class="cat-tile-count">22,118 items</div>
+      </div>
+    </a>
+    <a href="#" class="cat-tile">
+      <div class="cat-tile-content">
+        <div class="cat-tile-name">Gaming</div>
+        <div class="cat-tile-count">7,654 items</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================
+     RECENTLY ADDED
+     ============================================ -->
+<section class="section">
+  <div class="section-head">
+    <h2 class="section-title">Recently Added</h2>
+    <a href="#" class="section-link">View all →</a>
+  </div>
+
+  <div class="grid">
+
+    <article class="card">
+      <div class="card-media">
+        <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
+        <button class="card-like" aria-label="Save">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-seller">
+          <span class="card-avatar">R</span>
+          <span class="card-seller-name">rysellsthings</span>
+          <span class="card-time">15d ago</span>
+        </div>
+        <h3 class="card-title">Sony RX100 III Digital Camera</h3>
+        <div class="card-price">£450</div>
+        <div class="card-meta"><span class="chip chip-used">Well used</span></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-media">
+        <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
+        <button class="card-like" aria-label="Save">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-seller">
+          <span class="card-avatar">B</span>
+          <span class="card-seller-name">bernard8656</span>
+          <span class="card-time">9d ago</span>
+        </div>
+        <h3 class="card-title">DJI Osmo Pocket 3 Creator Combo — Very Good Condition</h3>
+        <div class="card-price">£460</div>
+        <div class="card-meta"><span class="chip chip-new">Like new</span></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-media">
+        <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
+        <button class="card-like" aria-label="Save">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-seller">
+          <span class="card-avatar">M</span>
+          <span class="card-seller-name">m4v11s</span>
+          <span class="card-time">4d ago</span>
+        </div>
+        <h3 class="card-title">Tamron Z Mount 35–150 f/2–2.8 Lens</h3>
+        <div class="card-price">£1,600</div>
+        <div class="card-meta"><span class="chip chip-new">Like new</span></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-media">
+        <div class="card-badges"><span class="badge badge-verified">✓ Verified</span></div>
+        <button class="card-like" aria-label="Save">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-seller">
+          <span class="card-avatar">B</span>
+          <span class="card-seller-name">bell_ringing</span>
+          <span class="card-time">13d ago</span>
+        </div>
+        <h3 class="card-title">Sony Alpha a6400 4K Mirrorless Camera with Kit Lens</h3>
+        <div class="card-price">£900</div>
+        <div class="card-meta"><span class="chip chip-new">Lightly used</span></div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="footer">
+  <div class="footer-inner">
+
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <a href="/" class="logo">
+          <span class="logo-mark">r</span>
+          relovly
+        </a>
+        <p>The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Buy</h4>
+        <ul>
+          <li><a href="#">How to Buy</a></li>
+          <li><a href="#">Buyer Protection</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Sell</h4>
+        <ul>
+          <li><a href="#">Start Selling</a></li>
+          <li><a href="#">Seller Fees</a></li>
+          <li><a href="#">Verification</a></li>
+          <li><a href="#">Seller Guide</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Centre</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Disputes</a></li>
+          <li><a href="#">Report Listing</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-trending">
+      <h4>Trending Searches</h4>
+      <div class="trend-chips">
+        <span class="trend-chip">Canon EOS</span>
+        <span class="trend-chip">iPhone 15 Pro</span>
+        <span class="trend-chip">MacBook Air M2</span>
+        <span class="trend-chip">Rolex Submariner</span>
+        <span class="trend-chip">Fujifilm X100V</span>
+        <span class="trend-chip">PlayStation 5</span>
+        <span class="trend-chip">Vintage Bicycle</span>
+        <span class="trend-chip">Mid-century Sofa</span>
+        <span class="trend-chip">Leica M</span>
+        <span class="trend-chip">Nintendo Switch</span>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 relovly. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="#">United Kingdom · GBP £</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ============================================
+     MOBILE BOTTOM BAR
+     ============================================ -->
+<nav class="mobile-bar">
+  <a href="/" class="mobile-bar-item active">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Home
+  </a>
+  <a href="#" class="mobile-bar-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    Saved
+  </a>
+  <a href="#" class="mobile-bar-item">
+    <span class="mobile-bar-sell">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+    </span>
+  </a>
+  <a href="#" class="mobile-bar-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    Chat
+  </a>
+  <a href="#" class="mobile-bar-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Me
+  </a>
+</nav>
+
+</body>
+</html>

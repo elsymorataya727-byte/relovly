@@ -25,6 +25,7 @@
     --green-soft: #E4F2EB;
     --amber: #C7873B;
     --amber-soft: #FAEFDD;
+    --red: #D14A40;
     --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
     --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
     --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
@@ -39,9 +40,6 @@
   img { display: block; max-width: 100%; }
   button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-  /* ============================================
-     LAYOUT — SPLIT SCREEN
-     ============================================ */
   .auth-page { display: grid; grid-template-columns: 1fr; min-height: 100vh; }
 
   .auth-form-panel {
@@ -127,9 +125,6 @@
 
   .auth-brand-trust span { display: flex; align-items: center; gap: 6px; }
 
-  /* ============================================
-     FORM CONTENT
-     ============================================ */
   .auth-inner {
     max-width: 440px;
     width: 100%;
@@ -187,9 +182,6 @@
     margin-bottom: 28px;
   }
 
-  /* ============================================
-     FORM
-     ============================================ */
   .form-group { margin-bottom: 14px; }
 
   .form-label {
@@ -223,6 +215,7 @@
 
   .form-input::placeholder { color: var(--text-3); }
   .form-input.has-icon { padding-right: 48px; }
+  .form-input.error { border-color: var(--red); }
 
   .input-toggle {
     position: absolute;
@@ -245,9 +238,6 @@
     gap: 10px;
   }
 
-  /* ============================================
-     PASSWORD STRENGTH
-     ============================================ */
   .password-strength {
     display: flex;
     gap: 4px;
@@ -272,9 +262,6 @@
     margin-top: 6px;
   }
 
-  /* ============================================
-     TERMS CHECKBOX
-     ============================================ */
   .terms-row {
     display: flex;
     align-items: flex-start;
@@ -313,9 +300,6 @@
   .terms-row a { color: var(--coral); font-weight: 600; }
   .terms-row a:hover { color: var(--coral-dark); }
 
-  /* ============================================
-     SUBMIT BUTTON
-     ============================================ */
   .btn-submit {
     width: 100%;
     height: 52px;
@@ -331,12 +315,29 @@
     transition: background 0.15s, transform 0.1s;
     margin-bottom: 20px;
   }
-  .btn-submit:hover { background: var(--coral-dark); }
-  .btn-submit:active { transform: scale(0.99); }
+  .btn-submit:hover:not(:disabled) { background: var(--coral-dark); }
+  .btn-submit:active:not(:disabled) { transform: scale(0.99); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
-  /* ============================================
-     SOCIAL BUTTONS (now at bottom)
-     ============================================ */
+  .btn-submit.loading svg { animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Alert */
+  .alert {
+    display: none;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: var(--r-md);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .alert.show { display: flex; }
+  .alert-error { background: #FDE9E7; color: var(--red); border: 1px solid #F8D5D2; }
+  .alert-success { background: var(--green-soft); color: var(--green); border: 1px solid #C7E4D5; }
+  .alert svg { flex-shrink: 0; margin-top: 1px; }
+
   .divider {
     display: flex;
     align-items: center;
@@ -369,9 +370,6 @@
   .social-btn:hover { border-color: var(--text); background: var(--bg); }
   .social-btn svg { flex-shrink: 0; }
 
-  /* ============================================
-     FOOTER LINK
-     ============================================ */
   .auth-footer {
     text-align: center;
     font-size: 14px;
@@ -398,9 +396,6 @@
 
   .auth-trust-footer span { display: flex; align-items: center; gap: 5px; }
 
-  /* ============================================
-     RESPONSIVE
-     ============================================ */
   @media (min-width: 900px) {
     .auth-page { grid-template-columns: 1fr 1fr; }
     .auth-brand-panel { display: block; order: 1; }
@@ -423,9 +418,6 @@
 
 <div class="auth-page">
 
-  <!-- ============================================
-       BRAND PANEL (right on desktop)
-       ============================================ -->
   <aside class="auth-brand-panel">
     <div class="auth-brand-content">
 
@@ -462,13 +454,9 @@
     </div>
   </aside>
 
-  <!-- ============================================
-       FORM PANEL
-       ============================================ -->
   <main class="auth-form-panel">
     <div class="auth-inner">
 
-      <!-- Mobile top bar -->
       <div class="auth-top-bar">
         <a href="index.html" class="auth-logo">
           <span class="auth-logo-mark">
@@ -487,12 +475,20 @@
         </a>
       </div>
 
-      <!-- Heading -->
       <h1 class="auth-title">Create your account</h1>
       <p class="auth-sub">Join thousands of buyers and sellers across the UK and Europe.</p>
 
-      <!-- Form -->
-      <form onsubmit="handleRegister(event)">
+      <div class="alert alert-error" id="errorAlert">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="errorMessage"></span>
+      </div>
+
+      <div class="alert alert-success" id="successAlert">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        <span id="successMessage"></span>
+      </div>
+
+      <form id="registerForm" novalidate>
 
         <div class="form-row-2">
           <div class="form-group">
@@ -556,9 +552,8 @@
           </div>
         </div>
 
-        <!-- Terms -->
         <label class="terms-row">
-          <input type="checkbox" required>
+          <input type="checkbox" id="termsCheckbox">
           <span class="checkbox-box">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
           </span>
@@ -567,19 +562,17 @@
           </span>
         </label>
 
-        <button type="submit" class="btn-submit">
-          Create account
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span id="submitText">Create account</span>
+          <svg id="submitIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </button>
 
       </form>
 
-      <!-- Divider -->
       <div class="divider">or continue with</div>
 
-      <!-- Social signup (moved to bottom) -->
       <div class="social-buttons">
-        <button class="social-btn">
+        <button class="social-btn" type="button" onclick="handleOAuth('google')">
           <svg width="18" height="18" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1Z"/>
             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23Z"/>
@@ -588,7 +581,7 @@
           </svg>
           Sign up with Google
         </button>
-        <button class="social-btn">
+        <button class="social-btn" type="button" onclick="handleOAuth('facebook')">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2">
             <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07Z"/>
           </svg>
@@ -596,12 +589,10 @@
         </button>
       </div>
 
-      <!-- Login link -->
       <div class="auth-footer">
         Already have an account? <a href="login.html">Log in</a>
       </div>
 
-      <!-- Trust footer -->
       <div class="auth-trust-footer">
         <span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -618,10 +609,33 @@
 
 </div>
 
+<!-- ============================================
+     SUPABASE CLIENT
+     ============================================ -->
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+  const SUPABASE_URL = 'https://osebqasifcnhyuajbyvv.supabase.co'
+  const SUPABASE_KEY = 'sb_publishable_vggy-_2xeONhcsSbiQklsw_hvLC_cgG'
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+
+  // Expose globally so the other script block can use it
+  window.supabaseClient = supabase
+
+  // If already logged in, send them to account page
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    if (session) {
+      window.location.href = 'account.html'
+    }
+  })
+</script>
+
+<!-- ============================================
+     FORM LOGIC
+     ============================================ -->
 <script>
-  // ============================================
   // PASSWORD VISIBILITY TOGGLE
-  // ============================================
   function togglePassword(inputId, btn) {
     const input = document.getElementById(inputId);
     const isPassword = input.type === 'password';
@@ -634,9 +648,7 @@
     btn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
   }
 
-  // ============================================
-  // PASSWORD STRENGTH METER
-  // ============================================
+  // PASSWORD STRENGTH
   function checkStrength(val) {
     const bars = document.querySelectorAll('#strengthBar .strength-bar');
     const hint = document.getElementById('strengthHint');
@@ -670,27 +682,133 @@
     }
   }
 
-  // ============================================
-  // REGISTER SUBMIT (placeholder for Supabase)
-  // ============================================
-  function handleRegister(e) {
+  // ALERT HELPERS
+  function showError(msg) {
+    const el = document.getElementById('errorAlert');
+    document.getElementById('errorMessage').textContent = msg;
+    el.classList.add('show');
+    document.getElementById('successAlert').classList.remove('show');
+  }
+  function hideAlerts() {
+    document.getElementById('errorAlert').classList.remove('show');
+    document.getElementById('successAlert').classList.remove('show');
+  }
+
+  // FORM SUBMIT
+  document.getElementById('registerForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-    const firstName = document.getElementById('firstName').value;
-    const lastName = document.getElementById('lastName').value;
-    const email = document.getElementById('email').value;
+    hideAlerts();
+
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
     const confirm = document.getElementById('confirmPassword').value;
+    const terms = document.getElementById('termsCheckbox').checked;
 
-    if (password !== confirm) {
-      alert('Passwords do not match');
-      return;
+    // Validate
+    if (!firstName || !lastName) return showError('Please enter your first and last name.');
+    if (!email || !email.includes('@')) return showError('Please enter a valid email address.');
+    if (password.length < 8) return showError('Password must be at least 8 characters.');
+    if (password !== confirm) return showError('Passwords do not match.');
+    if (!terms) return showError('Please agree to the Terms of Service to continue.');
+
+    // Disable button
+    const btn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('submitText');
+    const btnIcon = document.getElementById('submitIcon');
+    btn.disabled = true;
+    btn.classList.add('loading');
+    btnText.textContent = 'Creating your account...';
+
+    try {
+      const { data, error } = await window.supabaseClient.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            first_name: firstName,
+            last_name: lastName
+          }
+        }
+      });
+
+      if (error) throw error;
+
+      // Check if email confirmation is required
+      if (data.user && !data.session) {
+        // Email confirmation is ON
+        const successAlert = document.getElementById('successAlert');
+        document.getElementById('successMessage').textContent =
+          'Account created! Please check your email to confirm your address before logging in.';
+        successAlert.classList.add('show');
+        btnText.textContent = 'Account created';
+        btnIcon.innerHTML = '<path d="M20 6 9 17l-5-5"/>';
+
+        // Disable form
+        document.getElementById('registerForm').querySelectorAll('input, button').forEach(el => {
+          if (el.type !== 'button') el.disabled = true;
+        });
+
+        // Redirect to login after 3 seconds
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 3000);
+      } else {
+        // Email confirmation is OFF — user is signed in
+        const successAlert = document.getElementById('successAlert');
+        document.getElementById('successMessage').textContent =
+          'Account created! Redirecting to your account...';
+        successAlert.classList.add('show');
+        btnText.textContent = 'Welcome to relovly!';
+        btnIcon.innerHTML = '<path d="M20 6 9 17l-5-5"/>';
+
+        // Redirect to account page
+        setTimeout(() => {
+          window.location.href = 'account.html';
+        }, 1200);
+      }
+
+    } catch (err) {
+      console.error('Signup error:', err);
+
+      let msg = 'Something went wrong. Please try again.';
+      if (err.message) {
+        if (err.message.toLowerCase().includes('already registered') ||
+            err.message.toLowerCase().includes('already been registered')) {
+          msg = 'This email is already registered. Try logging in instead.';
+        } else if (err.message.toLowerCase().includes('password')) {
+          msg = 'Password is too weak. Use at least 8 characters with letters and numbers.';
+        } else if (err.message.toLowerCase().includes('email')) {
+          msg = 'Please enter a valid email address.';
+        } else {
+          msg = err.message;
+        }
+      }
+      showError(msg);
+
+      // Re-enable button
+      btn.disabled = false;
+      btn.classList.remove('loading');
+      btnText.textContent = 'Create account';
+      btnIcon.innerHTML = '<path d="m9 18 6-6-6-6"/>';
     }
+  });
 
-    // TODO: replace with Supabase auth.signUp call
-    console.log('Register attempt:', { firstName, lastName, email, password });
-
-    // Placeholder redirect
-    // window.location.href = 'index.html';
+  // OAUTH (Google / Facebook)
+  async function handleOAuth(provider) {
+    try {
+      const { error } = await window.supabaseClient.auth.signInWithOAuth({
+        provider: provider,
+        options: {
+          redirectTo: window.location.origin + '/account.html'
+        }
+      });
+      if (error) throw error;
+    } catch (err) {
+      console.error('OAuth error:', err);
+      showError(`${provider} sign-in is not available yet. Please use email.`);
+    }
   }
 </script>
 

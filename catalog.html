@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Browse Bicycles — relovly</title>
+<title>Browse — relovly</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
   button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
   /* ============================================
-     NAVIGATION
+     NAV
      ============================================ */
   .nav { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 0 16px; }
   .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 20px; height: 64px; }
@@ -59,21 +59,14 @@
   .nav-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
   .icon-btn { width: 40px; height: 40px; border-radius: var(--r-pill); display: flex; align-items: center; justify-content: center; color: var(--text-2); transition: background 0.15s, color 0.15s; position: relative; }
   .icon-btn:hover { background: var(--bg); color: var(--text); }
-  .icon-btn .dot { position: absolute; top: 8px; right: 8px; width: 8px; height: 8px; background: var(--coral); border-radius: 50%; border: 2px solid var(--card); }
 
   .btn-buy { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; background: var(--coral); color: white; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; transition: background 0.15s, transform 0.1s; }
   .btn-buy:hover { background: var(--coral-dark); }
-  .btn-buy:active { transform: scale(0.98); }
 
   /* ============================================
      PAGE HEADER
      ============================================ */
-  .page-header {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 24px 16px 8px;
-  }
-
+  .page-header { max-width: 1400px; margin: 0 auto; padding: 24px 16px 8px; }
   .breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-2); margin-bottom: 16px; }
   .breadcrumb a { transition: color 0.15s; }
   .breadcrumb a:hover { color: var(--coral); }
@@ -102,13 +95,6 @@
   }
 
   .page-count strong { color: var(--text); font-weight: 700; }
-
-  .page-subtitle {
-    font-size: 14px;
-    color: var(--text-2);
-    max-width: 720px;
-    margin-bottom: 20px;
-  }
 
   /* ============================================
      TOOLBAR
@@ -218,14 +204,9 @@
     gap: 24px;
   }
 
-  /* ---------- SIDEBAR FILTERS ---------- */
-  .filters {
-    display: none;
-  }
-
-  .filters.visible-desktop {
-    display: block;
-  }
+  /* ---------- SIDEBAR ---------- */
+  .filters { display: none; }
+  .filters.visible-desktop { display: block; }
 
   .filter-block {
     background: var(--card);
@@ -260,7 +241,6 @@
 
   .filter-body { display: flex; flex-direction: column; gap: 10px; }
 
-  /* Custom checkbox */
   .checkbox {
     display: flex;
     align-items: center;
@@ -294,14 +274,8 @@
   .checkbox input:checked + .checkbox-box svg { opacity: 1; }
 
   .checkbox-label { flex: 1; }
-  .checkbox-count { color: var(--text-3); font-size: 12px; }
 
-  /* Price range */
-  .price-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
+  .price-row { display: flex; gap: 8px; align-items: center; }
 
   .price-input {
     flex: 1;
@@ -333,7 +307,7 @@
   }
   .price-apply:hover { background: #000; }
 
-  /* ---------- MAIN CONTENT ---------- */
+  /* ---------- MAIN ---------- */
   .main { min-width: 0; }
 
   .grid {
@@ -365,7 +339,6 @@
   }
   .badge-protect { background: rgba(232, 90, 79, 0.92); color: white; }
   .badge-featured { background: rgba(26, 26, 26, 0.85); color: white; }
-  .badge-verified { background: rgba(46, 125, 91, 0.92); color: white; }
 
   .card-like {
     position: absolute; top: 10px; right: 10px;
@@ -392,6 +365,87 @@
   .chip-new { background: var(--green-soft); color: var(--green); }
   .chip-used { background: var(--amber-soft); color: var(--amber); }
   .chip-ship { background: var(--coral-soft); color: var(--coral); }
+  .chip-pickup { background: #EEF1F5; color: #5A6B7D; }
+
+  /* Empty state */
+  .empty-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+    background: var(--card);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--r-lg);
+    text-align: center;
+    grid-column: 1 / -1;
+  }
+  .empty-icon {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--coral-soft);
+    color: var(--coral);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+  }
+  .empty-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.4px; margin-bottom: 6px; }
+  .empty-desc { font-size: 14px; color: var(--text-2); max-width: 400px; line-height: 1.6; margin-bottom: 20px; }
+  .empty-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 42px; padding: 0 20px;
+    background: var(--coral); color: white;
+    border-radius: var(--r-md); font-weight: 600; font-size: 14px;
+    transition: background 0.15s;
+  }
+  .empty-btn:hover { background: var(--coral-dark); }
+
+  /* Skeleton */
+  .skeleton {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    overflow: hidden;
+  }
+  .skeleton-media {
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(90deg, #F5F2ED, #EBE7E0, #F5F2ED);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  .skeleton-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .skeleton-line {
+    height: 12px;
+    background: linear-gradient(90deg, #F5F2ED, #EBE7E0, #F5F2ED);
+    background-size: 200% 100%;
+    border-radius: 4px;
+    animation: shimmer 1.5s infinite;
+  }
+  .skeleton-line.short { width: 60%; }
+  .skeleton-line.price { height: 20px; width: 40%; }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Loading */
+  .loading-center {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    color: var(--text-3);
+    gap: 16px;
+  }
+  .spinner {
+    width: 36px; height: 36px;
+    border: 3px solid var(--border);
+    border-top-color: var(--coral);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
   /* ============================================
      PAGINATION
@@ -404,7 +458,6 @@
     margin-top: 40px;
     flex-wrap: wrap;
   }
-
   .page-btn {
     min-width: 40px;
     height: 40px;
@@ -425,7 +478,7 @@
   .page-btn.disabled { opacity: 0.4; pointer-events: none; }
 
   /* ============================================
-     MOBILE FILTER DRAWER
+     MOBILE DRAWER
      ============================================ */
   .drawer-overlay {
     position: fixed;
@@ -465,7 +518,6 @@
     justify-content: space-between;
     flex-shrink: 0;
   }
-
   .drawer-head::before {
     content: "";
     position: absolute;
@@ -477,9 +529,7 @@
     background: var(--border-strong);
     border-radius: 2px;
   }
-
   .drawer-title { font-size: 17px; font-weight: 700; }
-
   .drawer-close {
     width: 32px; height: 32px;
     border-radius: 50%;
@@ -490,14 +540,12 @@
     transition: background 0.15s;
   }
   .drawer-close:hover { background: var(--bg); }
-
   .drawer-body {
     flex: 1;
     overflow-y: auto;
     padding: 16px;
     -webkit-overflow-scrolling: touch;
   }
-
   .drawer-foot {
     padding: 14px 16px;
     border-top: 1px solid var(--border);
@@ -506,7 +554,6 @@
     gap: 10px;
     flex-shrink: 0;
   }
-
   .drawer-foot button {
     height: 46px;
     border-radius: var(--r-md);
@@ -516,7 +563,6 @@
     align-items: center;
     justify-content: center;
   }
-
   .drawer-foot .clear {
     background: var(--card);
     border: 1px solid var(--border-strong);
@@ -526,7 +572,6 @@
     background: var(--coral);
     color: white;
   }
-  .drawer-foot .apply:hover { background: var(--coral-dark); }
 
   /* ============================================
      FOOTER
@@ -544,7 +589,7 @@
   .footer-bottom-links { display: flex; flex-wrap: wrap; gap: 16px; }
 
   /* ============================================
-     MOBILE BOTTOM BAR
+     MOBILE BAR
      ============================================ */
   .mobile-bar {
     position: fixed;
@@ -564,15 +609,13 @@
     transition: color 0.15s;
   }
   .mobile-bar-item.active { color: var(--coral); }
-  .mobile-bar-sell {
+  .mobile-bar-buy {
     width: 48px; height: 48px; border-radius: 50%;
     background: var(--coral); color: white;
     display: flex; align-items: center; justify-content: center;
     margin-top: -18px;
     box-shadow: 0 4px 12px rgba(232,90,79,0.35);
-    transition: transform 0.15s;
   }
-  .mobile-bar-sell:active { transform: scale(0.94); }
 
   @media (max-width: 767px) { body { padding-bottom: 72px; } }
 
@@ -588,13 +631,8 @@
   }
 
   @media (min-width: 1024px) {
-    .layout {
-      grid-template-columns: 260px 1fr;
-      gap: 32px;
-      align-items: start;
-    }
+    .layout { grid-template-columns: 260px 1fr; gap: 32px; align-items: start; }
     .filters { display: block; position: sticky; top: 84px; }
-    .filters.visible-desktop { display: block; }
     .filter-btn { display: none; }
     .drawer, .drawer-overlay { display: none; }
     .grid { grid-template-columns: repeat(3, 1fr); }
@@ -605,16 +643,12 @@
   }
 
   :focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 4px; }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  }
 </style>
 </head>
 <body>
 
 <!-- ============================================
-     NAVIGATION
+     NAV
      ============================================ -->
 <nav class="nav">
   <div class="nav-inner">
@@ -640,21 +674,14 @@
       <span class="nav-search-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       </span>
-      <input type="text" placeholder="Search cameras, watches, bicycles..." value="bicycle">
+      <input type="text" id="navSearchInput" placeholder="Search cameras, watches, bicycles...">
     </div>
 
     <div class="nav-actions">
-      <button class="icon-btn" aria-label="Notifications">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-        <span class="dot"></span>
-      </button>
-      <button class="icon-btn" aria-label="Messages">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </button>
-      <button class="icon-btn" aria-label="Profile">
+      <a href="account.html" class="icon-btn" aria-label="Profile">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </button>
-      <a href="index.html" class="btn-buy">
+      </a>
+      <a href="cart.html" class="btn-buy">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         Buy
       </a>
@@ -666,20 +693,16 @@
      PAGE HEADER
      ============================================ -->
 <header class="page-header">
-  <div class="breadcrumb">
+  <div class="breadcrumb" id="breadcrumb">
     <a href="index.html">Home</a>
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-    <a href="#">Sports Equipment</a>
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-    <span>Bicycles</span>
+    <span>All Items</span>
   </div>
 
   <div class="page-title-row">
-    <h1 class="page-title">Bicycles</h1>
-    <span class="page-count"><strong>2,847</strong> items · United Kingdom</span>
+    <h1 class="page-title" id="pageTitle">All Items</h1>
+    <span class="page-count"><strong id="resultCount">0</strong> <span id="resultWord">items</span></span>
   </div>
-
-  <p class="page-subtitle">Quality used and pre-owned bicycles from trusted sellers across the UK. Road bikes, mountain bikes, folding bikes, e-bikes, and more — with buyer protection on every purchase.</p>
 </header>
 
 <!-- ============================================
@@ -689,34 +712,19 @@
   <button class="filter-btn" onclick="openDrawer()">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
     Filters
-    <span class="filter-btn-count">2</span>
+    <span class="filter-btn-count" id="mobileFilterCount" style="display:none;">0</span>
   </button>
 
-  <select class="sort-select" aria-label="Sort by">
-    <option>Best Match</option>
-    <option>Newest First</option>
-    <option>Price: Low to High</option>
-    <option>Price: High to Low</option>
-    <option>Most Liked</option>
-    <option>Nearest to Me</option>
+  <select class="sort-select" id="sortSelect" aria-label="Sort by">
+    <option value="newest">Newest First</option>
+    <option value="price_asc">Price: Low to High</option>
+    <option value="price_desc">Price: High to Low</option>
+    <option value="popular">Most Liked</option>
   </select>
 
   <div class="toolbar-spacer"></div>
 
-  <div class="active-filters">
-    <span class="filter-tag">
-      Brand new
-      <button aria-label="Remove filter">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-      </button>
-    </span>
-    <span class="filter-tag">
-      £200 – £2,500
-      <button aria-label="Remove filter">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-      </button>
-    </span>
-  </div>
+  <div class="active-filters" id="activeFilters"></div>
 </div>
 
 <!-- ============================================
@@ -726,402 +734,19 @@
 
   <!-- ---------- SIDEBAR FILTERS ---------- -->
   <aside class="filters" id="filtersDesktop">
-
-    <div class="filter-block">
-      <div class="filter-block-head" onclick="toggleBlock(this)">
-        <h4>Condition</h4>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
-      </div>
-      <div class="filter-body">
-        <label class="checkbox">
-          <input type="checkbox" checked>
-          <span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-          <span class="checkbox-label">Brand new</span>
-          <span class="checkbox-count">412</span>
-        </label>
-        <label class="checkbox">
-          <input type="checkbox">
-          <span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-          <span class="checkbox-label">Like new</span>
-          <span class="checkbox-count">986</span>
-        </label>
-        <label class="checkbox">
-          <input type="checkbox">
-          <span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-          <span class="checkbox-label">Lightly used</span>
-          <span class="checkbox-count">1,024</span>
-        </label>
-        <label class="checkbox">
-          <input type="checkbox">
-          <span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-          <span class="checkbox-label">Well used</span>
-          <span class="checkbox-count">425</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="filter-block">
-      <div class="filter-block-head" onclick="toggleBlock(this)">
-        <h4>Price Range</h4>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
-      </div>
-      <div class="filter-body">
-        <div class="price-row">
-          <input class="price-input" type="number" placeholder="Min £" value="200">
-          <span class="price-dash">–</span>
-          <input class="price-input" type="number" placeholder="Max £" value="2500">
-        </div>
-        <button class="price-apply" style="margin-top: 4px;">Apply</button>
-      </div>
-    </div>
-
-    <div class="filter-block">
-      <div class="filter-block-head" onclick="toggleBlock(this)">
-        <h4>Brand</h4>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
-      </div>
-      <div class="filter-body">
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Brompton</span><span class="checkbox-count">204</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Trek</span><span class="checkbox-count">318</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Specialized</span><span class="checkbox-count">276</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Cannondale</span><span class="checkbox-count">189</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Giant</span><span class="checkbox-count">241</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">RUHM</span><span class="checkbox-count">42</span></label>
-        <a href="#" style="font-size: 13px; font-weight: 600; color: var(--coral); margin-top: 4px;">Show all brands →</a>
-      </div>
-    </div>
-
-    <div class="filter-block">
-      <div class="filter-block-head" onclick="toggleBlock(this)">
-        <h4>Type</h4>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
-      </div>
-      <div class="filter-body">
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Road bikes</span><span class="checkbox-count">512</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Mountain bikes</span><span class="checkbox-count">638</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Folding bikes</span><span class="checkbox-count">247</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">E-bikes</span><span class="checkbox-count">389</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Vintage</span><span class="checkbox-count">156</span></label>
-      </div>
-    </div>
-
-    <div class="filter-block">
-      <div class="filter-block-head" onclick="toggleBlock(this)">
-        <h4>Delivery</h4>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
-      </div>
-      <div class="filter-body">
-        <label class="checkbox"><input type="checkbox" checked><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Shipping available</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Local pickup</span></label>
-      </div>
-    </div>
-
-    <div class="filter-block">
-      <div class="filter-block-head" onclick="toggleBlock(this)">
-        <h4>Seller</h4>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
-      </div>
-      <div class="filter-body">
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Verified sellers only</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">4.5+ rating</span></label>
-      </div>
-    </div>
-
+    <!-- Populated dynamically -->
   </aside>
 
   <!-- ---------- MAIN GRID ---------- -->
   <main class="main">
     <div class="grid" id="productGrid">
-
-      <!-- Product 1 -->
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
-          <button class="card-like" onclick="toggleLike(this)" aria-label="Save">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-          <img src="https://media.karousell.com/media/photos/products/2026/7/3/preorder_ruhm_5dii_full_carbon_1783047548_cae891a5_progressive" alt="RUHM bicycle">
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">S</span>
-            <span class="card-seller-name">thesense.life</span>
-            <span class="card-time">2h ago</span>
-          </div>
-          <h3 class="card-title">RUHM 5DII Full Carbon Lightweight 6.6kg 16" Trifold Bicycle</h3>
-          <div class="card-price">£2,530</div>
-          <div class="card-meta">
-            <span class="chip chip-new">Brand new</span>
-            <span class="chip chip-ship">Shipping</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Product 2 -->
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge badge-featured">Featured</span></div>
-          <button class="card-like" onclick="toggleLike(this)" aria-label="Save">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">B</span>
-            <span class="card-seller-name">brompton_fan</span>
-            <span class="card-time">3d ago</span>
-          </div>
-          <h3 class="card-title">Brompton C Line Explore M6L Folding Bike — 2023</h3>
-          <div class="card-price">£1,450</div>
-          <div class="card-meta">
-            <span class="chip chip-new">Like new</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Product 3 -->
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge badge-protect">✓ Protected</span><span class="badge badge-verified">✓ Verified</span></div>
-          <button class="card-like" onclick="toggleLike(this)" aria-label="Save">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">K</span>
-            <span class="card-seller-name">kito_bikes</span>
-            <span class="card-time">1w ago</span>
-          </div>
-          <h3 class="card-title">Kito Folding Commuter Bike 16" — Lightweight Alloy Frame</h3>
-          <div class="card-price">£420</div>
-          <div class="card-meta">
-            <span class="chip chip-used">Lightly used</span>
-            <span class="chip chip-ship">Shipping</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Product 4 -->
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
-          <button class="card-like" onclick="toggleLike(this)" aria-label="Save">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">M</span>
-            <span class="card-seller-name">mint_official</span>
-            <span class="card-time">2d ago</span>
-          </div>
-          <h3 class="card-title">Mint Compact 16" Trifold Bike — Premium Titanium Finish</h3>
-          <div class="card-price">£1,180</div>
-          <div class="card-meta">
-            <span class="chip chip-new">Brand new</span>
-            <span class="chip chip-ship">Shipping</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Product 5 -->
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
-          <button class="card-like" onclick="toggleLike(this)" aria-label="Save">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">A</span>
-            <span class="card-seller-name">aceoffix_uk</span>
-            <span class="card-time">5d ago</span>
-          </div>
-          <h3 class="card-title">Aceoffix Alloy Folding Bike — Upgraded Wheelset & Carbon Seatpost</h3>
-          <div class="card-price">£780</div>
-          <div class="card-meta">
-            <span class="chip chip-new">Like new</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Product 6 -->
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge badge-featured">Featured</span></div>
-          <button class="card-like" onclick="toggleLike(this)" aria-label="Save">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">T</span>
-            <span class="card-seller-name">trek_specialist</span>
-            <span class="card-time">1d ago</span>
-          </div>
-          <h3 class="card-title">Trek Domane SL 6 Road Bike — Ultegra Groupset, Size 54</h3>
-          <div class="card-price">£2,150</div>
-          <div class="card-meta">
-            <span class="chip chip-new">Lightly used</span>
-            <span class="chip chip-ship">Shipping</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Product 7 -->
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
-          <button class="card-like" onclick="toggleLike(this)" aria-label="Save">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">J</span>
-            <span class="card-seller-name">jameson_cycles</span>
-            <span class="card-time">4d ago</span>
-          </div>
-          <h3 class="card-title">Specialized Rockhopper Comp 29 — Mountain Bike, Great Condition</h3>
-          <div class="card-price">£695</div>
-          <div class="card-meta">
-            <span class="chip chip-used">Well used</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Product 8 -->
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
-          <button class="card-like" onclick="toggleLike(this)" aria-label="Save">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">G</span>
-            <span class="card-seller-name">giant_dealer</span>
-            <span class="card-time">6d ago</span>
-          </div>
-          <h3 class="card-title">Giant Escape 3 City Bike — Hybrid Commuter, Excellent Condition</h3>
-          <div class="card-price">£340</div>
-          <div class="card-meta">
-            <span class="chip chip-new">Like new</span>
-            <span class="chip chip-ship">Shipping</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Product 9 -->
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge badge-featured">Featured</span></div>
-          <button class="card-like" onclick="toggleLike(this)" aria-label="Save">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">V</span>
-            <span class="card-seller-name">vintage_wheels</span>
-            <span class="card-time">3d ago</span>
-          </div>
-          <h3 class="card-title">Peugeot Vintage Road Bike — Fully Restored, 1980s Classic</h3>
-          <div class="card-price">£520</div>
-          <div class="card-meta">
-            <span class="chip chip-new">Lightly used</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Product 10 -->
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
-          <button class="card-like" onclick="toggleLike(this)" aria-label="Save">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">E</span>
-            <span class="card-seller-name">e_bike_london</span>
-            <span class="card-time">1d ago</span>
-          </div>
-          <h3 class="card-title">Cube Reaction Hybrid E-Bike — Bosch Motor, 500Wh Battery</h3>
-          <div class="card-price">£1,890</div>
-          <div class="card-meta">
-            <span class="chip chip-new">Like new</span>
-            <span class="chip chip-ship">Shipping</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Product 11 -->
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge badge-protect">✓ Protected</span></div>
-          <button class="card-like" onclick="toggleLike(this)" aria-label="Save">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">C</span>
-            <span class="card-seller-name">cannondale_pro</span>
-            <span class="card-time">2d ago</span>
-          </div>
-          <h3 class="card-title">Cannondale Synapse Carbon 105 — Endurance Road Bike, Size 56</h3>
-          <div class="card-price">£1,650</div>
-          <div class="card-meta">
-            <span class="chip chip-new">Lightly used</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Product 12 -->
-      <article class="card">
-        <div class="card-media">
-          <div class="card-badges"><span class="badge badge-verified">✓ Verified</span></div>
-          <button class="card-like" onclick="toggleLike(this)" aria-label="Save">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-        </div>
-        <div class="card-body">
-          <div class="card-seller">
-            <span class="card-avatar">W</span>
-            <span class="card-seller-name">willier_official</span>
-            <span class="card-time">5h ago</span>
-          </div>
-          <h3 class="card-title">Wilier Triestina Cento10 — Italian Racing Bike, Dura-Ace</h3>
-          <div class="card-price">£3,200</div>
-          <div class="card-meta">
-            <span class="chip chip-new">Like new</span>
-            <span class="chip chip-ship">Shipping</span>
-          </div>
-        </div>
-      </article>
-
+      <div class="loading-center">
+        <div class="spinner"></div>
+        <span>Loading items...</span>
+      </div>
     </div>
 
-    <!-- Pagination -->
-    <div class="pagination">
-      <button class="page-btn disabled" aria-label="Previous">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
-      </button>
-      <button class="page-btn active">1</button>
-      <button class="page-btn">2</button>
-      <button class="page-btn">3</button>
-      <button class="page-btn">4</button>
-      <span style="padding: 0 4px; color: var(--text-3);">…</span>
-      <button class="page-btn">237</button>
-      <button class="page-btn" aria-label="Next">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-      </button>
-    </div>
+    <div class="pagination" id="pagination"></div>
   </main>
 
 </div>
@@ -1197,7 +822,7 @@
 </footer>
 
 <!-- ============================================
-     MOBILE BOTTOM BAR
+     MOBILE BAR
      ============================================ -->
 <nav class="mobile-bar">
   <a href="index.html" class="mobile-bar-item">
@@ -1208,8 +833,8 @@
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
     Browse
   </a>
-  <a href="#" class="mobile-bar-item">
-    <span class="mobile-bar-sell">
+  <a href="cart.html" class="mobile-bar-item">
+    <span class="mobile-bar-buy">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
     </span>
   </a>
@@ -1217,14 +842,14 @@
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     Chat
   </a>
-  <a href="#" class="mobile-bar-item">
+  <a href="account.html" class="mobile-bar-item">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     Me
   </a>
 </nav>
 
 <!-- ============================================
-     MOBILE FILTER DRAWER
+     MOBILE DRAWER
      ============================================ -->
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 <aside class="drawer" id="drawer" role="dialog" aria-label="Filters">
@@ -1234,118 +859,693 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
     </button>
   </div>
-
-  <div class="drawer-body">
-    <!-- Condition -->
-    <div class="filter-block">
-      <div class="filter-block-head" onclick="toggleBlock(this)">
-        <h4>Condition</h4>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
-      </div>
-      <div class="filter-body">
-        <label class="checkbox"><input type="checkbox" checked><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Brand new</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Like new</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Lightly used</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Well used</span></label>
-      </div>
-    </div>
-
-    <!-- Price -->
-    <div class="filter-block">
-      <div class="filter-block-head" onclick="toggleBlock(this)">
-        <h4>Price Range</h4>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
-      </div>
-      <div class="filter-body">
-        <div class="price-row">
-          <input class="price-input" type="number" placeholder="Min £">
-          <span class="price-dash">–</span>
-          <input class="price-input" type="number" placeholder="Max £">
-        </div>
-      </div>
-    </div>
-
-    <!-- Brand -->
-    <div class="filter-block">
-      <div class="filter-block-head" onclick="toggleBlock(this)">
-        <h4>Brand</h4>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
-      </div>
-      <div class="filter-body">
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Brompton</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Trek</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Specialized</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Giant</span></label>
-      </div>
-    </div>
-
-    <!-- Delivery -->
-    <div class="filter-block">
-      <div class="filter-block-head" onclick="toggleBlock(this)">
-        <h4>Delivery</h4>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
-      </div>
-      <div class="filter-body">
-        <label class="checkbox"><input type="checkbox" checked><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Shipping available</span></label>
-        <label class="checkbox"><input type="checkbox"><span class="checkbox-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="checkbox-label">Local pickup</span></label>
-      </div>
-    </div>
-  </div>
-
+  <div class="drawer-body" id="drawerBody"></div>
   <div class="drawer-foot">
-    <button class="clear" onclick="closeDrawer()">Clear all</button>
-    <button class="apply" onclick="closeDrawer()">Show 2,847 results</button>
+    <button class="clear" onclick="clearAllFilters()">Clear all</button>
+    <button class="apply" onclick="closeDrawer()">Show <span id="drawerCount">0</span> results</button>
   </div>
 </aside>
 
+<!-- ============================================
+     SUPABASE CLIENT
+     ============================================ -->
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+  const SUPABASE_URL = 'https://osebqasifcnhyuajbyvv.supabase.co'
+  const SUPABASE_KEY = 'sb_publishable_vggy-_2xeONhcsSbiQklsw_hvLC_cgG'
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+  window.supabaseClient = supabase
+  window.dispatchEvent(new Event('supabase-ready'))
+</script>
+
+<!-- ============================================
+     CATALOG LOGIC
+     ============================================ -->
 <script>
   // ============================================
-  // FILTER BLOCK COLLAPSE
+  // STATE
+  // ============================================
+  const state = {
+    categories: [],
+    filters: {
+      categorySlug: null,
+      categoryId: null,
+      conditions: [],
+      priceMin: null,
+      priceMax: null,
+      shipping: false,
+      pickup: false,
+      q: null
+    },
+    sort: 'newest',
+    page: 1,
+    perPage: 20,
+    totalCount: 0,
+    listings: []
+  }
+
+  // ============================================
+  // HELPERS
+  // ============================================
+  function formatPrice(price, currency) {
+    const n = parseFloat(price || 0)
+    const symbols = { GBP: '£', USD: '$', EUR: '€' }
+    const sym = symbols[currency] || ''
+    return sym + n.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 2 })
+  }
+
+  function timeAgo(dateStr) {
+    const date = new Date(dateStr)
+    const seconds = Math.floor((Date.now() - date.getTime()) / 1000)
+    if (seconds < 60) return 'just now'
+    if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago'
+    if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago'
+    if (seconds < 604800) return Math.floor(seconds / 86400) + 'd ago'
+    if (seconds < 2592000) return Math.floor(seconds / 604800) + 'w ago'
+    if (seconds < 31536000) return Math.floor(seconds / 2592000) + 'mo ago'
+    return Math.floor(seconds / 31536000) + 'y ago'
+  }
+
+  function escapeHtml(str) {
+    if (!str) return ''
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+  }
+
+  function conditionChip(condition) {
+    const map = {
+      brand_new: { label: 'Brand new', cls: 'chip-new' },
+      like_new: { label: 'Like new', cls: 'chip-new' },
+      lightly_used: { label: 'Lightly used', cls: 'chip-used' },
+      well_used: { label: 'Well used', cls: 'chip-used' }
+    }
+    const c = map[condition] || { label: 'Used', cls: 'chip-used' }
+    return `<span class="chip ${c.cls}">${c.label}</span>`
+  }
+
+  // ============================================
+  // READ URL PARAMS
+  // ============================================
+  function readUrlParams() {
+    const params = new URLSearchParams(window.location.search)
+    state.filters.categorySlug = params.get('category') || null
+    state.filters.q = params.get('q') || null
+    state.sort = params.get('sort') || 'newest'
+    state.page = parseInt(params.get('page') || '1', 10)
+  }
+
+  function updateUrl() {
+    const params = new URLSearchParams()
+    if (state.filters.categorySlug) params.set('category', state.filters.categorySlug)
+    if (state.filters.q) params.set('q', state.filters.q)
+    if (state.sort !== 'newest') params.set('sort', state.sort)
+    if (state.page > 1) params.set('page', state.page)
+
+    const url = params.toString() ? `?${params.toString()}` : window.location.pathname
+    window.history.replaceState({}, '', url)
+  }
+
+  // ============================================
+  // LOAD CATEGORIES
+  // ============================================
+  async function loadCategories() {
+    const { data, error } = await window.supabaseClient
+      .from('categories')
+      .select('id, name, slug, icon, sort_order')
+      .eq('is_active', true)
+      .order('sort_order')
+
+    if (error) {
+      console.error('Categories error:', error)
+      return []
+    }
+    state.categories = data || []
+
+    // If we have a category slug from URL, resolve to ID
+    if (state.filters.categorySlug) {
+      const cat = state.categories.find(c => c.slug === state.filters.categorySlug)
+      if (cat) {
+        state.filters.categoryId = cat.id
+        document.getElementById('pageTitle').textContent = cat.name
+        document.getElementById('breadcrumb').innerHTML = `
+          <a href="index.html">Home</a>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+          <span>${escapeHtml(cat.name)}</span>
+        `
+      }
+    } else if (state.filters.q) {
+      document.getElementById('pageTitle').textContent = `Search: "${state.filters.q}"`
+    }
+
+    return state.categories
+  }
+
+  // ============================================
+  // BUILD FILTER UI (sidebar + drawer)
+  // ============================================
+  function renderFilters() {
+    const html = buildFilterHTML()
+    document.getElementById('filtersDesktop').innerHTML = html
+    document.getElementById('drawerBody').innerHTML = html
+  }
+
+  function buildFilterHTML() {
+    const catsHtml = state.categories.map(c => `
+      <label class="checkbox">
+        <input type="checkbox" ${state.filters.categoryId === c.id ? 'checked' : ''} onchange="toggleCategory(${c.id}, this.checked)">
+        <span class="checkbox-box">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </span>
+        <span class="checkbox-label">${escapeHtml(c.name)}</span>
+      </label>
+    `).join('')
+
+    const conditions = [
+      { key: 'brand_new', label: 'Brand new' },
+      { key: 'like_new', label: 'Like new' },
+      { key: 'lightly_used', label: 'Lightly used' },
+      { key: 'well_used', label: 'Well used' }
+    ]
+
+    const conditionsHtml = conditions.map(c => `
+      <label class="checkbox">
+        <input type="checkbox" ${state.filters.conditions.includes(c.key) ? 'checked' : ''} onchange="toggleCondition('${c.key}', this.checked)">
+        <span class="checkbox-box">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </span>
+        <span class="checkbox-label">${c.label}</span>
+      </label>
+    `).join('')
+
+    return `
+      <div class="filter-block">
+        <div class="filter-block-head" onclick="toggleBlock(this)">
+          <h4>Category</h4>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+        <div class="filter-body">${catsHtml}</div>
+      </div>
+
+      <div class="filter-block">
+        <div class="filter-block-head" onclick="toggleBlock(this)">
+          <h4>Condition</h4>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+        <div class="filter-body">${conditionsHtml}</div>
+      </div>
+
+      <div class="filter-block">
+        <div class="filter-block-head" onclick="toggleBlock(this)">
+          <h4>Price Range</h4>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+        <div class="filter-body">
+          <div class="price-row">
+            <input class="price-input" type="number" id="priceMin" placeholder="Min" value="${state.filters.priceMin || ''}">
+            <span class="price-dash">–</span>
+            <input class="price-input" type="number" id="priceMax" placeholder="Max" value="${state.filters.priceMax || ''}">
+          </div>
+          <button class="price-apply" style="margin-top: 4px;" onclick="applyPrice()">Apply</button>
+        </div>
+      </div>
+
+      <div class="filter-block">
+        <div class="filter-block-head" onclick="toggleBlock(this)">
+          <h4>Delivery</h4>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+        <div class="filter-body">
+          <label class="checkbox">
+            <input type="checkbox" ${state.filters.shipping ? 'checked' : ''} onchange="toggleShipping(this.checked)">
+            <span class="checkbox-box">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <span class="checkbox-label">Shipping available</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" ${state.filters.pickup ? 'checked' : ''} onchange="togglePickup(this.checked)">
+            <span class="checkbox-box">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <span class="checkbox-label">Local pickup</span>
+          </label>
+        </div>
+      </div>
+    `
+  }
+
+  // ============================================
+  // FILTER EVENTS
   // ============================================
   function toggleBlock(head) {
-    head.parentElement.classList.toggle('collapsed');
+    head.parentElement.classList.toggle('collapsed')
+  }
+
+  function toggleCategory(id, checked) {
+    if (checked) {
+      state.filters.categoryId = id
+      const cat = state.categories.find(c => c.id === id)
+      state.filters.categorySlug = cat ? cat.slug : null
+    } else {
+      state.filters.categoryId = null
+      state.filters.categorySlug = null
+    }
+    state.page = 1
+    updateUrl()
+    applyAndRender()
+  }
+
+  function toggleCondition(key, checked) {
+    if (checked) {
+      if (!state.filters.conditions.includes(key)) {
+        state.filters.conditions.push(key)
+      }
+    } else {
+      state.filters.conditions = state.filters.conditions.filter(c => c !== key)
+    }
+    state.page = 1
+    applyAndRender()
+  }
+
+  function applyPrice() {
+    state.filters.priceMin = parseFloat(document.getElementById('priceMin').value) || null
+    state.filters.priceMax = parseFloat(document.getElementById('priceMax').value) || null
+    state.page = 1
+    applyAndRender()
+  }
+
+  function toggleShipping(checked) {
+    state.filters.shipping = checked
+    state.page = 1
+    applyAndRender()
+  }
+
+  function togglePickup(checked) {
+    state.filters.pickup = checked
+    state.page = 1
+    applyAndRender()
+  }
+
+  function clearAllFilters() {
+    state.filters = {
+      categorySlug: null,
+      categoryId: null,
+      conditions: [],
+      priceMin: null,
+      priceMax: null,
+      shipping: false,
+      pickup: false,
+      q: null
+    }
+    state.page = 1
+    updateUrl()
+    renderFilters()
+    renderActiveFilterTags()
+    applyAndRender()
+    document.getElementById('pageTitle').textContent = 'All Items'
+    document.getElementById('breadcrumb').innerHTML = `
+      <a href="index.html">Home</a>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      <span>All Items</span>
+    `
   }
 
   // ============================================
-  // FILTER DRAWER (mobile)
+  // RENDER ACTIVE FILTERS
   // ============================================
-  const drawer = document.getElementById('drawer');
-  const drawerOverlay = document.getElementById('drawerOverlay');
+  function renderActiveFilterTags() {
+    const wrap = document.getElementById('activeFilters')
+    const tags = []
 
-  function openDrawer() {
-    drawer.classList.add('open');
-    drawerOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    if (state.filters.categoryId) {
+      const cat = state.categories.find(c => c.id === state.filters.categoryId)
+      if (cat) tags.push({ label: cat.name, action: 'toggleCategory(' + cat.id + ', false)' })
+    }
+    state.filters.conditions.forEach(c => {
+      const labels = { brand_new: 'Brand new', like_new: 'Like new', lightly_used: 'Lightly used', well_used: 'Well used' }
+      tags.push({ label: labels[c], action: `toggleCondition('${c}', false)` })
+    })
+    if (state.filters.priceMin || state.filters.priceMax) {
+      const min = state.filters.priceMin ? `£${state.filters.priceMin}` : '£0'
+      const max = state.filters.priceMax ? `£${state.filters.priceMax}` : '∞'
+      tags.push({ label: `${min} – ${max}`, action: 'clearPrice()' })
+    }
+    if (state.filters.shipping) tags.push({ label: 'Shipping', action: 'toggleShipping(false)' })
+    if (state.filters.pickup) tags.push({ label: 'Pickup', action: 'togglePickup(false)' })
+    if (state.filters.q) tags.push({ label: `"${state.filters.q}"`, action: 'clearSearch()' })
+
+    wrap.innerHTML = tags.map(t => `
+      <span class="filter-tag">
+        ${escapeHtml(t.label)}
+        <button onclick="${t.action}" aria-label="Remove">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </span>
+    `).join('')
+
+    const count = tags.length
+    const badge = document.getElementById('mobileFilterCount')
+    if (count > 0) {
+      badge.textContent = count
+      badge.style.display = 'inline-flex'
+    } else {
+      badge.style.display = 'none'
+    }
   }
-  function closeDrawer() {
-    drawer.classList.remove('open');
-    drawerOverlay.classList.remove('open');
-    document.body.style.overflow = '';
+
+  function clearPrice() {
+    state.filters.priceMin = null
+    state.filters.priceMax = null
+    state.page = 1
+    renderFilters()
+    renderActiveFilterTags()
+    applyAndRender()
   }
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeDrawer();
-  });
+
+  function clearSearch() {
+    state.filters.q = null
+    state.page = 1
+    updateUrl()
+    renderActiveFilterTags()
+    applyAndRender()
+    document.getElementById('pageTitle').textContent = 'All Items'
+  }
 
   // ============================================
-  // WISHLIST TOGGLE
+  // BUILD QUERY
   // ============================================
-  function toggleLike(btn) {
-    btn.classList.toggle('active');
-    event.stopPropagation();
+  function buildQuery() {
+    let q = window.supabaseClient
+      .from('listings')
+      .select('*', { count: 'exact' })
+      .eq('status', 'active')
+
+    if (state.filters.categoryId) {
+      q = q.eq('category_id', state.filters.categoryId)
+    }
+    if (state.filters.conditions.length) {
+      q = q.in('condition', state.filters.conditions)
+    }
+    if (state.filters.priceMin !== null) {
+      q = q.gte('price', state.filters.priceMin)
+    }
+    if (state.filters.priceMax !== null) {
+      q = q.lte('price', state.filters.priceMax)
+    }
+    if (state.filters.shipping) {
+      q = q.eq('shipping_available', true)
+    }
+    if (state.filters.pickup) {
+      q = q.eq('pickup_available', true)
+    }
+    if (state.filters.q) {
+      q = q.ilike('title', `%${state.filters.q}%`)
+    }
+
+    // Sort
+    if (state.sort === 'newest') {
+      q = q.order('created_at', { ascending: false })
+    } else if (state.sort === 'price_asc') {
+      q = q.order('price', { ascending: true })
+    } else if (state.sort === 'price_desc') {
+      q = q.order('price', { ascending: false })
+    } else if (state.sort === 'popular') {
+      q = q.order('likes_count', { ascending: false })
+    }
+
+    // Pagination
+    const from = (state.page - 1) * state.perPage
+    const to = from + state.perPage - 1
+    q = q.range(from, to)
+
+    return q
+  }
+
+  // ============================================
+  // FETCH + RENDER
+  // ============================================
+  async function applyAndRender() {
+    const grid = document.getElementById('productGrid')
+    grid.innerHTML = `
+      <div class="loading-center">
+        <div class="spinner"></div>
+        <span>Loading items...</span>
+      </div>
+    `
+
+    const { data, error, count } = await buildQuery()
+
+    if (error) {
+      console.error('Query error:', error)
+      grid.innerHTML = `<div class="empty-block"><h3 class="empty-title">Could not load items</h3><p class="empty-desc">${escapeHtml(error.message)}</p></div>`
+      return
+    }
+
+    state.listings = data || []
+    state.totalCount = count || 0
+
+    // Update counts
+    document.getElementById('resultCount').textContent = state.totalCount.toLocaleString()
+    document.getElementById('resultWord').textContent = state.totalCount === 1 ? 'item' : 'items'
+    document.getElementById('drawerCount').textContent = state.totalCount.toLocaleString()
+
+    renderActiveFilterTags()
+
+    if (!state.listings.length) {
+      grid.innerHTML = `
+        <div class="empty-block">
+          <div class="empty-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </div>
+          <h3 class="empty-title">No items match your filters</h3>
+          <p class="empty-desc">Try adjusting your search or filters to see more results.</p>
+          <button class="empty-btn" onclick="clearAllFilters()">Clear all filters</button>
+        </div>
+      `
+      document.getElementById('pagination').innerHTML = ''
+      return
+    }
+
+    grid.innerHTML = state.listings.map(renderCard).join('')
+
+    renderPagination()
+  }
+
+  // ============================================
+  // RENDER CARD
+  // ============================================
+  function renderCard(listing) {
+    const img = Array.isArray(listing.images) && listing.images[0] ? listing.images[0] : ''
+    const isFeatured = listing.is_featured
+    const sellerName = listing.seller_name || 'relovly'
+    const sellerInitial = sellerName[0].toUpperCase()
+
+    return `
+      <article class="card" onclick="window.location.href='product.html?id=${listing.id}'">
+        <div class="card-media">
+          <div class="card-badges">
+            <span class="badge badge-protect">✓ Protected</span>
+            ${isFeatured ? '<span class="badge badge-featured">Featured</span>' : ''}
+          </div>
+          <button class="card-like" onclick="event.stopPropagation(); toggleWishlist(${listing.id}, this)" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+          ${img ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(listing.title)}" loading="lazy">` : ''}
+        </div>
+        <div class="card-body">
+          <div class="card-seller">
+            <span class="card-avatar">${escapeHtml(sellerInitial)}</span>
+            <span class="card-seller-name">${escapeHtml(sellerName)}</span>
+            <span class="card-time">${timeAgo(listing.created_at)}</span>
+          </div>
+          <h3 class="card-title">${escapeHtml(listing.title)}</h3>
+          <div class="card-price">${formatPrice(listing.price, listing.currency)}</div>
+          <div class="card-meta">
+            ${conditionChip(listing.condition)}
+            ${listing.shipping_available ? '<span class="chip chip-ship">Shipping</span>' : ''}
+            ${listing.pickup_available ? '<span class="chip chip-pickup">Pickup</span>' : ''}
+          </div>
+        </div>
+      </article>
+    `
   }
 
   // ============================================
   // PAGINATION
   // ============================================
-  document.querySelectorAll('.page-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      if (this.disabled || this.classList.contains('disabled')) return;
-      if (!this.querySelector('svg')) {
-        document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
+  function renderPagination() {
+    const totalPages = Math.ceil(state.totalCount / state.perPage)
+    const wrap = document.getElementById('pagination')
+
+    if (totalPages <= 1) {
+      wrap.innerHTML = ''
+      return
+    }
+
+    const pages = []
+    const current = state.page
+
+    // Always show first
+    pages.push(1)
+
+    // Middle range
+    let start = Math.max(2, current - 1)
+    let end = Math.min(totalPages - 1, current + 1)
+
+    if (start > 2) pages.push('...')
+    for (let i = start; i <= end; i++) pages.push(i)
+    if (end < totalPages - 1) pages.push('...')
+
+    // Always show last
+    if (totalPages > 1) pages.push(totalPages)
+
+    const html = []
+
+    html.push(`
+      <button class="page-btn ${current === 1 ? 'disabled' : ''}" onclick="goToPage(${current - 1})" aria-label="Previous">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+    `)
+
+    pages.forEach(p => {
+      if (p === '...') {
+        html.push(`<span style="padding: 0 4px; color: var(--text-3);">…</span>`)
+      } else {
+        html.push(`
+          <button class="page-btn ${p === current ? 'active' : ''}" onclick="goToPage(${p})">${p}</button>
+        `)
       }
-    });
-  });
+    })
+
+    html.push(`
+      <button class="page-btn ${current === totalPages ? 'disabled' : ''}" onclick="goToPage(${current + 1})" aria-label="Next">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    `)
+
+    wrap.innerHTML = html.join('')
+  }
+
+  function goToPage(page) {
+    state.page = page
+    updateUrl()
+    applyAndRender()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // ============================================
+  // SORT
+  // ============================================
+  document.getElementById('sortSelect').addEventListener('change', (e) => {
+    state.sort = e.target.value
+    state.page = 1
+    updateUrl()
+    applyAndRender()
+  })
+
+  // ============================================
+  // SEARCH FROM NAV
+  // ============================================
+  document.getElementById('navSearchInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const val = e.target.value.trim()
+      state.filters.q = val || null
+      state.page = 1
+      updateUrl()
+      if (val) {
+        document.getElementById('pageTitle').textContent = `Search: "${val}"`
+      } else {
+        document.getElementById('pageTitle').textContent = 'All Items'
+      }
+      applyAndRender()
+    }
+  })
+
+  // ============================================
+  // WISHLIST
+  // ============================================
+  async function toggleWishlist(listingId, btn) {
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+
+    if (!session) {
+      window.location.href = 'login.html'
+      return
+    }
+
+    const { data: existing } = await window.supabaseClient
+      .from('wishlists')
+      .select('id')
+      .eq('user_id', session.user.id)
+      .eq('listing_id', listingId)
+      .maybeSingle()
+
+    if (existing) {
+      await window.supabaseClient.from('wishlists').delete().eq('id', existing.id)
+      btn.classList.remove('active')
+      btn.querySelector('svg').setAttribute('fill', 'none')
+    } else {
+      await window.supabaseClient.from('wishlists').insert({
+        user_id: session.user.id,
+        listing_id: listingId
+      })
+      btn.classList.add('active')
+      btn.querySelector('svg').setAttribute('fill', 'var(--coral)')
+    }
+  }
+
+  // ============================================
+  // MOBILE DRAWER
+  // ============================================
+  const drawer = document.getElementById('drawer')
+  const drawerOverlay = document.getElementById('drawerOverlay')
+
+  function openDrawer() {
+    drawer.classList.add('open')
+    drawerOverlay.classList.add('open')
+    document.body.style.overflow = 'hidden'
+  }
+  function closeDrawer() {
+    drawer.classList.remove('open')
+    drawerOverlay.classList.remove('open')
+    document.body.style.overflow = ''
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDrawer()
+  })
+
+  // ============================================
+  // BOOT
+  // ============================================
+  window.addEventListener('supabase-ready', async () => {
+    let tries = 0
+    while (!window.supabaseClient && tries < 50) {
+      await new Promise(r => setTimeout(r, 100))
+      tries++
+    }
+    if (!window.supabaseClient) return
+
+    // Sync UI with current sort state
+    document.getElementById('sortSelect').value = state.sort
+    if (state.filters.q) {
+      document.getElementById('navSearchInput').value = state.filters.q
+    }
+
+    // Load data
+    await loadCategories()
+    renderFilters()
+    await applyAndRender()
+  })
+
+  // ============================================
+  // INIT — read URL params first, then boot
+  // ============================================
+  readUrlParams()
 </script>
 
 </body>

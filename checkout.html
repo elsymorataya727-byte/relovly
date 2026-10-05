@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — relovly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --coral: #E85A4F;
+    --coral-dark: #D14A40;
+    --coral-soft: #FDE9E7;
+    --bg: #FAFAF8;
+    --card: #FFFFFF;
+    --border: #EBE8E3;
+    --border-strong: #DDD8D0;
+    --text: #1A1A1A;
+    --text-2: #6B6B6B;
+    --text-3: #9A9A9A;
+    --green: #2E7D5B;
+    --green-soft: #E4F2EB;
+    --amber: #C7873B;
+    --amber-soft: #FAEFDD;
+    --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+    --shadow-lg: 0 12px 32px rgba(0,0,0,0.10);
+    --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Lora', Georgia, serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-ui); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  /* ============================================
+     MINIMAL CHECKOUT NAV
+     ============================================ */
+  .nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    height: 68px;
+  }
+
+  .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .logo-mark { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
+  .logo-mark svg { width: 34px; height: 34px; }
+  .logo-text { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.6px; line-height: 1; }
+  .logo-text em { font-style: normal; color: var(--coral); }
+
+  .nav-secure {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .nav-secure svg { color: var(--green); }
+
+  /* ============================================
+     PROGRESS STEPS
+     ============================================ */
+  .steps-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 16px 8px;
+  }
+
+  .steps {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-3);
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  .step-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1.5px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-3);
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+
+  .step.done .step-dot {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+  }
+
+  .step.active {
+    color: var(--text);
+  }
+  .step.active .step-dot {
+    background: var(--coral);
+    border-color: var(--coral);
+    color: white;
+  }
+
+  .step-line {
+    flex: 1;
+    min-width: 16px;
+    height: 1.5px;
+    background: var(--border-strong);
+    border-radius: 2px;
+  }
+  .step-line.done { background: var(--green); }
+
+  @media (max-width: 640px) {
+    .step span { display: none; }
+    .step.active span { display: inline; }
+  }
+
+  /* ============================================
+     PAGE TITLE
+     ============================================ */
+  .page-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 16px 0;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .page-sub {
+    font-size: 14px;
+    color: var(--text-2);
+  }
+
+  /* ============================================
+     LAYOUT
+     ============================================ */
+  .layout {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* ============================================
+     SECTION BLOCKS
+     ============================================ */
+  .block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .block-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .block-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--coral-soft);
+    color: var(--coral);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .block-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+    flex: 1;
+  }
+
+  .block-edit {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--coral);
+    transition: color 0.15s;
+  }
+  .block-edit:hover { color: var(--coral-dark); }
+
+  .block-body {
+    padding: 20px;
+  }
+
+  /* ============================================
+     ADDRESS / CARD OPTIONS
+     ============================================ */
+  .option-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-md);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+
+  .option:hover { border-color: var(--border-strong); }
+
+  .option.selected {
+    border-color: var(--coral);
+    background: var(--coral-soft);
+    box-shadow: 0 0 0 3px rgba(232,90,79,0.08);
+  }
+
+  .option-radio {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-strong);
+    background: var(--card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: border-color 0.15s;
+  }
+
+  .option-radio::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--coral);
+    opacity: 0;
+    transform: scale(0.4);
+    transition: opacity 0.15s, transform 0.15s;
+  }
+
+  .option.selected .option-radio {
+    border-color: var(--coral);
+  }
+  .option.selected .option-radio::after {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .option-content { flex: 1; min-width: 0; }
+
+  .option-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+    flex-wrap: wrap;
+  }
+
+  .option-title .badge-default {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 7px;
+    background: var(--coral);
+    color: white;
+    border-radius: var(--r-pill);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .option-line {
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.5;
+  }
+
+  .option-meta {
+    font-size: 13px;
+    color: var(--text-2);
+    margin-top: 3px;
+  }
+
+  .option-meta strong { color: var(--text); font-weight: 600; }
+
+  .option-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-left: auto;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .option-price.free { color: var(--green); }
+
+  /* Add new option */
+  .option-add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    background: transparent;
+    border: 1.5px dashed var(--border-strong);
+    border-radius: var(--r-md);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    width: 100%;
+  }
+  .option-add:hover { border-color: var(--coral); color: var(--coral); background: var(--coral-soft); }
+
+  /* ============================================
+     FORM GRID (inline)
+     ============================================ */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .form-grid.col-2 { grid-template-columns: 1fr 1fr; }
+
+  .form-field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-2);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .form-field input,
+  .form-field select {
+    width: 100%;
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-sm);
+    background: var(--card);
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .form-field input:focus,
+  .form-field select:focus {
+    border-color: var(--coral);
+    box-shadow: 0 0 0 3px var(--coral-soft);
+  }
+
+  .form-field input::placeholder { color: var(--text-3); }
+
+  .form-field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 34px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 640px) {
+    .form-grid.col-2 { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================
+     ORDER ITEMS (compact)
+     ============================================ */
+  .order-item {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 14px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+
+  .order-item:last-child { border-bottom: none; }
+
+  .order-item-img {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--r-sm);
+    background: linear-gradient(135deg, #F5F2ED, #EBE7E0);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .order-item-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  .order-item-info { min-width: 0; }
+
+  .order-item-seller {
+    font-size: 12px;
+    color: var(--text-2);
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .order-item-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-bottom: 4px;
+  }
+
+  .order-item-qty {
+    font-size: 12px;
+    color: var(--text-2);
+  }
+
+  .order-item-price {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.2px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ============================================
+     SIDEBAR — SUMMARY
+     ============================================ */
+  .sidebar {
+    position: sticky;
+    top: 88px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .summary {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 20px;
+  }
+
+  .summary-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+    margin-bottom: 16px;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 14px;
+    padding: 6px 0;
+    color: var(--text-2);
+  }
+
+  .summary-row .value {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .summary-row .value.free { color: var(--green); font-weight: 600; }
+
+  .summary-divider {
+    border-top: 1px solid var(--border);
+    margin: 12px 0;
+  }
+
+  .summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 0 4px;
+  }
+
+  .summary-total .label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .summary-total .amount {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.6px;
+  }
+
+  .summary-vat {
+    font-size: 12px;
+    color: var(--text-3);
+    text-align: right;
+    margin-bottom: 20px;
+  }
+
+  .btn-place {
+    width: 100%;
+    height: 52px;
+    background: var(--coral);
+    color: white;
+    border-radius: var(--r-md);
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.15s, transform 0.1s;
+    margin-bottom: 12px;
+  }
+  .btn-place:hover { background: var(--coral-dark); }
+  .btn-place:active { transform: scale(0.99); }
+
+  .btn-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    height: 42px;
+    color: var(--text-2);
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.15s;
+  }
+  .btn-back:hover { color: var(--coral); }
+
+  /* Trust list */
+  .trust-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 0 0;
+    border-top: 1px solid var(--border);
+    margin-top: 16px;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.5;
+  }
+  .trust-item svg { color: var(--green); flex-shrink: 0; margin-top: 2px; }
+  .trust-item strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 2px; }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .footer {
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    padding: 32px 16px;
+    margin-top: 40px;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-3);
+  }
+
+  .footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
+  .footer-links a:hover { color: var(--coral); }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (min-width: 1024px) {
+    .layout { grid-template-columns: 1fr 400px; gap: 32px; }
+  }
+
+  :focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     NAV
+     ============================================ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#E85A4F"/>
+              <stop offset="100%" stop-color="#D14A40"/>
+            </linearGradient>
+          </defs>
+          <rect width="40" height="40" rx="12" fill="url(#logoGrad)"/>
+          <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
+                stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+        </svg>
+      </span>
+      <span class="logo-text">re<em>lovly</em></span>
+    </a>
+
+    <div class="nav-secure">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secure checkout
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================
+     PROGRESS STEPS
+     ============================================ -->
+<div class="steps-wrap">
+  <div class="steps">
+    <div class="step done">
+      <span class="step-dot">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
+      <span>Cart</span>
+    </div>
+
+    <div class="step-line done"></div>
+
+    <div class="step active">
+      <span class="step-dot">2</span>
+      <span>Checkout</span>
+    </div>
+
+    <div class="step-line"></div>
+
+    <div class="step">
+      <span class="step-dot">3</span>
+      <span>Payment</span>
+    </div>
+
+    <div class="step-line"></div>
+
+    <div class="step">
+      <span class="step-dot">4</span>
+      <span>Confirmation</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     PAGE HEADER
+     ============================================ -->
+<header class="page-header">
+  <h1 class="page-title">Checkout</h1>
+  <p class="page-sub">Review your order and complete your purchase securely.</p>
+</header>
+
+<!-- ============================================
+     LAYOUT
+     ============================================ -->
+<div class="layout">
+
+  <!-- ---------- LEFT: FORM BLOCKS ---------- -->
+  <div>
+
+    <!-- 1. Shipping Address -->
+    <section class="block">
+      <div class="block-head">
+        <span class="block-num">1</span>
+        <h2 class="block-title">Shipping Address</h2>
+        <a href="account.html" class="block-edit">Manage</a>
+      </div>
+
+      <div class="block-body">
+        <div class="option-list">
+
+          <div class="option selected" onclick="selectOption(this)">
+            <span class="option-radio"></span>
+            <div class="option-content">
+              <div class="option-title">
+                Jane Doe
+                <span class="badge-default">Default</span>
+              </div>
+              <div class="option-line">
+                42 Oxford Road, Manchester, M1 5QA, United Kingdom
+              </div>
+              <div class="option-meta">
+                +44 7700 900000
+              </div>
+            </div>
+          </div>
+
+          <div class="option" onclick="selectOption(this)">
+            <span class="option-radio"></span>
+            <div class="option-content">
+              <div class="option-title">Jane Doe</div>
+              <div class="option-line">
+                18 Baker Street, London, W1U 3BW, United Kingdom
+              </div>
+              <div class="option-meta">
+                +44 7700 900000
+              </div>
+            </div>
+          </div>
+
+          <button class="option-add">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            Add new address
+          </button>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Delivery Method -->
+    <section class="block">
+      <div class="block-head">
+        <span class="block-num">2</span>
+        <h2 class="block-title">Delivery Method</h2>
+      </div>
+
+      <div class="block-body">
+        <div class="option-list">
+
+          <div class="option selected" onclick="selectOption(this)">
+            <span class="option-radio"></span>
+            <div class="option-content">
+              <div class="option-title">Standard Delivery</div>
+              <div class="option-line">3–5 business days · Tracked</div>
+            </div>
+            <div class="option-price free">Free</div>
+          </div>
+
+          <div class="option" onclick="selectOption(this)">
+            <span class="option-radio"></span>
+            <div class="option-content">
+              <div class="option-title">Express Delivery</div>
+              <div class="option-line">1–2 business days · Tracked + insured</div>
+            </div>
+            <div class="option-price">£12.99</div>
+          </div>
+
+          <div class="option" onclick="selectOption(this)">
+            <span class="option-radio"></span>
+            <div class="option-content">
+              <div class="option-title">Local Pickup</div>
+              <div class="option-line">Manchester, M1 · Exact address shared after purchase</div>
+            </div>
+            <div class="option-price free">Free</div>
+          </div>
+
+          <div class="option" onclick="selectOption(this)">
+            <span class="option-radio"></span>
+            <div class="option-content">
+              <div class="option-title">International Shipping</div>
+              <div class="option-line">Quote provided after checkout · Ships worldwide</div>
+            </div>
+            <div class="option-price">Quote</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Payment Method -->
+    <section class="block">
+      <div class="block-head">
+        <span class="block-num">3</span>
+        <h2 class="block-title">Payment Method</h2>
+        <a href="account.html" class="block-edit">Manage</a>
+      </div>
+
+      <div class="block-body">
+        <div class="option-list">
+
+          <div class="option selected" onclick="selectOption(this)">
+            <span class="option-radio"></span>
+            <div class="option-content">
+              <div class="option-title">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#1A1F71" style="vertical-align: middle;">
+                  <rect width="24" height="24" rx="3" fill="#1A1F71"/>
+                  <text x="12" y="16" text-anchor="middle" font-family="Arial" font-size="8" font-weight="700" fill="white">VISA</text>
+                </svg>
+                Visa •••• 4242
+                <span class="badge-default">Default</span>
+              </div>
+              <div class="option-line">Expires 08/2027</div>
+            </div>
+          </div>
+
+          <div class="option" onclick="selectOption(this)">
+            <span class="option-radio"></span>
+            <div class="option-content">
+              <div class="option-title">
+                <svg width="22" height="22" viewBox="0 0 24 24" style="vertical-align: middle;">
+                  <rect width="24" height="24" rx="3" fill="#000"/>
+                  <circle cx="9" cy="12" r="5" fill="#EB001B"/>
+                  <circle cx="15" cy="12" r="5" fill="#F79E1B" fill-opacity="0.85"/>
+                </svg>
+                Mastercard •••• 8891
+              </div>
+              <div class="option-line">Expires 12/2026</div>
+            </div>
+          </div>
+
+          <div class="option" onclick="selectOption(this)">
+            <span class="option-radio"></span>
+            <div class="option-content">
+              <div class="option-title">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; color: var(--coral);">
+                  <path d="M3 5h18v14H3z"/><path d="M3 10h18"/>
+                </svg>
+                Pay with PayPal
+              </div>
+              <div class="option-line">You'll be redirected to PayPal to complete payment</div>
+            </div>
+          </div>
+
+          <button class="option-add">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            Add new card
+          </button>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Order Review -->
+    <section class="block">
+      <div class="block-head">
+        <span class="block-num">4</span>
+        <h2 class="block-title">Order Review</h2>
+        <a href="cart.html" class="block-edit">Edit cart</a>
+      </div>
+
+      <div style="padding: 0;">
+
+        <div class="order-item">
+          <div class="order-item-img">
+            <img src="https://media.karousell.com/media/photos/products/2026/7/3/preorder_ruhm_5dii_full_carbon_1783047548_cae891a5_progressive" alt="RUHM">
+          </div>
+          <div class="order-item-info">
+            <div class="order-item-seller">
+              <span style="font-weight: 600;">Sense Of Life</span>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <div class="order-item-title">RUHM 5DII Full Carbon Lightweight 6.6kg 16" Trifold Bicycle</div>
+            <div class="order-item-qty">Quantity: 1</div>
+          </div>
+          <div class="order-item-price">£2,530</div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-img"></div>
+          <div class="order-item-info">
+            <div class="order-item-seller">
+              <span style="font-weight: 600;">heinrie.studios</span>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <div class="order-item-title">Canon EOS 7D Mark II — Pristine Condition</div>
+            <div class="order-item-qty">Quantity: 1</div>
+          </div>
+          <div class="order-item-price">£512</div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-img"></div>
+          <div class="order-item-info">
+            <div class="order-item-seller">
+              <span style="font-weight: 600;">heinrie.studios</span>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <div class="order-item-title">Fujifilm XF 35mm f/1.4 R Lens</div>
+            <div class="order-item-qty">Quantity: 1</div>
+          </div>
+          <div class="order-item-price">£699</div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ---------- RIGHT: SUMMARY ---------- -->
+  <aside class="sidebar">
+    <div class="summary">
+      <h2 class="summary-title">Order Summary</h2>
+
+      <div class="summary-row">
+        <span>Subtotal (3 items)</span>
+        <span class="value">£3,741</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Shipping</span>
+        <span class="value free">Free</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Buyer Protection</span>
+        <span class="value free">Included</span>
+      </div>
+
+      <div class="summary-divider"></div>
+
+      <div class="summary-total">
+        <span class="label">Total</span>
+        <span class="amount">£3,741</span>
+      </div>
+
+      <div class="summary-vat">Including VAT where applicable</div>
+
+      <button class="btn-place" onclick="placeOrder()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Place Order Securely
+      </button>
+
+      <a href="cart.html" class="btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
+        Back to cart
+      </a>
+
+      <div class="trust-list">
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div>
+            <strong>Buyer Protection</strong>
+            Money held securely until you confirm delivery
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <div>
+            <strong>Encrypted Payment</strong>
+            256-bit SSL encryption on every transaction
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          <div>
+            <strong>Free Returns</strong>
+            14-day returns on every item
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span>© 2026 relovly. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+      <a href="#">Buyer Protection</a>
+      <a href="#">Help</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ============================================
+  // RADIO OPTION SELECT (per group)
+  // ============================================
+  function selectOption(el) {
+    // Deselect siblings within the same parent list
+    const parent = el.parentElement;
+    parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  // ============================================
+  // PLACE ORDER (placeholder for Supabase)
+  // ============================================
+  function placeOrder() {
+    // TODO: replace with Supabase checkout call
+    console.log('Place order clicked');
+    // window.location.href = 'order-confirmation.html';
+  }
+</script>
+
+</body>
+</html>

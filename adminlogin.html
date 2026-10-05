@@ -684,7 +684,7 @@
 
     const { data: { session } } = await window.supabaseClient.auth.getSession()
     if (session && session.user && isAdminEmail(session.user.email)) {
-      window.location.href = 'admin.html'
+     window.location.href = 'adminpanel.html'
     }
   })
 </script>

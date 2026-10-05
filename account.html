@@ -27,6 +27,7 @@
     --amber-soft: #FAEFDD;
     --blue: #2563EB;
     --blue-soft: #E0EAFF;
+    --red: #D14A40;
     --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
     --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
     --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
@@ -42,7 +43,7 @@
   button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
   /* ============================================
-     NAVIGATION
+     NAV
      ============================================ */
   .nav { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 0 16px; }
   .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 20px; height: 64px; }
@@ -65,7 +66,6 @@
 
   .btn-buy { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; background: var(--coral); color: white; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; transition: background 0.15s, transform 0.1s; }
   .btn-buy:hover { background: var(--coral-dark); }
-  .btn-buy:active { transform: scale(0.98); }
 
   /* ============================================
      PAGE HEADER
@@ -75,12 +75,7 @@
   .breadcrumb a:hover { color: var(--coral); }
   .breadcrumb svg { color: var(--text-3); }
 
-  .profile-head {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
+  .profile-head { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 
   .profile-avatar {
     width: 84px; height: 84px;
@@ -95,24 +90,10 @@
     font-weight: 700;
     flex-shrink: 0;
     position: relative;
+    overflow: hidden;
   }
 
-  .profile-avatar-edit {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 28px; height: 28px;
-    background: var(--card);
-    border: 2px solid var(--card);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text);
-    box-shadow: var(--shadow-md);
-    transition: color 0.15s;
-  }
-  .profile-avatar-edit:hover { color: var(--coral); }
+  .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
   .profile-info { flex: 1; min-width: 200px; }
   .profile-name {
@@ -151,11 +132,7 @@
   }
   .profile-meta span { display: flex; align-items: center; gap: 6px; }
 
-  .profile-actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
+  .profile-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
   .btn {
     display: inline-flex;
@@ -174,9 +151,11 @@
   .btn-primary:hover { background: var(--coral-dark); }
   .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border-strong); }
   .btn-secondary:hover { border-color: var(--text); }
+  .btn-danger { background: var(--card); color: var(--red); border: 1px solid var(--border-strong); }
+  .btn-danger:hover { border-color: var(--red); background: var(--coral-soft); }
 
   /* ============================================
-     STATS ROW
+     STATS
      ============================================ */
   .stats-row {
     max-width: 1400px;
@@ -248,7 +227,6 @@
     cursor: pointer;
     border-bottom: 2px solid transparent;
     transition: color 0.15s, border-color 0.15s;
-    position: relative;
     background: none;
     border-top: none;
     border-left: none;
@@ -280,6 +258,63 @@
 
   .panel { display: none; }
   .panel.active { display: block; }
+
+  /* Loading state */
+  .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    color: var(--text-3);
+    gap: 16px;
+  }
+  .spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--border);
+    border-top-color: var(--coral);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Empty state */
+  .empty {
+    padding: 60px 20px;
+    text-align: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+  }
+
+  .empty-icon {
+    width: 64px; height: 64px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-3);
+  }
+
+  .empty h3 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .empty p {
+    font-size: 14px;
+    color: var(--text-2);
+    margin-bottom: 20px;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   /* Section card */
   .section-card {
@@ -377,10 +412,11 @@
     text-transform: uppercase;
     letter-spacing: 0.3px;
   }
+  .order-status.processing { background: var(--amber-soft); color: var(--amber); }
   .order-status.shipped { background: var(--blue-soft); color: var(--blue); }
   .order-status.delivered { background: var(--green-soft); color: var(--green); }
-  .order-status.processing { background: var(--amber-soft); color: var(--amber); }
   .order-status.cancelled { background: var(--coral-soft); color: var(--coral); }
+  .order-status.refunded { background: var(--bg); color: var(--text-2); }
 
   .order-actions {
     display: flex;
@@ -519,34 +555,10 @@
     white-space: nowrap;
   }
 
-  .message.unread .message-text { color: var(--text); font-weight: 500; }
-  .message.unread::before {
-    content: "";
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: var(--coral);
-    border-radius: 50%;
-    margin-left: -8px;
-  }
-
-  .message-thumb {
-    width: 48px; height: 48px;
-    border-radius: var(--r-sm);
-    background: linear-gradient(135deg, #F5F2ED, #EBE7E0);
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-  .message-thumb img { width: 100%; height: 100%; object-fit: cover; }
-
   /* ============================================
-     SETTINGS FORM
+     SETTINGS
      ============================================ */
-  .settings-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
+  .settings-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
 
   @media (min-width: 900px) {
     .settings-grid { grid-template-columns: 220px 1fr; }
@@ -623,6 +635,22 @@
     padding-top: 8px;
   }
 
+  /* Alert */
+  .alert {
+    display: none;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: var(--r-md);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .alert.show { display: flex; }
+  .alert-error { background: #FDE9E7; color: var(--red); border: 1px solid #F8D5D2; }
+  .alert-success { background: var(--green-soft); color: var(--green); border: 1px solid #C7E4D5; }
+  .alert svg { flex-shrink: 0; margin-top: 1px; }
+
   /* Address card */
   .address-card {
     position: relative;
@@ -668,43 +696,7 @@
     transition: color 0.15s;
   }
   .address-actions button:hover { color: var(--coral); }
-  .address-actions .danger:hover { color: #D14A40; }
-
-  /* ============================================
-     EMPTY STATE
-     ============================================ */
-  .empty {
-    padding: 60px 20px;
-    text-align: center;
-  }
-
-  .empty-icon {
-    width: 64px; height: 64px;
-    margin: 0 auto 20px;
-    border-radius: 50%;
-    background: var(--bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-3);
-  }
-
-  .empty h3 {
-    font-family: var(--font-display);
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-
-  .empty p {
-    font-size: 14px;
-    color: var(--text-2);
-    margin-bottom: 20px;
-    max-width: 320px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+  .address-actions .danger:hover { color: var(--red); }
 
   /* ============================================
      FOOTER
@@ -825,7 +817,6 @@
     <div class="nav-actions">
       <button class="icon-btn" aria-label="Notifications">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-        <span class="dot"></span>
       </button>
       <button class="icon-btn" aria-label="Messages">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -833,7 +824,7 @@
       <button class="icon-btn" aria-label="Profile">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </button>
-      <a href="catalog.html" class="btn-buy">
+      <a href="cart.html" class="btn-buy">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         Buy
       </a>
@@ -852,42 +843,41 @@
   </div>
 
   <div class="profile-head">
-    <div class="profile-avatar">
-      J
-      <button class="profile-avatar-edit" aria-label="Edit avatar">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-      </button>
-    </div>
+    <div class="profile-avatar" id="profileAvatar">J</div>
 
     <div class="profile-info">
-      <h1 class="profile-name">
-        Jane Doe
-        <span class="badge badge-verified">
+      <h1 class="profile-name" id="profileName">
+        <span id="nameText">Loading...</span>
+        <span class="badge badge-verified" id="verifiedBadge" style="display:none;">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
           Verified
         </span>
-        <span class="badge badge-member">Member since 2024</span>
+        <span class="badge badge-member" id="memberBadge" style="display:none;">Member since</span>
       </h1>
       <div class="profile-meta">
         <span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          jane@example.com
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span id="emailText">—</span>
         </span>
-        <span>
+        <span id="locationMeta" style="display:none;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Manchester, UK
+          <span id="locationText">—</span>
         </span>
       </div>
     </div>
 
     <div class="profile-actions">
-      <button class="btn btn-secondary">
+      <button class="btn btn-secondary" onclick="switchToSettings()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
         Edit profile
       </button>
-      <button class="btn btn-primary" onclick="window.location.href='index.html'">
+      <a href="catalog.html" class="btn btn-primary">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         Browse items
+      </a>
+      <button class="btn btn-danger" onclick="handleLogout()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Log out
       </button>
     </div>
   </div>
@@ -899,19 +889,19 @@
 <div class="stats-row">
   <div class="stat-card">
     <div class="stat-label">Orders</div>
-    <div class="stat-value">12</div>
+    <div class="stat-value" id="statOrders">0</div>
   </div>
   <div class="stat-card">
     <div class="stat-label">Saved items</div>
-    <div class="stat-value">28</div>
+    <div class="stat-value" id="statSaved">0</div>
   </div>
   <div class="stat-card">
     <div class="stat-label">Reviews</div>
-    <div class="stat-value">5.0</div>
+    <div class="stat-value" id="statReviews">0</div>
   </div>
   <div class="stat-card">
     <div class="stat-label">Following</div>
-    <div class="stat-value">14</div>
+    <div class="stat-value">0</div>
   </div>
 </div>
 
@@ -923,17 +913,17 @@
     <button class="tab active" data-panel="orders">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
       Orders
-      <span class="tab-count">12</span>
+      <span class="tab-count" id="tabOrdersCount">0</span>
     </button>
     <button class="tab" data-panel="saved">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       Saved
-      <span class="tab-count">28</span>
+      <span class="tab-count" id="tabSavedCount">0</span>
     </button>
     <button class="tab" data-panel="messages">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       Messages
-      <span class="tab-count">3</span>
+      <span class="tab-count" id="tabMessagesCount">0</span>
     </button>
     <button class="tab" data-panel="settings">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -949,223 +939,35 @@
 
   <!-- ========== ORDERS PANEL ========== -->
   <div class="panel active" id="panel-orders">
-
-    <!-- Order 1 -->
-    <div class="order">
-      <div class="order-img">
-        <img src="https://media.karousell.com/media/photos/products/2026/7/3/preorder_ruhm_5dii_full_carbon_1783047548_cae891a5_progressive" alt="RUHM bicycle">
-      </div>
-      <div class="order-details">
-        <h3 class="order-title">RUHM 5DII Full Carbon Lightweight 6.6kg 16" Trifold Bicycle</h3>
-        <div class="order-meta">
-          <span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            Ordered 12 Oct 2026
-          </span>
-          <span>Order #RLV-28461</span>
-        </div>
-        <div class="order-status shipped">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-          Shipped
-        </div>
-      </div>
-      <div class="order-actions">
-        <div class="order-price">£2,530</div>
-        <button class="btn-sm btn-sm-ghost">
-          Track order
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
-      </div>
+    <div id="ordersLoading" class="loading">
+      <div class="spinner"></div>
+      <span>Loading your orders...</span>
     </div>
-
-    <!-- Order 2 -->
-    <div class="order">
-      <div class="order-img"></div>
-      <div class="order-details">
-        <h3 class="order-title">Canon EOS 7D Mark II — Pristine Condition, Like New</h3>
-        <div class="order-meta">
-          <span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            Ordered 4 Oct 2026
-          </span>
-          <span>Order #RLV-28104</span>
-        </div>
-        <div class="order-status delivered">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-          Delivered
-        </div>
-      </div>
-      <div class="order-actions">
-        <div class="order-price">£512</div>
-        <button class="btn-sm btn-sm-primary">Leave review</button>
-      </div>
-    </div>
-
-    <!-- Order 3 -->
-    <div class="order">
-      <div class="order-img"></div>
-      <div class="order-details">
-        <h3 class="order-title">Fujifilm XF 35mm f/1.4 R Lens</h3>
-        <div class="order-meta">
-          <span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            Ordered 2 Oct 2026
-          </span>
-          <span>Order #RLV-27903</span>
-        </div>
-        <div class="order-status processing">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          Processing
-        </div>
-      </div>
-      <div class="order-actions">
-        <div class="order-price">£699</div>
-        <button class="btn-sm btn-sm-ghost">View</button>
-      </div>
-    </div>
-
-    <button class="btn btn-secondary" style="margin-top: 20px; width: 100%;">
-      Load more orders
-    </button>
+    <div id="ordersList"></div>
   </div>
 
   <!-- ========== SAVED PANEL ========== -->
   <div class="panel" id="panel-saved">
-    <div class="grid">
-
-      <article class="card">
-        <button class="card-remove" aria-label="Remove">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-        <div class="card-media"></div>
-        <div class="card-body">
-          <h3 class="card-title">Nikon D5300 + Tamron 18–270mm VC PZD Complete Set</h3>
-          <div class="card-price">£498</div>
-        </div>
-      </article>
-
-      <article class="card">
-        <button class="card-remove" aria-label="Remove">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-        <div class="card-media"></div>
-        <div class="card-body">
-          <h3 class="card-title">Olympus 8–25mm f/4 OM System M43 Lens</h3>
-          <div class="card-price">£880</div>
-        </div>
-      </article>
-
-      <article class="card">
-        <button class="card-remove" aria-label="Remove">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-        <div class="card-media"></div>
-        <div class="card-body">
-          <h3 class="card-title">Fujifilm Instax Mini 12 Instant Camera with Bag</h3>
-          <div class="card-price">£99</div>
-        </div>
-      </article>
-
-      <article class="card">
-        <button class="card-remove" aria-label="Remove">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-        <div class="card-media"></div>
-        <div class="card-body">
-          <h3 class="card-title">Nikon NIKKOR Z 135mm f/1.8 S Plena Lens</h3>
-          <div class="card-price">£2,300</div>
-        </div>
-      </article>
-
-      <article class="card">
-        <button class="card-remove" aria-label="Remove">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-        <div class="card-media"></div>
-        <div class="card-body">
-          <h3 class="card-title">Sony RX100 III Digital Camera</h3>
-          <div class="card-price">£450</div>
-        </div>
-      </article>
-
-      <article class="card">
-        <button class="card-remove" aria-label="Remove">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-        <div class="card-media"></div>
-        <div class="card-body">
-          <h3 class="card-title">Canon IXY Digital L Rose Gold Compact Camera</h3>
-          <div class="card-price">£200</div>
-        </div>
-      </article>
-
+    <div id="savedLoading" class="loading" style="display:none;">
+      <div class="spinner"></div>
+      <span>Loading saved items...</span>
     </div>
+    <div id="savedList" class="grid"></div>
   </div>
 
   <!-- ========== MESSAGES PANEL ========== -->
   <div class="panel" id="panel-messages">
-    <div class="section-card" style="padding: 0;">
-
-      <div class="message unread">
-        <div class="message-avatar">S</div>
-        <div class="message-content">
-          <div class="message-head">
-            <span class="message-name">Sense Of Life</span>
-            <span class="message-time">2h ago</span>
-          </div>
-          <div class="message-text">Hi! Yes, the bike is still available. Would you like to arrange a viewing?</div>
-        </div>
-        <div class="message-thumb"></div>
-      </div>
-
-      <div class="message unread">
-        <div class="message-avatar">B</div>
-        <div class="message-content">
-          <div class="message-head">
-            <span class="message-name">brompton_fan</span>
-            <span class="message-time">5h ago</span>
-          </div>
-          <div class="message-text">Thanks for your offer. I can do £1,400 if you can collect this weekend.</div>
-        </div>
-        <div class="message-thumb"></div>
-      </div>
-
-      <div class="message">
-        <div class="message-avatar">K</div>
-        <div class="message-content">
-          <div class="message-head">
-            <span class="message-name">kito_bikes</span>
-            <span class="message-time">Yesterday</span>
-          </div>
-          <div class="message-text">Your order has been shipped. Tracking number: RM123456789GB</div>
-        </div>
-        <div class="message-thumb"></div>
-      </div>
-
-      <div class="message">
-        <div class="message-avatar">A</div>
-        <div class="message-content">
-          <div class="message-head">
-            <span class="message-name">aceoffix_uk</span>
-            <span class="message-time">3 days ago</span>
-          </div>
-          <div class="message-text">Great, I'll send you the payment details now.</div>
-        </div>
-        <div class="message-thumb"></div>
-      </div>
-
+    <div id="messagesLoading" class="loading" style="display:none;">
+      <div class="spinner"></div>
+      <span>Loading messages...</span>
     </div>
-
-    <button class="btn btn-secondary" style="margin-top: 20px; width: 100%;">
-      Load more messages
-    </button>
+    <div id="messagesList" class="section-card" style="padding: 0;"></div>
   </div>
 
   <!-- ========== SETTINGS PANEL ========== -->
   <div class="panel" id="panel-settings">
     <div class="settings-grid">
 
-      <!-- Sidebar nav -->
       <nav class="settings-nav" id="settingsNav">
         <button class="settings-nav-item active" data-settings="profile">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -1189,155 +991,115 @@
         </button>
       </nav>
 
-      <!-- Panels -->
       <div class="settings-content">
 
-        <!-- Profile panel -->
+        <!-- Profile -->
         <div class="settings-panel active" id="settings-profile">
           <div class="section-card">
             <h2 class="section-title" style="margin-bottom: 20px;">Profile information</h2>
+
+            <div class="alert alert-error" id="profileError">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span id="profileErrorMessage"></span>
+            </div>
+            <div class="alert alert-success" id="profileSuccess">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              <span id="profileSuccessMessage"></span>
+            </div>
+
             <div class="form-row-2">
               <div class="form-group">
                 <label class="form-label">First name</label>
-                <input class="form-input" type="text" value="Jane">
+                <input class="form-input" type="text" id="inputFirstName">
               </div>
               <div class="form-group">
                 <label class="form-label">Last name</label>
-                <input class="form-input" type="text" value="Doe">
+                <input class="form-input" type="text" id="inputLastName">
               </div>
             </div>
             <div class="form-group">
               <label class="form-label">Email address</label>
-              <input class="form-input" type="email" value="jane@example.com">
+              <input class="form-input" type="email" id="inputEmail" disabled style="opacity:0.6; cursor:not-allowed;">
             </div>
             <div class="form-group">
               <label class="form-label">Phone number</label>
-              <input class="form-input" type="tel" placeholder="+44 7700 900000">
+              <input class="form-input" type="tel" id="inputPhone" placeholder="+44 7700 900000">
             </div>
             <div class="form-group">
-              <label class="form-label">Bio</label>
-              <textarea class="form-input" style="height: auto; min-height: 100px; padding: 12px 14px; resize: vertical; font-family: inherit;" placeholder="Tell buyers a little about yourself..."></textarea>
+              <label class="form-label">City</label>
+              <input class="form-input" type="text" id="inputCity" placeholder="Manchester">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Country</label>
+              <input class="form-input" type="text" id="inputCountry" placeholder="United Kingdom">
             </div>
             <div class="form-actions">
-              <button class="btn btn-primary">Save changes</button>
-              <button class="btn btn-secondary">Cancel</button>
+              <button class="btn btn-primary" id="saveProfileBtn" onclick="saveProfile()">Save changes</button>
             </div>
           </div>
         </div>
 
-        <!-- Password panel -->
+        <!-- Password -->
         <div class="settings-panel" id="settings-password">
           <div class="section-card">
             <h2 class="section-title" style="margin-bottom: 20px;">Change password</h2>
-            <div class="form-group">
-              <label class="form-label">Current password</label>
-              <input class="form-input" type="password" placeholder="Enter current password">
+
+            <div class="alert alert-error" id="passwordError">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span id="passwordErrorMessage"></span>
             </div>
+            <div class="alert alert-success" id="passwordSuccess">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              <span id="passwordSuccessMessage"></span>
+            </div>
+
             <div class="form-group">
               <label class="form-label">New password</label>
-              <input class="form-input" type="password" placeholder="Enter new password">
+              <input class="form-input" type="password" id="inputNewPassword" placeholder="Enter new password">
             </div>
             <div class="form-group">
               <label class="form-label">Confirm new password</label>
-              <input class="form-input" type="password" placeholder="Re-enter new password">
+              <input class="form-input" type="password" id="inputConfirmPassword" placeholder="Re-enter new password">
             </div>
             <div class="form-actions">
-              <button class="btn btn-primary">Update password</button>
+              <button class="btn btn-primary" id="changePasswordBtn" onclick="changePassword()">Update password</button>
             </div>
-          </div>
-
-          <div class="section-card">
-            <h2 class="section-title" style="margin-bottom: 8px;">Two-factor authentication</h2>
-            <p style="font-size: 14px; color: var(--text-2); margin-bottom: 16px;">Add an extra layer of security to your account.</p>
-            <button class="btn btn-secondary">Enable 2FA</button>
           </div>
         </div>
 
-        <!-- Addresses panel -->
+        <!-- Addresses -->
         <div class="settings-panel" id="settings-addresses">
           <div class="section-card">
             <div class="section-head">
               <h2 class="section-title">Saved addresses</h2>
-              <button class="section-link">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-                Add new
-              </button>
             </div>
-
-            <div class="address-card default">
-              <span class="address-label">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                Default
-              </span>
-              <div class="address-name">Jane Doe</div>
-              <div class="address-line">
-                42 Oxford Road<br>
-                Manchester, M1 5QA<br>
-                United Kingdom
+            <div class="empty" style="padding: 40px 20px;">
+              <div class="empty-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               </div>
-              <div class="address-actions">
-                <button>Edit</button>
-                <button>Set as default</button>
-                <button class="danger">Delete</button>
-              </div>
-            </div>
-
-            <div class="address-card">
-              <div class="address-name">Jane Doe</div>
-              <div class="address-line">
-                18 Baker Street<br>
-                London, W1U 3BW<br>
-                United Kingdom
-              </div>
-              <div class="address-actions">
-                <button>Edit</button>
-                <button>Set as default</button>
-                <button class="danger">Delete</button>
-              </div>
+              <h3>No saved addresses yet</h3>
+              <p>Addresses will appear here once the checkout flow is fully connected.</p>
             </div>
           </div>
         </div>
 
-        <!-- Payment panel -->
+        <!-- Payment -->
         <div class="settings-panel" id="settings-payment">
           <div class="section-card">
             <div class="section-head">
               <h2 class="section-title">Payment methods</h2>
-              <button class="section-link">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-                Add card
-              </button>
             </div>
-
-            <div class="address-card default">
-              <span class="address-label">Default</span>
-              <div class="address-name" style="display: flex; align-items: center; gap: 8px;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="#1A1F71"><rect width="24" height="24" rx="3" fill="#1A1F71"/><path d="M9 16H7l1-7h3l1 7h-2l-.5-3H9.5L9 16Zm5 0h-2l-1-7h2l1 7Z" fill="white"/></svg>
-                Visa •••• 4242
+            <div class="empty" style="padding: 40px 20px;">
+              <div class="empty-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
               </div>
-              <div class="address-line">Expires 08/2027</div>
-              <div class="address-actions">
-                <button>Edit</button>
-                <button class="danger">Remove</button>
-              </div>
-            </div>
-
-            <div class="address-card">
-              <div class="address-name" style="display: flex; align-items: center; gap: 8px;">
-                <svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="3" fill="#EB001B"/><circle cx="9" cy="12" r="6" fill="#EB001B"/><circle cx="15" cy="12" r="6" fill="#F79E1B" fill-opacity="0.8"/></svg>
-                Mastercard •••• 8891
-              </div>
-              <div class="address-line">Expires 12/2026</div>
-              <div class="address-actions">
-                <button>Edit</button>
-                <button>Set as default</button>
-                <button class="danger">Remove</button>
-              </div>
+              <h3>No payment methods yet</h3>
+              <p>Payment methods will appear here once Stripe is connected.</p>
             </div>
           </div>
         </div>
 
-        <!-- Notifications panel -->
+        <!-- Notifications -->
         <div class="settings-panel" id="settings-notifications">
           <div class="section-card">
             <h2 class="section-title" style="margin-bottom: 20px;">Email notifications</h2>
@@ -1354,7 +1116,7 @@
               <input type="checkbox" checked style="margin-top: 4px; accent-color: var(--coral);">
               <div>
                 <div style="font-size: 14px; font-weight: 600; color: var(--text);">Messages</div>
-                <div style="font-size: 13px; color: var(--text-2);">Get notified when a seller or buyer sends you a message.</div>
+                <div style="font-size: 13px; color: var(--text-2);">Get notified when someone sends you a message.</div>
               </div>
             </label>
 
@@ -1373,10 +1135,6 @@
                 <div style="font-size: 13px; color: var(--text-2);">Receive special offers and curated recommendations.</div>
               </div>
             </label>
-
-            <div class="form-actions">
-              <button class="btn btn-primary">Save preferences</button>
-            </div>
           </div>
         </div>
 
@@ -1457,7 +1215,7 @@
 </footer>
 
 <!-- ============================================
-     MOBILE BOTTOM BAR
+     MOBILE BAR
      ============================================ -->
 <nav class="mobile-bar">
   <a href="index.html" class="mobile-bar-item">
@@ -1468,7 +1226,7 @@
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
     Browse
   </a>
-  <a href="catalog.html" class="mobile-bar-item">
+  <a href="cart.html" class="mobile-bar-item">
     <span class="mobile-bar-buy">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
     </span>
@@ -1483,56 +1241,514 @@
   </a>
 </nav>
 
+<!-- ============================================
+     SUPABASE CLIENT
+     ============================================ -->
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+  const SUPABASE_URL = 'https://osebqasifcnhyuajbyvv.supabase.co'
+  const SUPABASE_KEY = 'sb_publishable_vggy-_2xeONhcsSbiQklsw_hvLC_cgG'
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+  window.supabaseClient = supabase
+</script>
+
+<!-- ============================================
+     ACCOUNT PAGE LOGIC
+     ============================================ -->
 <script>
-  // ============================================
-  // MAIN TABS
-  // ============================================
-  const tabs = document.querySelectorAll('#tabs .tab');
-  const panels = document.querySelectorAll('.content > .panel');
+  let currentUser = null
+  let currentProfile = null
 
-  tabs.forEach(tab => {
+  // ============================================
+  // BOOT
+  // ============================================
+  async function boot() {
+    // Wait for supabase to be available
+    let tries = 0
+    while (!window.supabaseClient && tries < 50) {
+      await new Promise(r => setTimeout(r, 100))
+      tries++
+    }
+
+    if (!window.supabaseClient) {
+      console.error('Supabase client not loaded')
+      window.location.href = 'login.html'
+      return
+    }
+
+    // Check session
+    const { data: { session }, error } = await window.supabaseClient.auth.getSession()
+
+    if (error || !session) {
+      // Not logged in → redirect
+      window.location.href = 'login.html'
+      return
+    }
+
+    currentUser = session.user
+
+    // Load everything
+    await Promise.all([
+      loadProfile(),
+      loadOrders(),
+      loadWishlists(),
+      loadMessages()
+    ])
+  }
+
+  // ============================================
+  // PROFILE
+  // ============================================
+  async function loadProfile() {
+    const { data, error } = await window.supabaseClient
+      .from('profiles')
+      .select('*')
+      .eq('id', currentUser.id)
+      .maybeSingle()
+
+    if (error) {
+      console.error('Profile load error:', error)
+    }
+
+    // Fallback to auth metadata if profile row doesn't exist yet
+    const meta = currentUser.user_metadata || {}
+    const profile = data || {
+      first_name: meta.first_name || '',
+      last_name: meta.last_name || '',
+      email: currentUser.email,
+      phone: '',
+      city: '',
+      country: ''
+    }
+
+    currentProfile = profile
+
+    // Header
+    const fullName = [profile.first_name, profile.last_name].filter(Boolean).join(' ') || 'User'
+    document.getElementById('nameText').textContent = fullName
+    document.getElementById('emailText').textContent = profile.email || currentUser.email
+
+    // Avatar initial
+    const initial = (profile.first_name?.[0] || profile.email?.[0] || 'U').toUpperCase()
+    document.getElementById('profileAvatar').textContent = initial
+
+    // Location meta
+    if (profile.city || profile.country) {
+      document.getElementById('locationMeta').style.display = 'flex'
+      document.getElementById('locationText').textContent =
+        [profile.city, profile.country].filter(Boolean).join(', ')
+    }
+
+    // Member since
+    const created = new Date(currentUser.created_at)
+    const memberBadge = document.getElementById('memberBadge')
+    memberBadge.textContent = 'Member since ' + created.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })
+    memberBadge.style.display = 'inline-flex'
+
+    // Verified badge (show always for now — real logic later)
+    document.getElementById('verifiedBadge').style.display = 'inline-flex'
+
+    // Fill settings form
+    document.getElementById('inputFirstName').value = profile.first_name || ''
+    document.getElementById('inputLastName').value = profile.last_name || ''
+    document.getElementById('inputEmail').value = profile.email || currentUser.email
+    document.getElementById('inputPhone').value = profile.phone || ''
+    document.getElementById('inputCity').value = profile.city || ''
+    document.getElementById('inputCountry').value = profile.country || ''
+  }
+
+  // ============================================
+  // ORDERS
+  // ============================================
+  async function loadOrders() {
+    const ordersList = document.getElementById('ordersList')
+    const loading = document.getElementById('ordersLoading')
+
+    const { data, error } = await window.supabaseClient
+      .from('orders')
+      .select('*')
+      .eq('buyer_id', currentUser.id)
+      .order('created_at', { ascending: false })
+
+    loading.style.display = 'none'
+
+    if (error) {
+      console.error('Orders error:', error)
+      ordersList.innerHTML = `<div class="empty"><h3>Could not load orders</h3><p>${error.message}</p></div>`
+      return
+    }
+
+    // Update counts
+    document.getElementById('statOrders').textContent = data.length
+    document.getElementById('tabOrdersCount').textContent = data.length
+
+    if (!data.length) {
+      ordersList.innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+          </div>
+          <h3>No orders yet</h3>
+          <p>When you buy something on relovly, it will appear here.</p>
+          <a href="catalog.html" class="btn btn-primary">Start browsing</a>
+        </div>`
+      return
+    }
+
+    ordersList.innerHTML = data.map(order => renderOrder(order)).join('')
+  }
+
+  function renderOrder(order) {
+    const statusClass = order.status || 'processing'
+    const statusLabel = {
+      processing: 'Processing',
+      shipped: 'Shipped',
+      delivered: 'Delivered',
+      cancelled: 'Cancelled',
+      refunded: 'Refunded'
+    }[statusClass] || statusClass
+
+    const date = new Date(order.created_at).toLocaleDateString('en-GB', {
+      day: 'numeric', month: 'short', year: 'numeric'
+    })
+
+    const imgHtml = order.listing_image
+      ? `<img src="${escapeHtml(order.listing_image)}" alt="">`
+      : ''
+
+    return `
+      <div class="order">
+        <div class="order-img">${imgHtml}</div>
+        <div class="order-details">
+          <h3 class="order-title">${escapeHtml(order.listing_title || 'Item')}</h3>
+          <div class="order-meta">
+            <span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Ordered ${date}
+            </span>
+            <span>Order #${escapeHtml(order.order_number)}</span>
+          </div>
+          <div class="order-status ${statusClass}">${statusLabel}</div>
+        </div>
+        <div class="order-actions">
+          <div class="order-price">${formatPrice(order.price_paid, order.currency)}</div>
+          <a href="order-confirmation.html" class="btn-sm btn-sm-ghost">View order</a>
+        </div>
+      </div>`
+  }
+
+  // ============================================
+  // WISHLISTS (Saved items)
+  // ============================================
+  async function loadWishlists() {
+    const savedList = document.getElementById('savedList')
+    const loading = document.getElementById('savedLoading')
+
+    // Fetch wishlists joined with listings
+    const { data, error } = await window.supabaseClient
+      .from('wishlists')
+      .select(`
+        id,
+        created_at,
+        listing_id,
+        listings (
+          id,
+          title,
+          price,
+          currency,
+          images,
+          status
+        )
+      `)
+      .eq('user_id', currentUser.id)
+      .order('created_at', { ascending: false })
+
+    loading.style.display = 'none'
+
+    if (error) {
+      console.error('Wishlist error:', error)
+      savedList.innerHTML = `<div class="empty" style="grid-column: 1 / -1;"><h3>Could not load saved items</h3><p>${error.message}</p></div>`
+      return
+    }
+
+    document.getElementById('statSaved').textContent = data.length
+    document.getElementById('tabSavedCount').textContent = data.length
+
+    if (!data.length) {
+      savedList.innerHTML = `
+        <div class="empty" style="grid-column: 1 / -1;">
+          <div class="empty-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>No saved items yet</h3>
+          <p>Tap the heart on any listing to save it here for later.</p>
+          <a href="catalog.html" class="btn btn-primary">Browse listings</a>
+        </div>`
+      return
+    }
+
+    savedList.innerHTML = data.map(item => {
+      const listing = item.listings
+      if (!listing) return ''
+      const img = Array.isArray(listing.images) && listing.images[0] ? listing.images[0] : ''
+      return `
+        <article class="card" data-wishlist-id="${item.id}" data-listing-id="${listing.id}">
+          <button class="card-remove" onclick="removeWishlist(event, ${item.id})" aria-label="Remove">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+          <div class="card-media" onclick="window.location.href='product.html?id=${listing.id}'">
+            ${img ? `<img src="${escapeHtml(img)}" alt="">` : ''}
+          </div>
+          <div class="card-body" onclick="window.location.href='product.html?id=${listing.id}'">
+            <h3 class="card-title">${escapeHtml(listing.title)}</h3>
+            <div class="card-price">${formatPrice(listing.price, listing.currency)}</div>
+          </div>
+        </article>`
+    }).join('')
+  }
+
+  async function removeWishlist(event, wishlistId) {
+    event.stopPropagation()
+    const card = event.target.closest('.card')
+
+    const { error } = await window.supabaseClient
+      .from('wishlists')
+      .delete()
+      .eq('id', wishlistId)
+
+    if (error) {
+      alert('Could not remove item: ' + error.message)
+      return
+    }
+
+    // Animate out
+    card.style.transition = 'opacity 0.2s, transform 0.2s'
+    card.style.opacity = '0'
+    card.style.transform = 'scale(0.95)'
+    setTimeout(() => {
+      card.remove()
+      // Update counts
+      const remaining = document.querySelectorAll('#savedList .card').length
+      document.getElementById('statSaved').textContent = remaining
+      document.getElementById('tabSavedCount').textContent = remaining
+      if (remaining === 0) loadWishlists() // re-render empty state
+    }, 200)
+  }
+
+  // ============================================
+  // MESSAGES
+  // ============================================
+  async function loadMessages() {
+    const messagesList = document.getElementById('messagesList')
+    const loading = document.getElementById('messagesLoading')
+
+    const { data, error } = await window.supabaseClient
+      .from('messages')
+      .select('*')
+      .eq('sender_id', currentUser.id)
+      .order('created_at', { ascending: false })
+      .limit(20)
+
+    loading.style.display = 'none'
+
+    if (error) {
+      console.error('Messages error:', error)
+      messagesList.innerHTML = `<div style="padding: 40px; text-align: center; color: var(--text-2);">Could not load messages.</div>`
+      return
+    }
+
+    document.getElementById('tabMessagesCount').textContent = data.length
+
+    if (!data.length) {
+      messagesList.innerHTML = `
+        <div class="empty" style="border: none;">
+          <div class="empty-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>No messages yet</h3>
+          <p>Messages from buyers and our support team will appear here.</p>
+        </div>`
+      return
+    }
+
+    messagesList.innerHTML = data.map(msg => {
+      const date = new Date(msg.created_at).toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'short'
+      })
+      const initial = (msg.subject?.[0] || 'M').toUpperCase()
+      return `
+        <div class="message">
+          <div class="message-avatar">${initial}</div>
+          <div class="message-content">
+            <div class="message-head">
+              <span class="message-name">${escapeHtml(msg.subject || 'Message')}</span>
+              <span class="message-time">${date}</span>
+            </div>
+            <div class="message-text">${escapeHtml(msg.body)}</div>
+          </div>
+        </div>`
+    }).join('')
+  }
+
+  // ============================================
+  // SAVE PROFILE
+  // ============================================
+  async function saveProfile() {
+    const btn = document.getElementById('saveProfileBtn')
+    const errEl = document.getElementById('profileError')
+    const okEl = document.getElementById('profileSuccess')
+    errEl.classList.remove('show')
+    okEl.classList.remove('show')
+
+    const updates = {
+      first_name: document.getElementById('inputFirstName').value.trim(),
+      last_name: document.getElementById('inputLastName').value.trim(),
+      phone: document.getElementById('inputPhone').value.trim(),
+      city: document.getElementById('inputCity').value.trim(),
+      country: document.getElementById('inputCountry').value.trim(),
+      updated_at: new Date().toISOString()
+    }
+
+    btn.disabled = true
+    btn.textContent = 'Saving...'
+
+    const { error } = await window.supabaseClient
+      .from('profiles')
+      .update(updates)
+      .eq('id', currentUser.id)
+
+    btn.disabled = false
+    btn.textContent = 'Save changes'
+
+    if (error) {
+      document.getElementById('profileErrorMessage').textContent = error.message
+      errEl.classList.add('show')
+      return
+    }
+
+    document.getElementById('profileSuccessMessage').textContent = 'Profile updated successfully'
+    okEl.classList.add('show')
+
+    // Refresh header
+    await loadProfile()
+
+    setTimeout(() => okEl.classList.remove('show'), 3000)
+  }
+
+  // ============================================
+  // CHANGE PASSWORD
+  // ============================================
+  async function changePassword() {
+    const btn = document.getElementById('changePasswordBtn')
+    const errEl = document.getElementById('passwordError')
+    const okEl = document.getElementById('passwordSuccess')
+    errEl.classList.remove('show')
+    okEl.classList.remove('show')
+
+    const newPw = document.getElementById('inputNewPassword').value
+    const confirmPw = document.getElementById('inputConfirmPassword').value
+
+    if (newPw.length < 8) {
+      document.getElementById('passwordErrorMessage').textContent = 'Password must be at least 8 characters.'
+      errEl.classList.add('show')
+      return
+    }
+    if (newPw !== confirmPw) {
+      document.getElementById('passwordErrorMessage').textContent = 'Passwords do not match.'
+      errEl.classList.add('show')
+      return
+    }
+
+    btn.disabled = true
+    btn.textContent = 'Updating...'
+
+    const { error } = await window.supabaseClient.auth.updateUser({ password: newPw })
+
+    btn.disabled = false
+    btn.textContent = 'Update password'
+
+    if (error) {
+      document.getElementById('passwordErrorMessage').textContent = error.message
+      errEl.classList.add('show')
+      return
+    }
+
+    document.getElementById('inputNewPassword').value = ''
+    document.getElementById('inputConfirmPassword').value = ''
+    document.getElementById('passwordSuccessMessage').textContent = 'Password updated successfully'
+    okEl.classList.add('show')
+    setTimeout(() => okEl.classList.remove('show'), 3000)
+  }
+
+  // ============================================
+  // LOGOUT
+  // ============================================
+  async function handleLogout() {
+    if (!confirm('Are you sure you want to log out?')) return
+    await window.supabaseClient.auth.signOut()
+    window.location.href = 'login.html'
+  }
+
+  // ============================================
+  // HELPERS
+  // ============================================
+  function formatPrice(price, currency) {
+    const n = parseFloat(price || 0)
+    const symbols = { GBP: '£', USD: '$', EUR: '€' }
+    const sym = symbols[currency] || ''
+    return sym + n.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 2 })
+  }
+
+  function escapeHtml(str) {
+    if (!str) return ''
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+  }
+
+  function switchToSettings() {
+    document.querySelectorAll('#tabs .tab').forEach(t => t.classList.remove('active'))
+    document.querySelectorAll('.content > .panel').forEach(p => p.classList.remove('active'))
+    document.querySelector('[data-panel="settings"]').classList.add('active')
+    document.getElementById('panel-settings').classList.add('active')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // ============================================
+  // TABS
+  // ============================================
+  document.querySelectorAll('#tabs .tab').forEach(tab => {
     tab.addEventListener('click', () => {
-      const target = tab.dataset.panel;
-
-      tabs.forEach(t => t.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-
-      tab.classList.add('active');
-      document.getElementById('panel-' + target).classList.add('active');
-    });
-  });
+      const target = tab.dataset.panel
+      document.querySelectorAll('#tabs .tab').forEach(t => t.classList.remove('active'))
+      document.querySelectorAll('.content > .panel').forEach(p => p.classList.remove('active'))
+      tab.classList.add('active')
+      document.getElementById('panel-' + target).classList.add('active')
+    })
+  })
 
   // ============================================
   // SETTINGS SUB-NAV
   // ============================================
-  const settingsNav = document.querySelectorAll('#settingsNav .settings-nav-item');
-  const settingsPanels = document.querySelectorAll('.settings-panel');
-
-  settingsNav.forEach(item => {
+  document.querySelectorAll('#settingsNav .settings-nav-item').forEach(item => {
     item.addEventListener('click', () => {
-      const target = item.dataset.settings;
-
-      settingsNav.forEach(n => n.classList.remove('active'));
-      settingsPanels.forEach(p => p.classList.remove('active'));
-
-      item.classList.add('active');
-      document.getElementById('settings-' + target).classList.add('active');
-    });
-  });
+      const target = item.dataset.settings
+      document.querySelectorAll('#settingsNav .settings-nav-item').forEach(n => n.classList.remove('active'))
+      document.querySelectorAll('.settings-panel').forEach(p => p.classList.remove('active'))
+      item.classList.add('active')
+      document.getElementById('settings-' + target).classList.add('active')
+    })
+  })
 
   // ============================================
-  // SAVED ITEMS REMOVE
+  // BOOT
   // ============================================
-  document.querySelectorAll('.card-remove').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const card = btn.closest('.card');
-      card.style.transition = 'opacity 0.2s, transform 0.2s';
-      card.style.opacity = '0';
-      card.style.transform = 'scale(0.95)';
-      setTimeout(() => card.remove(), 200);
-    });
-  });
+  boot()
 </script>
 
 </body>

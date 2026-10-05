@@ -25,6 +25,7 @@
     --green-soft: #E4F2EB;
     --amber: #C7873B;
     --amber-soft: #FAEFDD;
+    --red: #D14A40;
     --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
     --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
     --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
@@ -40,27 +41,10 @@
   button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
   /* ============================================
-     MINIMAL CHECKOUT NAV
+     NAV
      ============================================ */
-  .nav {
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    padding: 0 16px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .nav-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    height: 68px;
-  }
-
+  .nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 0 16px; position: sticky; top: 0; z-index: 100; }
+  .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 68px; }
   .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
   .logo-mark { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
   .logo-mark svg { width: 34px; height: 34px; }
@@ -68,552 +52,296 @@
   .logo-text em { font-style: normal; color: var(--coral); }
 
   .nav-secure {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--text-2);
-    font-weight: 500;
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13px; color: var(--text-2); font-weight: 500;
   }
   .nav-secure svg { color: var(--green); }
 
   /* ============================================
-     PROGRESS STEPS
+     STEPS
      ============================================ */
-  .steps-wrap {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 24px 16px 8px;
-  }
-
-  .steps {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-3);
-  }
-
-  .step {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    white-space: nowrap;
-  }
-
+  .steps-wrap { max-width: 1200px; margin: 0 auto; padding: 24px 16px 8px; }
+  .steps { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-3); }
+  .step { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
   .step-dot {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--bg);
-    border: 1.5px solid var(--border-strong);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--text-3);
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--bg); border: 1.5px solid var(--border-strong);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: var(--text-3);
     flex-shrink: 0;
-    transition: all 0.2s;
   }
-
-  .step.done .step-dot {
-    background: var(--green);
-    border-color: var(--green);
-    color: white;
-  }
-
-  .step.active {
-    color: var(--text);
-  }
-  .step.active .step-dot {
-    background: var(--coral);
-    border-color: var(--coral);
-    color: white;
-  }
-
-  .step-line {
-    flex: 1;
-    min-width: 16px;
-    height: 1.5px;
-    background: var(--border-strong);
-    border-radius: 2px;
-  }
+  .step.done .step-dot { background: var(--green); border-color: var(--green); color: white; }
+  .step.active { color: var(--text); }
+  .step.active .step-dot { background: var(--coral); border-color: var(--coral); color: white; }
+  .step-line { flex: 1; min-width: 16px; height: 1.5px; background: var(--border-strong); border-radius: 2px; }
   .step-line.done { background: var(--green); }
 
   @media (max-width: 640px) {
-    .step span { display: none; }
-    .step.active span { display: inline; }
+    .step span:not(.step-dot) { display: none; }
+    .step.active span:not(.step-dot) { display: inline; }
   }
 
   /* ============================================
-     PAGE TITLE
+     PAGE HEADER
      ============================================ */
-  .page-header {
+  .page-header { max-width: 1200px; margin: 0 auto; padding: 16px 16px 0; }
+  .page-title { font-family: var(--font-display); font-size: clamp(24px, 4vw, 32px); font-weight: 700; letter-spacing: -0.6px; color: var(--text); margin-bottom: 6px; }
+  .page-sub { font-size: 14px; color: var(--text-2); }
+
+  /* Alert */
+  .alert {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 16px 16px 0;
-  }
-
-  .page-title {
-    font-family: var(--font-display);
-    font-size: clamp(24px, 4vw, 32px);
-    font-weight: 700;
-    letter-spacing: -0.6px;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-
-  .page-sub {
+    margin: 16px auto 0;
+    padding: 12px 16px;
+    border-radius: var(--r-md);
     font-size: 14px;
-    color: var(--text-2);
+    display: none;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
   }
+  .alert.show { display: flex; }
+  .alert-error { background: #FDE9E7; color: var(--red); border: 1px solid #F8D5D2; }
+  .alert svg { flex-shrink: 0; margin-top: 1px; }
 
   /* ============================================
      LAYOUT
      ============================================ */
   .layout {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 24px 16px 60px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-    align-items: start;
+    max-width: 1200px; margin: 0 auto; padding: 24px 16px 60px;
+    display: grid; grid-template-columns: 1fr; gap: 24px; align-items: start;
   }
 
+  /* Loading */
+  .loading-center {
+    grid-column: 1 / -1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 100px 20px; color: var(--text-3); gap: 16px;
+  }
+  .spinner {
+    width: 36px; height: 36px;
+    border: 3px solid var(--border);
+    border-top-color: var(--coral);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Empty */
+  .empty-checkout {
+    grid-column: 1 / -1;
+    max-width: 480px; margin: 40px auto;
+    padding: 60px 24px; background: var(--card);
+    border: 1px solid var(--border); border-radius: var(--r-lg);
+    text-align: center;
+  }
+  .empty-icon {
+    width: 80px; height: 80px; margin: 0 auto 24px;
+    border-radius: 50%; background: var(--coral-soft);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--coral);
+  }
+  .empty-checkout h2 {
+    font-family: var(--font-display);
+    font-size: 26px; font-weight: 700; color: var(--text);
+    letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .empty-checkout p { font-size: 15px; color: var(--text-2); margin-bottom: 24px; line-height: 1.6; }
+  .empty-checkout a {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 50px; padding: 0 28px;
+    background: var(--coral); color: white;
+    border-radius: var(--r-md); font-weight: 600; font-size: 15px;
+  }
+  .empty-checkout a:hover { background: var(--coral-dark); }
+
   /* ============================================
-     SECTION BLOCKS
+     BLOCKS
      ============================================ */
   .block {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--r-md);
-    margin-bottom: 16px;
-    overflow: hidden;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--r-md); margin-bottom: 16px; overflow: hidden;
   }
-
   .block-head {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 18px 20px;
-    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+    padding: 18px 20px; border-bottom: 1px solid var(--border);
   }
-
   .block-num {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--coral-soft);
-    color: var(--coral);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
-    flex-shrink: 0;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--coral-soft); color: var(--coral);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0;
   }
-
   .block-title {
     font-family: var(--font-display);
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.3px;
-    flex: 1;
+    font-size: 17px; font-weight: 700; color: var(--text);
+    letter-spacing: -0.3px; flex: 1;
   }
-
-  .block-edit {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--coral);
-    transition: color 0.15s;
-  }
+  .block-edit { font-size: 13px; font-weight: 600; color: var(--coral); }
   .block-edit:hover { color: var(--coral-dark); }
-
-  .block-body {
-    padding: 20px;
-  }
+  .block-body { padding: 20px; }
 
   /* ============================================
-     ADDRESS / CARD OPTIONS
+     ADDRESS FORM
      ============================================ */
-  .option-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .option {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 14px 16px;
-    background: var(--bg);
-    border: 1.5px solid var(--border);
-    border-radius: var(--r-md);
-    cursor: pointer;
-    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
-    position: relative;
-  }
-
-  .option:hover { border-color: var(--border-strong); }
-
-  .option.selected {
-    border-color: var(--coral);
-    background: var(--coral-soft);
-    box-shadow: 0 0 0 3px rgba(232,90,79,0.08);
-  }
-
-  .option-radio {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 1.5px solid var(--border-strong);
-    background: var(--card);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-    transition: border-color 0.15s;
-  }
-
-  .option-radio::after {
-    content: "";
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--coral);
-    opacity: 0;
-    transform: scale(0.4);
-    transition: opacity 0.15s, transform 0.15s;
-  }
-
-  .option.selected .option-radio {
-    border-color: var(--coral);
-  }
-  .option.selected .option-radio::after {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .option-content { flex: 1; min-width: 0; }
-
-  .option-title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 3px;
-    flex-wrap: wrap;
-  }
-
-  .option-title .badge-default {
-    display: inline-flex;
-    align-items: center;
-    padding: 2px 7px;
-    background: var(--coral);
-    color: white;
-    border-radius: var(--r-pill);
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-  }
-
-  .option-line {
-    font-size: 13px;
-    color: var(--text-2);
-    line-height: 1.5;
-  }
-
-  .option-meta {
-    font-size: 13px;
-    color: var(--text-2);
-    margin-top: 3px;
-  }
-
-  .option-meta strong { color: var(--text); font-weight: 600; }
-
-  .option-price {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text);
-    margin-left: auto;
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  .option-price.free { color: var(--green); }
-
-  /* Add new option */
-  .option-add {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 14px;
-    background: transparent;
-    border: 1.5px dashed var(--border-strong);
-    border-radius: var(--r-md);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-2);
-    cursor: pointer;
-    transition: border-color 0.15s, color 0.15s, background 0.15s;
-    width: 100%;
-  }
-  .option-add:hover { border-color: var(--coral); color: var(--coral); background: var(--coral-soft); }
-
-  /* ============================================
-     FORM GRID (inline)
-     ============================================ */
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
+  .form-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
   .form-grid.col-2 { grid-template-columns: 1fr 1fr; }
-
   .form-field label {
-    display: block;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-2);
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
+    display: block; font-size: 12px; font-weight: 600; color: var(--text-2);
+    margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px;
   }
-
-  .form-field input,
-  .form-field select {
-    width: 100%;
-    height: 44px;
-    padding: 0 14px;
-    border: 1px solid var(--border-strong);
-    border-radius: var(--r-sm);
-    background: var(--card);
-    font-family: inherit;
-    font-size: 14px;
-    color: var(--text);
-    outline: none;
+  .form-field input, .form-field select, .form-field textarea {
+    width: 100%; height: 44px; padding: 0 14px;
+    border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+    background: var(--card); font-family: inherit; font-size: 14px;
+    color: var(--text); outline: none;
     transition: border-color 0.15s, box-shadow 0.15s;
   }
-
-  .form-field input:focus,
-  .form-field select:focus {
-    border-color: var(--coral);
-    box-shadow: 0 0 0 3px var(--coral-soft);
+  .form-field textarea { height: auto; min-height: 80px; padding: 12px 14px; resize: vertical; }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+    border-color: var(--coral); box-shadow: 0 0 0 3px var(--coral-soft);
   }
-
-  .form-field input::placeholder { color: var(--text-3); }
-
-  .form-field select {
-    appearance: none;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    padding-right: 34px;
-    cursor: pointer;
-  }
-
-  @media (max-width: 640px) {
-    .form-grid.col-2 { grid-template-columns: 1fr; }
-  }
+  .form-field input::placeholder, .form-field textarea::placeholder { color: var(--text-3); }
+  .form-field input:disabled { background: var(--bg); color: var(--text-2); cursor: not-allowed; }
+  @media (max-width: 640px) { .form-grid.col-2 { grid-template-columns: 1fr; } }
 
   /* ============================================
-     ORDER ITEMS (compact)
+     DELIVERY / PAYMENT OPTIONS
+     ============================================ */
+  .option-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .option {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 16px; background: var(--bg);
+    border: 1.5px solid var(--border); border-radius: var(--r-md);
+    cursor: pointer; transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+  .option:hover { border-color: var(--border-strong); }
+  .option.selected {
+    border-color: var(--coral); background: var(--coral-soft);
+    box-shadow: 0 0 0 3px rgba(232,90,79,0.08);
+  }
+  .option input { display: none; }
+  .option-radio {
+    width: 20px; height: 20px; border-radius: 50%;
+    border: 1.5px solid var(--border-strong); background: var(--card);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .option-radio::after {
+    content: ""; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--coral); opacity: 0; transform: scale(0.4);
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .option.selected .option-radio { border-color: var(--coral); }
+  .option.selected .option-radio::after { opacity: 1; transform: scale(1); }
+  .option-content { flex: 1; min-width: 0; }
+  .option-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; font-weight: 700; color: var(--text);
+    margin-bottom: 3px; flex-wrap: wrap;
+  }
+  .option-line { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+  .option-price {
+    font-size: 14px; font-weight: 700; color: var(--text);
+    margin-left: auto; text-align: right; flex-shrink: 0;
+  }
+  .option-price.free { color: var(--green); }
+
+  /* ============================================
+     ORDER REVIEW
      ============================================ */
   .order-item {
-    display: grid;
-    grid-template-columns: 64px 1fr auto;
-    gap: 14px;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--border);
-    align-items: center;
+    display: grid; grid-template-columns: 64px 1fr auto;
+    gap: 14px; padding: 14px 20px;
+    border-bottom: 1px solid var(--border); align-items: center;
   }
-
   .order-item:last-child { border-bottom: none; }
-
   .order-item-img {
-    width: 64px;
-    height: 64px;
-    border-radius: var(--r-sm);
+    width: 64px; height: 64px; border-radius: var(--r-sm);
     background: linear-gradient(135deg, #F5F2ED, #EBE7E0);
-    overflow: hidden;
-    flex-shrink: 0;
+    overflow: hidden; flex-shrink: 0;
   }
   .order-item-img img { width: 100%; height: 100%; object-fit: cover; }
-
   .order-item-info { min-width: 0; }
-
   .order-item-seller {
-    font-size: 12px;
-    color: var(--text-2);
-    margin-bottom: 3px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    font-size: 12px; color: var(--text-2);
+    margin-bottom: 3px; display: flex; align-items: center; gap: 5px;
   }
-
+  .order-item-seller strong { color: var(--text); font-weight: 600; }
   .order-item-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.35;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    margin-bottom: 4px;
+    font-size: 13px; font-weight: 600; color: var(--text);
+    line-height: 1.35; overflow: hidden; text-overflow: ellipsis;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    margin-bottom: 3px;
   }
-
-  .order-item-qty {
-    font-size: 12px;
-    color: var(--text-2);
-  }
-
+  .order-item-qty { font-size: 12px; color: var(--text-2); }
   .order-item-price {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.2px;
-    text-align: right;
-    flex-shrink: 0;
+    font-size: 15px; font-weight: 700; color: var(--text);
+    letter-spacing: -0.2px; text-align: right; flex-shrink: 0;
   }
 
   /* ============================================
-     SIDEBAR — SUMMARY
+     SIDEBAR
      ============================================ */
-  .sidebar {
-    position: sticky;
-    top: 88px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+  .sidebar { position: sticky; top: 88px; display: flex; flex-direction: column; gap: 16px; }
 
   .summary {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--r-md);
-    padding: 20px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--r-md); padding: 20px;
   }
-
   .summary-title {
     font-family: var(--font-display);
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.3px;
-    margin-bottom: 16px;
+    font-size: 18px; font-weight: 700; color: var(--text);
+    letter-spacing: -0.3px; margin-bottom: 16px;
   }
-
   .summary-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-size: 14px;
-    padding: 6px 0;
-    color: var(--text-2);
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 14px; padding: 6px 0; color: var(--text-2);
   }
-
-  .summary-row .value {
-    color: var(--text);
-    font-weight: 500;
-  }
-
+  .summary-row .value { color: var(--text); font-weight: 500; }
   .summary-row .value.free { color: var(--green); font-weight: 600; }
-
-  .summary-divider {
-    border-top: 1px solid var(--border);
-    margin: 12px 0;
-  }
-
+  .summary-divider { border-top: 1px solid var(--border); margin: 12px 0; }
   .summary-total {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    display: flex; justify-content: space-between; align-items: baseline;
     padding: 8px 0 4px;
   }
-
-  .summary-total .label {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-  }
-
+  .summary-total .label { font-size: 15px; font-weight: 700; color: var(--text); }
   .summary-total .amount {
     font-family: var(--font-display);
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.6px;
+    font-size: 26px; font-weight: 700; color: var(--text); letter-spacing: -0.6px;
   }
-
-  .summary-vat {
-    font-size: 12px;
-    color: var(--text-3);
-    text-align: right;
-    margin-bottom: 20px;
-  }
+  .summary-vat { font-size: 12px; color: var(--text-3); text-align: right; margin-bottom: 20px; }
 
   .btn-place {
-    width: 100%;
-    height: 52px;
-    background: var(--coral);
-    color: white;
-    border-radius: var(--r-md);
-    font-weight: 600;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: background 0.15s, transform 0.1s;
+    width: 100%; height: 52px;
+    background: var(--coral); color: white;
+    border-radius: var(--r-md); font-weight: 600; font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; transition: background 0.15s, transform 0.1s;
     margin-bottom: 12px;
   }
-  .btn-place:hover { background: var(--coral-dark); }
-  .btn-place:active { transform: scale(0.99); }
+  .btn-place:hover:not(:disabled) { background: var(--coral-dark); }
+  .btn-place:active:not(:disabled) { transform: scale(0.99); }
+  .btn-place:disabled { opacity: 0.6; cursor: not-allowed; }
+  .btn-place.loading svg { animation: spin 0.8s linear infinite; }
 
   .btn-back {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    width: 100%;
-    height: 42px;
-    color: var(--text-2);
-    font-size: 14px;
-    font-weight: 600;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    width: 100%; height: 42px;
+    color: var(--text-2); font-size: 14px; font-weight: 600;
     transition: color 0.15s;
   }
   .btn-back:hover { color: var(--coral); }
 
-  /* Trust list */
   .trust-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 16px 0 0;
-    border-top: 1px solid var(--border);
-    margin-top: 16px;
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 16px 0 0; border-top: 1px solid var(--border); margin-top: 16px;
   }
-
   .trust-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 13px;
-    color: var(--text-2);
-    line-height: 1.5;
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 13px; color: var(--text-2); line-height: 1.5;
   }
   .trust-item svg { color: var(--green); flex-shrink: 0; margin-top: 2px; }
   .trust-item strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 2px; }
@@ -621,25 +349,13 @@
   /* ============================================
      FOOTER
      ============================================ */
-  .footer {
-    background: var(--card);
-    border-top: 1px solid var(--border);
-    padding: 32px 16px;
-    margin-top: 40px;
-  }
-
+  .footer { background: var(--card); border-top: 1px solid var(--border); padding: 32px 16px; margin-top: 40px; }
   .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 13px;
-    color: var(--text-3);
+    max-width: 1200px; margin: 0 auto;
+    display: flex; flex-wrap: wrap; gap: 16px;
+    align-items: center; justify-content: space-between;
+    font-size: 13px; color: var(--text-3);
   }
-
   .footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
   .footer-links a:hover { color: var(--coral); }
 
@@ -648,6 +364,12 @@
      ============================================ */
   @media (min-width: 1024px) {
     .layout { grid-template-columns: 1fr 400px; gap: 32px; }
+  }
+
+  @media (max-width: 640px) {
+    .order-item { grid-template-columns: 56px 1fr; padding: 12px 16px; }
+    .order-item-img { width: 56px; height: 56px; }
+    .order-item-price { grid-column: 2; text-align: left; margin-top: 4px; font-size: 14px; }
   }
 
   :focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 4px; }
@@ -686,7 +408,7 @@
 </nav>
 
 <!-- ============================================
-     PROGRESS STEPS
+     STEPS
      ============================================ -->
 <div class="steps-wrap">
   <div class="steps">
@@ -696,23 +418,17 @@
       </span>
       <span>Cart</span>
     </div>
-
     <div class="step-line done"></div>
-
     <div class="step active">
       <span class="step-dot">2</span>
       <span>Checkout</span>
     </div>
-
     <div class="step-line"></div>
-
     <div class="step">
       <span class="step-dot">3</span>
       <span>Payment</span>
     </div>
-
     <div class="step-line"></div>
-
     <div class="step">
       <span class="step-dot">4</span>
       <span>Confirmation</span>
@@ -721,306 +437,26 @@
 </div>
 
 <!-- ============================================
-     PAGE HEADER
+     HEADER
      ============================================ -->
 <header class="page-header">
   <h1 class="page-title">Checkout</h1>
   <p class="page-sub">Review your order and complete your purchase securely.</p>
 </header>
 
+<div class="alert alert-error" id="errorAlert">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  <span id="errorMessage"></span>
+</div>
+
 <!-- ============================================
      LAYOUT
      ============================================ -->
-<div class="layout">
-
-  <!-- ---------- LEFT: FORM BLOCKS ---------- -->
-  <div>
-
-    <!-- 1. Shipping Address -->
-    <section class="block">
-      <div class="block-head">
-        <span class="block-num">1</span>
-        <h2 class="block-title">Shipping Address</h2>
-        <a href="account.html" class="block-edit">Manage</a>
-      </div>
-
-      <div class="block-body">
-        <div class="option-list">
-
-          <div class="option selected" onclick="selectOption(this)">
-            <span class="option-radio"></span>
-            <div class="option-content">
-              <div class="option-title">
-                Jane Doe
-                <span class="badge-default">Default</span>
-              </div>
-              <div class="option-line">
-                42 Oxford Road, Manchester, M1 5QA, United Kingdom
-              </div>
-              <div class="option-meta">
-                +44 7700 900000
-              </div>
-            </div>
-          </div>
-
-          <div class="option" onclick="selectOption(this)">
-            <span class="option-radio"></span>
-            <div class="option-content">
-              <div class="option-title">Jane Doe</div>
-              <div class="option-line">
-                18 Baker Street, London, W1U 3BW, United Kingdom
-              </div>
-              <div class="option-meta">
-                +44 7700 900000
-              </div>
-            </div>
-          </div>
-
-          <button class="option-add">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-            Add new address
-          </button>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. Delivery Method -->
-    <section class="block">
-      <div class="block-head">
-        <span class="block-num">2</span>
-        <h2 class="block-title">Delivery Method</h2>
-      </div>
-
-      <div class="block-body">
-        <div class="option-list">
-
-          <div class="option selected" onclick="selectOption(this)">
-            <span class="option-radio"></span>
-            <div class="option-content">
-              <div class="option-title">Standard Delivery</div>
-              <div class="option-line">3–5 business days · Tracked</div>
-            </div>
-            <div class="option-price free">Free</div>
-          </div>
-
-          <div class="option" onclick="selectOption(this)">
-            <span class="option-radio"></span>
-            <div class="option-content">
-              <div class="option-title">Express Delivery</div>
-              <div class="option-line">1–2 business days · Tracked + insured</div>
-            </div>
-            <div class="option-price">£12.99</div>
-          </div>
-
-          <div class="option" onclick="selectOption(this)">
-            <span class="option-radio"></span>
-            <div class="option-content">
-              <div class="option-title">Local Pickup</div>
-              <div class="option-line">Manchester, M1 · Exact address shared after purchase</div>
-            </div>
-            <div class="option-price free">Free</div>
-          </div>
-
-          <div class="option" onclick="selectOption(this)">
-            <span class="option-radio"></span>
-            <div class="option-content">
-              <div class="option-title">International Shipping</div>
-              <div class="option-line">Quote provided after checkout · Ships worldwide</div>
-            </div>
-            <div class="option-price">Quote</div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- 3. Payment Method -->
-    <section class="block">
-      <div class="block-head">
-        <span class="block-num">3</span>
-        <h2 class="block-title">Payment Method</h2>
-        <a href="account.html" class="block-edit">Manage</a>
-      </div>
-
-      <div class="block-body">
-        <div class="option-list">
-
-          <div class="option selected" onclick="selectOption(this)">
-            <span class="option-radio"></span>
-            <div class="option-content">
-              <div class="option-title">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="#1A1F71" style="vertical-align: middle;">
-                  <rect width="24" height="24" rx="3" fill="#1A1F71"/>
-                  <text x="12" y="16" text-anchor="middle" font-family="Arial" font-size="8" font-weight="700" fill="white">VISA</text>
-                </svg>
-                Visa •••• 4242
-                <span class="badge-default">Default</span>
-              </div>
-              <div class="option-line">Expires 08/2027</div>
-            </div>
-          </div>
-
-          <div class="option" onclick="selectOption(this)">
-            <span class="option-radio"></span>
-            <div class="option-content">
-              <div class="option-title">
-                <svg width="22" height="22" viewBox="0 0 24 24" style="vertical-align: middle;">
-                  <rect width="24" height="24" rx="3" fill="#000"/>
-                  <circle cx="9" cy="12" r="5" fill="#EB001B"/>
-                  <circle cx="15" cy="12" r="5" fill="#F79E1B" fill-opacity="0.85"/>
-                </svg>
-                Mastercard •••• 8891
-              </div>
-              <div class="option-line">Expires 12/2026</div>
-            </div>
-          </div>
-
-          <div class="option" onclick="selectOption(this)">
-            <span class="option-radio"></span>
-            <div class="option-content">
-              <div class="option-title">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; color: var(--coral);">
-                  <path d="M3 5h18v14H3z"/><path d="M3 10h18"/>
-                </svg>
-                Pay with PayPal
-              </div>
-              <div class="option-line">You'll be redirected to PayPal to complete payment</div>
-            </div>
-          </div>
-
-          <button class="option-add">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-            Add new card
-          </button>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. Order Review -->
-    <section class="block">
-      <div class="block-head">
-        <span class="block-num">4</span>
-        <h2 class="block-title">Order Review</h2>
-        <a href="cart.html" class="block-edit">Edit cart</a>
-      </div>
-
-      <div style="padding: 0;">
-
-        <div class="order-item">
-          <div class="order-item-img">
-            <img src="https://media.karousell.com/media/photos/products/2026/7/3/preorder_ruhm_5dii_full_carbon_1783047548_cae891a5_progressive" alt="RUHM">
-          </div>
-          <div class="order-item-info">
-            <div class="order-item-seller">
-              <span style="font-weight: 600;">Sense Of Life</span>
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-            </div>
-            <div class="order-item-title">RUHM 5DII Full Carbon Lightweight 6.6kg 16" Trifold Bicycle</div>
-            <div class="order-item-qty">Quantity: 1</div>
-          </div>
-          <div class="order-item-price">£2,530</div>
-        </div>
-
-        <div class="order-item">
-          <div class="order-item-img"></div>
-          <div class="order-item-info">
-            <div class="order-item-seller">
-              <span style="font-weight: 600;">heinrie.studios</span>
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-            </div>
-            <div class="order-item-title">Canon EOS 7D Mark II — Pristine Condition</div>
-            <div class="order-item-qty">Quantity: 1</div>
-          </div>
-          <div class="order-item-price">£512</div>
-        </div>
-
-        <div class="order-item">
-          <div class="order-item-img"></div>
-          <div class="order-item-info">
-            <div class="order-item-seller">
-              <span style="font-weight: 600;">heinrie.studios</span>
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-            </div>
-            <div class="order-item-title">Fujifilm XF 35mm f/1.4 R Lens</div>
-            <div class="order-item-qty">Quantity: 1</div>
-          </div>
-          <div class="order-item-price">£699</div>
-        </div>
-
-      </div>
-    </section>
-
+<div class="layout" id="layout">
+  <div class="loading-center">
+    <div class="spinner"></div>
+    <span>Loading checkout...</span>
   </div>
-
-  <!-- ---------- RIGHT: SUMMARY ---------- -->
-  <aside class="sidebar">
-    <div class="summary">
-      <h2 class="summary-title">Order Summary</h2>
-
-      <div class="summary-row">
-        <span>Subtotal (3 items)</span>
-        <span class="value">£3,741</span>
-      </div>
-
-      <div class="summary-row">
-        <span>Shipping</span>
-        <span class="value free">Free</span>
-      </div>
-
-      <div class="summary-row">
-        <span>Buyer Protection</span>
-        <span class="value free">Included</span>
-      </div>
-
-      <div class="summary-divider"></div>
-
-      <div class="summary-total">
-        <span class="label">Total</span>
-        <span class="amount">£3,741</span>
-      </div>
-
-      <div class="summary-vat">Including VAT where applicable</div>
-
-      <button class="btn-place" onclick="placeOrder()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Place Order Securely
-      </button>
-
-      <a href="cart.html" class="btn-back">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
-        Back to cart
-      </a>
-
-      <div class="trust-list">
-        <div class="trust-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <div>
-            <strong>Buyer Protection</strong>
-            Money held securely until you confirm delivery
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          <div>
-            <strong>Encrypted Payment</strong>
-            256-bit SSL encryption on every transaction
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-          <div>
-            <strong>Free Returns</strong>
-            14-day returns on every item
-          </div>
-        </div>
-      </div>
-    </div>
-  </aside>
-
 </div>
 
 <!-- ============================================
@@ -1038,25 +474,602 @@
   </div>
 </footer>
 
+<!-- ============================================
+     SUPABASE CLIENT
+     ============================================ -->
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+  const SUPABASE_URL = 'https://osebqasifcnhyuajbyvv.supabase.co'
+  const SUPABASE_KEY = 'sb_publishable_vggy-_2xeONhcsSbiQklsw_hvLC_cgG'
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+  window.supabaseClient = supabase
+  window.dispatchEvent(new Event('supabase-ready'))
+</script>
+
+<!-- ============================================
+     CHECKOUT LOGIC
+     ============================================ -->
 <script>
   // ============================================
-  // RADIO OPTION SELECT (per group)
+  // STATE
   // ============================================
-  function selectOption(el) {
-    // Deselect siblings within the same parent list
-    const parent = el.parentElement;
-    parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
-    el.classList.add('selected');
+  const state = {
+    user: null,
+    profile: null,
+    cartItems: [],
+    subtotal: 0,
+    shippingCost: 0,
+    total: 0,
+    currency: 'GBP',
+    deliveryMethod: 'standard',
+    paymentMethod: 'card',
+    placing: false,
+    orderNumber: null
   }
 
   // ============================================
-  // PLACE ORDER (placeholder for Supabase)
+  // HELPERS
   // ============================================
-  function placeOrder() {
-    // TODO: replace with Supabase checkout call
-    console.log('Place order clicked');
-    // window.location.href = 'order-confirmation.html';
+  function formatPrice(price, currency) {
+    const n = parseFloat(price || 0)
+    const symbols = { GBP: '£', USD: '$', EUR: '€' }
+    const sym = symbols[currency] || ''
+    return sym + n.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 2 })
   }
+
+  function escapeHtml(str) {
+    if (!str) return ''
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+  }
+
+  function getCart() {
+    try {
+      const raw = localStorage.getItem('relovly_cart')
+      if (!raw) return []
+      const parsed = JSON.parse(raw)
+      if (Array.isArray(parsed) && parsed.length && typeof parsed[0] === 'object') return parsed
+      if (Array.isArray(parsed)) return parsed.map(id => ({ id: parseInt(id, 10), quantity: 1 }))
+      return []
+    } catch {
+      return []
+    }
+  }
+
+  function clearCart() {
+    localStorage.removeItem('relovly_cart')
+  }
+
+  function generateOrderNumber() {
+    const n = Math.floor(10000 + Math.random() * 90000)
+    return `RLV-${n}`
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('errorAlert')
+    document.getElementById('errorMessage').textContent = msg
+    el.classList.add('show')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  function hideError() {
+    document.getElementById('errorAlert').classList.remove('show')
+  }
+
+  // ============================================
+  // AUTH CHECK
+  // ============================================
+  async function checkAuth() {
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (!session) {
+      window.location.href = 'login.html'
+      return false
+    }
+    state.user = session.user
+
+    // Load profile
+    const { data: profile } = await window.supabaseClient
+      .from('profiles')
+      .select('*')
+      .eq('id', session.user.id)
+      .maybeSingle()
+
+    state.profile = profile || {
+      first_name: session.user.user_metadata?.first_name || '',
+      last_name: session.user.user_metadata?.last_name || '',
+      email: session.user.email,
+      phone: '',
+      city: '',
+      country: ''
+    }
+
+    return true
+  }
+
+  // ============================================
+  // LOAD CART
+  // ============================================
+  async function loadCartItems() {
+    const cart = getCart()
+
+    if (!cart.length) {
+      renderEmpty()
+      return false
+    }
+
+    const ids = cart.map(c => c.id)
+
+    const { data, error } = await window.supabaseClient
+      .from('listings')
+      .select('*')
+      .in('id', ids)
+
+    if (error || !data || !data.length) {
+      renderEmpty()
+      return false
+    }
+
+    state.cartItems = cart
+      .map(c => {
+        const listing = data.find(l => l.id === c.id)
+        if (!listing || listing.status !== 'active') return null
+        return { ...c, listing }
+      })
+      .filter(Boolean)
+
+    if (!state.cartItems.length) {
+      renderEmpty()
+      return false
+    }
+
+    state.currency = state.cartItems[0].listing.currency || 'GBP'
+    state.subtotal = state.cartItems.reduce((sum, i) => {
+      return sum + (parseFloat(i.listing.price) || 0) * i.quantity
+    }, 0)
+
+    return true
+  }
+
+  // ============================================
+  // RENDER EMPTY
+  // ============================================
+  function renderEmpty() {
+    document.getElementById('layout').innerHTML = `
+      <div class="empty-checkout">
+        <div class="empty-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </div>
+        <h2>Your cart is empty</h2>
+        <p>Add some items before checking out.</p>
+        <a href="catalog.html">
+          Browse items
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </div>
+    `
+  }
+
+  // ============================================
+  // RENDER CHECKOUT
+  // ============================================
+  function renderCheckout() {
+    const p = state.profile
+    const addressLine = [p.city, p.country].filter(Boolean).join(', ') || 'Add your address below'
+
+    const orderItemsHtml = state.cartItems.map(item => {
+      const l = item.listing
+      const img = Array.isArray(l.images) && l.images[0] ? l.images[0] : ''
+      const lineTotal = (parseFloat(l.price) || 0) * item.quantity
+
+      return `
+        <div class="order-item">
+          <div class="order-item-img">
+            ${img ? `<img src="${escapeHtml(img)}" alt="">` : ''}
+          </div>
+          <div class="order-item-info">
+            <div class="order-item-seller">
+              <strong>${escapeHtml(l.seller_name || 'relovly')}</strong>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <div class="order-item-title">${escapeHtml(l.title)}</div>
+            <div class="order-item-qty">Quantity: ${item.quantity}</div>
+          </div>
+          <div class="order-item-price">${formatPrice(lineTotal, l.currency)}</div>
+        </div>
+      `
+    }).join('')
+
+    const totalItems = state.cartItems.reduce((s, i) => s + i.quantity, 0)
+
+    document.getElementById('layout').innerHTML = `
+      <!-- LEFT: FORM -->
+      <div>
+
+        <!-- 1. Shipping Address -->
+        <section class="block">
+          <div class="block-head">
+            <span class="block-num">1</span>
+            <h2 class="block-title">Shipping Address</h2>
+            <a href="account.html" class="block-edit">Manage</a>
+          </div>
+          <div class="block-body">
+            <div class="form-grid col-2">
+              <div class="form-field">
+                <label>First name</label>
+                <input type="text" id="shipFirstName" value="${escapeHtml(p.first_name || '')}" placeholder="Jane">
+              </div>
+              <div class="form-field">
+                <label>Last name</label>
+                <input type="text" id="shipLastName" value="${escapeHtml(p.last_name || '')}" placeholder="Doe">
+              </div>
+            </div>
+
+            <div class="form-field" style="margin-top: 12px;">
+              <label>Email address</label>
+              <input type="email" id="shipEmail" value="${escapeHtml(p.email || '')}" placeholder="you@example.com">
+            </div>
+
+            <div class="form-field" style="margin-top: 12px;">
+              <label>Phone number</label>
+              <input type="tel" id="shipPhone" value="${escapeHtml(p.phone || '')}" placeholder="+44 7700 900000">
+            </div>
+
+            <div class="form-field" style="margin-top: 12px;">
+              <label>Street address</label>
+              <input type="text" id="shipStreet" placeholder="42 Oxford Road">
+            </div>
+
+            <div class="form-grid col-2" style="margin-top: 12px;">
+              <div class="form-field">
+                <label>City</label>
+                <input type="text" id="shipCity" value="${escapeHtml(p.city || '')}" placeholder="Manchester">
+              </div>
+              <div class="form-field">
+                <label>Postcode</label>
+                <input type="text" id="shipPostcode" placeholder="M1 5QA">
+              </div>
+            </div>
+
+            <div class="form-field" style="margin-top: 12px;">
+              <label>Country</label>
+              <input type="text" id="shipCountry" value="${escapeHtml(p.country || '')}" placeholder="United Kingdom">
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Delivery Method -->
+        <section class="block">
+          <div class="block-head">
+            <span class="block-num">2</span>
+            <h2 class="block-title">Delivery Method</h2>
+          </div>
+          <div class="block-body">
+            <div class="option-list" id="deliveryOptions">
+
+              <label class="option selected" data-method="standard" data-cost="0">
+                <input type="radio" name="delivery" value="standard" checked>
+                <span class="option-radio"></span>
+                <div class="option-content">
+                  <div class="option-title">Standard Delivery</div>
+                  <div class="option-line">3–5 business days · Tracked</div>
+                </div>
+                <div class="option-price free">Free</div>
+              </label>
+
+              <label class="option" data-method="express" data-cost="12.99">
+                <input type="radio" name="delivery" value="express">
+                <span class="option-radio"></span>
+                <div class="option-content">
+                  <div class="option-title">Express Delivery</div>
+                  <div class="option-line">1–2 business days · Tracked + insured</div>
+                </div>
+                <div class="option-price">${formatPrice(12.99, state.currency)}</div>
+              </label>
+
+              <label class="option" data-method="pickup" data-cost="0">
+                <input type="radio" name="delivery" value="pickup">
+                <span class="option-radio"></span>
+                <div class="option-content">
+                  <div class="option-title">Local Pickup</div>
+                  <div class="option-line">Exact address shared after purchase</div>
+                </div>
+                <div class="option-price free">Free</div>
+              </label>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Payment Method -->
+        <section class="block">
+          <div class="block-head">
+            <span class="block-num">3</span>
+            <h2 class="block-title">Payment Method</h2>
+          </div>
+          <div class="block-body">
+            <div class="option-list" id="paymentOptions">
+
+              <label class="option selected" data-method="card">
+                <input type="radio" name="payment" value="card" checked>
+                <span class="option-radio"></span>
+                <div class="option-content">
+                  <div class="option-title">
+                    <svg width="22" height="22" viewBox="0 0 24 24" style="vertical-align: middle;">
+                      <rect width="24" height="24" rx="3" fill="#1A1F71"/>
+                      <text x="12" y="16" text-anchor="middle" font-family="Arial" font-size="8" font-weight="700" fill="white">VISA</text>
+                    </svg>
+                    Credit or Debit Card
+                  </div>
+                  <div class="option-line">Visa, Mastercard, Amex, Apple Pay, Google Pay</div>
+                </div>
+              </label>
+
+              <label class="option" data-method="paypal">
+                <input type="radio" name="payment" value="paypal">
+                <span class="option-radio"></span>
+                <div class="option-content">
+                  <div class="option-title">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; color: var(--coral);">
+                      <path d="M3 5h18v14H3z"/><path d="M3 10h18"/>
+                    </svg>
+                    Pay with PayPal
+                  </div>
+                  <div class="option-line">You'll be redirected to PayPal to complete payment</div>
+                </div>
+              </label>
+
+              <div class="option" style="border-style: dashed; background: transparent; cursor: default;">
+                <span class="option-radio" style="opacity: 0;"></span>
+                <div class="option-content">
+                  <div class="option-line">More payment methods coming soon</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Order Review -->
+        <section class="block">
+          <div class="block-head">
+            <span class="block-num">4</span>
+            <h2 class="block-title">Order Review (${totalItems} ${totalItems === 1 ? 'item' : 'items'})</h2>
+            <a href="cart.html" class="block-edit">Edit cart</a>
+          </div>
+          <div style="padding: 0;">
+            ${orderItemsHtml}
+          </div>
+        </section>
+
+      </div>
+
+      <!-- RIGHT: SUMMARY -->
+      <aside class="sidebar">
+        <div class="summary">
+          <h2 class="summary-title">Order Summary</h2>
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span class="value" id="summarySubtotal">${formatPrice(state.subtotal, state.currency)}</span>
+          </div>
+
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span class="value free" id="summaryShipping">Free</span>
+          </div>
+
+          <div class="summary-row">
+            <span>Buyer Protection</span>
+            <span class="value free">Included</span>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-total">
+            <span class="label">Total</span>
+            <span class="amount" id="summaryTotal">${formatPrice(state.subtotal, state.currency)}</span>
+          </div>
+
+          <div class="summary-vat">Including VAT where applicable</div>
+
+          <button class="btn-place" id="placeOrderBtn" onclick="placeOrder()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span id="placeOrderText">Place Order Securely</span>
+          </button>
+
+          <a href="cart.html" class="btn-back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
+            Back to cart
+          </a>
+
+          <div class="trust-list">
+            <div class="trust-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <div>
+                <strong>Buyer Protection</strong>
+                Money held securely until you confirm delivery
+              </div>
+            </div>
+            <div class="trust-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <div>
+                <strong>Encrypted Payment</strong>
+                256-bit SSL encryption on every transaction
+              </div>
+            </div>
+            <div class="trust-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              <div>
+                <strong>Free Returns</strong>
+                14-day returns on every item
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    `
+
+    // Wire up delivery options
+    document.querySelectorAll('#deliveryOptions .option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        document.querySelectorAll('#deliveryOptions .option').forEach(o => o.classList.remove('selected'))
+        opt.classList.add('selected')
+        state.deliveryMethod = opt.dataset.method
+        state.shippingCost = parseFloat(opt.dataset.cost) || 0
+        updateTotals()
+      })
+    })
+
+    // Wire up payment options
+    document.querySelectorAll('#paymentOptions .option[data-method]').forEach(opt => {
+      opt.addEventListener('click', () => {
+        document.querySelectorAll('#paymentOptions .option').forEach(o => o.classList.remove('selected'))
+        opt.classList.add('selected')
+        state.paymentMethod = opt.dataset.method
+      })
+    })
+
+    updateTotals()
+  }
+
+  // ============================================
+  // UPDATE TOTALS
+  // ============================================
+  function updateTotals() {
+    state.total = state.subtotal + state.shippingCost
+
+    const shippingEl = document.getElementById('summaryShipping')
+    if (state.shippingCost > 0) {
+      shippingEl.textContent = formatPrice(state.shippingCost, state.currency)
+      shippingEl.classList.remove('free')
+    } else {
+      shippingEl.textContent = 'Free'
+      shippingEl.classList.add('free')
+    }
+
+    document.getElementById('summarySubtotal').textContent = formatPrice(state.subtotal, state.currency)
+    document.getElementById('summaryTotal').textContent = formatPrice(state.total, state.currency)
+  }
+
+  // ============================================
+  // PLACE ORDER
+  // ============================================
+  async function placeOrder() {
+    if (state.placing) return
+    hideError()
+
+    // Validate address
+    const address = {
+      first_name: document.getElementById('shipFirstName').value.trim(),
+      last_name: document.getElementById('shipLastName').value.trim(),
+      email: document.getElementById('shipEmail').value.trim(),
+      phone: document.getElementById('shipPhone').value.trim(),
+      street: document.getElementById('shipStreet').value.trim(),
+      city: document.getElementById('shipCity').value.trim(),
+      postcode: document.getElementById('shipPostcode').value.trim(),
+      country: document.getElementById('shipCountry').value.trim()
+    }
+
+    if (!address.first_name || !address.last_name) return showError('Please enter your first and last name.')
+    if (!address.email || !address.email.includes('@')) return showError('Please enter a valid email address.')
+    if (!address.street) return showError('Please enter your street address.')
+    if (!address.city) return showError('Please enter your city.')
+    if (!address.postcode) return showError('Please enter your postcode.')
+    if (!address.country) return showError('Please enter your country.')
+
+    // Disable button
+    const btn = document.getElementById('placeOrderBtn')
+    const btnText = document.getElementById('placeOrderText')
+    state.placing = true
+    btn.disabled = true
+    btn.classList.add('loading')
+    btnText.textContent = 'Placing your order...'
+
+    try {
+      // Create one order per cart item
+      const ordersToInsert = state.cartItems.map(item => {
+        const l = item.listing
+        return {
+          order_number: generateOrderNumber(),
+          buyer_id: state.user.id,
+          listing_id: l.id,
+          listing_title: l.title,
+          listing_image: Array.isArray(l.images) && l.images[0] ? l.images[0] : null,
+          quantity: item.quantity,
+          price_paid: (parseFloat(l.price) || 0) * item.quantity,
+          currency: l.currency || 'GBP',
+          status: 'processing',
+          shipping_address: address.street,
+          shipping_city: address.city,
+          shipping_country: address.country,
+          shipping_postcode: address.postcode,
+          shipping_method: state.deliveryMethod,
+          shipping_price: state.shippingCost,
+          payment_method: state.paymentMethod,
+          payment_reference: 'TXN-' + Math.random().toString(36).substring(2, 12).toUpperCase()
+        }
+      })
+
+      const { data, error } = await window.supabaseClient
+        .from('orders')
+        .insert(ordersToInsert)
+        .select()
+
+      if (error) throw error
+
+      // Save the first order number for confirmation page
+      const orderNumber = ordersToInsert[0].order_number
+      sessionStorage.setItem('relovly_last_order', JSON.stringify({
+        order_number: orderNumber,
+        total: state.total,
+        currency: state.currency,
+        item_count: state.cartItems.reduce((s, i) => s + i.quantity, 0),
+        created_at: new Date().toISOString()
+      }))
+
+      // Clear cart
+      clearCart()
+
+      btnText.textContent = 'Order placed!'
+      setTimeout(() => {
+        window.location.href = 'order-confirmation.html?order=' + encodeURIComponent(orderNumber)
+      }, 600)
+
+    } catch (err) {
+      console.error('Order placement error:', err)
+      showError(err.message || 'Could not place order. Please try again.')
+      state.placing = false
+      btn.disabled = false
+      btn.classList.remove('loading')
+      btnText.textContent = 'Place Order Securely'
+    }
+  }
+
+  // ============================================
+  // BOOT
+  // ============================================
+  window.addEventListener('supabase-ready', async () => {
+    let tries = 0
+    while (!window.supabaseClient && tries < 50) {
+      await new Promise(r => setTimeout(r, 100))
+      tries++
+    }
+    if (!window.supabaseClient) return
+
+    const authed = await checkAuth()
+    if (!authed) return
+
+    const hasItems = await loadCartItems()
+    if (!hasItems) return
+
+    renderCheckout()
+  })
 </script>
 
 </body>

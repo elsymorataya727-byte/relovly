@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — relovly</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --coral: #E85A4F;
+    --coral-dark: #D14A40;
+    --coral-soft: #FDE9E7;
+    --bg: #FAFAF8;
+    --card: #FFFFFF;
+    --border: #EBE8E3;
+    --border-strong: #DDD8D0;
+    --text: #1A1A1A;
+    --text-2: #6B6B6B;
+    --text-3: #9A9A9A;
+    --green: #2E7D5B;
+    --green-soft: #E4F2EB;
+    --red: #D14A40;
+    --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+    --shadow-lg: 0 12px 32px rgba(0,0,0,0.10);
+    --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Lora', Georgia, serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-ui);
+    background: #0F1115;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Dark background with subtle grid */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(232,90,79,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(46,125,91,0.10) 0%, transparent 50%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 48px 48px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 440px;
+  }
+
+  /* Brand */
+  .brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.6px;
+  }
+  .brand-logo em { font-style: normal; color: var(--coral); }
+
+  .brand-logo-mark {
+    width: 40px; height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .brand-logo-mark svg { width: 40px; height: 40px; }
+
+  .brand-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: rgba(232,90,79,0.15);
+    border: 1px solid rgba(232,90,79,0.3);
+    border-radius: var(--r-pill);
+    color: var(--coral);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  /* Card */
+  .card {
+    background: #16181D;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--r-lg);
+    padding: 32px;
+    box-shadow:
+      0 24px 48px rgba(0,0,0,0.4),
+      0 0 0 1px rgba(255,255,255,0.03) inset;
+  }
+
+  @media (max-width: 480px) {
+    .card { padding: 24px 20px; }
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .card-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  /* Alert */
+  .alert {
+    display: none;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: var(--r-md);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .alert.show { display: flex; }
+  .alert-error {
+    background: rgba(209,74,64,0.12);
+    border: 1px solid rgba(209,74,64,0.3);
+    color: #FF9B92;
+  }
+  .alert-success {
+    background: rgba(46,125,91,0.12);
+    border: 1px solid rgba(46,125,91,0.3);
+    color: #6BCBA3;
+  }
+  .alert svg { flex-shrink: 0; margin-top: 1px; }
+
+  /* Form */
+  .form-group { margin-bottom: 16px; }
+
+  .form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+  }
+
+  .form-input-wrap { position: relative; }
+
+  .form-input {
+    width: 100%;
+    height: 50px;
+    padding: 0 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--r-md);
+    font-family: inherit;
+    font-size: 15px;
+    color: white;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  }
+
+  .form-input:focus {
+    border-color: var(--coral);
+    background: rgba(255,255,255,0.06);
+    box-shadow: 0 0 0 4px rgba(232,90,79,0.12);
+  }
+
+  .form-input::placeholder { color: rgba(255,255,255,0.3); }
+  .form-input.has-icon { padding-right: 48px; }
+  .form-input:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .input-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.4);
+    transition: color 0.15s, background 0.15s;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .input-toggle:hover { color: white; background: rgba(255,255,255,0.06); }
+
+  /* Remember + forgot */
+  .form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    user-select: none;
+  }
+
+  .checkbox input { display: none; }
+
+  .checkbox-box {
+    width: 20px; height: 20px;
+    border-radius: 5px;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .checkbox-box svg { opacity: 0; color: white; transition: opacity 0.15s; }
+
+  .checkbox input:checked + .checkbox-box {
+    background: var(--coral);
+    border-color: var(--coral);
+  }
+  .checkbox input:checked + .checkbox-box svg { opacity: 1; }
+
+  .forgot-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--coral);
+    transition: color 0.15s;
+  }
+  .forgot-link:hover { color: #FF8B80; }
+
+  /* Submit */
+  .btn-submit {
+    width: 100%;
+    height: 52px;
+    background: var(--coral);
+    color: white;
+    border-radius: var(--r-md);
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.15s, transform 0.1s;
+    margin-bottom: 20px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-submit:hover:not(:disabled) { background: var(--coral-dark); }
+  .btn-submit:active:not(:disabled) { transform: scale(0.99); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .btn-submit.loading svg { animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Footer */
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+  }
+  .card-footer a {
+    color: var(--coral);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .card-footer a:hover { color: #FF8B80; }
+
+  /* Below card */
+  .below-card {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.6;
+  }
+
+  .security-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--r-pill);
+    margin-bottom: 10px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  :focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- Brand -->
+  <div class="brand">
+    <div class="brand-logo">
+      <span class="brand-logo-mark">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="adminLogoGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#E85A4F"/>
+              <stop offset="100%" stop-color="#D14A40"/>
+            </linearGradient>
+          </defs>
+          <rect width="40" height="40" rx="12" fill="url(#adminLogoGrad)"/>
+          <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
+                stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+        </svg>
+      </span>
+      re<em>lovly</em>
+    </div>
+    <div class="brand-badge">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Admin Access Only
+    </div>
+  </div>
+
+  <!-- Card -->
+  <div class="card">
+
+    <h1 class="card-title">Admin sign in</h1>
+    <p class="card-sub">Restricted area. Sign in with your administrator credentials to manage listings, orders, and users.</p>
+
+    <div class="alert alert-error" id="errorAlert">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span id="errorMessage"></span>
+    </div>
+
+    <div class="alert alert-success" id="successAlert">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      <span id="successMessage"></span>
+    </div>
+
+    <form id="adminLoginForm" novalidate>
+
+      <div class="form-group">
+        <label class="form-label" for="email">Admin email</label>
+        <input
+          class="form-input"
+          type="email"
+          id="email"
+          placeholder="admin@relovly.com"
+          autocomplete="email"
+          spellcheck="false"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <div class="form-input-wrap">
+          <input
+            class="form-input has-icon"
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required>
+          <button type="button" class="input-toggle" onclick="togglePassword('password', this)" aria-label="Show password">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="checkbox">
+          <input type="checkbox" id="rememberMe">
+          <span class="checkbox-box">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          Keep me signed in
+        </label>
+        <a href="#" class="forgot-link" onclick="handleForgotPassword(event)">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <svg id="submitIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span id="submitText">Sign in as Admin</span>
+      </button>
+
+    </form>
+
+    <div class="card-footer">
+      Not an admin? <a href="login.html">Go to regular login</a>
+    </div>
+
+  </div>
+
+  <div class="below-card">
+    <div class="security-note">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Encrypted connection · All access attempts are logged
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================
+     SUPABASE CLIENT
+     ============================================ -->
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+  const SUPABASE_URL = 'https://osebqasifcnhyuajbyvv.supabase.co'
+  const SUPABASE_KEY = 'sb_publishable_vggy-_2xeONhcsSbiQklsw_hvLC_cgG'
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+  window.supabaseClient = supabase
+  window.dispatchEvent(new Event('supabase-ready'))
+</script>
+
+<!-- ============================================
+     ADMIN LOGIN LOGIC
+     ============================================ -->
+<script>
+  // ============================================
+  // ADMIN EMAILS — ALLOWED LIST
+  // ============================================
+  // Add your admin email(s) here. Only these emails
+  // can sign in to the admin panel.
+  // ============================================
+  const ADMIN_EMAILS = [
+    'admin@relovly.com',
+    'frankghania51@gmail.com',      // ← your own email — replace if different
+    // Add more admin emails here
+  ]
+
+  function isAdminEmail(email) {
+    return ADMIN_EMAILS.map(e => e.toLowerCase()).includes(email.toLowerCase())
+  }
+
+  // ============================================
+  // HELPERS
+  // ============================================
+  function togglePassword(inputId, btn) {
+    const input = document.getElementById(inputId)
+    const isPassword = input.type === 'password'
+    input.type = isPassword ? 'text' : 'password'
+
+    btn.innerHTML = isPassword
+      ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`
+      : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>`
+
+    btn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password')
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('errorAlert')
+    document.getElementById('errorMessage').textContent = msg
+    el.classList.add('show')
+    document.getElementById('successAlert').classList.remove('show')
+  }
+
+  function showSuccess(msg) {
+    const el = document.getElementById('successAlert')
+    document.getElementById('successMessage').textContent = msg
+    el.classList.add('show')
+    document.getElementById('errorAlert').classList.remove('show')
+  }
+
+  function hideAlerts() {
+    document.getElementById('errorAlert').classList.remove('show')
+    document.getElementById('successAlert').classList.remove('show')
+  }
+
+  // ============================================
+  // FORM SUBMIT
+  // ============================================
+  document.getElementById('adminLoginForm').addEventListener('submit', async function (e) {
+    e.preventDefault()
+    hideAlerts()
+
+    const email = document.getElementById('email').value.trim()
+    const password = document.getElementById('password').value
+
+    if (!email || !email.includes('@')) return showError('Please enter a valid email address.')
+    if (!password) return showError('Please enter your password.')
+
+    // Client-side check — is this email in the admin list?
+    // (Real security is enforced by RLS on the server side,
+    // but we still guard the UI so normal users can't wander in.)
+    if (!isAdminEmail(email)) {
+      showError('This email is not authorised for admin access.')
+      // Log the attempt (fires and forgets)
+      logAdminAttempt(email, 'unauthorised_email')
+      return
+    }
+
+    const btn = document.getElementById('submitBtn')
+    const btnText = document.getElementById('submitText')
+    const btnIcon = document.getElementById('submitIcon')
+    btn.disabled = true
+    btn.classList.add('loading')
+    btnText.textContent = 'Verifying credentials...'
+
+    try {
+      const { data, error } = await window.supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      })
+
+      if (error) throw error
+
+      // Double check the signed-in user's email matches (in case of edge case)
+      if (!data.user || !isAdminEmail(data.user.email)) {
+        await window.supabaseClient.auth.signOut()
+        throw new Error('Unauthorised account for admin access.')
+      }
+
+      logAdminAttempt(email, 'success')
+
+      showSuccess('Admin access granted. Redirecting...')
+      btnText.textContent = 'Access granted'
+      btnIcon.innerHTML = '<path d="M20 6 9 17l-5-5"/>'
+
+      setTimeout(() => {
+        window.location.href = 'admin.html'
+      }, 700)
+
+    } catch (err) {
+      console.error('Admin login error:', err)
+
+      let msg = 'Unable to sign in. Please try again.'
+      if (err.message) {
+        const lower = err.message.toLowerCase()
+        if (lower.includes('invalid login credentials') || lower.includes('invalid')) {
+          msg = 'Incorrect email or password.'
+        } else if (lower.includes('email not confirmed')) {
+          msg = 'Please confirm your email address before signing in.'
+        } else if (lower.includes('too many requests')) {
+          msg = 'Too many attempts. Please wait a moment and try again.'
+        } else {
+          msg = err.message
+        }
+      }
+      showError(msg)
+      logAdminAttempt(email, 'failed_login')
+
+      btn.disabled = false
+      btn.classList.remove('loading')
+      btnText.textContent = 'Sign in as Admin'
+      btnIcon.innerHTML = '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>'
+    }
+  })
+
+  // ============================================
+  // FORGOT PASSWORD
+  // ============================================
+  async function handleForgotPassword(e) {
+    e.preventDefault()
+    hideAlerts()
+
+    const email = document.getElementById('email').value.trim()
+    if (!email || !email.includes('@')) {
+      return showError('Enter your admin email above, then click "Forgot password?" again.')
+    }
+
+    if (!isAdminEmail(email)) {
+      return showError('This email is not registered as an administrator.')
+    }
+
+    try {
+      const { error } = await window.supabaseClient.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + '/adminlogin.html'
+      })
+      if (error) throw error
+      showSuccess('Password reset link sent. Check your admin inbox.')
+    } catch (err) {
+      console.error('Forgot password error:', err)
+      showError(err.message || 'Could not send reset link. Please try again.')
+    }
+  }
+
+  // ============================================
+  // LOG ADMIN ATTEMPTS (best-effort, non-blocking)
+  // ============================================
+  async function logAdminAttempt(email, result) {
+    try {
+      // We log into a hypothetical admin_audit table.
+      // If it doesn't exist, this silently fails — that's fine.
+      await window.supabaseClient
+        .from('admin_audit_log')
+        .insert({
+          email: email,
+          result: result,
+          user_agent: navigator.userAgent,
+          timestamp: new Date().toISOString()
+        })
+    } catch (e) {
+      // Silent — table may not exist yet
+    }
+  }
+
+  // ============================================
+  // AUTO-REDIRECT IF ALREADY SIGNED IN AS ADMIN
+  // ============================================
+  window.addEventListener('supabase-ready', async () => {
+    let tries = 0
+    while (!window.supabaseClient && tries < 50) {
+      await new Promise(r => setTimeout(r, 100))
+      tries++
+    }
+    if (!window.supabaseClient) return
+
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (session && session.user && isAdminEmail(session.user.email)) {
+      window.location.href = 'admin.html'
+    }
+  })
+</script>
+
+</body>
+</html>

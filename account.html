@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account — relovly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --coral: #E85A4F;
+    --coral-dark: #D14A40;
+    --coral-soft: #FDE9E7;
+    --bg: #FAFAF8;
+    --card: #FFFFFF;
+    --border: #EBE8E3;
+    --border-strong: #DDD8D0;
+    --text: #1A1A1A;
+    --text-2: #6B6B6B;
+    --text-3: #9A9A9A;
+    --green: #2E7D5B;
+    --green-soft: #E4F2EB;
+    --amber: #C7873B;
+    --amber-soft: #FAEFDD;
+    --blue: #2563EB;
+    --blue-soft: #E0EAFF;
+    --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+    --shadow-lg: 0 12px 32px rgba(0,0,0,0.10);
+    --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Lora', Georgia, serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-ui); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  /* ============================================
+     NAVIGATION
+     ============================================ */
+  .nav { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 0 16px; }
+  .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 20px; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .logo-mark { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
+  .logo-mark svg { width: 34px; height: 34px; }
+  .logo-text { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--text); letter-spacing: -0.6px; line-height: 1; }
+  .logo-text em { font-style: normal; color: var(--coral); }
+
+  .nav-search { flex: 1; max-width: 560px; position: relative; display: none; }
+  .nav-search input { width: 100%; height: 42px; padding: 0 16px 0 44px; border: 1px solid var(--border); background: var(--bg); border-radius: var(--r-pill); font-size: 14px; font-family: inherit; color: var(--text); outline: none; transition: border-color 0.15s, background 0.15s; }
+  .nav-search input:focus { border-color: var(--coral); background: var(--card); }
+  .nav-search input::placeholder { color: var(--text-3); }
+  .nav-search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-3); pointer-events: none; }
+
+  .nav-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+  .icon-btn { width: 40px; height: 40px; border-radius: var(--r-pill); display: flex; align-items: center; justify-content: center; color: var(--text-2); transition: background 0.15s, color 0.15s; position: relative; }
+  .icon-btn:hover { background: var(--bg); color: var(--text); }
+  .icon-btn .dot { position: absolute; top: 8px; right: 8px; width: 8px; height: 8px; background: var(--coral); border-radius: 50%; border: 2px solid var(--card); }
+
+  .btn-buy { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; background: var(--coral); color: white; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; transition: background 0.15s, transform 0.1s; }
+  .btn-buy:hover { background: var(--coral-dark); }
+  .btn-buy:active { transform: scale(0.98); }
+
+  /* ============================================
+     PAGE HEADER
+     ============================================ */
+  .page-header { max-width: 1400px; margin: 0 auto; padding: 32px 16px 24px; }
+  .breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-2); margin-bottom: 20px; }
+  .breadcrumb a:hover { color: var(--coral); }
+  .breadcrumb svg { color: var(--text-3); }
+
+  .profile-head {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .profile-avatar {
+    width: 84px; height: 84px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--coral), var(--coral-dark));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 34px;
+    font-weight: 700;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .profile-avatar-edit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 28px; height: 28px;
+    background: var(--card);
+    border: 2px solid var(--card);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    box-shadow: var(--shadow-md);
+    transition: color 0.15s;
+  }
+  .profile-avatar-edit:hover { color: var(--coral); }
+
+  .profile-info { flex: 1; min-width: 200px; }
+  .profile-name {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 3vw, 30px);
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: var(--r-pill);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .badge-verified { background: var(--green-soft); color: var(--green); }
+  .badge-member { background: var(--coral-soft); color: var(--coral); }
+
+  .profile-meta {
+    font-size: 14px;
+    color: var(--text-2);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .profile-meta span { display: flex; align-items: center; gap: 6px; }
+
+  .profile-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 42px;
+    padding: 0 18px;
+    border-radius: var(--r-md);
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
+    white-space: nowrap;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary { background: var(--coral); color: white; }
+  .btn-primary:hover { background: var(--coral-dark); }
+  .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border-strong); }
+  .btn-secondary:hover { border-color: var(--text); }
+
+  /* ============================================
+     STATS ROW
+     ============================================ */
+  .stats-row {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 16px 32px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px 18px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .stat-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.4px;
+  }
+
+  /* ============================================
+     TABS
+     ============================================ */
+  .tabs-wrap {
+    position: sticky;
+    top: 64px;
+    z-index: 50;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    margin-bottom: 24px;
+  }
+
+  .tabs {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-2);
+    white-space: nowrap;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+    position: relative;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: inherit;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--coral); border-bottom-color: var(--coral); }
+
+  .tab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background: var(--bg);
+    border-radius: var(--r-pill);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-2);
+  }
+  .tab.active .tab-count { background: var(--coral-soft); color: var(--coral); }
+
+  /* ============================================
+     CONTENT
+     ============================================ */
+  .content { max-width: 1400px; margin: 0 auto; padding: 0 16px 60px; }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* Section card */
+  .section-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: var(--text);
+  }
+
+  .section-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--coral);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .section-link:hover { color: var(--coral-dark); }
+
+  /* ============================================
+     ORDER CARD
+     ============================================ */
+  .order {
+    display: grid;
+    grid-template-columns: 84px 1fr auto;
+    gap: 16px;
+    padding: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    margin-bottom: 12px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    align-items: start;
+  }
+  .order:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+
+  .order-img {
+    width: 84px; height: 84px;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    background: linear-gradient(135deg, #F5F2ED, #EBE7E0);
+    flex-shrink: 0;
+  }
+  .order-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  .order-details { min-width: 0; }
+
+  .order-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .order-meta {
+    font-size: 13px;
+    color: var(--text-2);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .order-meta span { display: flex; align-items: center; gap: 4px; }
+
+  .order-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: var(--r-pill);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .order-status.shipped { background: var(--blue-soft); color: var(--blue); }
+  .order-status.delivered { background: var(--green-soft); color: var(--green); }
+  .order-status.processing { background: var(--amber-soft); color: var(--amber); }
+  .order-status.cancelled { background: var(--coral-soft); color: var(--coral); }
+
+  .order-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+  }
+
+  .order-price {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+  }
+
+  .btn-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: var(--r-sm);
+    font-weight: 600;
+    font-size: 13px;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .btn-sm-primary { background: var(--coral); color: white; }
+  .btn-sm-primary:hover { background: var(--coral-dark); }
+  .btn-sm-ghost { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+  .btn-sm-ghost:hover { border-color: var(--text); }
+
+  /* ============================================
+     SAVED ITEMS GRID
+     ============================================ */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
+  .card-media { position: relative; aspect-ratio: 1 / 1; background: linear-gradient(135deg, #F5F2ED 0%, #EBE7E0 100%); overflow: hidden; }
+  .card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+  .card:hover .card-media img { transform: scale(1.03); }
+  .card-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .card-title { font-size: 13px; font-weight: 500; line-height: 1.35; color: var(--text); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 35px; }
+  .card-price { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+
+  .card-remove {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-2);
+    z-index: 2;
+    transition: color 0.15s, background 0.15s;
+  }
+  .card-remove:hover { color: var(--coral); background: white; }
+
+  /* ============================================
+     MESSAGES
+     ============================================ */
+  .message {
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    gap: 14px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    align-items: center;
+  }
+  .message:last-child { border-bottom: none; }
+  .message:hover { background: var(--bg); }
+
+  .message-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8B92A8, #6B7280);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .message-content { min-width: 0; }
+
+  .message-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+
+  .message-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .message-time {
+    font-size: 12px;
+    color: var(--text-3);
+    margin-left: auto;
+  }
+
+  .message-text {
+    font-size: 13px;
+    color: var(--text-2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .message.unread .message-text { color: var(--text); font-weight: 500; }
+  .message.unread::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--coral);
+    border-radius: 50%;
+    margin-left: -8px;
+  }
+
+  .message-thumb {
+    width: 48px; height: 48px;
+    border-radius: var(--r-sm);
+    background: linear-gradient(135deg, #F5F2ED, #EBE7E0);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .message-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ============================================
+     SETTINGS FORM
+     ============================================ */
+  .settings-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 900px) {
+    .settings-grid { grid-template-columns: 220px 1fr; }
+  }
+
+  .settings-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .settings-nav::-webkit-scrollbar { display: none; }
+
+  @media (min-width: 900px) {
+    .settings-nav { flex-direction: column; position: sticky; top: 120px; }
+  }
+
+  .settings-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: var(--r-md);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+    background: none;
+    border: none;
+    font-family: inherit;
+    text-align: left;
+  }
+  .settings-nav-item:hover { background: var(--bg); color: var(--text); }
+  .settings-nav-item.active { background: var(--coral-soft); color: var(--coral); font-weight: 600; }
+
+  .settings-panel { display: none; }
+  .settings-panel.active { display: block; }
+
+  .form-group { margin-bottom: 16px; }
+
+  .form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .form-input {
+    width: 100%;
+    height: 46px;
+    padding: 0 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-md);
+    background: var(--card);
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .form-input:focus { border-color: var(--coral); box-shadow: 0 0 0 4px var(--coral-soft); }
+  .form-input::placeholder { color: var(--text-3); }
+
+  .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .form-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-top: 8px;
+  }
+
+  /* Address card */
+  .address-card {
+    position: relative;
+    padding: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    margin-bottom: 12px;
+  }
+
+  .address-card.default { border-color: var(--coral); box-shadow: 0 0 0 3px var(--coral-soft); }
+
+  .address-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    background: var(--coral-soft);
+    color: var(--coral);
+    border-radius: var(--r-pill);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 10px;
+  }
+
+  .address-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .address-line { font-size: 13px; color: var(--text-2); line-height: 1.6; }
+
+  .address-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .address-actions button {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-2);
+    transition: color 0.15s;
+  }
+  .address-actions button:hover { color: var(--coral); }
+  .address-actions .danger:hover { color: #D14A40; }
+
+  /* ============================================
+     EMPTY STATE
+     ============================================ */
+  .empty {
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .empty-icon {
+    width: 64px; height: 64px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-3);
+  }
+
+  .empty h3 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .empty p {
+    font-size: 14px;
+    color: var(--text-2);
+    margin-bottom: 20px;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .footer { background: var(--card); border-top: 1px solid var(--border); padding: 48px 16px 32px; margin-top: 40px; }
+  .footer-inner { max-width: 1400px; margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
+  .footer-brand p { font-size: 14px; color: var(--text-2); margin-top: 12px; max-width: 300px; line-height: 1.6; }
+  .footer-col h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text); margin-bottom: 14px; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 10px; }
+  .footer-col a { font-size: 14px; color: var(--text-2); transition: color 0.15s; }
+  .footer-col a:hover { color: var(--coral); }
+  .footer-bottom { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text-3); }
+  .footer-bottom-links { display: flex; flex-wrap: wrap; gap: 16px; }
+
+  /* ============================================
+     MOBILE BAR
+     ============================================ */
+  .mobile-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 0 10px;
+    z-index: 99;
+  }
+  .mobile-bar-item {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    font-size: 10px; color: var(--text-3);
+    padding: 4px 12px;
+    transition: color 0.15s;
+  }
+  .mobile-bar-item.active { color: var(--coral); }
+  .mobile-bar-buy {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--coral); color: white;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: -18px;
+    box-shadow: 0 4px 12px rgba(232,90,79,0.35);
+    transition: transform 0.15s;
+  }
+
+  @media (max-width: 767px) { body { padding-bottom: 72px; } }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (min-width: 640px) {
+    .stats-row { grid-template-columns: repeat(4, 1fr); }
+    .grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  }
+
+  @media (min-width: 768px) {
+    .nav-search { display: block; }
+    .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+    .mobile-bar { display: none; }
+    body { padding-bottom: 0; }
+  }
+
+  @media (min-width: 1024px) {
+    .grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .order { grid-template-columns: 72px 1fr; }
+    .order-img { width: 72px; height: 72px; }
+    .order-actions {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
+    }
+    .form-row-2 { grid-template-columns: 1fr; }
+  }
+
+  :focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     NAV
+     ============================================ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#E85A4F"/>
+              <stop offset="100%" stop-color="#D14A40"/>
+            </linearGradient>
+          </defs>
+          <rect width="40" height="40" rx="12" fill="url(#logoGrad)"/>
+          <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
+                stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+        </svg>
+      </span>
+      <span class="logo-text">re<em>lovly</em></span>
+    </a>
+
+    <div class="nav-search">
+      <span class="nav-search-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </span>
+      <input type="text" placeholder="Search cameras, watches, bicycles...">
+    </div>
+
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Notifications">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+        <span class="dot"></span>
+      </button>
+      <button class="icon-btn" aria-label="Messages">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Profile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <a href="catalog.html" class="btn-buy">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        Buy
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================
+     PROFILE HEADER
+     ============================================ -->
+<header class="page-header">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+    <span>My Account</span>
+  </div>
+
+  <div class="profile-head">
+    <div class="profile-avatar">
+      J
+      <button class="profile-avatar-edit" aria-label="Edit avatar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </button>
+    </div>
+
+    <div class="profile-info">
+      <h1 class="profile-name">
+        Jane Doe
+        <span class="badge badge-verified">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          Verified
+        </span>
+        <span class="badge badge-member">Member since 2024</span>
+      </h1>
+      <div class="profile-meta">
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          jane@example.com
+        </span>
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Manchester, UK
+        </span>
+      </div>
+    </div>
+
+    <div class="profile-actions">
+      <button class="btn btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        Edit profile
+      </button>
+      <button class="btn btn-primary" onclick="window.location.href='index.html'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Browse items
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================
+     STATS
+     ============================================ -->
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="stat-label">Orders</div>
+    <div class="stat-value">12</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Saved items</div>
+    <div class="stat-value">28</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Reviews</div>
+    <div class="stat-value">5.0</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Following</div>
+    <div class="stat-value">14</div>
+  </div>
+</div>
+
+<!-- ============================================
+     TABS
+     ============================================ -->
+<div class="tabs-wrap">
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-panel="orders">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+      Orders
+      <span class="tab-count">12</span>
+    </button>
+    <button class="tab" data-panel="saved">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Saved
+      <span class="tab-count">28</span>
+    </button>
+    <button class="tab" data-panel="messages">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Messages
+      <span class="tab-count">3</span>
+    </button>
+    <button class="tab" data-panel="settings">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Settings
+    </button>
+  </div>
+</div>
+
+<!-- ============================================
+     CONTENT
+     ============================================ -->
+<main class="content">
+
+  <!-- ========== ORDERS PANEL ========== -->
+  <div class="panel active" id="panel-orders">
+
+    <!-- Order 1 -->
+    <div class="order">
+      <div class="order-img">
+        <img src="https://media.karousell.com/media/photos/products/2026/7/3/preorder_ruhm_5dii_full_carbon_1783047548_cae891a5_progressive" alt="RUHM bicycle">
+      </div>
+      <div class="order-details">
+        <h3 class="order-title">RUHM 5DII Full Carbon Lightweight 6.6kg 16" Trifold Bicycle</h3>
+        <div class="order-meta">
+          <span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Ordered 12 Oct 2026
+          </span>
+          <span>Order #RLV-28461</span>
+        </div>
+        <div class="order-status shipped">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Shipped
+        </div>
+      </div>
+      <div class="order-actions">
+        <div class="order-price">£2,530</div>
+        <button class="btn-sm btn-sm-ghost">
+          Track order
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Order 2 -->
+    <div class="order">
+      <div class="order-img"></div>
+      <div class="order-details">
+        <h3 class="order-title">Canon EOS 7D Mark II — Pristine Condition, Like New</h3>
+        <div class="order-meta">
+          <span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Ordered 4 Oct 2026
+          </span>
+          <span>Order #RLV-28104</span>
+        </div>
+        <div class="order-status delivered">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          Delivered
+        </div>
+      </div>
+      <div class="order-actions">
+        <div class="order-price">£512</div>
+        <button class="btn-sm btn-sm-primary">Leave review</button>
+      </div>
+    </div>
+
+    <!-- Order 3 -->
+    <div class="order">
+      <div class="order-img"></div>
+      <div class="order-details">
+        <h3 class="order-title">Fujifilm XF 35mm f/1.4 R Lens</h3>
+        <div class="order-meta">
+          <span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Ordered 2 Oct 2026
+          </span>
+          <span>Order #RLV-27903</span>
+        </div>
+        <div class="order-status processing">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Processing
+        </div>
+      </div>
+      <div class="order-actions">
+        <div class="order-price">£699</div>
+        <button class="btn-sm btn-sm-ghost">View</button>
+      </div>
+    </div>
+
+    <button class="btn btn-secondary" style="margin-top: 20px; width: 100%;">
+      Load more orders
+    </button>
+  </div>
+
+  <!-- ========== SAVED PANEL ========== -->
+  <div class="panel" id="panel-saved">
+    <div class="grid">
+
+      <article class="card">
+        <button class="card-remove" aria-label="Remove">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="card-media"></div>
+        <div class="card-body">
+          <h3 class="card-title">Nikon D5300 + Tamron 18–270mm VC PZD Complete Set</h3>
+          <div class="card-price">£498</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="card-remove" aria-label="Remove">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="card-media"></div>
+        <div class="card-body">
+          <h3 class="card-title">Olympus 8–25mm f/4 OM System M43 Lens</h3>
+          <div class="card-price">£880</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="card-remove" aria-label="Remove">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="card-media"></div>
+        <div class="card-body">
+          <h3 class="card-title">Fujifilm Instax Mini 12 Instant Camera with Bag</h3>
+          <div class="card-price">£99</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="card-remove" aria-label="Remove">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="card-media"></div>
+        <div class="card-body">
+          <h3 class="card-title">Nikon NIKKOR Z 135mm f/1.8 S Plena Lens</h3>
+          <div class="card-price">£2,300</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="card-remove" aria-label="Remove">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="card-media"></div>
+        <div class="card-body">
+          <h3 class="card-title">Sony RX100 III Digital Camera</h3>
+          <div class="card-price">£450</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="card-remove" aria-label="Remove">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="card-media"></div>
+        <div class="card-body">
+          <h3 class="card-title">Canon IXY Digital L Rose Gold Compact Camera</h3>
+          <div class="card-price">£200</div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- ========== MESSAGES PANEL ========== -->
+  <div class="panel" id="panel-messages">
+    <div class="section-card" style="padding: 0;">
+
+      <div class="message unread">
+        <div class="message-avatar">S</div>
+        <div class="message-content">
+          <div class="message-head">
+            <span class="message-name">Sense Of Life</span>
+            <span class="message-time">2h ago</span>
+          </div>
+          <div class="message-text">Hi! Yes, the bike is still available. Would you like to arrange a viewing?</div>
+        </div>
+        <div class="message-thumb"></div>
+      </div>
+
+      <div class="message unread">
+        <div class="message-avatar">B</div>
+        <div class="message-content">
+          <div class="message-head">
+            <span class="message-name">brompton_fan</span>
+            <span class="message-time">5h ago</span>
+          </div>
+          <div class="message-text">Thanks for your offer. I can do £1,400 if you can collect this weekend.</div>
+        </div>
+        <div class="message-thumb"></div>
+      </div>
+
+      <div class="message">
+        <div class="message-avatar">K</div>
+        <div class="message-content">
+          <div class="message-head">
+            <span class="message-name">kito_bikes</span>
+            <span class="message-time">Yesterday</span>
+          </div>
+          <div class="message-text">Your order has been shipped. Tracking number: RM123456789GB</div>
+        </div>
+        <div class="message-thumb"></div>
+      </div>
+
+      <div class="message">
+        <div class="message-avatar">A</div>
+        <div class="message-content">
+          <div class="message-head">
+            <span class="message-name">aceoffix_uk</span>
+            <span class="message-time">3 days ago</span>
+          </div>
+          <div class="message-text">Great, I'll send you the payment details now.</div>
+        </div>
+        <div class="message-thumb"></div>
+      </div>
+
+    </div>
+
+    <button class="btn btn-secondary" style="margin-top: 20px; width: 100%;">
+      Load more messages
+    </button>
+  </div>
+
+  <!-- ========== SETTINGS PANEL ========== -->
+  <div class="panel" id="panel-settings">
+    <div class="settings-grid">
+
+      <!-- Sidebar nav -->
+      <nav class="settings-nav" id="settingsNav">
+        <button class="settings-nav-item active" data-settings="profile">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile
+        </button>
+        <button class="settings-nav-item" data-settings="password">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Password
+        </button>
+        <button class="settings-nav-item" data-settings="addresses">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Addresses
+        </button>
+        <button class="settings-nav-item" data-settings="payment">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Payment
+        </button>
+        <button class="settings-nav-item" data-settings="notifications">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          Notifications
+        </button>
+      </nav>
+
+      <!-- Panels -->
+      <div class="settings-content">
+
+        <!-- Profile panel -->
+        <div class="settings-panel active" id="settings-profile">
+          <div class="section-card">
+            <h2 class="section-title" style="margin-bottom: 20px;">Profile information</h2>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label">First name</label>
+                <input class="form-input" type="text" value="Jane">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Last name</label>
+                <input class="form-input" type="text" value="Doe">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email address</label>
+              <input class="form-input" type="email" value="jane@example.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone number</label>
+              <input class="form-input" type="tel" placeholder="+44 7700 900000">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Bio</label>
+              <textarea class="form-input" style="height: auto; min-height: 100px; padding: 12px 14px; resize: vertical; font-family: inherit;" placeholder="Tell buyers a little about yourself..."></textarea>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary">Save changes</button>
+              <button class="btn btn-secondary">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Password panel -->
+        <div class="settings-panel" id="settings-password">
+          <div class="section-card">
+            <h2 class="section-title" style="margin-bottom: 20px;">Change password</h2>
+            <div class="form-group">
+              <label class="form-label">Current password</label>
+              <input class="form-input" type="password" placeholder="Enter current password">
+            </div>
+            <div class="form-group">
+              <label class="form-label">New password</label>
+              <input class="form-input" type="password" placeholder="Enter new password">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Confirm new password</label>
+              <input class="form-input" type="password" placeholder="Re-enter new password">
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary">Update password</button>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h2 class="section-title" style="margin-bottom: 8px;">Two-factor authentication</h2>
+            <p style="font-size: 14px; color: var(--text-2); margin-bottom: 16px;">Add an extra layer of security to your account.</p>
+            <button class="btn btn-secondary">Enable 2FA</button>
+          </div>
+        </div>
+
+        <!-- Addresses panel -->
+        <div class="settings-panel" id="settings-addresses">
+          <div class="section-card">
+            <div class="section-head">
+              <h2 class="section-title">Saved addresses</h2>
+              <button class="section-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                Add new
+              </button>
+            </div>
+
+            <div class="address-card default">
+              <span class="address-label">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                Default
+              </span>
+              <div class="address-name">Jane Doe</div>
+              <div class="address-line">
+                42 Oxford Road<br>
+                Manchester, M1 5QA<br>
+                United Kingdom
+              </div>
+              <div class="address-actions">
+                <button>Edit</button>
+                <button>Set as default</button>
+                <button class="danger">Delete</button>
+              </div>
+            </div>
+
+            <div class="address-card">
+              <div class="address-name">Jane Doe</div>
+              <div class="address-line">
+                18 Baker Street<br>
+                London, W1U 3BW<br>
+                United Kingdom
+              </div>
+              <div class="address-actions">
+                <button>Edit</button>
+                <button>Set as default</button>
+                <button class="danger">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment panel -->
+        <div class="settings-panel" id="settings-payment">
+          <div class="section-card">
+            <div class="section-head">
+              <h2 class="section-title">Payment methods</h2>
+              <button class="section-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                Add card
+              </button>
+            </div>
+
+            <div class="address-card default">
+              <span class="address-label">Default</span>
+              <div class="address-name" style="display: flex; align-items: center; gap: 8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#1A1F71"><rect width="24" height="24" rx="3" fill="#1A1F71"/><path d="M9 16H7l1-7h3l1 7h-2l-.5-3H9.5L9 16Zm5 0h-2l-1-7h2l1 7Z" fill="white"/></svg>
+                Visa •••• 4242
+              </div>
+              <div class="address-line">Expires 08/2027</div>
+              <div class="address-actions">
+                <button>Edit</button>
+                <button class="danger">Remove</button>
+              </div>
+            </div>
+
+            <div class="address-card">
+              <div class="address-name" style="display: flex; align-items: center; gap: 8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="3" fill="#EB001B"/><circle cx="9" cy="12" r="6" fill="#EB001B"/><circle cx="15" cy="12" r="6" fill="#F79E1B" fill-opacity="0.8"/></svg>
+                Mastercard •••• 8891
+              </div>
+              <div class="address-line">Expires 12/2026</div>
+              <div class="address-actions">
+                <button>Edit</button>
+                <button>Set as default</button>
+                <button class="danger">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notifications panel -->
+        <div class="settings-panel" id="settings-notifications">
+          <div class="section-card">
+            <h2 class="section-title" style="margin-bottom: 20px;">Email notifications</h2>
+
+            <label style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; cursor: pointer;">
+              <input type="checkbox" checked style="margin-top: 4px; accent-color: var(--coral);">
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--text);">Order updates</div>
+                <div style="font-size: 13px; color: var(--text-2);">Get notified when your order is shipped, delivered, or updated.</div>
+              </div>
+            </label>
+
+            <label style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; cursor: pointer;">
+              <input type="checkbox" checked style="margin-top: 4px; accent-color: var(--coral);">
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--text);">Messages</div>
+                <div style="font-size: 13px; color: var(--text-2);">Get notified when a seller or buyer sends you a message.</div>
+              </div>
+            </label>
+
+            <label style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; cursor: pointer;">
+              <input type="checkbox" style="margin-top: 4px; accent-color: var(--coral);">
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--text);">Price drops on saved items</div>
+                <div style="font-size: 13px; color: var(--text-2);">Be the first to know when an item you saved drops in price.</div>
+              </div>
+            </label>
+
+            <label style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; cursor: pointer;">
+              <input type="checkbox" style="margin-top: 4px; accent-color: var(--coral);">
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--text);">Promotions & deals</div>
+                <div style="font-size: 13px; color: var(--text-2);">Receive special offers and curated recommendations.</div>
+              </div>
+            </label>
+
+            <div class="form-actions">
+              <button class="btn btn-primary">Save preferences</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="logoGrad2" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#E85A4F"/>
+                  <stop offset="100%" stop-color="#D14A40"/>
+                </linearGradient>
+              </defs>
+              <rect width="40" height="40" rx="12" fill="url(#logoGrad2)"/>
+              <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
+                    stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+            </svg>
+          </span>
+          <span class="logo-text">re<em>lovly</em></span>
+        </a>
+        <p>The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Buy</h4>
+        <ul>
+          <li><a href="#">How to Buy</a></li>
+          <li><a href="#">Buyer Protection</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Sell</h4>
+        <ul>
+          <li><a href="#">Start Selling</a></li>
+          <li><a href="#">Seller Fees</a></li>
+          <li><a href="#">Verification</a></li>
+          <li><a href="#">Seller Guide</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Centre</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Disputes</a></li>
+          <li><a href="#">Report Listing</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 relovly. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="#">United Kingdom · GBP £</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================
+     MOBILE BOTTOM BAR
+     ============================================ -->
+<nav class="mobile-bar">
+  <a href="index.html" class="mobile-bar-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Home
+  </a>
+  <a href="catalog.html" class="mobile-bar-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    Browse
+  </a>
+  <a href="catalog.html" class="mobile-bar-item">
+    <span class="mobile-bar-buy">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    </span>
+  </a>
+  <a href="#" class="mobile-bar-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    Chat
+  </a>
+  <a href="account.html" class="mobile-bar-item active">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Me
+  </a>
+</nav>
+
+<script>
+  // ============================================
+  // MAIN TABS
+  // ============================================
+  const tabs = document.querySelectorAll('#tabs .tab');
+  const panels = document.querySelectorAll('.content > .panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.panel;
+
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+
+      tab.classList.add('active');
+      document.getElementById('panel-' + target).classList.add('active');
+    });
+  });
+
+  // ============================================
+  // SETTINGS SUB-NAV
+  // ============================================
+  const settingsNav = document.querySelectorAll('#settingsNav .settings-nav-item');
+  const settingsPanels = document.querySelectorAll('.settings-panel');
+
+  settingsNav.forEach(item => {
+    item.addEventListener('click', () => {
+      const target = item.dataset.settings;
+
+      settingsNav.forEach(n => n.classList.remove('active'));
+      settingsPanels.forEach(p => p.classList.remove('active'));
+
+      item.classList.add('active');
+      document.getElementById('settings-' + target).classList.add('active');
+    });
+  });
+
+  // ============================================
+  // SAVED ITEMS REMOVE
+  // ============================================
+  document.querySelectorAll('.card-remove').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.card');
+      card.style.transition = 'opacity 0.2s, transform 0.2s';
+      card.style.opacity = '0';
+      card.style.transform = 'scale(0.95)';
+      setTimeout(() => card.remove(), 200);
+    });
+  });
+</script>
+
+</body>
+</html>

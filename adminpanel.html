@@ -1,0 +1,2736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — relovly</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0F1115;
+    --bg-2: #16181D;
+    --bg-3: #1C1F26;
+    --bg-4: #232730;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --text: #FFFFFF;
+    --text-2: rgba(255,255,255,0.7);
+    --text-3: rgba(255,255,255,0.45);
+    --text-4: rgba(255,255,255,0.3);
+    --coral: #E85A4F;
+    --coral-dark: #D14A40;
+    --coral-soft: rgba(232,90,79,0.14);
+    --green: #2E9E6E;
+    --green-soft: rgba(46,158,110,0.14);
+    --amber: #D49A3C;
+    --amber-soft: rgba(212,154,60,0.14);
+    --blue: #4A8BE8;
+    --blue-soft: rgba(74,139,232,0.14);
+    --red: #E05548;
+    --red-soft: rgba(224,85,72,0.14);
+    --purple: #9A6BE0;
+    --purple-soft: rgba(154,107,224,0.14);
+    --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
+    --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Lora', Georgia, serif;
+    --sidebar-w: 240px;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-ui);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input, select, textarea { font-family: inherit; }
+
+  /* ============================================
+     LAYOUT
+     ============================================ */
+  .app {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    min-height: 100vh;
+  }
+
+  /* ============================================
+     SIDEBAR
+     ============================================ */
+  .sidebar {
+    background: var(--bg-2);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sidebar::-webkit-scrollbar { width: 6px; }
+  .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+  .sidebar-brand {
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.5px;
+  }
+  .brand-logo em { font-style: normal; color: var(--coral); }
+
+  .brand-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 7px;
+    background: var(--coral-soft);
+    color: var(--coral);
+    border-radius: var(--r-pill);
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    padding: 12px 8px;
+  }
+
+  .nav-section {
+    margin-bottom: 16px;
+  }
+
+  .nav-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 12px 6px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: var(--r-sm);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    margin-bottom: 2px;
+    position: relative;
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-item:hover { background: var(--bg-3); color: var(--text); }
+
+  .nav-item.active {
+    background: var(--coral-soft);
+    color: var(--coral);
+    font-weight: 600;
+  }
+
+  .nav-item.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    background: var(--coral);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .nav-item svg { flex-shrink: 0; }
+
+  .nav-item-count {
+    margin-left: auto;
+    padding: 2px 7px;
+    background: var(--bg-4);
+    border-radius: var(--r-pill);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-2);
+  }
+
+  .nav-item.active .nav-item-count {
+    background: rgba(232,90,79,0.2);
+    color: var(--coral);
+  }
+
+  /* Sidebar footer — admin user */
+  .sidebar-user {
+    border-top: 1px solid var(--border);
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .user-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--coral), var(--coral-dark));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .user-info { flex: 1; min-width: 0; }
+  .user-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .user-email {
+    font-size: 10px;
+    color: var(--text-4);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .logout-btn {
+    width: 28px; height: 28px;
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-3);
+    transition: background 0.15s, color 0.15s;
+  }
+  .logout-btn:hover { background: var(--red-soft); color: var(--red); }
+
+  /* ============================================
+     MAIN
+     ============================================ */
+  .main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--bg);
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(15,17,21,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .topbar-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: var(--r-sm);
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
+    white-space: nowrap;
+  }
+  .btn:active { transform: scale(0.98); }
+
+  .btn-primary { background: var(--coral); color: white; }
+  .btn-primary:hover { background: var(--coral-dark); }
+
+  .btn-ghost {
+    background: var(--bg-3);
+    color: var(--text-2);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--border-strong); color: var(--text); }
+
+  .btn-sm {
+    height: 30px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  /* Page content */
+  .page {
+    display: none;
+    padding: 24px;
+    flex: 1;
+  }
+  .page.active { display: block; }
+
+  /* ============================================
+     STATS CARDS
+     ============================================ */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 900px) {
+    .stats-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .stat {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .stat:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+
+  .stat-icon {
+    width: 32px; height: 32px;
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .stat-icon-coral { background: var(--coral-soft); color: var(--coral); }
+  .stat-icon-green { background: var(--green-soft); color: var(--green); }
+  .stat-icon-blue { background: var(--blue-soft); color: var(--blue); }
+  .stat-icon-purple { background: var(--purple-soft); color: var(--purple); }
+  .stat-icon-amber { background: var(--amber-soft); color: var(--amber); }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+
+  .stat-sub {
+    font-size: 11px;
+    color: var(--text-4);
+    margin-top: 2px;
+  }
+
+  /* ============================================
+     PANEL / CARD
+     ============================================ */
+  .panel {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .panel-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .panel-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.2px;
+    flex: 1;
+    min-width: 100px;
+  }
+
+  .panel-body { padding: 18px; }
+
+  /* ============================================
+     TABLES
+     ============================================ */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 640px;
+  }
+
+  th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-3);
+    background: var(--bg-3);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-2);
+    vertical-align: middle;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .td-strong { color: var(--text); font-weight: 600; }
+  .td-mono { font-family: 'SF Mono', Menlo, monospace; font-size: 12px; color: var(--text-3); }
+  .td-actions { text-align: right; white-space: nowrap; }
+
+  .row-img {
+    width: 40px; height: 40px;
+    border-radius: var(--r-sm);
+    background: var(--bg-3);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .row-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  .row-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .row-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    max-width: 320px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ============================================
+     CHIPS / BADGES
+     ============================================ */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    border-radius: var(--r-pill);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+  }
+
+  .chip-green { background: var(--green-soft); color: var(--green); }
+  .chip-amber { background: var(--amber-soft); color: var(--amber); }
+  .chip-blue { background: var(--blue-soft); color: var(--blue); }
+  .chip-coral { background: var(--coral-soft); color: var(--coral); }
+  .chip-red { background: var(--red-soft); color: var(--red); }
+  .chip-gray { background: var(--bg-4); color: var(--text-2); }
+  .chip-purple { background: var(--purple-soft); color: var(--purple); }
+
+  /* ============================================
+     FORMS (inside modals + edit)
+     ============================================ */
+  .form-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .form-grid.col-2 { grid-template-columns: 1fr 1fr; }
+  .form-grid.col-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  @media (max-width: 640px) {
+    .form-grid.col-2, .form-grid.col-3 { grid-template-columns: 1fr; }
+  }
+
+  .form-field { display: flex; flex-direction: column; }
+  .form-field.full { grid-column: 1 / -1; }
+
+  .form-field label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-3);
+    margin-bottom: 6px;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    color: var(--text);
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  }
+
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    border-color: var(--coral);
+    background: var(--bg-4);
+    box-shadow: 0 0 0 3px rgba(232,90,79,0.12);
+  }
+
+  .form-field textarea { min-height: 90px; resize: vertical; font-family: inherit; }
+  .form-field input::placeholder,
+  .form-field textarea::placeholder { color: var(--text-4); }
+
+  .form-field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 32px;
+  }
+
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+  }
+
+  .toggle-row label {
+    flex: 1;
+    font-size: 13px;
+    color: var(--text);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  /* Toggle switch */
+  .switch {
+    position: relative;
+    width: 38px;
+    height: 22px;
+    background: var(--bg-4);
+    border-radius: var(--r-pill);
+    cursor: pointer;
+    transition: background 0.15s;
+    flex-shrink: 0;
+    border: none;
+    padding: 0;
+  }
+
+  .switch::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }
+
+  .switch.on { background: var(--coral); }
+  .switch.on::after { transform: translateX(16px); }
+
+  /* Image inputs */
+  .images-list { display: flex; flex-direction: column; gap: 6px; }
+  .image-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+  }
+  .image-row input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 12px;
+    padding: 4px 0;
+    outline: none;
+    min-width: 0;
+  }
+  .image-row .thumb-mini {
+    width: 32px; height: 32px;
+    border-radius: 4px;
+    background: var(--bg-4);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .image-row .thumb-mini img { width: 100%; height: 100%; object-fit: cover; }
+  .image-row .remove-img {
+    width: 24px; height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-3);
+    transition: background 0.15s, color 0.15s;
+    flex-shrink: 0;
+  }
+  .image-row .remove-img:hover { background: var(--red-soft); color: var(--red); }
+
+  .add-img-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: var(--bg-3);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--r-sm);
+    color: var(--text-2);
+    font-size: 12px;
+    font-weight: 600;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    cursor: pointer;
+  }
+  .add-img-btn:hover { border-color: var(--coral); color: var(--coral); background: var(--coral-soft); }
+
+  /* ============================================
+     MODAL
+     ============================================ */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+    overflow-y: auto;
+  }
+
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 720px;
+    background: var(--bg-2);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-lg);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    transform: translateY(20px) scale(0.98);
+    transition: transform 0.2s;
+    overflow: hidden;
+    margin: auto 0;
+  }
+
+  .modal-overlay.open .modal {
+    transform: translateY(0) scale(1);
+  }
+
+  .modal-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-3);
+  }
+
+  .modal-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    flex: 1;
+    letter-spacing: -0.2px;
+  }
+
+  .modal-close {
+    width: 32px; height: 32px;
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-3);
+    transition: background 0.15s, color 0.15s;
+  }
+  .modal-close:hover { background: var(--bg-4); color: var(--text); }
+
+  .modal-body {
+    padding: 20px;
+    max-height: calc(100vh - 220px);
+    overflow-y: auto;
+  }
+
+  .modal-foot {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-3);
+  }
+
+  /* ============================================
+     ALERTS
+     ============================================ */
+  .alert {
+    display: none;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: var(--r-md);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .alert.show { display: flex; }
+  .alert-error {
+    background: var(--red-soft);
+    border: 1px solid rgba(224,85,72,0.3);
+    color: #FFA59A;
+  }
+  .alert-success {
+    background: var(--green-soft);
+    border: 1px solid rgba(46,158,110,0.3);
+    color: #6BCBA3;
+  }
+  .alert svg { flex-shrink: 0; margin-top: 1px; }
+
+  /* ============================================
+     EMPTY / LOADING
+     ============================================ */
+  .loading-row {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--text-3);
+    font-size: 13px;
+  }
+  .spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255,255,255,0.1);
+    border-top-color: var(--coral);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .empty {
+    padding: 60px 20px;
+    text-align: center;
+  }
+  .empty-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--bg-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-3);
+    margin: 0 auto 16px;
+  }
+  .empty h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .empty p {
+    font-size: 13px;
+    color: var(--text-3);
+    max-width: 320px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+  }
+
+  /* ============================================
+     SEARCH INPUT
+     ============================================ */
+  .search-input-wrap {
+    position: relative;
+    flex: 1;
+    max-width: 320px;
+    min-width: 160px;
+  }
+
+  .search-input-wrap input {
+    width: 100%;
+    height: 36px;
+    padding: 0 12px 0 34px;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    color: var(--text);
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .search-input-wrap input:focus {
+    border-color: var(--coral);
+    background: var(--bg-4);
+  }
+  .search-input-wrap input::placeholder { color: var(--text-4); }
+
+  .search-input-wrap svg {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-4);
+    pointer-events: none;
+  }
+
+  /* ============================================
+     MOBILE
+     ============================================ */
+  .mobile-menu-btn {
+    display: none;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--r-sm);
+    align-items: center;
+    justify-content: center;
+    color: var(--text-2);
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+  }
+
+  .mobile-sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 260px;
+      z-index: 100;
+      transform: translateX(-100%);
+      transition: transform 0.25s;
+    }
+    .sidebar.open { transform: translateX(0); }
+    .mobile-menu-btn { display: flex; }
+    .mobile-sidebar-overlay.show {
+      display: block;
+      opacity: 1;
+      pointer-events: all;
+    }
+    .topbar { padding: 12px 16px; }
+    .page { padding: 16px; }
+    .panel-head { padding: 12px 14px; }
+    .panel-body { padding: 14px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  :focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- Mobile sidebar overlay -->
+<div class="mobile-sidebar-overlay" id="mobileOverlay" onclick="closeMobileSidebar()"></div>
+
+<div class="app">
+
+  <!-- ============================================
+       SIDEBAR
+       ============================================ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="adminLogoGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#E85A4F"/>
+              <stop offset="100%" stop-color="#D14A40"/>
+            </linearGradient>
+          </defs>
+          <rect width="40" height="40" rx="12" fill="url(#adminLogoGrad)"/>
+          <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
+                stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+        </svg>
+        re<em>lovly</em>
+      </div>
+      <span class="brand-badge">Admin</span>
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <div class="nav-section">
+        <div class="nav-section-label">Overview</div>
+        <button class="nav-item active" data-page="dashboard">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          Dashboard
+        </button>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">Manage</div>
+        <button class="nav-item" data-page="listings">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+          Listings
+          <span class="nav-item-count" id="navListingsCount">0</span>
+        </button>
+        <button class="nav-item" data-page="orders">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Orders
+          <span class="nav-item-count" id="navOrdersCount">0</span>
+        </button>
+        <button class="nav-item" data-page="categories">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Categories
+        </button>
+        <button class="nav-item" data-page="users">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Users
+        </button>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">System</div>
+        <button class="nav-item" data-page="settings">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </button>
+        <button class="nav-item" data-page="audit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Audit Log
+        </button>
+      </div>
+
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="user-avatar" id="adminInitial">A</div>
+      <div class="user-info">
+        <div class="user-name" id="adminName">Admin</div>
+        <div class="user-email" id="adminEmail">—</div>
+      </div>
+      <button class="logout-btn" onclick="handleLogout()" aria-label="Log out">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ============================================
+       MAIN
+       ============================================ -->
+  <main class="main">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <button class="mobile-menu-btn" onclick="openMobileSidebar()" aria-label="Menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      </button>
+      <h1 class="topbar-title" id="pageTitle">Dashboard</h1>
+      <div class="topbar-actions">
+        <a href="index.html" target="_blank" class="btn btn-ghost btn-sm">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          View site
+        </a>
+      </div>
+    </div>
+
+    <!-- ============================================
+         DASHBOARD
+         ============================================ -->
+    <div class="page active" id="page-dashboard">
+      <div class="alert alert-error" id="dashError">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="dashErrorMessage"></span>
+      </div>
+
+      <div class="stats-grid" id="dashStats">
+        <div class="stat">
+          <div class="stat-icon stat-icon-coral">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+          </div>
+          <div class="stat-label">Total Listings</div>
+          <div class="stat-value" id="statTotalListings">—</div>
+          <div class="stat-sub"><span id="statActiveListings">—</span> active</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon stat-icon-blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <div class="stat-label">Orders</div>
+          <div class="stat-value" id="statTotalOrders">—</div>
+          <div class="stat-sub"><span id="statProcessingOrders">—</span> processing</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon stat-icon-green">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="stat-label">Revenue</div>
+          <div class="stat-value" id="statRevenue">—</div>
+          <div class="stat-sub">From completed orders</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon stat-icon-purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="stat-label">Users</div>
+          <div class="stat-value" id="statTotalUsers">—</div>
+          <div class="stat-sub">Signed up</div>
+        </div>
+      </div>
+
+      <!-- Recent orders -->
+      <div class="panel">
+        <div class="panel-head">
+          <h2 class="panel-title">Recent Orders</h2>
+          <button class="btn btn-ghost btn-sm" onclick="switchPage('orders')">View all →</button>
+        </div>
+        <div class="table-wrap" id="recentOrdersWrap">
+          <div class="loading-row"><span class="spinner"></span>Loading orders...</div>
+        </div>
+      </div>
+
+      <!-- Recent listings -->
+      <div class="panel">
+        <div class="panel-head">
+          <h2 class="panel-title">Recently Added Listings</h2>
+          <button class="btn btn-ghost btn-sm" onclick="switchPage('listings')">View all →</button>
+        </div>
+        <div class="table-wrap" id="recentListingsWrap">
+          <div class="loading-row"><span class="spinner"></span>Loading listings...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         LISTINGS
+         ============================================ -->
+    <div class="page" id="page-listings">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="search-input-wrap">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" id="listingsSearch" placeholder="Search listings..." oninput="renderListings()">
+          </div>
+          <select id="listingsStatusFilter" class="btn-ghost" style="height:36px;padding:0 10px;border-radius:8px;border:1px solid var(--border);background:var(--bg-3);color:var(--text);font-size:13px;" onchange="renderListings()">
+            <option value="">All statuses</option>
+            <option value="active">Active</option>
+            <option value="sold">Sold</option>
+            <option value="paused">Paused</option>
+            <option value="draft">Draft</option>
+          </select>
+          <button class="btn btn-primary" onclick="openListingModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            New Listing
+          </button>
+        </div>
+        <div class="table-wrap" id="listingsWrap">
+          <div class="loading-row"><span class="spinner"></span>Loading listings...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         ORDERS
+         ============================================ -->
+    <div class="page" id="page-orders">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="search-input-wrap">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" id="ordersSearch" placeholder="Search by order # or title..." oninput="renderOrders()">
+          </div>
+          <select id="ordersStatusFilter" style="height:36px;padding:0 10px;border-radius:8px;border:1px solid var(--border);background:var(--bg-3);color:var(--text);font-size:13px;" onchange="renderOrders()">
+            <option value="">All statuses</option>
+            <option value="processing">Processing</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled</option>
+            <option value="refunded">Refunded</option>
+          </select>
+        </div>
+        <div class="table-wrap" id="ordersWrap">
+          <div class="loading-row"><span class="spinner"></span>Loading orders...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         CATEGORIES
+         ============================================ -->
+    <div class="page" id="page-categories">
+      <div class="panel">
+        <div class="panel-head">
+          <h2 class="panel-title">Categories</h2>
+          <button class="btn btn-primary" onclick="openCategoryModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            New Category
+          </button>
+        </div>
+        <div class="table-wrap" id="categoriesWrap">
+          <div class="loading-row"><span class="spinner"></span>Loading categories...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         USERS
+         ============================================ -->
+    <div class="page" id="page-users">
+      <div class="panel">
+        <div class="panel-head">
+          <h2 class="panel-title">Users</h2>
+          <span style="font-size:12px;color:var(--text-3);" id="usersCount">—</span>
+        </div>
+        <div class="table-wrap" id="usersWrap">
+          <div class="loading-row"><span class="spinner"></span>Loading users...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         SETTINGS
+         ============================================ -->
+    <div class="page" id="page-settings">
+      <div class="panel">
+        <div class="panel-head">
+          <h2 class="panel-title">Site Settings</h2>
+        </div>
+        <div class="panel-body" id="settingsWrap">
+          <div class="loading-row"><span class="spinner"></span>Loading settings...</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2 class="panel-title">Administrators</h2>
+          <button class="btn btn-primary btn-sm" onclick="openAdminModal()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            Add Admin
+          </button>
+        </div>
+        <div class="table-wrap" id="adminsWrap">
+          <div class="loading-row"><span class="spinner"></span>Loading admins...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         AUDIT LOG
+         ============================================ -->
+    <div class="page" id="page-audit">
+      <div class="panel">
+        <div class="panel-head">
+          <h2 class="panel-title">Admin Audit Log</h2>
+        </div>
+        <div class="table-wrap" id="auditWrap">
+          <div class="loading-row"><span class="spinner"></span>Loading audit log...</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ============================================
+     MODAL: LISTING
+     ============================================ -->
+<div class="modal-overlay" id="listingModal" onclick="closeModalIfBackdrop(event, 'listingModal')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <h3 class="modal-title" id="listingModalTitle">New Listing</h3>
+      <button class="modal-close" onclick="closeModal('listingModal')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-error" id="listingModalError">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="listingModalErrorMessage"></span>
+      </div>
+
+      <input type="hidden" id="listingId">
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Title *</label>
+          <input type="text" id="listingTitle" placeholder="e.g. Canon EOS 7D Mark II — Pristine Condition">
+        </div>
+
+        <div class="form-field">
+          <label>Description</label>
+          <textarea id="listingDescription" placeholder="Full product description..."></textarea>
+        </div>
+
+        <div class="form-grid col-3">
+          <div class="form-field">
+            <label>Price *</label>
+            <input type="number" id="listingPrice" placeholder="0.00" step="0.01" min="0">
+          </div>
+          <div class="form-field">
+            <label>Currency</label>
+            <select id="listingCurrency">
+              <option value="GBP">GBP (£)</option>
+              <option value="USD">USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Condition *</label>
+            <select id="listingCondition">
+              <option value="brand_new">Brand new</option>
+              <option value="like_new">Like new</option>
+              <option value="lightly_used">Lightly used</option>
+              <option value="well_used">Well used</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid col-3">
+          <div class="form-field">
+            <label>Category</label>
+            <select id="listingCategory">
+              <option value="">— None —</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Seller name</label>
+            <input type="text" id="listingSellerName" placeholder="relovly" value="relovly">
+          </div>
+          <div class="form-field">
+            <label>Status</label>
+            <select id="listingStatus">
+              <option value="active">Active</option>
+              <option value="sold">Sold</option>
+              <option value="paused">Paused</option>
+              <option value="draft">Draft</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid col-3">
+          <div class="form-field">
+            <label>City</label>
+            <input type="text" id="listingCity" placeholder="Manchester">
+          </div>
+          <div class="form-field">
+            <label>Region</label>
+            <input type="text" id="listingRegion" placeholder="Greater Manchester">
+          </div>
+          <div class="form-field">
+            <label>Country</label>
+            <input type="text" id="listingCountry" placeholder="United Kingdom">
+          </div>
+        </div>
+
+        <div class="form-field full">
+          <label>Images (URLs)</label>
+          <div class="images-list" id="imagesList"></div>
+          <button type="button" class="add-img-btn" onclick="addImageInput()" style="margin-top:8px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            Add image URL
+          </button>
+        </div>
+
+        <div class="form-grid col-2">
+          <button type="button" class="toggle-row" onclick="toggleSwitch(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3);"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            <label>Shipping available</label>
+            <span class="switch" data-field="shipping_available"></span>
+          </button>
+
+          <button type="button" class="toggle-row" onclick="toggleSwitch(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <label>Local pickup</label>
+            <span class="switch" data-field="pickup_available"></span>
+          </button>
+        </div>
+
+        <div class="form-grid col-2">
+          <div class="form-field">
+            <label>Shipping price (optional)</label>
+            <input type="number" id="listingShippingPrice" placeholder="0.00" step="0.01" min="0">
+          </div>
+          <div class="form-field">
+            <label>Shipping note</label>
+            <input type="text" id="listingShippingNote" placeholder="Estimated 3–5 business days">
+          </div>
+        </div>
+
+        <button type="button" class="toggle-row" onclick="toggleSwitch(this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <label>Featured listing</label>
+          <span class="switch" data-field="is_featured"></span>
+        </button>
+
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('listingModal')">Cancel</button>
+      <button class="btn btn-primary" id="saveListingBtn" onclick="saveListing()">
+        <span id="saveListingText">Save Listing</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     MODAL: CATEGORY
+     ============================================ -->
+<div class="modal-overlay" id="categoryModal" onclick="closeModalIfBackdrop(event, 'categoryModal')">
+  <div class="modal" style="max-width: 480px;" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <h3 class="modal-title" id="categoryModalTitle">New Category</h3>
+      <button class="modal-close" onclick="closeModal('categoryModal')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-error" id="categoryModalError">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="categoryModalErrorMessage"></span>
+      </div>
+
+      <input type="hidden" id="categoryId">
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Name *</label>
+          <input type="text" id="categoryName" placeholder="e.g. Cameras & Photography">
+        </div>
+        <div class="form-field">
+          <label>Slug *</label>
+          <input type="text" id="categorySlug" placeholder="e.g. cameras">
+        </div>
+        <div class="form-grid col-2">
+          <div class="form-field">
+            <label>Icon (emoji)</label>
+            <input type="text" id="categoryIcon" placeholder="📷" maxlength="4">
+          </div>
+          <div class="form-field">
+            <label>Sort order</label>
+            <input type="number" id="categorySortOrder" placeholder="0" value="0">
+          </div>
+        </div>
+        <button type="button" class="toggle-row" onclick="toggleSwitch(this)">
+          <label>Active</label>
+          <span class="switch on" data-field="is_active"></span>
+        </button>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('categoryModal')">Cancel</button>
+      <button class="btn btn-primary" id="saveCategoryBtn" onclick="saveCategory()">
+        <span id="saveCategoryText">Save Category</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     MODAL: ORDER DETAIL
+     ============================================ -->
+<div class="modal-overlay" id="orderModal" onclick="closeModalIfBackdrop(event, 'orderModal')">
+  <div class="modal" style="max-width: 640px;" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <h3 class="modal-title" id="orderModalTitle">Order Details</h3>
+      <button class="modal-close" onclick="closeModal('orderModal')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="orderModalBody"></div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('orderModal')">Close</button>
+      <button class="btn btn-primary" onclick="saveOrderStatus()">
+        <span>Update Status</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     MODAL: ADMIN
+     ============================================ -->
+<div class="modal-overlay" id="adminModal" onclick="closeModalIfBackdrop(event, 'adminModal')">
+  <div class="modal" style="max-width: 480px;" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <h3 class="modal-title">Add Administrator</h3>
+      <button class="modal-close" onclick="closeModal('adminModal')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-error" id="adminModalError">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="adminModalErrorMessage"></span>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Admin email *</label>
+          <input type="email" id="newAdminEmail" placeholder="admin@example.com">
+        </div>
+        <div class="form-field">
+          <label>Name</label>
+          <input type="text" id="newAdminName" placeholder="Full name">
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('adminModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveAdmin()">
+        <span>Add Admin</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     SUPABASE CLIENT
+     ============================================ -->
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+  const SUPABASE_URL = 'https://osebqasifcnhyuajbyvv.supabase.co'
+  const SUPABASE_KEY = 'sb_publishable_vggy-_2xeONhcsSbiQklsw_hvLC_cgG'
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+  window.supabaseClient = supabase
+  window.dispatchEvent(new Event('supabase-ready'))
+</script>
+
+<!-- ============================================
+     ADMIN PANEL LOGIC
+     ============================================ -->
+<script>
+  // ============================================
+  // STATE
+  // ============================================
+  const state = {
+    user: null,
+    listings: [],
+    orders: [],
+    categories: [],
+    users: [],
+    admins: [],
+    audit: [],
+    listingEdit: null,
+    categoryEdit: null,
+    orderEdit: null
+  }
+
+  // ============================================
+  // HELPERS
+  // ============================================
+  function fmtPrice(price, currency = 'GBP') {
+    const n = parseFloat(price || 0)
+    const symbols = { GBP: '£', USD: '$', EUR: '€' }
+    return (symbols[currency] || '') + n.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 2 })
+  }
+
+  function esc(str) {
+    if (!str) return ''
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+  }
+
+  function fmtDate(d) {
+    if (!d) return '—'
+    return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+  }
+
+  function fmtTime(d) {
+    if (!d) return '—'
+    return new Date(d).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+  }
+
+  function showModalError(prefix, msg) {
+    const el = document.getElementById(prefix + 'Error')
+    const msgEl = document.getElementById(prefix + 'ErrorMessage')
+    if (el && msgEl) {
+      msgEl.textContent = msg
+      el.classList.add('show')
+    }
+  }
+
+  function hideModalError(prefix) {
+    const el = document.getElementById(prefix + 'Error')
+    if (el) el.classList.remove('show')
+  }
+
+  // ============================================
+  // AUTH CHECK
+  // ============================================
+  async function checkAdmin() {
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (!session) {
+      window.location.href = 'adminlogin.html'
+      return false
+    }
+    state.user = session.user
+
+    // Verify in admins table
+    const { data: adminRecord } = await window.supabaseClient
+      .from('admins')
+      .select('*')
+      .eq('email', session.user.email)
+      .maybeSingle()
+
+    if (!adminRecord) {
+      await window.supabaseClient.auth.signOut()
+      window.location.href = 'adminlogin.html'
+      return false
+    }
+
+    // Set sidebar user
+    document.getElementById('adminName').textContent = adminRecord.name || session.user.email.split('@')[0]
+    document.getElementById('adminEmail').textContent = session.user.email
+    document.getElementById('adminInitial').textContent = (adminRecord.name || session.user.email)[0].toUpperCase()
+
+    return true
+  }
+
+  // ============================================
+  // SIDEBAR NAV
+  // ============================================
+  const PAGE_TITLES = {
+    dashboard: 'Dashboard',
+    listings: 'Listings',
+    orders: 'Orders',
+    categories: 'Categories',
+    users: 'Users',
+    settings: 'Settings',
+    audit: 'Audit Log'
+  }
+
+  function switchPage(page) {
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.toggle('active', i.dataset.page === page))
+    document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === 'page-' + page))
+    document.getElementById('pageTitle').textContent = PAGE_TITLES[page] || 'Admin'
+
+    // Load data on first visit
+    if (page === 'listings' && !state.listings.length) loadListings()
+    if (page === 'orders' && !state.orders.length) loadOrders()
+    if (page === 'categories' && !state.categories.length) loadCategories()
+    if (page === 'users' && !state.users.length) loadUsers()
+    if (page === 'settings') { loadSettings(); loadAdmins() }
+    if (page === 'audit') loadAudit()
+
+    closeMobileSidebar()
+    window.scrollTo({ top: 0 })
+  }
+
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => switchPage(item.dataset.page))
+  })
+
+  function openMobileSidebar() {
+    document.getElementById('sidebar').classList.add('open')
+    document.getElementById('mobileOverlay').classList.add('show')
+    document.body.style.overflow = 'hidden'
+  }
+  function closeMobileSidebar() {
+    document.getElementById('sidebar').classList.remove('open')
+    document.getElementById('mobileOverlay').classList.remove('show')
+    document.body.style.overflow = ''
+  }
+
+  // ============================================
+  // MODAL HELPERS
+  // ============================================
+  function openModal(id) {
+    document.getElementById(id).classList.add('open')
+    document.body.style.overflow = 'hidden'
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open')
+    document.body.style.overflow = ''
+  }
+  function closeModalIfBackdrop(e, id) {
+    if (e.target.id === id) closeModal(id)
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'))
+      document.body.style.overflow = ''
+    }
+  })
+
+  function toggleSwitch(el) {
+    event.stopPropagation()
+    const sw = el.querySelector('.switch')
+    if (sw) sw.classList.toggle('on')
+  }
+
+  // ============================================
+  // DASHBOARD
+  // ============================================
+  async function loadDashboard() {
+    try {
+      const [listings, orders, users] = await Promise.all([
+        window.supabaseClient.from('listings').select('*', { count: 'exact' }),
+        window.supabaseClient.from('orders').select('*', { count: 'exact' }),
+        window.supabaseClient.from('profiles').select('*', { count: 'exact' })
+      ])
+
+      // Stats
+      const totalListings = listings.count || 0
+      const activeListings = (listings.data || []).filter(l => l.status === 'active').length
+      const totalOrders = orders.count || 0
+      const processingOrders = (orders.data || []).filter(o => o.status === 'processing').length
+      const totalUsers = users.count || 0
+
+      const revenue = (orders.data || [])
+        .filter(o => o.status === 'delivered' || o.status === 'shipped' || o.status === 'processing')
+        .reduce((sum, o) => sum + (parseFloat(o.price_paid) || 0), 0)
+
+      document.getElementById('statTotalListings').textContent = totalListings.toLocaleString()
+      document.getElementById('statActiveListings').textContent = activeListings.toLocaleString()
+      document.getElementById('statTotalOrders').textContent = totalOrders.toLocaleString()
+      document.getElementById('statProcessingOrders').textContent = processingOrders.toLocaleString()
+      document.getElementById('statRevenue').textContent = fmtPrice(revenue)
+      document.getElementById('statTotalUsers').textContent = totalUsers.toLocaleString()
+
+      // Nav counts
+      document.getElementById('navListingsCount').textContent = totalListings
+      document.getElementById('navOrdersCount').textContent = totalOrders
+
+      // Recent orders (5 latest)
+      const recentOrders = (orders.data || [])
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        .slice(0, 5)
+
+      renderRecentOrders(recentOrders)
+
+      // Recent listings (5 latest)
+      const recentListings = (listings.data || [])
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        .slice(0, 5)
+
+      renderRecentListings(recentListings)
+
+    } catch (err) {
+      console.error('Dashboard error:', err)
+      document.getElementById('dashErrorMessage').textContent = err.message || 'Could not load dashboard.'
+      document.getElementById('dashError').classList.add('show')
+    }
+  }
+
+  function renderRecentOrders(orders) {
+    const wrap = document.getElementById('recentOrdersWrap')
+    if (!orders.length) {
+      wrap.innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <h3>No orders yet</h3>
+          <p>Orders will appear here as customers purchase your listings.</p>
+        </div>
+      `
+      return
+    }
+
+    wrap.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Order #</th>
+            <th>Item</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${orders.map(o => `
+            <tr>
+              <td class="td-mono">${esc(o.order_number)}</td>
+              <td>
+                <div class="row-item">
+                  <div class="row-img">${o.listing_image ? `<img src="${esc(o.listing_image)}" alt="">` : ''}</div>
+                  <span class="row-title">${esc(o.listing_title)}</span>
+                </div>
+              </td>
+              <td class="td-strong">${fmtPrice(o.price_paid, o.currency)}</td>
+              <td><span class="chip chip-${statusChipClass(o.status)}">${esc(o.status)}</span></td>
+              <td>${fmtDate(o.created_at)}</td>
+              <td class="td-actions"><button class="btn btn-ghost btn-sm" onclick="openOrderDetail('${esc(o.order_number)}')">View</button></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `
+  }
+
+  function renderRecentListings(listings) {
+    const wrap = document.getElementById('recentListingsWrap')
+    if (!listings.length) {
+      wrap.innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+          </div>
+          <h3>No listings yet</h3>
+          <p>Click "New Listing" to add your first product.</p>
+          <button class="btn btn-primary" onclick="openListingModal()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            New Listing
+          </button>
+        </div>
+      `
+      return
+    }
+
+    wrap.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Added</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${listings.map(l => {
+            const img = Array.isArray(l.images) && l.images[0] ? l.images[0] : ''
+            return `
+              <tr>
+                <td>
+                  <div class="row-item">
+                    <div class="row-img">${img ? `<img src="${esc(img)}" alt="">` : ''}</div>
+                    <span class="row-title">${esc(l.title)}</span>
+                  </div>
+                </td>
+                <td class="td-strong">${fmtPrice(l.price, l.currency)}</td>
+                <td>${esc(categoryName(l.category_id) || '—')}</td>
+                <td><span class="chip chip-${statusChipClass(l.status)}">${esc(l.status)}</span></td>
+                <td>${fmtDate(l.created_at)}</td>
+              </tr>
+            `
+          }).join('')}
+        </tbody>
+      </table>
+    `
+  }
+
+  function statusChipClass(status) {
+    return {
+      active: 'green',
+      processing: 'amber',
+      shipped: 'blue',
+      delivered: 'green',
+      cancelled: 'red',
+      refunded: 'gray',
+      sold: 'purple',
+      paused: 'gray',
+      draft: 'gray'
+    }[status] || 'gray'
+  }
+
+  function categoryName(id) {
+    const cat = state.categories.find(c => c.id === id)
+    return cat ? cat.name : null
+  }
+
+  // ============================================
+  // LISTINGS
+  // ============================================
+  async function loadListings() {
+    const wrap = document.getElementById('listingsWrap')
+    wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>Loading listings...</div>'
+
+    const { data, error } = await window.supabaseClient
+      .from('listings')
+      .select('*')
+      .order('created_at', { ascending: false })
+
+    if (error) {
+      wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`
+      return
+    }
+
+    state.listings = data || []
+
+    // Ensure categories are loaded too
+    if (!state.categories.length) await loadCategories()
+
+    renderListings()
+  }
+
+  function renderListings() {
+    const wrap = document.getElementById('listingsWrap')
+    const search = (document.getElementById('listingsSearch').value || '').toLowerCase()
+    const statusFilter = document.getElementById('listingsStatusFilter').value
+
+    let filtered = state.listings
+    if (search) filtered = filtered.filter(l => l.title.toLowerCase().includes(search))
+    if (statusFilter) filtered = filtered.filter(l => l.status === statusFilter)
+
+    document.getElementById('navListingsCount').textContent = state.listings.length
+
+    if (!filtered.length) {
+      wrap.innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+          </div>
+          <h3>${state.listings.length ? 'No matches' : 'No listings yet'}</h3>
+          <p>${state.listings.length ? 'Try adjusting your search or filters.' : 'Click "New Listing" to add your first product.'}</p>
+          ${!state.listings.length ? `<button class="btn btn-primary" onclick="openListingModal()">New Listing</button>` : ''}
+        </div>
+      `
+      return
+    }
+
+    wrap.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Condition</th>
+            <th>Status</th>
+            <th>Added</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${filtered.map(l => {
+            const img = Array.isArray(l.images) && l.images[0] ? l.images[0] : ''
+            return `
+              <tr>
+                <td>
+                  <div class="row-item">
+                    <div class="row-img">${img ? `<img src="${esc(img)}" alt="">` : ''}</div>
+                    <span class="row-title">${esc(l.title)}</span>
+                  </div>
+                </td>
+                <td class="td-strong">${fmtPrice(l.price, l.currency)}</td>
+                <td>${esc(categoryName(l.category_id) || '—')}</td>
+                <td>${esc(conditionLabel(l.condition))}</td>
+                <td><span class="chip chip-${statusChipClass(l.status)}">${esc(l.status)}</span></td>
+                <td>${fmtDate(l.created_at)}</td>
+                <td class="td-actions">
+                  <button class="btn btn-ghost btn-sm" onclick="editListing(${l.id})">Edit</button>
+                  <button class="btn btn-ghost btn-sm" onclick="deleteListing(${l.id})" style="color:var(--red);">Delete</button>
+                </td>
+              </tr>
+            `
+          }).join('')}
+        </tbody>
+      </table>
+    `
+  }
+
+  function conditionLabel(c) {
+    return {
+      brand_new: 'Brand new',
+      like_new: 'Like new',
+      lightly_used: 'Lightly used',
+      well_used: 'Well used'
+    }[c] || c
+  }
+
+  function openListingModal(listing = null) {
+    hideModalError('listingModal')
+    document.getElementById('listingId').value = ''
+    document.getElementById('listingModalTitle').textContent = listing ? 'Edit Listing' : 'New Listing'
+
+    // Reset form
+    document.getElementById('listingTitle').value = listing?.title || ''
+    document.getElementById('listingDescription').value = listing?.description || ''
+    document.getElementById('listingPrice').value = listing?.price || ''
+    document.getElementById('listingCurrency').value = listing?.currency || 'GBP'
+    document.getElementById('listingCondition').value = listing?.condition || 'brand_new'
+    document.getElementById('listingCategory').value = listing?.category_id || ''
+    document.getElementById('listingSellerName').value = listing?.seller_name || 'relovly'
+    document.getElementById('listingStatus').value = listing?.status || 'active'
+    document.getElementById('listingCity').value = listing?.location_city || ''
+    document.getElementById('listingRegion').value = listing?.location_region || ''
+    document.getElementById('listingCountry').value = listing?.location_country || ''
+    document.getElementById('listingShippingPrice').value = listing?.shipping_price || ''
+    document.getElementById('listingShippingNote').value = listing?.shipping_note || ''
+
+    // Toggles
+    const toggles = {
+      shipping_available: listing?.shipping_available || false,
+      pickup_available: listing?.pickup_available || false,
+      is_featured: listing?.is_featured || false
+    }
+
+    document.querySelectorAll('#listingModal .switch').forEach(sw => {
+      sw.classList.toggle('on', !!toggles[sw.dataset.field])
+    })
+
+    // Images
+    const images = Array.isArray(listing?.images) ? listing.images : ['']
+    renderImageInputs(images.length ? images : [''])
+
+    // Category dropdown
+    const catSelect = document.getElementById('listingCategory')
+    catSelect.innerHTML = '<option value="">— None —</option>' +
+      state.categories.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join('')
+    catSelect.value = listing?.category_id || ''
+
+    // Store edit id
+    if (listing) {
+      document.getElementById('listingId').value = listing.id
+      state.listingEdit = listing
+    } else {
+      state.listingEdit = null
+    }
+
+    openModal('listingModal')
+  }
+
+  function renderImageInputs(images) {
+    const wrap = document.getElementById('imagesList')
+    wrap.innerHTML = images.map((url, i) => `
+      <div class="image-row" data-index="${i}">
+        <div class="thumb-mini">${url ? `<img src="${esc(url)}" onerror="this.style.display='none'">` : ''}</div>
+        <input type="text" value="${esc(url)}" placeholder="https://..." oninput="updateImagePreview(this)">
+        <button type="button" class="remove-img" onclick="removeImageRow(this)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    `).join('')
+  }
+
+  function updateImagePreview(input) {
+    const thumb = input.parentElement.querySelector('.thumb-mini')
+    const val = input.value.trim()
+    thumb.innerHTML = val ? `<img src="${esc(val)}" onerror="this.style.display='none'">` : ''
+  }
+
+  function addImageInput() {
+    const wrap = document.getElementById('imagesList')
+    const row = document.createElement('div')
+    row.className = 'image-row'
+    row.innerHTML = `
+      <div class="thumb-mini"></div>
+      <input type="text" placeholder="https://..." oninput="updateImagePreview(this)">
+      <button type="button" class="remove-img" onclick="removeImageRow(this)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    `
+    wrap.appendChild(row)
+    row.querySelector('input').focus()
+  }
+
+  function removeImageRow(btn) {
+    const wrap = document.getElementById('imagesList')
+    if (wrap.children.length <= 1) {
+      btn.parentElement.querySelector('input').value = ''
+      btn.parentElement.querySelector('.thumb-mini').innerHTML = ''
+      return
+    }
+    btn.parentElement.remove()
+  }
+
+  function editListing(id) {
+    const listing = state.listings.find(l => l.id === id)
+    if (listing) openListingModal(listing)
+  }
+
+  async function deleteListing(id) {
+    const listing = state.listings.find(l => l.id === id)
+    if (!listing) return
+    if (!confirm(`Delete "${listing.title}"?\n\nThis cannot be undone.`)) return
+
+    const { error } = await window.supabaseClient.from('listings').delete().eq('id', id)
+    if (error) {
+      alert('Could not delete: ' + error.message)
+      return
+    }
+    state.listings = state.listings.filter(l => l.id !== id)
+    renderListings()
+    loadDashboard()
+  }
+
+  async function saveListing() {
+    hideModalError('listingModal')
+
+    const id = document.getElementById('listingId').value
+    const title = document.getElementById('listingTitle').value.trim()
+    const description = document.getElementById('listingDescription').value.trim()
+    const price = parseFloat(document.getElementById('listingPrice').value)
+    const currency = document.getElementById('listingCurrency').value
+    const condition = document.getElementById('listingCondition').value
+    const category_id = document.getElementById('listingCategory').value || null
+    const seller_name = document.getElementById('listingSellerName').value.trim() || 'relovly'
+    const status = document.getElementById('listingStatus').value
+    const location_city = document.getElementById('listingCity').value.trim() || null
+    const location_region = document.getElementById('listingRegion').value.trim() || null
+    const location_country = document.getElementById('listingCountry').value.trim() || null
+    const shipping_price = parseFloat(document.getElementById('listingShippingPrice').value) || null
+    const shipping_note = document.getElementById('listingShippingNote').value.trim() || null
+
+    // Toggles
+    const sw = {}
+    document.querySelectorAll('#listingModal .switch').forEach(s => {
+      sw[s.dataset.field] = s.classList.contains('on')
+    })
+
+    // Images
+    const images = [...document.querySelectorAll('#imagesList input')]
+      .map(i => i.value.trim())
+      .filter(Boolean)
+
+    // Validate
+    if (!title) return showModalError('listingModal', 'Please enter a title.')
+    if (isNaN(price) || price < 0) return showModalError('listingModal', 'Please enter a valid price.')
+
+    const payload = {
+      title,
+      description,
+      price,
+      currency,
+      condition,
+      category_id,
+      seller_name,
+      status,
+      location_city,
+      location_region,
+      location_country,
+      shipping_price,
+      shipping_note,
+      images,
+      shipping_available: sw.shipping_available,
+      pickup_available: sw.pickup_available,
+      is_featured: sw.is_featured,
+      updated_at: new Date().toISOString()
+    }
+
+    const btn = document.getElementById('saveListingBtn')
+    const btnText = document.getElementById('saveListingText')
+    btn.disabled = true
+    btnText.textContent = 'Saving...'
+
+    try {
+      let result
+      if (id) {
+        result = await window.supabaseClient.from('listings').update(payload).eq('id', id).select().single()
+      } else {
+        result = await window.supabaseClient.from('listings').insert([payload]).select().single()
+      }
+
+      if (result.error) throw result.error
+
+      closeModal('listingModal')
+      await loadListings()
+      loadDashboard()
+
+    } catch (err) {
+      showModalError('listingModal', err.message || 'Could not save listing.')
+    } finally {
+      btn.disabled = false
+      btnText.textContent = 'Save Listing'
+    }
+  }
+
+  // ============================================
+  // ORDERS
+  // ============================================
+  async function loadOrders() {
+    const wrap = document.getElementById('ordersWrap')
+    wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>Loading orders...</div>'
+
+    const { data, error } = await window.supabaseClient
+      .from('orders')
+      .select('*')
+      .order('created_at', { ascending: false })
+
+    if (error) {
+      wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`
+      return
+    }
+
+    state.orders = data || []
+    renderOrders()
+  }
+
+  function renderOrders() {
+    const wrap = document.getElementById('ordersWrap')
+    const search = (document.getElementById('ordersSearch').value || '').toLowerCase()
+    const statusFilter = document.getElementById('ordersStatusFilter').value
+
+    let filtered = state.orders
+    if (search) filtered = filtered.filter(o =>
+      (o.order_number || '').toLowerCase().includes(search) ||
+      (o.listing_title || '').toLowerCase().includes(search)
+    )
+    if (statusFilter) filtered = filtered.filter(o => o.status === statusFilter)
+
+    document.getElementById('navOrdersCount').textContent = state.orders.length
+
+    if (!filtered.length) {
+      wrap.innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <h3>${state.orders.length ? 'No matches' : 'No orders yet'}</h3>
+          <p>${state.orders.length ? 'Try adjusting your search or filters.' : 'Orders will appear here as customers purchase.'}</p>
+        </div>
+      `
+      return
+    }
+
+    wrap.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Order #</th>
+            <th>Item</th>
+            <th>Buyer</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${filtered.map(o => `
+            <tr>
+              <td class="td-mono">${esc(o.order_number)}</td>
+              <td>
+                <div class="row-item">
+                  <div class="row-img">${o.listing_image ? `<img src="${esc(o.listing_image)}" alt="">` : ''}</div>
+                  <span class="row-title">${esc(o.listing_title)}</span>
+                </div>
+              </td>
+              <td class="td-mono">${esc((o.buyer_id || '').slice(0, 8))}…</td>
+              <td class="td-strong">${fmtPrice(o.price_paid, o.currency)}</td>
+              <td><span class="chip chip-${statusChipClass(o.status)}">${esc(o.status)}</span></td>
+              <td>${fmtDate(o.created_at)}</td>
+              <td class="td-actions">
+                <button class="btn btn-ghost btn-sm" onclick="openOrderDetail('${esc(o.order_number)}')">View</button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `
+  }
+
+  function openOrderDetail(orderNumber) {
+    const orders = state.orders.filter(o => o.order_number === orderNumber)
+    if (!orders.length) return
+    const o = orders[0]
+
+    document.getElementById('orderModalTitle').textContent = 'Order ' + orderNumber
+
+    const itemsHtml = orders.map(item => `
+      <div class="row-item" style="padding:10px 0;border-bottom:1px solid var(--border);">
+        <div class="row-img">${item.listing_image ? `<img src="${esc(item.listing_image)}" alt="">` : ''}</div>
+        <div style="flex:1;min-width:0;">
+          <div class="row-title" style="max-width:100%;">${esc(item.listing_title)}</div>
+          <div style="font-size:12px;color:var(--text-3);">Qty: ${item.quantity} · ${fmtPrice(item.price_paid, item.currency)}</div>
+        </div>
+      </div>
+    `).join('')
+
+    document.getElementById('orderModalBody').innerHTML = `
+      <div class="form-grid">
+        <div class="form-grid col-2">
+          <div class="form-field">
+            <label>Status</label>
+            <select id="orderStatusSelect">
+              <option value="processing" ${o.status === 'processing' ? 'selected' : ''}>Processing</option>
+              <option value="shipped" ${o.status === 'shipped' ? 'selected' : ''}>Shipped</option>
+              <option value="delivered" ${o.status === 'delivered' ? 'selected' : ''}>Delivered</option>
+              <option value="cancelled" ${o.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+              <option value="refunded" ${o.status === 'refunded' ? 'selected' : ''}>Refunded</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Tracking number</label>
+            <input type="text" id="orderTrackingInput" value="${esc(o.tracking_number || '')}" placeholder="e.g. RM123456789GB">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>Items (${orders.length})</label>
+          ${itemsHtml}
+        </div>
+
+        <div class="form-grid col-2">
+          <div class="form-field">
+            <label>Shipping address</label>
+            <div style="background:var(--bg-3);padding:10px 12px;border-radius:8px;font-size:13px;line-height:1.6;color:var(--text-2);">
+              ${esc(o.shipping_address || '')}<br>
+              ${esc(o.shipping_city || '')}${o.shipping_postcode ? ', ' + esc(o.shipping_postcode) : ''}<br>
+              ${esc(o.shipping_country || '')}
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Payment</label>
+            <div style="background:var(--bg-3);padding:10px 12px;border-radius:8px;font-size:13px;line-height:1.6;color:var(--text-2);">
+              Method: ${esc(o.payment_method || '—')}<br>
+              Ref: ${esc(o.payment_reference || '—')}<br>
+              Total: <strong style="color:var(--text);">${fmtPrice(o.price_paid, o.currency)}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+
+    state.orderEdit = o
+    openModal('orderModal')
+  }
+
+  async function saveOrderStatus() {
+    if (!state.orderEdit) return
+    const status = document.getElementById('orderStatusSelect').value
+    const tracking_number = document.getElementById('orderTrackingInput').value.trim() || null
+
+    const { error } = await window.supabaseClient
+      .from('orders')
+      .update({ status, tracking_number, updated_at: new Date().toISOString() })
+      .eq('id', state.orderEdit.id)
+
+    if (error) {
+      alert('Could not update order: ' + error.message)
+      return
+    }
+
+    closeModal('orderModal')
+    await loadOrders()
+    loadDashboard()
+  }
+
+  // ============================================
+  // CATEGORIES
+  // ============================================
+  async function loadCategories() {
+    const wrap = document.getElementById('categoriesWrap')
+    wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>Loading categories...</div>'
+
+    const { data, error } = await window.supabaseClient
+      .from('categories')
+      .select('*')
+      .order('sort_order', { ascending: true })
+
+    if (error) {
+      wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`
+      return
+    }
+
+    state.categories = data || []
+    renderCategories()
+  }
+
+  function renderCategories() {
+    const wrap = document.getElementById('categoriesWrap')
+
+    if (!state.categories.length) {
+      wrap.innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <h3>No categories yet</h3>
+          <p>Click "New Category" to add your first category.</p>
+        </div>
+      `
+      return
+    }
+
+    wrap.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Icon</th>
+            <th>Name</th>
+            <th>Slug</th>
+            <th>Order</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${state.categories.map(c => `
+            <tr>
+              <td style="font-size:22px;">${esc(c.icon || '📦')}</td>
+              <td class="td-strong">${esc(c.name)}</td>
+              <td class="td-mono">${esc(c.slug)}</td>
+              <td>${c.sort_order || 0}</td>
+              <td><span class="chip chip-${c.is_active ? 'green' : 'gray'}">${c.is_active ? 'Active' : 'Hidden'}</span></td>
+              <td class="td-actions">
+                <button class="btn btn-ghost btn-sm" onclick="editCategory(${c.id})">Edit</button>
+                <button class="btn btn-ghost btn-sm" onclick="deleteCategory(${c.id})" style="color:var(--red);">Delete</button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `
+  }
+
+  function openCategoryModal(category = null) {
+    hideModalError('categoryModal')
+    document.getElementById('categoryId').value = category?.id || ''
+    document.getElementById('categoryModalTitle').textContent = category ? 'Edit Category' : 'New Category'
+
+    document.getElementById('categoryName').value = category?.name || ''
+    document.getElementById('categorySlug').value = category?.slug || ''
+    document.getElementById('categoryIcon').value = category?.icon || ''
+    document.getElementById('categorySortOrder').value = category?.sort_order || 0
+
+    const sw = document.querySelector('#categoryModal .switch')
+    sw.classList.toggle('on', category ? category.is_active : true)
+
+    state.categoryEdit = category || null
+    openModal('categoryModal')
+  }
+
+  function editCategory(id) {
+    const cat = state.categories.find(c => c.id === id)
+    if (cat) openCategoryModal(cat)
+  }
+
+  async function deleteCategory(id) {
+    const cat = state.categories.find(c => c.id === id)
+    if (!cat) return
+    if (!confirm(`Delete category "${cat.name}"?\n\nListings in this category will become uncategorised.`)) return
+
+    const { error } = await window.supabaseClient.from('categories').delete().eq('id', id)
+    if (error) {
+      alert('Could not delete: ' + error.message)
+      return
+    }
+    state.categories = state.categories.filter(c => c.id !== id)
+    renderCategories()
+  }
+
+  async function saveCategory() {
+    hideModalError('categoryModal')
+
+    const id = document.getElementById('categoryId').value
+    const name = document.getElementById('categoryName').value.trim()
+    const slug = document.getElementById('categorySlug').value.trim().toLowerCase().replace(/\s+/g, '-')
+    const icon = document.getElementById('categoryIcon').value.trim() || '📦'
+    const sort_order = parseInt(document.getElementById('categorySortOrder').value) || 0
+    const is_active = document.querySelector('#categoryModal .switch').classList.contains('on')
+
+    if (!name) return showModalError('categoryModal', 'Please enter a name.')
+    if (!slug) return showModalError('categoryModal', 'Please enter a slug.')
+
+    const payload = { name, slug, icon, sort_order, is_active, updated_at: new Date().toISOString() }
+
+    const btn = document.getElementById('saveCategoryBtn')
+    const btnText = document.getElementById('saveCategoryText')
+    btn.disabled = true
+    btnText.textContent = 'Saving...'
+
+    try {
+      let result
+      if (id) {
+        result = await window.supabaseClient.from('categories').update(payload).eq('id', id)
+      } else {
+        result = await window.supabaseClient.from('categories').insert([payload])
+      }
+      if (result.error) throw result.error
+
+      closeModal('categoryModal')
+      await loadCategories()
+    } catch (err) {
+      showModalError('categoryModal', err.message || 'Could not save category.')
+    } finally {
+      btn.disabled = false
+      btnText.textContent = 'Save Category'
+    }
+  }
+
+  // ============================================
+  // USERS
+  // ============================================
+  async function loadUsers() {
+    const wrap = document.getElementById('usersWrap')
+    wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>Loading users...</div>'
+
+    const { data, error } = await window.supabaseClient
+      .from('profiles')
+      .select('*')
+      .order('created_at', { ascending: false })
+
+    if (error) {
+      wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`
+      return
+    }
+
+    state.users = data || []
+    document.getElementById('usersCount').textContent = state.users.length + ' users'
+    renderUsers()
+  }
+
+  function renderUsers() {
+    const wrap = document.getElementById('usersWrap')
+
+    if (!state.users.length) {
+      wrap.innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <h3>No users yet</h3>
+          <p>Users appear here after they sign up.</p>
+        </div>
+      `
+      return
+    }
+
+    wrap.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Email</th>
+            <th>Location</th>
+            <th>Joined</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${state.users.map(u => {
+            const name = [u.first_name, u.last_name].filter(Boolean).join(' ') || 'User'
+            const initial = (u.first_name?.[0] || u.email?.[0] || 'U').toUpperCase()
+            const location = [u.city, u.country].filter(Boolean).join(', ') || '—'
+            return `
+              <tr>
+                <td>
+                  <div class="row-item">
+                    <div class="user-avatar" style="width:32px;height:32px;font-size:12px;">${esc(initial)}</div>
+                    <span class="td-strong">${esc(name)}</span>
+                  </div>
+                </td>
+                <td class="td-mono">${esc(u.email || '—')}</td>
+                <td>${esc(location)}</td>
+                <td>${fmtDate(u.created_at)}</td>
+              </tr>
+            `
+          }).join('')}
+        </tbody>
+      </table>
+    `
+  }
+
+  // ============================================
+  // SETTINGS
+  // ============================================
+  async function loadSettings() {
+    const wrap = document.getElementById('settingsWrap')
+    wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>Loading settings...</div>'
+
+    const { data, error } = await window.supabaseClient.from('site_settings').select('*').order('key')
+
+    if (error) {
+      wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`
+      return
+    }
+
+    if (!data || !data.length) {
+      wrap.innerHTML = '<div class="loading-row">No settings configured.</div>'
+      return
+    }
+
+    wrap.innerHTML = `
+      <div class="form-grid col-2">
+        ${data.map(s => `
+          <div class="form-field">
+            <label>${esc(s.key)}</label>
+            <input type="text" value="${esc(JSON.stringify(s.value).replace(/"/g, ''))}" data-setting-key="${esc(s.key)}" onchange="updateSetting('${esc(s.key)}', this.value)">
+            <span style="font-size:11px;color:var(--text-4);margin-top:4px;">${esc(s.description || '')}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div style="margin-top:16px;">
+        <button class="btn btn-primary" onclick="alert('Settings save automatically on change.')">Done</button>
+      </div>
+    `
+  }
+
+  async function updateSetting(key, value) {
+    let parsed
+    try {
+      parsed = JSON.parse(value)
+    } catch {
+      parsed = value
+    }
+
+    const { error } = await window.supabaseClient
+      .from('site_settings')
+      .update({ value: parsed, updated_at: new Date().toISOString() })
+      .eq('key', key)
+
+    if (error) {
+      alert('Could not save: ' + error.message)
+    }
+  }
+
+  // ============================================
+  // ADMINS
+  // ============================================
+  async function loadAdmins() {
+    const wrap = document.getElementById('adminsWrap')
+    wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>Loading admins...</div>'
+
+    const { data, error } = await window.supabaseClient
+      .from('admins')
+      .select('*')
+      .order('created_at', { ascending: false })
+
+    if (error) {
+      wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`
+      return
+    }
+
+    state.admins = data || []
+    renderAdmins()
+  }
+
+  function renderAdmins() {
+    const wrap = document.getElementById('adminsWrap')
+
+    if (!state.admins.length) {
+      wrap.innerHTML = '<div class="loading-row">No administrators configured.</div>'
+      return
+    }
+
+    wrap.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Added</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${state.admins.map(a => `
+            <tr>
+              <td class="td-strong">${esc(a.email)}</td>
+              <td>${esc(a.name || '—')}</td>
+              <td>${fmtDate(a.created_at)}</td>
+              <td class="td-actions">
+                ${a.email === state.user.email ? '<span style="font-size:11px;color:var(--text-4);">You</span>' : `<button class="btn btn-ghost btn-sm" onclick="removeAdmin(${a.id})" style="color:var(--red);">Remove</button>`}
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `
+  }
+
+  function openAdminModal() {
+    hideModalError('adminModal')
+    document.getElementById('newAdminEmail').value = ''
+    document.getElementById('newAdminName').value = ''
+    openModal('adminModal')
+  }
+
+  async function saveAdmin() {
+    hideModalError('adminModal')
+    const email = document.getElementById('newAdminEmail').value.trim().toLowerCase()
+    const name = document.getElementById('newAdminName').value.trim()
+
+    if (!email || !email.includes('@')) return showModalError('adminModal', 'Enter a valid email.')
+
+    const { error } = await window.supabaseClient.from('admins').insert([{ email, name }])
+
+    if (error) return showModalError('adminModal', error.message)
+
+    closeModal('adminModal')
+    loadAdmins()
+  }
+
+  async function removeAdmin(id) {
+    if (!confirm('Remove this admin? They will lose access immediately.')) return
+    const { error } = await window.supabaseClient.from('admins').delete().eq('id', id)
+    if (error) {
+      alert('Could not remove: ' + error.message)
+      return
+    }
+    loadAdmins()
+  }
+
+  // ============================================
+  // AUDIT LOG
+  // ============================================
+  async function loadAudit() {
+    const wrap = document.getElementById('auditWrap')
+    wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>Loading audit log...</div>'
+
+    const { data, error } = await window.supabaseClient
+      .from('admin_audit_log')
+      .select('*')
+      .order('timestamp', { ascending: false })
+      .limit(200)
+
+    if (error) {
+      wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`
+      return
+    }
+
+    state.audit = data || []
+
+    if (!state.audit.length) {
+      wrap.innerHTML = '<div class="loading-row">No admin activity logged yet.</div>'
+      return
+    }
+
+    wrap.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Email</th>
+            <th>Result</th>
+            <th>User agent</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${state.audit.map(a => `
+            <tr>
+              <td class="td-mono">${fmtTime(a.timestamp)}</td>
+              <td class="td-strong">${esc(a.email || '—')}</td>
+              <td><span class="chip chip-${a.result === 'success' ? 'green' : 'red'}">${esc(a.result || '—')}</span></td>
+              <td class="td-mono" style="max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc((a.user_agent || '').slice(0, 60))}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `
+  }
+
+  // ============================================
+  // LOGOUT
+  // ============================================
+  async function handleLogout() {
+    if (!confirm('Log out of admin panel?')) return
+    await window.supabaseClient.auth.signOut()
+    window.location.href = 'adminlogin.html'
+  }
+
+  // ============================================
+  // BOOT
+  // ============================================
+  window.addEventListener('supabase-ready', async () => {
+    let tries = 0
+    while (!window.supabaseClient && tries < 50) {
+      await new Promise(r => setTimeout(r, 100))
+      tries++
+    }
+    if (!window.supabaseClient) return
+
+    const ok = await checkAdmin()
+    if (!ok) return
+
+    // Load initial data
+    await loadCategories()
+    await loadDashboard()
+  })
+</script>
+
+</body>
+</html>

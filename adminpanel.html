@@ -55,18 +55,13 @@
   button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
   input, select, textarea { font-family: inherit; }
 
-  /* ============================================
-     LAYOUT
-     ============================================ */
   .app {
     display: grid;
     grid-template-columns: var(--sidebar-w) 1fr;
     min-height: 100vh;
   }
 
-  /* ============================================
-     SIDEBAR
-     ============================================ */
+  /* SIDEBAR */
   .sidebar {
     background: var(--bg-2);
     border-right: 1px solid var(--border);
@@ -114,14 +109,8 @@
     letter-spacing: 0.5px;
   }
 
-  .sidebar-nav {
-    flex: 1;
-    padding: 12px 8px;
-  }
-
-  .nav-section {
-    margin-bottom: 16px;
-  }
+  .sidebar-nav { flex: 1; padding: 12px 8px; }
+  .nav-section { margin-bottom: 16px; }
 
   .nav-section-label {
     font-size: 10px;
@@ -150,19 +139,12 @@
   }
 
   .nav-item:hover { background: var(--bg-3); color: var(--text); }
-
-  .nav-item.active {
-    background: var(--coral-soft);
-    color: var(--coral);
-    font-weight: 600;
-  }
+  .nav-item.active { background: var(--coral-soft); color: var(--coral); font-weight: 600; }
 
   .nav-item.active::before {
     content: "";
     position: absolute;
-    left: 0;
-    top: 8px;
-    bottom: 8px;
+    left: 0; top: 8px; bottom: 8px;
     width: 3px;
     background: var(--coral);
     border-radius: 0 2px 2px 0;
@@ -185,7 +167,6 @@
     color: var(--coral);
   }
 
-  /* Sidebar footer — admin user */
   .sidebar-user {
     border-top: 1px solid var(--border);
     padding: 12px;
@@ -235,15 +216,8 @@
   }
   .logout-btn:hover { background: var(--red-soft); color: var(--red); }
 
-  /* ============================================
-     MAIN
-     ============================================ */
-  .main {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    background: var(--bg);
-  }
+  /* MAIN */
+  .main { display: flex; flex-direction: column; min-width: 0; background: var(--bg); }
 
   .topbar {
     position: sticky;
@@ -267,11 +241,7 @@
     flex: 1;
   }
 
-  .topbar-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .topbar-actions { display: flex; align-items: center; gap: 8px; }
 
   .btn {
     display: inline-flex;
@@ -290,41 +260,21 @@
 
   .btn-primary { background: var(--coral); color: white; }
   .btn-primary:hover { background: var(--coral-dark); }
-
-  .btn-ghost {
-    background: var(--bg-3);
-    color: var(--text-2);
-    border: 1px solid var(--border);
-  }
+  .btn-ghost { background: var(--bg-3); color: var(--text-2); border: 1px solid var(--border); }
   .btn-ghost:hover { border-color: var(--border-strong); color: var(--text); }
+  .btn-sm { height: 30px; padding: 0 10px; font-size: 12px; }
 
-  .btn-sm {
-    height: 30px;
-    padding: 0 10px;
-    font-size: 12px;
-  }
-
-  /* Page content */
-  .page {
-    display: none;
-    padding: 24px;
-    flex: 1;
-  }
+  .page { display: none; padding: 24px; flex: 1; }
   .page.active { display: block; }
 
-  /* ============================================
-     STATS CARDS
-     ============================================ */
+  /* STATS */
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     margin-bottom: 20px;
   }
-
-  @media (min-width: 900px) {
-    .stats-grid { grid-template-columns: repeat(4, 1fr); }
-  }
+  @media (min-width: 900px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
 
   .stat {
     background: var(--bg-2);
@@ -345,12 +295,10 @@
     justify-content: center;
     margin-bottom: 12px;
   }
-
   .stat-icon-coral { background: var(--coral-soft); color: var(--coral); }
   .stat-icon-green { background: var(--green-soft); color: var(--green); }
   .stat-icon-blue { background: var(--blue-soft); color: var(--blue); }
   .stat-icon-purple { background: var(--purple-soft); color: var(--purple); }
-  .stat-icon-amber { background: var(--amber-soft); color: var(--amber); }
 
   .stat-label {
     font-size: 11px;
@@ -370,15 +318,9 @@
     line-height: 1.2;
   }
 
-  .stat-sub {
-    font-size: 11px;
-    color: var(--text-4);
-    margin-top: 2px;
-  }
+  .stat-sub { font-size: 11px; color: var(--text-4); margin-top: 2px; }
 
-  /* ============================================
-     PANEL / CARD
-     ============================================ */
+  /* PANEL */
   .panel {
     background: var(--bg-2);
     border: 1px solid var(--border);
@@ -407,13 +349,8 @@
 
   .panel-body { padding: 18px; }
 
-  /* ============================================
-     TABLES
-     ============================================ */
-  .table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+  /* TABLES */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
   table {
     width: 100%;
@@ -458,11 +395,7 @@
   }
   .row-img img { width: 100%; height: 100%; object-fit: cover; }
 
-  .row-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  .row-item { display: flex; align-items: center; gap: 10px; }
 
   .row-title {
     font-size: 13px;
@@ -474,9 +407,7 @@
     white-space: nowrap;
   }
 
-  /* ============================================
-     CHIPS / BADGES
-     ============================================ */
+  /* CHIPS */
   .chip {
     display: inline-flex;
     align-items: center;
@@ -489,7 +420,6 @@
     letter-spacing: 0.4px;
     white-space: nowrap;
   }
-
   .chip-green { background: var(--green-soft); color: var(--green); }
   .chip-amber { background: var(--amber-soft); color: var(--amber); }
   .chip-blue { background: var(--blue-soft); color: var(--blue); }
@@ -498,9 +428,7 @@
   .chip-gray { background: var(--bg-4); color: var(--text-2); }
   .chip-purple { background: var(--purple-soft); color: var(--purple); }
 
-  /* ============================================
-     FORMS (inside modals + edit)
-     ============================================ */
+  /* FORMS */
   .form-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
   .form-grid.col-2 { grid-template-columns: 1fr 1fr; }
   .form-grid.col-3 { grid-template-columns: 1fr 1fr 1fr; }
@@ -575,7 +503,6 @@
     margin: 0;
   }
 
-  /* Toggle switch */
   .switch {
     position: relative;
     width: 38px;
@@ -592,10 +519,8 @@
   .switch::after {
     content: "";
     position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 16px;
-    height: 16px;
+    top: 3px; left: 3px;
+    width: 16px; height: 16px;
     background: white;
     border-radius: 50%;
     transition: transform 0.2s;
@@ -604,66 +529,153 @@
   .switch.on { background: var(--coral); }
   .switch.on::after { transform: translateX(16px); }
 
-  /* Image inputs */
-  .images-list { display: flex; flex-direction: column; gap: 6px; }
-  .image-row {
+  /* IMAGE UPLOAD */
+  .upload-zone {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 8px;
-    padding: 8px 10px;
+    justify-content: center;
+    gap: 12px;
+    padding: 28px 20px;
     background: var(--bg-3);
-    border: 1px solid var(--border);
-    border-radius: var(--r-sm);
+    border: 2px dashed var(--border-strong);
+    border-radius: var(--r-md);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    text-align: center;
+    user-select: none;
   }
-  .image-row input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: var(--text);
-    font-size: 12px;
-    padding: 4px 0;
-    outline: none;
-    min-width: 0;
+
+  .upload-zone:hover {
+    border-color: var(--coral);
+    background: var(--coral-soft);
   }
-  .image-row .thumb-mini {
-    width: 32px; height: 32px;
-    border-radius: 4px;
-    background: var(--bg-4);
-    overflow: hidden;
-    flex-shrink: 0;
+
+  .upload-zone.dragging {
+    border-color: var(--coral);
+    background: var(--coral-soft);
+    transform: scale(1.01);
   }
-  .image-row .thumb-mini img { width: 100%; height: 100%; object-fit: cover; }
-  .image-row .remove-img {
-    width: 24px; height: 24px;
-    border-radius: 4px;
+
+  .upload-zone-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--coral-soft);
+    color: var(--coral);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-3);
-    transition: background 0.15s, color 0.15s;
     flex-shrink: 0;
   }
-  .image-row .remove-img:hover { background: var(--red-soft); color: var(--red); }
 
-  .add-img-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 12px;
-    background: var(--bg-3);
-    border: 1px dashed var(--border-strong);
-    border-radius: var(--r-sm);
-    color: var(--text-2);
-    font-size: 12px;
-    font-weight: 600;
-    transition: border-color 0.15s, color 0.15s, background 0.15s;
-    cursor: pointer;
+  .upload-zone-text { display: flex; flex-direction: column; gap: 4px; }
+  .upload-zone-text strong { font-size: 14px; font-weight: 600; color: var(--text); }
+  .upload-zone-text span { font-size: 12px; color: var(--text-3); }
+
+  .images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
   }
-  .add-img-btn:hover { border-color: var(--coral); color: var(--coral); background: var(--coral-soft); }
 
-  /* ============================================
-     MODAL
-     ============================================ */
+  .images-grid:empty { display: none; }
+
+  .image-tile {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--r-sm);
+    background: var(--bg-3);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .image-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .image-tile-remove {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.65);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    transition: background 0.15s, transform 0.15s;
+    backdrop-filter: blur(4px);
+  }
+
+  .image-tile-remove:hover {
+    background: var(--red);
+    transform: scale(1.1);
+  }
+
+  .image-tile.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image-tile-spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(255,255,255,0.15);
+    border-top-color: var(--coral);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  .image-tile.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: var(--red-soft);
+    border-color: rgba(224,85,72,0.3);
+    padding: 6px;
+  }
+
+  .image-tile-error { font-size: 20px; }
+  .image-tile-label { font-size: 9px; color: #FFA59A; text-align: center; line-height: 1.2; }
+
+  .upload-progress {
+    margin-top: 12px;
+    position: relative;
+    height: 26px;
+    background: var(--bg-3);
+    border-radius: var(--r-pill);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .upload-progress-bar {
+    height: 100%;
+    background: var(--coral);
+    width: 0%;
+    transition: width 0.2s ease;
+  }
+
+  .upload-progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+    white-space: nowrap;
+  }
+
+  /* MODAL */
   .modal-overlay {
     position: fixed;
     inset: 0;
@@ -680,10 +692,7 @@
     overflow-y: auto;
   }
 
-  .modal-overlay.open {
-    opacity: 1;
-    pointer-events: all;
-  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
 
   .modal {
     width: 100%;
@@ -698,9 +707,7 @@
     margin: auto 0;
   }
 
-  .modal-overlay.open .modal {
-    transform: translateY(0) scale(1);
-  }
+  .modal-overlay.open .modal { transform: translateY(0) scale(1); }
 
   .modal-head {
     display: flex;
@@ -746,9 +753,7 @@
     background: var(--bg-3);
   }
 
-  /* ============================================
-     ALERTS
-     ============================================ */
+  /* ALERTS */
   .alert {
     display: none;
     align-items: flex-start;
@@ -760,31 +765,14 @@
     margin-bottom: 16px;
   }
   .alert.show { display: flex; }
-  .alert-error {
-    background: var(--red-soft);
-    border: 1px solid rgba(224,85,72,0.3);
-    color: #FFA59A;
-  }
-  .alert-success {
-    background: var(--green-soft);
-    border: 1px solid rgba(46,158,110,0.3);
-    color: #6BCBA3;
-  }
+  .alert-error { background: var(--red-soft); border: 1px solid rgba(224,85,72,0.3); color: #FFA59A; }
   .alert svg { flex-shrink: 0; margin-top: 1px; }
 
-  /* ============================================
-     EMPTY / LOADING
-     ============================================ */
-  .loading-row {
-    padding: 40px 20px;
-    text-align: center;
-    color: var(--text-3);
-    font-size: 13px;
-  }
+  /* EMPTY / LOADING */
+  .loading-row { padding: 40px 20px; text-align: center; color: var(--text-3); font-size: 13px; }
   .spinner {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 20px; height: 20px;
     border: 2px solid rgba(255,255,255,0.1);
     border-top-color: var(--coral);
     border-radius: 50%;
@@ -794,10 +782,7 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  .empty {
-    padding: 60px 20px;
-    text-align: center;
-  }
+  .empty { padding: 60px 20px; text-align: center; }
   .empty-icon {
     width: 56px; height: 56px;
     border-radius: 50%;
@@ -823,15 +808,8 @@
     line-height: 1.6;
   }
 
-  /* ============================================
-     SEARCH INPUT
-     ============================================ */
-  .search-input-wrap {
-    position: relative;
-    flex: 1;
-    max-width: 320px;
-    min-width: 160px;
-  }
+  /* SEARCH */
+  .search-input-wrap { position: relative; flex: 1; max-width: 320px; min-width: 160px; }
 
   .search-input-wrap input {
     width: 100%;
@@ -843,30 +821,22 @@
     color: var(--text);
     font-size: 13px;
     outline: none;
-    transition: border-color 0.15s, background 0.15s;
   }
-  .search-input-wrap input:focus {
-    border-color: var(--coral);
-    background: var(--bg-4);
-  }
+  .search-input-wrap input:focus { border-color: var(--coral); background: var(--bg-4); }
   .search-input-wrap input::placeholder { color: var(--text-4); }
 
   .search-input-wrap svg {
     position: absolute;
-    left: 11px;
-    top: 50%;
+    left: 11px; top: 50%;
     transform: translateY(-50%);
     color: var(--text-4);
     pointer-events: none;
   }
 
-  /* ============================================
-     MOBILE
-     ============================================ */
+  /* MOBILE */
   .mobile-menu-btn {
     display: none;
-    width: 36px;
-    height: 36px;
+    width: 36px; height: 36px;
     border-radius: var(--r-sm);
     align-items: center;
     justify-content: center;
@@ -890,9 +860,7 @@
     .app { grid-template-columns: 1fr; }
     .sidebar {
       position: fixed;
-      left: 0;
-      top: 0;
-      bottom: 0;
+      left: 0; top: 0; bottom: 0;
       width: 260px;
       z-index: 100;
       transform: translateX(-100%);
@@ -900,22 +868,11 @@
     }
     .sidebar.open { transform: translateX(0); }
     .mobile-menu-btn { display: flex; }
-    .mobile-sidebar-overlay.show {
-      display: block;
-      opacity: 1;
-      pointer-events: all;
-    }
+    .mobile-sidebar-overlay.show { display: block; opacity: 1; pointer-events: all; }
     .topbar { padding: 12px 16px; }
     .page { padding: 16px; }
     .panel-head { padding: 12px 14px; }
     .panel-body { padding: 14px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
-    }
   }
 
   :focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 4px; }
@@ -923,14 +880,10 @@
 </head>
 <body>
 
-<!-- Mobile sidebar overlay -->
 <div class="mobile-sidebar-overlay" id="mobileOverlay" onclick="closeMobileSidebar()"></div>
 
 <div class="app">
 
-  <!-- ============================================
-       SIDEBAR
-       ============================================ -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
       <div class="brand-logo">
@@ -1009,12 +962,8 @@
     </div>
   </aside>
 
-  <!-- ============================================
-       MAIN
-       ============================================ -->
   <main class="main">
 
-    <!-- Topbar -->
     <div class="topbar">
       <button class="mobile-menu-btn" onclick="openMobileSidebar()" aria-label="Menu">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
@@ -1028,16 +977,13 @@
       </div>
     </div>
 
-    <!-- ============================================
-         DASHBOARD
-         ============================================ -->
     <div class="page active" id="page-dashboard">
       <div class="alert alert-error" id="dashError">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         <span id="dashErrorMessage"></span>
       </div>
 
-      <div class="stats-grid" id="dashStats">
+      <div class="stats-grid">
         <div class="stat">
           <div class="stat-icon stat-icon-coral">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
@@ -1075,7 +1021,6 @@
         </div>
       </div>
 
-      <!-- Recent orders -->
       <div class="panel">
         <div class="panel-head">
           <h2 class="panel-title">Recent Orders</h2>
@@ -1086,7 +1031,6 @@
         </div>
       </div>
 
-      <!-- Recent listings -->
       <div class="panel">
         <div class="panel-head">
           <h2 class="panel-title">Recently Added Listings</h2>
@@ -1098,9 +1042,6 @@
       </div>
     </div>
 
-    <!-- ============================================
-         LISTINGS
-         ============================================ -->
     <div class="page" id="page-listings">
       <div class="panel">
         <div class="panel-head">
@@ -1108,7 +1049,7 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             <input type="text" id="listingsSearch" placeholder="Search listings..." oninput="renderListings()">
           </div>
-          <select id="listingsStatusFilter" class="btn-ghost" style="height:36px;padding:0 10px;border-radius:8px;border:1px solid var(--border);background:var(--bg-3);color:var(--text);font-size:13px;" onchange="renderListings()">
+          <select id="listingsStatusFilter" style="height:36px;padding:0 10px;border-radius:8px;border:1px solid var(--border);background:var(--bg-3);color:var(--text);font-size:13px;" onchange="renderListings()">
             <option value="">All statuses</option>
             <option value="active">Active</option>
             <option value="sold">Sold</option>
@@ -1126,9 +1067,6 @@
       </div>
     </div>
 
-    <!-- ============================================
-         ORDERS
-         ============================================ -->
     <div class="page" id="page-orders">
       <div class="panel">
         <div class="panel-head">
@@ -1151,9 +1089,6 @@
       </div>
     </div>
 
-    <!-- ============================================
-         CATEGORIES
-         ============================================ -->
     <div class="page" id="page-categories">
       <div class="panel">
         <div class="panel-head">
@@ -1169,9 +1104,6 @@
       </div>
     </div>
 
-    <!-- ============================================
-         USERS
-         ============================================ -->
     <div class="page" id="page-users">
       <div class="panel">
         <div class="panel-head">
@@ -1184,9 +1116,6 @@
       </div>
     </div>
 
-    <!-- ============================================
-         SETTINGS
-         ============================================ -->
     <div class="page" id="page-settings">
       <div class="panel">
         <div class="panel-head">
@@ -1211,9 +1140,6 @@
       </div>
     </div>
 
-    <!-- ============================================
-         AUDIT LOG
-         ============================================ -->
     <div class="page" id="page-audit">
       <div class="panel">
         <div class="panel-head">
@@ -1228,9 +1154,7 @@
   </main>
 </div>
 
-<!-- ============================================
-     MODAL: LISTING
-     ============================================ -->
+<!-- MODAL: LISTING -->
 <div class="modal-overlay" id="listingModal" onclick="closeModalIfBackdrop(event, 'listingModal')">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-head">
@@ -1320,12 +1244,31 @@
         </div>
 
         <div class="form-field full">
-          <label>Images (URLs)</label>
-          <div class="images-list" id="imagesList"></div>
-          <button type="button" class="add-img-btn" onclick="addImageInput()" style="margin-top:8px;">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-            Add image URL
-          </button>
+          <label>Images</label>
+
+          <label class="upload-zone" id="uploadZone">
+            <input
+              type="file"
+              id="imageFileInput"
+              accept="image/*"
+              multiple
+              hidden
+              onchange="handleFileSelect(event)">
+            <div class="upload-zone-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div class="upload-zone-text">
+              <strong>Click to select images</strong>
+              <span>or drag and drop · PNG, JPG, WEBP · up to 5MB each</span>
+            </div>
+          </label>
+
+          <div class="images-grid" id="imagesGrid"></div>
+
+          <div class="upload-progress" id="uploadProgress" style="display:none;">
+            <div class="upload-progress-bar" id="uploadProgressBar"></div>
+            <span class="upload-progress-text" id="uploadProgressText">Uploading...</span>
+          </div>
         </div>
 
         <div class="form-grid col-2">
@@ -1370,9 +1313,7 @@
   </div>
 </div>
 
-<!-- ============================================
-     MODAL: CATEGORY
-     ============================================ -->
+<!-- MODAL: CATEGORY -->
 <div class="modal-overlay" id="categoryModal" onclick="closeModalIfBackdrop(event, 'categoryModal')">
   <div class="modal" style="max-width: 480px;" onclick="event.stopPropagation()">
     <div class="modal-head">
@@ -1423,9 +1364,7 @@
   </div>
 </div>
 
-<!-- ============================================
-     MODAL: ORDER DETAIL
-     ============================================ -->
+<!-- MODAL: ORDER DETAIL -->
 <div class="modal-overlay" id="orderModal" onclick="closeModalIfBackdrop(event, 'orderModal')">
   <div class="modal" style="max-width: 640px;" onclick="event.stopPropagation()">
     <div class="modal-head">
@@ -1444,9 +1383,7 @@
   </div>
 </div>
 
-<!-- ============================================
-     MODAL: ADMIN
-     ============================================ -->
+<!-- MODAL: ADMIN -->
 <div class="modal-overlay" id="adminModal" onclick="closeModalIfBackdrop(event, 'adminModal')">
   <div class="modal" style="max-width: 480px;" onclick="event.stopPropagation()">
     <div class="modal-head">
@@ -1481,9 +1418,7 @@
   </div>
 </div>
 
-<!-- ============================================
-     SUPABASE CLIENT
-     ============================================ -->
+<!-- SUPABASE CLIENT -->
 <script type="module">
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
@@ -1495,13 +1430,8 @@
   window.dispatchEvent(new Event('supabase-ready'))
 </script>
 
-<!-- ============================================
-     ADMIN PANEL LOGIC
-     ============================================ -->
+<!-- ADMIN PANEL LOGIC -->
 <script>
-  // ============================================
-  // STATE
-  // ============================================
   const state = {
     user: null,
     listings: [],
@@ -1515,9 +1445,8 @@
     orderEdit: null
   }
 
-  // ============================================
-  // HELPERS
-  // ============================================
+  let modalImages = []
+
   function fmtPrice(price, currency = 'GBP') {
     const n = parseFloat(price || 0)
     const symbols = { GBP: '£', USD: '$', EUR: '€' }
@@ -1553,9 +1482,6 @@
     if (el) el.classList.remove('show')
   }
 
-  // ============================================
-  // AUTH CHECK
-  // ============================================
   async function checkAdmin() {
     const { data: { session } } = await window.supabaseClient.auth.getSession()
     if (!session) {
@@ -1564,7 +1490,6 @@
     }
     state.user = session.user
 
-    // Verify in admins table
     const { data: adminRecord } = await window.supabaseClient
       .from('admins')
       .select('*')
@@ -1577,7 +1502,6 @@
       return false
     }
 
-    // Set sidebar user
     document.getElementById('adminName').textContent = adminRecord.name || session.user.email.split('@')[0]
     document.getElementById('adminEmail').textContent = session.user.email
     document.getElementById('adminInitial').textContent = (adminRecord.name || session.user.email)[0].toUpperCase()
@@ -1585,9 +1509,6 @@
     return true
   }
 
-  // ============================================
-  // SIDEBAR NAV
-  // ============================================
   const PAGE_TITLES = {
     dashboard: 'Dashboard',
     listings: 'Listings',
@@ -1603,7 +1524,6 @@
     document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === 'page-' + page))
     document.getElementById('pageTitle').textContent = PAGE_TITLES[page] || 'Admin'
 
-    // Load data on first visit
     if (page === 'listings' && !state.listings.length) loadListings()
     if (page === 'orders' && !state.orders.length) loadOrders()
     if (page === 'categories' && !state.categories.length) loadCategories()
@@ -1630,9 +1550,6 @@
     document.body.style.overflow = ''
   }
 
-  // ============================================
-  // MODAL HELPERS
-  // ============================================
   function openModal(id) {
     document.getElementById(id).classList.add('open')
     document.body.style.overflow = 'hidden'
@@ -1658,6 +1575,147 @@
   }
 
   // ============================================
+  // IMAGE UPLOAD
+  // ============================================
+  document.addEventListener('click', (e) => {
+    const zone = e.target.closest('#uploadZone')
+    if (zone) {
+      document.getElementById('imageFileInput').click()
+    }
+  })
+
+  document.addEventListener('dragover', (e) => {
+    const zone = e.target.closest('#uploadZone')
+    if (zone) { e.preventDefault(); zone.classList.add('dragging') }
+  })
+  document.addEventListener('dragleave', (e) => {
+    const zone = e.target.closest('#uploadZone')
+    if (zone) zone.classList.remove('dragging')
+  })
+  document.addEventListener('drop', (e) => {
+    const zone = e.target.closest('#uploadZone')
+    if (zone) {
+      e.preventDefault()
+      zone.classList.remove('dragging')
+      const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'))
+      if (files.length) uploadFiles(files)
+    }
+  })
+
+  function handleFileSelect(event) {
+    const files = Array.from(event.target.files || [])
+    if (!files.length) return
+    uploadFiles(files)
+    event.target.value = ''
+  }
+
+  async function uploadFiles(files) {
+    const progress = document.getElementById('uploadProgress')
+    const bar = document.getElementById('uploadProgressBar')
+    const text = document.getElementById('uploadProgressText')
+
+    progress.style.display = 'block'
+    bar.style.width = '0%'
+    text.textContent = `Uploading 0 / ${files.length}...`
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+
+      if (file.size > 5 * 1024 * 1024) {
+        modalImages.push({ url: '', path: '', uploading: false, error: 'Too large' })
+        renderImageGrid()
+        continue
+      }
+
+      if (!file.type.startsWith('image/')) {
+        modalImages.push({ url: '', path: '', uploading: false, error: 'Not an image' })
+        renderImageGrid()
+        continue
+      }
+
+      const placeholder = { url: '', path: '', uploading: true, error: null }
+      modalImages.push(placeholder)
+      renderImageGrid()
+
+      try {
+        const ext = (file.name.split('.').pop() || 'jpg').toLowerCase()
+        const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${ext}`
+        const path = `listings/${filename}`
+
+        const { error } = await window.supabaseClient.storage
+          .from('listing-images')
+          .upload(path, file, { cacheControl: '3600', upsert: false, contentType: file.type })
+
+        if (error) throw error
+
+        const { data: urlData } = window.supabaseClient.storage
+          .from('listing-images')
+          .getPublicUrl(path)
+
+        placeholder.url = urlData.publicUrl
+        placeholder.path = path
+        placeholder.uploading = false
+        renderImageGrid()
+
+      } catch (err) {
+        console.error('Upload error:', err)
+        placeholder.uploading = false
+        placeholder.error = err.message || 'Failed'
+        renderImageGrid()
+      }
+
+      const pct = Math.round(((i + 1) / files.length) * 100)
+      bar.style.width = pct + '%'
+      text.textContent = `Uploading ${i + 1} / ${files.length}...`
+    }
+
+    text.textContent = 'Done'
+    setTimeout(() => { progress.style.display = 'none' }, 800)
+  }
+
+  function renderImageGrid() {
+    const grid = document.getElementById('imagesGrid')
+    if (!grid) return
+
+    if (!modalImages.length) { grid.innerHTML = ''; return }
+
+    grid.innerHTML = modalImages.map((img, i) => {
+      if (img.uploading) {
+        return `<div class="image-tile loading"><div class="image-tile-spinner"></div></div>`
+      }
+      if (img.error) {
+        return `
+          <div class="image-tile error">
+            <div class="image-tile-error">⚠</div>
+            <button type="button" class="image-tile-remove" onclick="removeModalImage(${i})">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+            <div class="image-tile-label">${esc(img.error)}</div>
+          </div>
+        `
+      }
+      return `
+        <div class="image-tile">
+          <img src="${esc(img.url)}" alt="">
+          <button type="button" class="image-tile-remove" onclick="removeModalImage(${i})">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+      `
+    }).join('')
+  }
+
+  function removeModalImage(index) {
+    const img = modalImages[index]
+    if (!img) return
+    if (img.path) {
+      window.supabaseClient.storage.from('listing-images').remove([img.path]).catch(() => {})
+    }
+    modalImages.splice(index, 1)
+    renderImageGrid()
+  }
+
+  // ============================================
   // DASHBOARD
   // ============================================
   async function loadDashboard() {
@@ -1668,7 +1726,6 @@
         window.supabaseClient.from('profiles').select('*', { count: 'exact' })
       ])
 
-      // Stats
       const totalListings = listings.count || 0
       const activeListings = (listings.data || []).filter(l => l.status === 'active').length
       const totalOrders = orders.count || 0
@@ -1676,7 +1733,7 @@
       const totalUsers = users.count || 0
 
       const revenue = (orders.data || [])
-        .filter(o => o.status === 'delivered' || o.status === 'shipped' || o.status === 'processing')
+        .filter(o => ['delivered', 'shipped', 'processing'].includes(o.status))
         .reduce((sum, o) => sum + (parseFloat(o.price_paid) || 0), 0)
 
       document.getElementById('statTotalListings').textContent = totalListings.toLocaleString()
@@ -1686,22 +1743,17 @@
       document.getElementById('statRevenue').textContent = fmtPrice(revenue)
       document.getElementById('statTotalUsers').textContent = totalUsers.toLocaleString()
 
-      // Nav counts
       document.getElementById('navListingsCount').textContent = totalListings
       document.getElementById('navOrdersCount').textContent = totalOrders
 
-      // Recent orders (5 latest)
       const recentOrders = (orders.data || [])
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         .slice(0, 5)
-
       renderRecentOrders(recentOrders)
 
-      // Recent listings (5 latest)
       const recentListings = (listings.data || [])
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         .slice(0, 5)
-
       renderRecentListings(recentListings)
 
     } catch (err) {
@@ -1716,47 +1768,23 @@
     if (!orders.length) {
       wrap.innerHTML = `
         <div class="empty">
-          <div class="empty-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          </div>
+          <div class="empty-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
           <h3>No orders yet</h3>
           <p>Orders will appear here as customers purchase your listings.</p>
-        </div>
-      `
+        </div>`
       return
     }
-
     wrap.innerHTML = `
-      <table>
-        <thead>
-          <tr>
-            <th>Order #</th>
-            <th>Item</th>
-            <th>Total</th>
-            <th>Status</th>
-            <th>Date</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          ${orders.map(o => `
-            <tr>
-              <td class="td-mono">${esc(o.order_number)}</td>
-              <td>
-                <div class="row-item">
-                  <div class="row-img">${o.listing_image ? `<img src="${esc(o.listing_image)}" alt="">` : ''}</div>
-                  <span class="row-title">${esc(o.listing_title)}</span>
-                </div>
-              </td>
-              <td class="td-strong">${fmtPrice(o.price_paid, o.currency)}</td>
-              <td><span class="chip chip-${statusChipClass(o.status)}">${esc(o.status)}</span></td>
-              <td>${fmtDate(o.created_at)}</td>
-              <td class="td-actions"><button class="btn btn-ghost btn-sm" onclick="openOrderDetail('${esc(o.order_number)}')">View</button></td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    `
+      <table><thead><tr><th>Order #</th><th>Item</th><th>Total</th><th>Status</th><th>Date</th><th></th></tr></thead>
+      <tbody>${orders.map(o => `
+        <tr>
+          <td class="td-mono">${esc(o.order_number)}</td>
+          <td><div class="row-item"><div class="row-img">${o.listing_image ? `<img src="${esc(o.listing_image)}" alt="">` : ''}</div><span class="row-title">${esc(o.listing_title)}</span></div></td>
+          <td class="td-strong">${fmtPrice(o.price_paid, o.currency)}</td>
+          <td><span class="chip chip-${statusChipClass(o.status)}">${esc(o.status)}</span></td>
+          <td>${fmtDate(o.created_at)}</td>
+          <td class="td-actions"><button class="btn btn-ghost btn-sm" onclick="openOrderDetail('${esc(o.order_number)}')">View</button></td>
+        </tr>`).join('')}</tbody></table>`
   }
 
   function renderRecentListings(listings) {
@@ -1764,65 +1792,31 @@
     if (!listings.length) {
       wrap.innerHTML = `
         <div class="empty">
-          <div class="empty-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
-          </div>
+          <div class="empty-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg></div>
           <h3>No listings yet</h3>
           <p>Click "New Listing" to add your first product.</p>
-          <button class="btn btn-primary" onclick="openListingModal()">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-            New Listing
-          </button>
-        </div>
-      `
+          <button class="btn btn-primary" onclick="openListingModal()">New Listing</button>
+        </div>`
       return
     }
-
     wrap.innerHTML = `
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Status</th>
-            <th>Added</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${listings.map(l => {
-            const img = Array.isArray(l.images) && l.images[0] ? l.images[0] : ''
-            return `
-              <tr>
-                <td>
-                  <div class="row-item">
-                    <div class="row-img">${img ? `<img src="${esc(img)}" alt="">` : ''}</div>
-                    <span class="row-title">${esc(l.title)}</span>
-                  </div>
-                </td>
-                <td class="td-strong">${fmtPrice(l.price, l.currency)}</td>
-                <td>${esc(categoryName(l.category_id) || '—')}</td>
-                <td><span class="chip chip-${statusChipClass(l.status)}">${esc(l.status)}</span></td>
-                <td>${fmtDate(l.created_at)}</td>
-              </tr>
-            `
-          }).join('')}
-        </tbody>
-      </table>
-    `
+      <table><thead><tr><th>Item</th><th>Price</th><th>Category</th><th>Status</th><th>Added</th></tr></thead>
+      <tbody>${listings.map(l => {
+        const img = Array.isArray(l.images) && l.images[0] ? l.images[0] : ''
+        return `<tr>
+          <td><div class="row-item"><div class="row-img">${img ? `<img src="${esc(img)}" alt="">` : ''}</div><span class="row-title">${esc(l.title)}</span></div></td>
+          <td class="td-strong">${fmtPrice(l.price, l.currency)}</td>
+          <td>${esc(categoryName(l.category_id) || '—')}</td>
+          <td><span class="chip chip-${statusChipClass(l.status)}">${esc(l.status)}</span></td>
+          <td>${fmtDate(l.created_at)}</td>
+        </tr>`
+      }).join('')}</tbody></table>`
   }
 
   function statusChipClass(status) {
     return {
-      active: 'green',
-      processing: 'amber',
-      shipped: 'blue',
-      delivered: 'green',
-      cancelled: 'red',
-      refunded: 'gray',
-      sold: 'purple',
-      paused: 'gray',
-      draft: 'gray'
+      active: 'green', processing: 'amber', shipped: 'blue', delivered: 'green',
+      cancelled: 'red', refunded: 'gray', sold: 'purple', paused: 'gray', draft: 'gray'
     }[status] || 'gray'
   }
 
@@ -1831,9 +1825,7 @@
     return cat ? cat.name : null
   }
 
-  // ============================================
   // LISTINGS
-  // ============================================
   async function loadListings() {
     const wrap = document.getElementById('listingsWrap')
     wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>Loading listings...</div>'
@@ -1849,10 +1841,7 @@
     }
 
     state.listings = data || []
-
-    // Ensure categories are loaded too
     if (!state.categories.length) await loadCategories()
-
     renderListings()
   }
 
@@ -1870,65 +1859,35 @@
     if (!filtered.length) {
       wrap.innerHTML = `
         <div class="empty">
-          <div class="empty-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
-          </div>
+          <div class="empty-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg></div>
           <h3>${state.listings.length ? 'No matches' : 'No listings yet'}</h3>
           <p>${state.listings.length ? 'Try adjusting your search or filters.' : 'Click "New Listing" to add your first product.'}</p>
           ${!state.listings.length ? `<button class="btn btn-primary" onclick="openListingModal()">New Listing</button>` : ''}
-        </div>
-      `
+        </div>`
       return
     }
 
     wrap.innerHTML = `
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Condition</th>
-            <th>Status</th>
-            <th>Added</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          ${filtered.map(l => {
-            const img = Array.isArray(l.images) && l.images[0] ? l.images[0] : ''
-            return `
-              <tr>
-                <td>
-                  <div class="row-item">
-                    <div class="row-img">${img ? `<img src="${esc(img)}" alt="">` : ''}</div>
-                    <span class="row-title">${esc(l.title)}</span>
-                  </div>
-                </td>
-                <td class="td-strong">${fmtPrice(l.price, l.currency)}</td>
-                <td>${esc(categoryName(l.category_id) || '—')}</td>
-                <td>${esc(conditionLabel(l.condition))}</td>
-                <td><span class="chip chip-${statusChipClass(l.status)}">${esc(l.status)}</span></td>
-                <td>${fmtDate(l.created_at)}</td>
-                <td class="td-actions">
-                  <button class="btn btn-ghost btn-sm" onclick="editListing(${l.id})">Edit</button>
-                  <button class="btn btn-ghost btn-sm" onclick="deleteListing(${l.id})" style="color:var(--red);">Delete</button>
-                </td>
-              </tr>
-            `
-          }).join('')}
-        </tbody>
-      </table>
-    `
+      <table><thead><tr><th>Item</th><th>Price</th><th>Category</th><th>Condition</th><th>Status</th><th>Added</th><th></th></tr></thead>
+      <tbody>${filtered.map(l => {
+        const img = Array.isArray(l.images) && l.images[0] ? l.images[0] : ''
+        return `<tr>
+          <td><div class="row-item"><div class="row-img">${img ? `<img src="${esc(img)}" alt="">` : ''}</div><span class="row-title">${esc(l.title)}</span></div></td>
+          <td class="td-strong">${fmtPrice(l.price, l.currency)}</td>
+          <td>${esc(categoryName(l.category_id) || '—')}</td>
+          <td>${esc(conditionLabel(l.condition))}</td>
+          <td><span class="chip chip-${statusChipClass(l.status)}">${esc(l.status)}</span></td>
+          <td>${fmtDate(l.created_at)}</td>
+          <td class="td-actions">
+            <button class="btn btn-ghost btn-sm" onclick="editListing(${l.id})">Edit</button>
+            <button class="btn btn-ghost btn-sm" onclick="deleteListing(${l.id})" style="color:var(--red);">Delete</button>
+          </td>
+        </tr>`
+      }).join('')}</tbody></table>`
   }
 
   function conditionLabel(c) {
-    return {
-      brand_new: 'Brand new',
-      like_new: 'Like new',
-      lightly_used: 'Lightly used',
-      well_used: 'Well used'
-    }[c] || c
+    return { brand_new: 'Brand new', like_new: 'Like new', lightly_used: 'Lightly used', well_used: 'Well used' }[c] || c
   }
 
   function openListingModal(listing = null) {
@@ -1936,7 +1895,6 @@
     document.getElementById('listingId').value = ''
     document.getElementById('listingModalTitle').textContent = listing ? 'Edit Listing' : 'New Listing'
 
-    // Reset form
     document.getElementById('listingTitle').value = listing?.title || ''
     document.getElementById('listingDescription').value = listing?.description || ''
     document.getElementById('listingPrice').value = listing?.price || ''
@@ -1951,28 +1909,24 @@
     document.getElementById('listingShippingPrice').value = listing?.shipping_price || ''
     document.getElementById('listingShippingNote').value = listing?.shipping_note || ''
 
-    // Toggles
     const toggles = {
       shipping_available: listing?.shipping_available || false,
       pickup_available: listing?.pickup_available || false,
       is_featured: listing?.is_featured || false
     }
-
     document.querySelectorAll('#listingModal .switch').forEach(sw => {
       sw.classList.toggle('on', !!toggles[sw.dataset.field])
     })
 
-    // Images
-    const images = Array.isArray(listing?.images) ? listing.images : ['']
-    renderImageInputs(images.length ? images : [''])
+    const existingImages = Array.isArray(listing?.images) ? listing.images.filter(Boolean) : []
+    modalImages = existingImages.map(url => ({ url, path: null, uploading: false, error: null }))
+    renderImageGrid()
 
-    // Category dropdown
     const catSelect = document.getElementById('listingCategory')
     catSelect.innerHTML = '<option value="">— None —</option>' +
       state.categories.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join('')
     catSelect.value = listing?.category_id || ''
 
-    // Store edit id
     if (listing) {
       document.getElementById('listingId').value = listing.id
       state.listingEdit = listing
@@ -1981,50 +1935,6 @@
     }
 
     openModal('listingModal')
-  }
-
-  function renderImageInputs(images) {
-    const wrap = document.getElementById('imagesList')
-    wrap.innerHTML = images.map((url, i) => `
-      <div class="image-row" data-index="${i}">
-        <div class="thumb-mini">${url ? `<img src="${esc(url)}" onerror="this.style.display='none'">` : ''}</div>
-        <input type="text" value="${esc(url)}" placeholder="https://..." oninput="updateImagePreview(this)">
-        <button type="button" class="remove-img" onclick="removeImageRow(this)">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-      </div>
-    `).join('')
-  }
-
-  function updateImagePreview(input) {
-    const thumb = input.parentElement.querySelector('.thumb-mini')
-    const val = input.value.trim()
-    thumb.innerHTML = val ? `<img src="${esc(val)}" onerror="this.style.display='none'">` : ''
-  }
-
-  function addImageInput() {
-    const wrap = document.getElementById('imagesList')
-    const row = document.createElement('div')
-    row.className = 'image-row'
-    row.innerHTML = `
-      <div class="thumb-mini"></div>
-      <input type="text" placeholder="https://..." oninput="updateImagePreview(this)">
-      <button type="button" class="remove-img" onclick="removeImageRow(this)">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-      </button>
-    `
-    wrap.appendChild(row)
-    row.querySelector('input').focus()
-  }
-
-  function removeImageRow(btn) {
-    const wrap = document.getElementById('imagesList')
-    if (wrap.children.length <= 1) {
-      btn.parentElement.querySelector('input').value = ''
-      btn.parentElement.querySelector('.thumb-mini').innerHTML = ''
-      return
-    }
-    btn.parentElement.remove()
   }
 
   function editListing(id) {
@@ -2038,10 +1948,7 @@
     if (!confirm(`Delete "${listing.title}"?\n\nThis cannot be undone.`)) return
 
     const { error } = await window.supabaseClient.from('listings').delete().eq('id', id)
-    if (error) {
-      alert('Could not delete: ' + error.message)
-      return
-    }
+    if (error) { alert('Could not delete: ' + error.message); return }
     state.listings = state.listings.filter(l => l.id !== id)
     renderListings()
     loadDashboard()
@@ -2065,36 +1972,25 @@
     const shipping_price = parseFloat(document.getElementById('listingShippingPrice').value) || null
     const shipping_note = document.getElementById('listingShippingNote').value.trim() || null
 
-    // Toggles
     const sw = {}
     document.querySelectorAll('#listingModal .switch').forEach(s => {
       sw[s.dataset.field] = s.classList.contains('on')
     })
 
-    // Images
-    const images = [...document.querySelectorAll('#imagesList input')]
-      .map(i => i.value.trim())
-      .filter(Boolean)
+    const images = modalImages
+      .filter(img => img.url && !img.uploading && !img.error)
+      .map(img => img.url)
 
-    // Validate
     if (!title) return showModalError('listingModal', 'Please enter a title.')
     if (isNaN(price) || price < 0) return showModalError('listingModal', 'Please enter a valid price.')
 
+    // Check if uploads are still in progress
+    const stillUploading = modalImages.some(img => img.uploading)
+    if (stillUploading) return showModalError('listingModal', 'Please wait for images to finish uploading.')
+
     const payload = {
-      title,
-      description,
-      price,
-      currency,
-      condition,
-      category_id,
-      seller_name,
-      status,
-      location_city,
-      location_region,
-      location_country,
-      shipping_price,
-      shipping_note,
-      images,
+      title, description, price, currency, condition, category_id, seller_name, status,
+      location_city, location_region, location_country, shipping_price, shipping_note, images,
       shipping_available: sw.shipping_available,
       pickup_available: sw.pickup_available,
       is_featured: sw.is_featured,
@@ -2113,13 +2009,11 @@
       } else {
         result = await window.supabaseClient.from('listings').insert([payload]).select().single()
       }
-
       if (result.error) throw result.error
 
       closeModal('listingModal')
       await loadListings()
       loadDashboard()
-
     } catch (err) {
       showModalError('listingModal', err.message || 'Could not save listing.')
     } finally {
@@ -2128,9 +2022,7 @@
     }
   }
 
-  // ============================================
   // ORDERS
-  // ============================================
   async function loadOrders() {
     const wrap = document.getElementById('ordersWrap')
     wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>Loading orders...</div>'
@@ -2140,11 +2032,7 @@
       .select('*')
       .order('created_at', { ascending: false })
 
-    if (error) {
-      wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`
-      return
-    }
-
+    if (error) { wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`; return }
     state.orders = data || []
     renderOrders()
   }
@@ -2157,8 +2045,7 @@
     let filtered = state.orders
     if (search) filtered = filtered.filter(o =>
       (o.order_number || '').toLowerCase().includes(search) ||
-      (o.listing_title || '').toLowerCase().includes(search)
-    )
+      (o.listing_title || '').toLowerCase().includes(search))
     if (statusFilter) filtered = filtered.filter(o => o.status === statusFilter)
 
     document.getElementById('navOrdersCount').textContent = state.orders.length
@@ -2166,51 +2053,25 @@
     if (!filtered.length) {
       wrap.innerHTML = `
         <div class="empty">
-          <div class="empty-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          </div>
+          <div class="empty-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
           <h3>${state.orders.length ? 'No matches' : 'No orders yet'}</h3>
           <p>${state.orders.length ? 'Try adjusting your search or filters.' : 'Orders will appear here as customers purchase.'}</p>
-        </div>
-      `
+        </div>`
       return
     }
 
     wrap.innerHTML = `
-      <table>
-        <thead>
-          <tr>
-            <th>Order #</th>
-            <th>Item</th>
-            <th>Buyer</th>
-            <th>Total</th>
-            <th>Status</th>
-            <th>Date</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          ${filtered.map(o => `
-            <tr>
-              <td class="td-mono">${esc(o.order_number)}</td>
-              <td>
-                <div class="row-item">
-                  <div class="row-img">${o.listing_image ? `<img src="${esc(o.listing_image)}" alt="">` : ''}</div>
-                  <span class="row-title">${esc(o.listing_title)}</span>
-                </div>
-              </td>
-              <td class="td-mono">${esc((o.buyer_id || '').slice(0, 8))}…</td>
-              <td class="td-strong">${fmtPrice(o.price_paid, o.currency)}</td>
-              <td><span class="chip chip-${statusChipClass(o.status)}">${esc(o.status)}</span></td>
-              <td>${fmtDate(o.created_at)}</td>
-              <td class="td-actions">
-                <button class="btn btn-ghost btn-sm" onclick="openOrderDetail('${esc(o.order_number)}')">View</button>
-              </td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    `
+      <table><thead><tr><th>Order #</th><th>Item</th><th>Buyer</th><th>Total</th><th>Status</th><th>Date</th><th></th></tr></thead>
+      <tbody>${filtered.map(o => `
+        <tr>
+          <td class="td-mono">${esc(o.order_number)}</td>
+          <td><div class="row-item"><div class="row-img">${o.listing_image ? `<img src="${esc(o.listing_image)}" alt="">` : ''}</div><span class="row-title">${esc(o.listing_title)}</span></div></td>
+          <td class="td-mono">${esc((o.buyer_id || '').slice(0, 8))}…</td>
+          <td class="td-strong">${fmtPrice(o.price_paid, o.currency)}</td>
+          <td><span class="chip chip-${statusChipClass(o.status)}">${esc(o.status)}</span></td>
+          <td>${fmtDate(o.created_at)}</td>
+          <td class="td-actions"><button class="btn btn-ghost btn-sm" onclick="openOrderDetail('${esc(o.order_number)}')">View</button></td>
+        </tr>`).join('')}</tbody></table>`
   }
 
   function openOrderDetail(orderNumber) {
@@ -2227,8 +2088,7 @@
           <div class="row-title" style="max-width:100%;">${esc(item.listing_title)}</div>
           <div style="font-size:12px;color:var(--text-3);">Qty: ${item.quantity} · ${fmtPrice(item.price_paid, item.currency)}</div>
         </div>
-      </div>
-    `).join('')
+      </div>`).join('')
 
     document.getElementById('orderModalBody').innerHTML = `
       <div class="form-grid">
@@ -2248,12 +2108,10 @@
             <input type="text" id="orderTrackingInput" value="${esc(o.tracking_number || '')}" placeholder="e.g. RM123456789GB">
           </div>
         </div>
-
         <div class="form-field">
           <label>Items (${orders.length})</label>
           ${itemsHtml}
         </div>
-
         <div class="form-grid col-2">
           <div class="form-field">
             <label>Shipping address</label>
@@ -2272,8 +2130,7 @@
             </div>
           </div>
         </div>
-      </div>
-    `
+      </div>`
 
     state.orderEdit = o
     openModal('orderModal')
@@ -2289,19 +2146,14 @@
       .update({ status, tracking_number, updated_at: new Date().toISOString() })
       .eq('id', state.orderEdit.id)
 
-    if (error) {
-      alert('Could not update order: ' + error.message)
-      return
-    }
+    if (error) { alert('Could not update order: ' + error.message); return }
 
     closeModal('orderModal')
     await loadOrders()
     loadDashboard()
   }
 
-  // ============================================
   // CATEGORIES
-  // ============================================
   async function loadCategories() {
     const wrap = document.getElementById('categoriesWrap')
     wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>Loading categories...</div>'
@@ -2311,11 +2163,7 @@
       .select('*')
       .order('sort_order', { ascending: true })
 
-    if (error) {
-      wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`
-      return
-    }
-
+    if (error) { wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`; return }
     state.categories = data || []
     renderCategories()
   }
@@ -2326,52 +2174,33 @@
     if (!state.categories.length) {
       wrap.innerHTML = `
         <div class="empty">
-          <div class="empty-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          </div>
+          <div class="empty-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
           <h3>No categories yet</h3>
           <p>Click "New Category" to add your first category.</p>
-        </div>
-      `
+        </div>`
       return
     }
 
     wrap.innerHTML = `
-      <table>
-        <thead>
-          <tr>
-            <th>Icon</th>
-            <th>Name</th>
-            <th>Slug</th>
-            <th>Order</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          ${state.categories.map(c => `
-            <tr>
-              <td style="font-size:22px;">${esc(c.icon || '📦')}</td>
-              <td class="td-strong">${esc(c.name)}</td>
-              <td class="td-mono">${esc(c.slug)}</td>
-              <td>${c.sort_order || 0}</td>
-              <td><span class="chip chip-${c.is_active ? 'green' : 'gray'}">${c.is_active ? 'Active' : 'Hidden'}</span></td>
-              <td class="td-actions">
-                <button class="btn btn-ghost btn-sm" onclick="editCategory(${c.id})">Edit</button>
-                <button class="btn btn-ghost btn-sm" onclick="deleteCategory(${c.id})" style="color:var(--red);">Delete</button>
-              </td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    `
+      <table><thead><tr><th>Icon</th><th>Name</th><th>Slug</th><th>Order</th><th>Status</th><th></th></tr></thead>
+      <tbody>${state.categories.map(c => `
+        <tr>
+          <td style="font-size:22px;">${esc(c.icon || '📦')}</td>
+          <td class="td-strong">${esc(c.name)}</td>
+          <td class="td-mono">${esc(c.slug)}</td>
+          <td>${c.sort_order || 0}</td>
+          <td><span class="chip chip-${c.is_active ? 'green' : 'gray'}">${c.is_active ? 'Active' : 'Hidden'}</span></td>
+          <td class="td-actions">
+            <button class="btn btn-ghost btn-sm" onclick="editCategory(${c.id})">Edit</button>
+            <button class="btn btn-ghost btn-sm" onclick="deleteCategory(${c.id})" style="color:var(--red);">Delete</button>
+          </td>
+        </tr>`).join('')}</tbody></table>`
   }
 
   function openCategoryModal(category = null) {
     hideModalError('categoryModal')
     document.getElementById('categoryId').value = category?.id || ''
     document.getElementById('categoryModalTitle').textContent = category ? 'Edit Category' : 'New Category'
-
     document.getElementById('categoryName').value = category?.name || ''
     document.getElementById('categorySlug').value = category?.slug || ''
     document.getElementById('categoryIcon').value = category?.icon || ''
@@ -2395,10 +2224,7 @@
     if (!confirm(`Delete category "${cat.name}"?\n\nListings in this category will become uncategorised.`)) return
 
     const { error } = await window.supabaseClient.from('categories').delete().eq('id', id)
-    if (error) {
-      alert('Could not delete: ' + error.message)
-      return
-    }
+    if (error) { alert('Could not delete: ' + error.message); return }
     state.categories = state.categories.filter(c => c.id !== id)
     renderCategories()
   }
@@ -2431,7 +2257,6 @@
         result = await window.supabaseClient.from('categories').insert([payload])
       }
       if (result.error) throw result.error
-
       closeModal('categoryModal')
       await loadCategories()
     } catch (err) {
@@ -2442,9 +2267,7 @@
     }
   }
 
-  // ============================================
   // USERS
-  // ============================================
   async function loadUsers() {
     const wrap = document.getElementById('usersWrap')
     wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>Loading users...</div>'
@@ -2454,11 +2277,7 @@
       .select('*')
       .order('created_at', { ascending: false })
 
-    if (error) {
-      wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`
-      return
-    }
-
+    if (error) { wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`; return }
     state.users = data || []
     document.getElementById('usersCount').textContent = state.users.length + ' users'
     renderUsers()
@@ -2470,63 +2289,36 @@
     if (!state.users.length) {
       wrap.innerHTML = `
         <div class="empty">
-          <div class="empty-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-          </div>
+          <div class="empty-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
           <h3>No users yet</h3>
           <p>Users appear here after they sign up.</p>
-        </div>
-      `
+        </div>`
       return
     }
 
     wrap.innerHTML = `
-      <table>
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Email</th>
-            <th>Location</th>
-            <th>Joined</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${state.users.map(u => {
-            const name = [u.first_name, u.last_name].filter(Boolean).join(' ') || 'User'
-            const initial = (u.first_name?.[0] || u.email?.[0] || 'U').toUpperCase()
-            const location = [u.city, u.country].filter(Boolean).join(', ') || '—'
-            return `
-              <tr>
-                <td>
-                  <div class="row-item">
-                    <div class="user-avatar" style="width:32px;height:32px;font-size:12px;">${esc(initial)}</div>
-                    <span class="td-strong">${esc(name)}</span>
-                  </div>
-                </td>
-                <td class="td-mono">${esc(u.email || '—')}</td>
-                <td>${esc(location)}</td>
-                <td>${fmtDate(u.created_at)}</td>
-              </tr>
-            `
-          }).join('')}
-        </tbody>
-      </table>
-    `
+      <table><thead><tr><th>User</th><th>Email</th><th>Location</th><th>Joined</th></tr></thead>
+      <tbody>${state.users.map(u => {
+        const name = [u.first_name, u.last_name].filter(Boolean).join(' ') || 'User'
+        const initial = (u.first_name?.[0] || u.email?.[0] || 'U').toUpperCase()
+        const location = [u.city, u.country].filter(Boolean).join(', ') || '—'
+        return `<tr>
+          <td><div class="row-item"><div class="user-avatar" style="width:32px;height:32px;font-size:12px;">${esc(initial)}</div><span class="td-strong">${esc(name)}</span></div></td>
+          <td class="td-mono">${esc(u.email || '—')}</td>
+          <td>${esc(location)}</td>
+          <td>${fmtDate(u.created_at)}</td>
+        </tr>`
+      }).join('')}</tbody></table>`
   }
 
-  // ============================================
   // SETTINGS
-  // ============================================
   async function loadSettings() {
     const wrap = document.getElementById('settingsWrap')
     wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>Loading settings...</div>'
 
     const { data, error } = await window.supabaseClient.from('site_settings').select('*').order('key')
 
-    if (error) {
-      wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`
-      return
-    }
+    if (error) { wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`; return }
 
     if (!data || !data.length) {
       wrap.innerHTML = '<div class="loading-row">No settings configured.</div>'
@@ -2542,34 +2334,22 @@
             <span style="font-size:11px;color:var(--text-4);margin-top:4px;">${esc(s.description || '')}</span>
           </div>
         `).join('')}
-      </div>
-      <div style="margin-top:16px;">
-        <button class="btn btn-primary" onclick="alert('Settings save automatically on change.')">Done</button>
-      </div>
-    `
+      </div>`
   }
 
   async function updateSetting(key, value) {
     let parsed
-    try {
-      parsed = JSON.parse(value)
-    } catch {
-      parsed = value
-    }
+    try { parsed = JSON.parse(value) } catch { parsed = value }
 
     const { error } = await window.supabaseClient
       .from('site_settings')
       .update({ value: parsed, updated_at: new Date().toISOString() })
       .eq('key', key)
 
-    if (error) {
-      alert('Could not save: ' + error.message)
-    }
+    if (error) alert('Could not save: ' + error.message)
   }
 
-  // ============================================
   // ADMINS
-  // ============================================
   async function loadAdmins() {
     const wrap = document.getElementById('adminsWrap')
     wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>Loading admins...</div>'
@@ -2579,11 +2359,7 @@
       .select('*')
       .order('created_at', { ascending: false })
 
-    if (error) {
-      wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`
-      return
-    }
-
+    if (error) { wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`; return }
     state.admins = data || []
     renderAdmins()
   }
@@ -2597,29 +2373,16 @@
     }
 
     wrap.innerHTML = `
-      <table>
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Name</th>
-            <th>Added</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          ${state.admins.map(a => `
-            <tr>
-              <td class="td-strong">${esc(a.email)}</td>
-              <td>${esc(a.name || '—')}</td>
-              <td>${fmtDate(a.created_at)}</td>
-              <td class="td-actions">
-                ${a.email === state.user.email ? '<span style="font-size:11px;color:var(--text-4);">You</span>' : `<button class="btn btn-ghost btn-sm" onclick="removeAdmin(${a.id})" style="color:var(--red);">Remove</button>`}
-              </td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    `
+      <table><thead><tr><th>Email</th><th>Name</th><th>Added</th><th></th></tr></thead>
+      <tbody>${state.admins.map(a => `
+        <tr>
+          <td class="td-strong">${esc(a.email)}</td>
+          <td>${esc(a.name || '—')}</td>
+          <td>${fmtDate(a.created_at)}</td>
+          <td class="td-actions">
+            ${a.email === state.user.email ? '<span style="font-size:11px;color:var(--text-4);">You</span>' : `<button class="btn btn-ghost btn-sm" onclick="removeAdmin(${a.id})" style="color:var(--red);">Remove</button>`}
+          </td>
+        </tr>`).join('')}</tbody></table>`
   }
 
   function openAdminModal() {
@@ -2637,7 +2400,6 @@
     if (!email || !email.includes('@')) return showModalError('adminModal', 'Enter a valid email.')
 
     const { error } = await window.supabaseClient.from('admins').insert([{ email, name }])
-
     if (error) return showModalError('adminModal', error.message)
 
     closeModal('adminModal')
@@ -2647,16 +2409,11 @@
   async function removeAdmin(id) {
     if (!confirm('Remove this admin? They will lose access immediately.')) return
     const { error } = await window.supabaseClient.from('admins').delete().eq('id', id)
-    if (error) {
-      alert('Could not remove: ' + error.message)
-      return
-    }
+    if (error) { alert('Could not remove: ' + error.message); return }
     loadAdmins()
   }
 
-  // ============================================
-  // AUDIT LOG
-  // ============================================
+  // AUDIT
   async function loadAudit() {
     const wrap = document.getElementById('auditWrap')
     wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>Loading audit log...</div>'
@@ -2667,11 +2424,7 @@
       .order('timestamp', { ascending: false })
       .limit(200)
 
-    if (error) {
-      wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`
-      return
-    }
-
+    if (error) { wrap.innerHTML = `<div class="loading-row">Error: ${esc(error.message)}</div>`; return }
     state.audit = data || []
 
     if (!state.audit.length) {
@@ -2680,41 +2433,24 @@
     }
 
     wrap.innerHTML = `
-      <table>
-        <thead>
-          <tr>
-            <th>Time</th>
-            <th>Email</th>
-            <th>Result</th>
-            <th>User agent</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${state.audit.map(a => `
-            <tr>
-              <td class="td-mono">${fmtTime(a.timestamp)}</td>
-              <td class="td-strong">${esc(a.email || '—')}</td>
-              <td><span class="chip chip-${a.result === 'success' ? 'green' : 'red'}">${esc(a.result || '—')}</span></td>
-              <td class="td-mono" style="max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc((a.user_agent || '').slice(0, 60))}</td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    `
+      <table><thead><tr><th>Time</th><th>Email</th><th>Result</th><th>User agent</th></tr></thead>
+      <tbody>${state.audit.map(a => `
+        <tr>
+          <td class="td-mono">${fmtTime(a.timestamp)}</td>
+          <td class="td-strong">${esc(a.email || '—')}</td>
+          <td><span class="chip chip-${a.result === 'success' ? 'green' : 'red'}">${esc(a.result || '—')}</span></td>
+          <td class="td-mono" style="max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc((a.user_agent || '').slice(0, 60))}</td>
+        </tr>`).join('')}</tbody></table>`
   }
 
-  // ============================================
   // LOGOUT
-  // ============================================
   async function handleLogout() {
     if (!confirm('Log out of admin panel?')) return
     await window.supabaseClient.auth.signOut()
     window.location.href = 'adminlogin.html'
   }
 
-  // ============================================
   // BOOT
-  // ============================================
   window.addEventListener('supabase-ready', async () => {
     let tries = 0
     while (!window.supabaseClient && tries < 50) {
@@ -2726,7 +2462,6 @@
     const ok = await checkAdmin()
     if (!ok) return
 
-    // Load initial data
     await loadCategories()
     await loadDashboard()
   })

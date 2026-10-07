@@ -373,7 +373,7 @@
       <span class="nav-search-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       </span>
-      <input type="text" placeholder="Search cameras, watches, bicycles..." onkeydown="if(event.key==='Enter'){window.location.href='catalog.html?q='+encodeURIComponent(this.value)}">
+      <input type="text" data-i18n-placeholder="search_placeholder" placeholder="Search cameras, watches, bicycles..." onkeydown="if(event.key==='Enter'){window.location.href='catalog.html?q='+encodeURIComponent(this.value)}">
     </div>
 
     <div class="nav-actions">
@@ -394,7 +394,7 @@
 
       <a href="catalog.html" class="btn-buy">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        <span>Buy</span>
+        <span data-i18n="buy">Buy</span>
       </a>
     </div>
   </div>
@@ -427,8 +427,8 @@
 <!-- FEATURED -->
 <section class="section">
   <div class="section-head">
-    <h2 class="section-title">Featured Products</h2>
-    <a href="catalog.html" class="section-link">View all →</a>
+    <h2 class="section-title" data-i18n="featured">Featured Products</h2>
+    <a href="catalog.html" class="section-link" data-i18n="view_all">View all →</a>
   </div>
   <div class="grid" id="featuredGrid"></div>
 </section>
@@ -436,8 +436,8 @@
 <!-- RECENTLY ADDED -->
 <section class="section">
   <div class="section-head">
-    <h2 class="section-title">Recently Added</h2>
-    <a href="catalog.html" class="section-link">View all →</a>
+    <h2 class="section-title" data-i18n="recently_added">Recently Added</h2>
+    <a href="catalog.html" class="section-link" data-i18n="view_all">View all →</a>
   </div>
   <div class="grid" id="recentGrid"></div>
 </section>
@@ -445,8 +445,8 @@
 <!-- POPULAR CATEGORIES -->
 <section class="section">
   <div class="section-head">
-    <h2 class="section-title">Popular Categories</h2>
-    <a href="catalog.html" class="section-link">All categories →</a>
+    <h2 class="section-title" data-i18n="popular_categories">Popular Categories</h2>
+    <a href="catalog.html" class="section-link" data-i18n="all_categories">All categories →</a>
   </div>
   <div class="cat-tiles" id="categoryTiles"></div>
 </section>
@@ -465,27 +465,42 @@
           </span>
           <span class="wordmark">relov<em>ly</em></span>
         </a>
-        <p>The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
+        <p data-i18n="footer_tagline">The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
       </div>
       <div class="footer-col">
-        <h4>Buy</h4>
-        <ul><li><a href="#">How to Buy</a></li><li><a href="#">Buyer Protection</a></li><li><a href="#">Shipping Info</a></li><li><a href="#">Returns</a></li></ul>
+        <h4 data-i18n="footer_buy">Buy</h4>
+        <ul>
+          <li><a href="#" data-i18n="footer_how_to_buy">How to Buy</a></li>
+          <li><a href="#" data-i18n="footer_buyer_protection">Buyer Protection</a></li>
+          <li><a href="#" data-i18n="footer_shipping_info">Shipping Info</a></li>
+          <li><a href="#" data-i18n="footer_returns">Returns</a></li>
+        </ul>
       </div>
       <div class="footer-col">
-        <h4>Sell</h4>
-        <ul><li><a href="#">Start Selling</a></li><li><a href="#">Seller Fees</a></li><li><a href="#">Verification</a></li><li><a href="#">Seller Guide</a></li></ul>
+        <h4 data-i18n="footer_sell">Sell</h4>
+        <ul>
+          <li><a href="#" data-i18n="footer_start_selling">Start Selling</a></li>
+          <li><a href="#" data-i18n="footer_seller_fees">Seller Fees</a></li>
+          <li><a href="#" data-i18n="footer_verification">Verification</a></li>
+          <li><a href="#" data-i18n="footer_seller_guide">Seller Guide</a></li>
+        </ul>
       </div>
       <div class="footer-col">
-        <h4>Support</h4>
-        <ul><li><a href="#">Help Centre</a></li><li><a href="#">Contact Us</a></li><li><a href="#">Disputes</a></li><li><a href="#">Report Listing</a></li></ul>
+        <h4 data-i18n="footer_support">Support</h4>
+        <ul>
+          <li><a href="#" data-i18n="footer_help">Help Centre</a></li>
+          <li><a href="#" data-i18n="footer_contact">Contact Us</a></li>
+          <li><a href="#" data-i18n="footer_disputes">Disputes</a></li>
+          <li><a href="#" data-i18n="footer_report">Report Listing</a></li>
+        </ul>
       </div>
     </div>
     <div class="footer-trending">
-      <h4>Trending Searches</h4>
+      <h4 data-i18n="footer_trending">Trending Searches</h4>
       <div class="trend-chips">
         <a href="catalog.html?q=canon" class="trend-chip">Canon EOS</a>
         <a href="catalog.html?q=iphone" class="trend-chip">iPhone 15 Pro</a>
-        <a href="catalog.html?q=macbook" trend-chip>MacBook Air M2</a>
+        <a href="catalog.html?q=macbook" class="trend-chip">MacBook Air M2</a>
         <a href="catalog.html?q=rolex" class="trend-chip">Rolex Submariner</a>
         <a href="catalog.html?q=fujifilm" class="trend-chip">Fujifilm X100V</a>
         <a href="catalog.html?q=playstation" class="trend-chip">PlayStation 5</a>
@@ -496,12 +511,12 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 relovly. All rights reserved.</span>
+      <span data-i18n="footer_rights">© 2026 relovly. All rights reserved.</span>
       <div class="footer-bottom-links">
         <a href="#">United Kingdom · GBP £</a>
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="#">Cookies</a>
+        <a href="#" data-i18n="footer_terms">Terms</a>
+        <a href="#" data-i18n="footer_privacy">Privacy</a>
+        <a href="#" data-i18n="footer_cookies">Cookies</a>
       </div>
     </div>
   </div>
@@ -511,11 +526,11 @@
 <nav class="mobile-bar">
   <a href="index.html" class="mobile-bar-item active">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    Home
+    <span data-i18n="mobile_home">Home</span>
   </a>
   <a href="#" class="mobile-bar-item">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-    Saved
+    <span data-i18n="mobile_saved">Saved</span>
   </a>
   <a href="catalog.html" class="mobile-bar-item">
     <span class="mobile-bar-buy">
@@ -524,11 +539,11 @@
   </a>
   <a href="#" class="mobile-bar-item">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    Chat
+    <span data-i18n="mobile_chat">Chat</span>
   </a>
   <a href="account.html" class="mobile-bar-item">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    Me
+    <span data-i18n="mobile_me">Me</span>
   </a>
 </nav>
 
@@ -582,6 +597,10 @@
 <script>
   let categoryTileTimers = [];
 
+  function t(key) {
+    return window.relovlyI18n ? window.relovlyI18n.t(key) : key;
+  }
+
   function formatPrice(price, currency) {
     const n = parseFloat(price || 0);
     const symbols = { GBP: '£', USD: '$', EUR: '€' };
@@ -621,9 +640,9 @@
         <div class="empty-icon">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
-        <h3 class="empty-title">Nothing here yet</h3>
-        <p class="empty-desc">Listings will appear here as soon as they're uploaded.</p>
-        <a href="catalog.html" class="empty-btn">Browse all categories</a>
+        <h3 class="empty-title">${t('empty_title')}</h3>
+        <p class="empty-desc">${t('empty_desc')}</p>
+        <a href="catalog.html" class="empty-btn">${t('empty_browse')}</a>
       </div>`;
   }
 
@@ -666,11 +685,14 @@
 
   function renderCategoryRow(categories) {
     const row = document.getElementById('categoriesRow');
-    row.innerHTML = categories.map(c => `
-      <a href="catalog.html?category=${encodeURIComponent(c.slug)}" class="cat-pill">
-        <span class="cat-icon">${esc(c.icon || '📦')}</span>
-        <span class="cat-label">${esc(c.name)}</span>
-      </a>`).join('');
+    row.innerHTML = categories.map(c => {
+      const label = window.relovlyI18n ? window.relovlyI18n.translateCategoryName(c.name) : c.name;
+      return `
+        <a href="catalog.html?category=${encodeURIComponent(c.slug)}" class="cat-pill">
+          <span class="cat-icon">${esc(c.icon || '📦')}</span>
+          <span class="cat-label">${esc(label)}</span>
+        </a>`;
+    }).join('');
   }
 
   async function renderCategoryTiles(categories) {
@@ -689,6 +711,7 @@
       const listings = (data || []).filter(l => Array.isArray(l.images) && l.images[0]);
       const images = listings.map(l => l.images[0]);
       const count = listings.length;
+      const translatedName = window.relovlyI18n ? window.relovlyI18n.translateCategoryName(cat.name) : cat.name;
 
       const tile = document.createElement('a');
       tile.href = `catalog.html?category=${encodeURIComponent(cat.slug)}`;
@@ -699,7 +722,7 @@
       if (images.length > 0) {
         const slidesHtml = images.map(src => `
           <div class="cat-tile-slide">
-            <img src="${esc(src)}" alt="${esc(cat.name)}" loading="lazy">
+            <img src="${esc(src)}" alt="${esc(translatedName)}" loading="lazy">
           </div>`).join('');
 
         const dotsHtml = images.length > 1
@@ -711,7 +734,7 @@
           <div class="cat-tile-overlay"></div>
           ${dotsHtml}
           <div class="cat-tile-content">
-            <div class="cat-tile-name">${esc(cat.name)}</div>
+            <div class="cat-tile-name">${esc(translatedName)}</div>
             <div class="cat-tile-count">${count} ${count === 1 ? 'item' : 'items'}</div>
           </div>`;
       } else {
@@ -719,7 +742,7 @@
           <div class="cat-tile-fallback">${esc(cat.icon || '📦')}</div>
           <div class="cat-tile-overlay"></div>
           <div class="cat-tile-content">
-            <div class="cat-tile-name">${esc(cat.name)}</div>
+            <div class="cat-tile-name">${esc(translatedName)}</div>
             <div class="cat-tile-count">No items yet</div>
           </div>`;
       }
@@ -788,15 +811,30 @@
   }
 
   function handleLanguageChange(lang) {
-    localStorage.setItem('relovly_lang', lang);
-    document.documentElement.lang = lang;
+    if (window.relovlyI18n) {
+      window.relovlyI18n.setLanguage(lang);
+    } else {
+      localStorage.setItem('relovly_lang', lang);
+      document.documentElement.lang = lang;
+    }
   }
+
   function restoreLanguage() {
-    const saved = localStorage.getItem('relovly_lang') || 'en';
+    const saved = (window.relovlyI18n && window.relovlyI18n.getCurrentLanguage()) || localStorage.getItem('relovly_lang') || 'en';
     const sel = document.getElementById('langSelect');
     if (sel) sel.value = saved;
     document.documentElement.lang = saved;
+    if (window.relovlyI18n) window.relovlyI18n.applyTranslations();
   }
+
+  // Re-render category names (row + tiles) when language changes
+  window.addEventListener('relovly-lang-changed', async () => {
+    const categories = await loadCategories();
+    if (categories.length) {
+      renderCategoryRow(categories);
+      await renderCategoryTiles(categories);
+    }
+  });
 
   window.addEventListener('supabase-ready', async () => {
     let tries = 0;
@@ -814,6 +852,9 @@
     await renderCategoryTiles(categories);
   });
 </script>
+
+<!-- Shared translation system -->
+<script src="i18n.js"></script>
 
 </body>
 </html>

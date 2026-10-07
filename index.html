@@ -682,6 +682,7 @@
 
 <script>
   let categoryTileTimers = [];
+  let isRenderingTiles = false;
 
   function t(key) {
     return window.relovlyI18n ? window.relovlyI18n.t(key) : key;
@@ -709,7 +710,6 @@
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
-  // Fisher–Yates shuffle (in place)
   function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -791,97 +791,116 @@
   }
 
   /**
-   * Popular Categories tiles:
-   *  - ONE tile per category
-   *  - Slides = only the FIRST image of each listing in that category
-   *  - Count label = "N available"
+   * Popular Categories — ONE tile per category.
+   * Slides = only images[0] of each listing in that category.
+   * Count = number of listings in that category → "N available".
+   *
+   * Fixes:
+   *  - Clears existing timers BEFORE replacing DOM.
+   *  - Uses replaceChildren() to guarantee no leftover children.
+   *  - Re-entrancy guard (isRenderingTiles) so rapid/duplicate calls
+   *    can't append the same tiles twice.
    */
   async function renderCategoryTiles(categories) {
-    const wrap = document.getElementById('categoryTiles');
-    wrap.innerHTML = '';
+    if (isRenderingTiles) return;
+    isRenderingTiles = true;
 
-    // clear old timers
-    categoryTileTimers.forEach(clearInterval);
-    categoryTileTimers = [];
+    try {
+      const wrap = document.getElementById('categoryTiles');
+      if (!wrap) return;
 
-    for (const cat of categories.slice(0, 8)) {
-      const { data } = await window.supabaseClient
-        .from('listings')
-        .select('id, images')
-        .eq('status', 'active')
-        .eq('category_id', cat.id)
-        .order('created_at', { ascending: false })
-        .limit(20);
+      // 1. Stop any running slide timers from a previous render
+      categoryTileTimers.forEach(clearInterval);
+      categoryTileTimers = [];
 
-      // Take only the FIRST image of each listing (one slide per item)
-      const firstImages = (data || [])
-        .map(l => (Array.isArray(l.images) && l.images[0]) ? l.images[0] : null)
-        .filter(Boolean);
+      // 2. Guarantee empty container — no duplicates possible
+      wrap.replaceChildren();
 
-      const count = firstImages.length;
-      const translatedName = window.relovlyI18n
-        ? window.relovlyI18n.translateCategoryName(cat.name)
-        : cat.name;
+      // 3. Only render a tile if the category actually has at least one listing
+      const visibleCats = categories.slice(0, 8);
 
-      const tile = document.createElement('a');
-      tile.href = `catalog.html?category=${encodeURIComponent(cat.slug)}`;
-      tile.className = 'cat-tile';
+      for (const cat of visibleCats) {
+        const { data } = await window.supabaseClient
+          .from('listings')
+          .select('id, images')
+          .eq('status', 'active')
+          .eq('category_id', cat.id)
+          .order('created_at', { ascending: false })
+          .limit(20);
 
-      let tileInner = '';
+        const listings = data || [];
 
-      if (count > 0) {
-        const slidesHtml = firstImages.map(src => `
-          <div class="cat-tile-slide">
-            <img src="${esc(src)}" alt="${esc(translatedName)}" loading="lazy">
-          </div>`).join('');
+        // Collect ONLY the first image of each listing (one slide per item)
+        const firstImages = listings
+          .map(l => (Array.isArray(l.images) && l.images[0]) ? l.images[0] : null)
+          .filter(Boolean);
 
-        const dotsHtml = count > 1
-          ? `<div class="cat-tile-dots">${firstImages.map((_, i) => `<span class="cat-tile-dot${i === 0 ? ' active' : ''}"></span>`).join('')}</div>`
-          : '';
+        const count = listings.length; // "available" = number of items in this category
+        const translatedName = window.relovlyI18n
+          ? window.relovlyI18n.translateCategoryName(cat.name)
+          : cat.name;
 
-        tileInner = `
-          <div class="cat-tile-track" data-track>${slidesHtml}</div>
-          <div class="cat-tile-overlay"></div>
-          ${dotsHtml}
-          <div class="cat-tile-content">
-            <div class="cat-tile-name">${esc(translatedName)}</div>
-            <div class="cat-tile-count">${count} available</div>
-          </div>`;
-      } else {
-        tileInner = `
-          <div class="cat-tile-fallback">${esc(cat.icon || '📦')}</div>
-          <div class="cat-tile-overlay"></div>
-          <div class="cat-tile-content">
-            <div class="cat-tile-name">${esc(translatedName)}</div>
-            <div class="cat-tile-count">No items yet</div>
-          </div>`;
+        const tile = document.createElement('a');
+        tile.href = `catalog.html?category=${encodeURIComponent(cat.slug)}`;
+        tile.className = 'cat-tile';
+
+        let tileInner = '';
+
+        if (count > 0) {
+          const slidesHtml = firstImages.map(src => `
+            <div class="cat-tile-slide">
+              <img src="${esc(src)}" alt="${esc(translatedName)}" loading="lazy">
+            </div>`).join('');
+
+          const dotsHtml = firstImages.length > 1
+            ? `<div class="cat-tile-dots">${firstImages.map((_, i) => `<span class="cat-tile-dot${i === 0 ? ' active' : ''}"></span>`).join('')}</div>`
+            : '';
+
+          tileInner = `
+            <div class="cat-tile-track" data-track>${slidesHtml}</div>
+            <div class="cat-tile-overlay"></div>
+            ${dotsHtml}
+            <div class="cat-tile-content">
+              <div class="cat-tile-name">${esc(translatedName)}</div>
+              <div class="cat-tile-count">${count} available</div>
+            </div>`;
+        } else {
+          tileInner = `
+            <div class="cat-tile-fallback">${esc(cat.icon || '📦')}</div>
+            <div class="cat-tile-overlay"></div>
+            <div class="cat-tile-content">
+              <div class="cat-tile-name">${esc(translatedName)}</div>
+              <div class="cat-tile-count">No items yet</div>
+            </div>`;
+        }
+
+        tile.innerHTML = tileInner;
+        wrap.appendChild(tile);
+
+        if (firstImages.length > 1) {
+          const trackEl = tile.querySelector('[data-track]');
+          const dotEls = tile.querySelectorAll('.cat-tile-dot');
+          let idx = 0;
+
+          const interval = 3000 + Math.floor(Math.random() * 3000);
+
+          const timer = setInterval(() => {
+            idx = (idx + 1) % firstImages.length;
+            trackEl.style.transform = `translateX(-${idx * 100}%)`;
+            dotEls.forEach((d, i) => d.classList.toggle('active', i === idx));
+          }, interval);
+
+          categoryTileTimers.push(timer);
+        }
       }
-
-      tile.innerHTML = tileInner;
-      wrap.appendChild(tile);
-
-      if (count > 1) {
-        const trackEl = tile.querySelector('[data-track]');
-        const dotEls = tile.querySelectorAll('.cat-tile-dot');
-        let idx = 0;
-
-        const interval = 3000 + Math.floor(Math.random() * 3000);
-
-        const timer = setInterval(() => {
-          idx = (idx + 1) % count;
-          trackEl.style.transform = `translateX(-${idx * 100}%)`;
-          dotEls.forEach((d, i) => d.classList.toggle('active', i === idx));
-        }, interval);
-
-        categoryTileTimers.push(timer);
-      }
+    } finally {
+      isRenderingTiles = false;
     }
   }
 
   /**
-   * Featured Products — shuffled random order on every page load.
-   * Shows ALL active listings (featured ones first if any, then the rest),
-   * but shuffled so it feels fresh each visit.
+   * Featured Products — shuffled on every page load.
+   * Shows ALL active listings.
    */
   async function loadFeatured() {
     const grid = document.getElementById('featuredGrid');
@@ -899,14 +918,12 @@
       return;
     }
 
-    // Shuffle so order changes on every page load
     listings = shuffle(listings);
-
     grid.innerHTML = listings.map(renderCard).join('');
   }
 
   /**
-   * Recently Added — first 10 newest items (time-based, this is correct here).
+   * Recently Added — first 10 newest items.
    */
   async function loadRecent() {
     const grid = document.getElementById('recentGrid');

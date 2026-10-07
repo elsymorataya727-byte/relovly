@@ -79,7 +79,7 @@
 
   .nav-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
 
-  /* Language selector */
+  /* Language selector — replaces the bell */
   .lang-select {
     display: none;
     align-items: center;
@@ -110,7 +110,6 @@
     position: relative;
   }
   .icon-btn:hover { background: var(--bg); color: var(--text); }
-  .icon-btn .dot { position: absolute; top: 8px; right: 8px; width: 8px; height: 8px; background: var(--coral); border-radius: 50%; border: 2px solid var(--card); }
 
   .btn-buy {
     display: flex; align-items: center; gap: 6px;
@@ -152,7 +151,7 @@
   .slider-dot.active { background: white; width: 20px; border-radius: var(--r-pill); }
 
   /* ============================================
-     CATEGORIES
+     CATEGORY ROW (pills)
      ============================================ */
   .categories { max-width: 1400px; margin: 0 auto; padding: 20px 0 4px; overflow-x: auto; scrollbar-width: none; }
   .categories::-webkit-scrollbar { display: none; }
@@ -228,7 +227,24 @@
   .chip-pickup { background: #EEF1F5; color: #5A6B7D; }
 
   /* ============================================
-     CATEGORY CAROUSELS
+     POPULAR CATEGORIES — SMALL SQUARE TILES (RESTORED)
+     ============================================ */
+  .cat-tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .cat-tile {
+    position: relative; aspect-ratio: 4 / 3;
+    border-radius: var(--r-md); overflow: hidden;
+    background: linear-gradient(135deg, #F5F2ED, #E4DFD6);
+    display: flex; align-items: flex-end; padding: 16px;
+    cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cat-tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .cat-tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.55) 100%); }
+  .cat-tile-content { position: relative; z-index: 2; color: white; }
+  .cat-tile-name { font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: -0.3px; }
+  .cat-tile-count { font-size: 12px; opacity: 0.85; margin-top: 2px; }
+
+  /* ============================================
+     CATEGORY CAROUSELS — SEPARATE SECTION
      ============================================ */
   .carousel-section {
     max-width: 1400px;
@@ -385,9 +401,7 @@
     display: flex; align-items: center; justify-content: center;
     margin-top: -18px;
     box-shadow: 0 4px 12px rgba(232,90,79,0.35);
-    transition: transform 0.15s;
   }
-  .mobile-bar-buy:active { transform: scale(0.94); }
 
   @media (max-width: 767px) { body { padding-bottom: 72px; } }
 
@@ -398,6 +412,7 @@
     .nav-search { display: block; }
     .lang-select { display: flex; }
     .grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .cat-tiles { grid-template-columns: repeat(3, 1fr); }
     .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
     .mobile-bar { display: none; }
     body { padding-bottom: 0; }
@@ -409,6 +424,7 @@
 
   @media (min-width: 1200px) {
     .grid { grid-template-columns: repeat(4, 1fr); }
+    .cat-tiles { grid-template-columns: repeat(4, 1fr); }
     .section { padding: 36px 24px; }
     .carousel-section { padding: 0 24px; }
     .slider-viewport { height: 240px; }
@@ -425,7 +441,7 @@
 <body>
 
 <!-- ============================================
-     NAVIGATION
+     NAV
      ============================================ -->
 <nav class="nav">
   <div class="nav-inner">
@@ -455,16 +471,17 @@
         <option value="it">🇮🇹 Italiano</option>
         <option value="nl">🇳🇱 Nederlands</option>
         <option value="pt">🇵🇹 Português</option>
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="ja">🇯🇵 日本語</option>
+        <option value="zh">🇨🇳 中文</option>
+        <option value="ar">🇸🇦 العربية</option>
+        <option value="ko">🇰🇷 한국어</option>
       </select>
 
-      <button class="icon-btn" aria-label="Notifications">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-        <span class="dot" id="notifDot" style="display:none;"></span>
-      </button>
       <button class="icon-btn" aria-label="Messages">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       </button>
-      <a href="account.html" class="icon-btn" aria-label="Profile" id="profileBtn">
+      <a href="account.html" class="icon-btn" aria-label="Profile">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </a>
       <a href="catalog.html" class="btn-buy">
@@ -475,39 +492,31 @@
   </div>
 </nav>
 
-<!-- ============================================
-     HERO SLIDER — REDUCED
-     ============================================ -->
+<!-- HERO -->
 <section class="hero-slider">
   <div class="slider-viewport">
     <div class="slides-track" id="slidesTrack">
-      <div class="slide"><img src="https://images.unsplash.com/photo-1653896776084-d311e7042d78?w=1600&q=80&auto=format&fit=crop" alt="Photography gear flat lay"></div>
-      <div class="slide"><img src="https://plus.unsplash.com/premium_photo-1676968002945-c8f74e0e27d8?w=1600&q=80&auto=format&fit=crop" alt="Premium lifestyle"></div>
-      <div class="slide"><img src="https://plus.unsplash.com/premium_photo-1755422107149-e47860ae16bb?w=1600&q=80&auto=format&fit=crop" alt="Curated collection"></div>
-      <div class="slide"><img src="https://images.unsplash.com/photo-1604586362294-e6a98fb96401?w=1600&q=80&auto=format&fit=crop" alt="Lifestyle goods"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1653896776084-d311e7042d78?w=1600&q=80&auto=format&fit=crop" alt=""></div>
+      <div class="slide"><img src="https://plus.unsplash.com/premium_photo-1676968002945-c8f74e0e27d8?w=1600&q=80&auto=format&fit=crop" alt=""></div>
+      <div class="slide"><img src="https://plus.unsplash.com/premium_photo-1755422107149-e47860ae16bb?w=1600&q=80&auto=format&fit=crop" alt=""></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1604586362294-e6a98fb96401?w=1600&q=80&auto=format&fit=crop" alt=""></div>
     </div>
-
-    <button class="slider-arrow prev" aria-label="Previous slide" onclick="slidePrev()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    <button class="slider-arrow prev" aria-label="Previous" onclick="slidePrev()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
     </button>
-    <button class="slider-arrow next" aria-label="Next slide" onclick="slideNext()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    <button class="slider-arrow next" aria-label="Next" onclick="slideNext()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
     </button>
-
     <div class="slider-dots" id="sliderDots"></div>
   </div>
 </section>
 
-<!-- ============================================
-     CATEGORIES
-     ============================================ -->
+<!-- CATEGORY ROW -->
 <div class="categories">
   <div class="categories-inner" id="categoriesRow"></div>
 </div>
 
-<!-- ============================================
-     FEATURED PRODUCTS
-     ============================================ -->
+<!-- FEATURED PRODUCTS -->
 <section class="section">
   <div class="section-head">
     <h2 class="section-title">Featured Products</h2>
@@ -516,9 +525,7 @@
   <div class="grid" id="featuredGrid"></div>
 </section>
 
-<!-- ============================================
-     RECENTLY ADDED
-     ============================================ -->
+<!-- RECENTLY ADDED -->
 <section class="section">
   <div class="section-head">
     <h2 class="section-title">Recently Added</h2>
@@ -527,16 +534,21 @@
   <div class="grid" id="recentGrid"></div>
 </section>
 
-<!-- ============================================
-     CATEGORY CAROUSELS     ============================================ -->
+<!-- POPULAR CATEGORIES — SMALL SQUARE TILES (RESTORED) -->
+<section class="section">
+  <div class="section-head">
+    <h2 class="section-title">Popular Categories</h2>
+    <a href="catalog.html" class="section-link">All categories →</a>
+  </div>
+  <div class="cat-tiles" id="categoryTiles"></div>
+</section>
+
+<!-- CATEGORY CAROUSELS — SEPARATE SECTION -->
 <div id="categoryCarousels"></div>
 
-<!-- ============================================
-     FOOTER
-     ============================================ -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
-
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="logo">
@@ -550,7 +562,6 @@
         </a>
         <p>The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
       </div>
-
       <div class="footer-col">
         <h4>Buy</h4>
         <ul>
@@ -560,7 +571,6 @@
           <li><a href="#">Returns</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>Sell</h4>
         <ul>
@@ -570,7 +580,6 @@
           <li><a href="#">Seller Guide</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>Support</h4>
         <ul>
@@ -607,13 +616,10 @@
         <a href="#">Cookies</a>
       </div>
     </div>
-
   </div>
 </footer>
 
-<!-- ============================================
-     MOBILE BOTTOM BAR
-     ============================================ -->
+<!-- MOBILE BAR -->
 <nav class="mobile-bar">
   <a href="index.html" class="mobile-bar-item active">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -638,24 +644,17 @@
   </a>
 </nav>
 
-<!-- ============================================
-     SUPABASE CLIENT
-     ============================================ -->
 <script type="module">
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-
   const SUPABASE_URL = 'https://osebqasifcnhyuajbyvv.supabase.co'
   const SUPABASE_KEY = 'sb_publishable_vggy-_2xeONhcsSbiQklsw_hvLC_cgG'
-
   const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
   window.supabaseClient = supabase
   window.dispatchEvent(new Event('supabase-ready'))
 </script>
 
-<!-- ============================================
-     SLIDER
-     ============================================ -->
 <script>
+  // SLIDER
   const track = document.getElementById('slidesTrack');
   const slides = track.querySelectorAll('.slide');
   const dotsWrap = document.getElementById('sliderDots');
@@ -665,11 +664,9 @@
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
     dot.addEventListener('click', () => goTo(i));
     dotsWrap.appendChild(dot);
   });
-
   const dots = dotsWrap.querySelectorAll('.slider-dot');
 
   function goTo(index) {
@@ -678,60 +675,45 @@
     dots.forEach((d, i) => d.classList.toggle('active', i === current));
     resetAuto();
   }
-
   function slideNext() { goTo(current + 1); }
   function slidePrev() { goTo(current - 1); }
-
-  function resetAuto() {
-    clearInterval(autoTimer);
-    autoTimer = setInterval(() => goTo(current + 1), 5000);
-  }
+  function resetAuto() { clearInterval(autoTimer); autoTimer = setInterval(() => goTo(current + 1), 5000); }
   resetAuto();
 
   let touchStartX = 0;
   const viewport = document.querySelector('.slider-viewport');
-
   viewport.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
   viewport.addEventListener('touchend', (e) => {
     const diff = touchStartX - e.changedTouches[0].screenX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) slideNext();
-      else slidePrev();
-    }
+    if (Math.abs(diff) > 40) { if (diff > 0) slideNext(); else slidePrev(); }
   }, { passive: true });
-
   viewport.addEventListener('mouseenter', () => clearInterval(autoTimer));
   viewport.addEventListener('mouseleave', resetAuto);
 </script>
 
-<!-- ============================================
-     HOMEPAGE DATA LOADING
-     ============================================ -->
 <script>
   let carouselTimers = [];
 
   function formatPrice(price, currency) {
-    const n = parseFloat(price || 0)
-    const symbols = { GBP: '£', USD: '$', EUR: '€' }
-    const sym = symbols[currency] || ''
-    return sym + n.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 2 })
+    const n = parseFloat(price || 0);
+    const symbols = { GBP: '£', USD: '$', EUR: '€' };
+    return (symbols[currency] || '') + n.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
   }
 
   function timeAgo(dateStr) {
-    const date = new Date(dateStr)
-    const seconds = Math.floor((Date.now() - date.getTime()) / 1000)
-    if (seconds < 60) return 'just now'
-    if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago'
-    if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago'
-    if (seconds < 604800) return Math.floor(seconds / 86400) + 'd ago'
-    if (seconds < 2592000) return Math.floor(seconds / 604800) + 'w ago'
-    if (seconds < 31536000) return Math.floor(seconds / 2592000) + 'mo ago'
-    return Math.floor(seconds / 31536000) + 'y ago'
+    const seconds = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
+    if (seconds < 60) return 'just now';
+    if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago';
+    if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago';
+    if (seconds < 604800) return Math.floor(seconds / 86400) + 'd ago';
+    if (seconds < 2592000) return Math.floor(seconds / 604800) + 'w ago';
+    if (seconds < 31536000) return Math.floor(seconds / 2592000) + 'mo ago';
+    return Math.floor(seconds / 31536000) + 'y ago';
   }
 
-  function escapeHtml(str) {
-    if (!str) return ''
-    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+  function esc(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
   function conditionChip(condition) {
@@ -740,23 +722,9 @@
       like_new: { label: 'Like new', cls: 'chip-new' },
       lightly_used: { label: 'Lightly used', cls: 'chip-used' },
       well_used: { label: 'Well used', cls: 'chip-used' }
-    }
-    const c = map[condition] || { label: 'Used', cls: 'chip-used' }
-    return `<span class="chip ${c.cls}">${c.label}</span>`
-  }
-
-  function skeletonCards(count = 4) {
-    return Array.from({ length: count }).map(() => `
-      <div class="skeleton">
-        <div class="skeleton-media"></div>
-        <div class="skeleton-body">
-          <div class="skeleton-line short"></div>
-          <div class="skeleton-line"></div>
-          <div class="skeleton-line short"></div>
-          <div class="skeleton-line price"></div>
-        </div>
-      </div>
-    `).join('')
+    };
+    const c = map[condition] || { label: 'Used', cls: 'chip-used' };
+    return `<span class="chip ${c.cls}">${c.label}</span>`;
   }
 
   function emptyState() {
@@ -767,18 +735,14 @@
         </div>
         <h3 class="empty-title">Nothing here yet</h3>
         <p class="empty-desc">Listings will appear here as soon as they're uploaded.</p>
-        <a href="catalog.html" class="empty-btn">
-          Browse all categories
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-        </a>
-      </div>`
+        <a href="catalog.html" class="empty-btn">Browse all categories</a>
+      </div>`;
   }
 
-  // PRODUCT CARD — no badges
   function renderCard(listing) {
-    const img = Array.isArray(listing.images) && listing.images[0] ? listing.images[0] : ''
-    const sellerName = listing.seller_name || 'relovly'
-    const sellerInitial = sellerName[0].toUpperCase()
+    const img = Array.isArray(listing.images) && listing.images[0] ? listing.images[0] : '';
+    const sellerName = listing.seller_name || 'relovly';
+    const sellerInitial = sellerName[0].toUpperCase();
 
     return `
       <article class="card" onclick="window.location.href='product.html?id=${listing.id}'">
@@ -786,15 +750,15 @@
           <button class="card-like" onclick="event.stopPropagation(); toggleWishlist(${listing.id}, this)" aria-label="Save">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </button>
-          ${img ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(listing.title)}" loading="lazy">` : ''}
+          ${img ? `<img src="${esc(img)}" alt="${esc(listing.title)}" loading="lazy">` : ''}
         </div>
         <div class="card-body">
           <div class="card-seller">
-            <span class="card-avatar">${escapeHtml(sellerInitial)}</span>
-            <span class="card-seller-name">${escapeHtml(sellerName)}</span>
+            <span class="card-avatar">${esc(sellerInitial)}</span>
+            <span class="card-seller-name">${esc(sellerName)}</span>
             <span class="card-time">${timeAgo(listing.created_at)}</span>
           </div>
-          <h3 class="card-title">${escapeHtml(listing.title)}</h3>
+          <h3 class="card-title">${esc(listing.title)}</h3>
           <div class="card-price">${formatPrice(listing.price, listing.currency)}</div>
           <div class="card-meta">
             ${conditionChip(listing.condition)}
@@ -802,115 +766,90 @@
             ${listing.pickup_available ? '<span class="chip chip-pickup">Pickup</span>' : ''}
           </div>
         </div>
-      </article>
-    `
+      </article>`;
   }
 
   async function loadCategories() {
-    const { data, error } = await window.supabaseClient
-      .from('categories')
-      .select('id, name, slug, icon, sort_order')
-      .eq('is_active', true)
-      .order('sort_order', { ascending: true })
-
-    if (error) {
-      console.error('Categories error:', error)
-      return []
-    }
-    return data || []
+    const { data } = await window.supabaseClient
+      .from('categories').select('id, name, slug, icon, sort_order')
+      .eq('is_active', true).order('sort_order', { ascending: true });
+    return data || [];
   }
 
   function renderCategoryRow(categories) {
-    const row = document.getElementById('categoriesRow')
-    if (!categories.length) { row.innerHTML = ''; return }
+    const row = document.getElementById('categoriesRow');
     row.innerHTML = categories.map(c => `
       <a href="catalog.html?category=${encodeURIComponent(c.slug)}" class="cat-pill">
-        <span class="cat-icon">${escapeHtml(c.icon || '📦')}</span>
-        <span class="cat-label">${escapeHtml(c.name)}</span>
-      </a>
-    `).join('')
+        <span class="cat-icon">${esc(c.icon || '📦')}</span>
+        <span class="cat-label">${esc(c.name)}</span>
+      </a>`).join('');
+  }
+
+  // POPULAR CATEGORY TILES
+  async function renderCategoryTiles(categories) {
+    const wrap = document.getElementById('categoryTiles');
+    const counts = {};
+    await Promise.all(categories.map(async c => {
+      const { count } = await window.supabaseClient
+        .from('listings').select('*', { count: 'exact', head: true })
+        .eq('category_id', c.id).eq('status', 'active');
+      counts[c.id] = count || 0;
+    }));
+
+    wrap.innerHTML = categories.slice(0, 8).map(c => `
+      <a href="catalog.html?category=${encodeURIComponent(c.slug)}" class="cat-tile">
+        <div class="cat-tile-content">
+          <div class="cat-tile-name">${esc(c.name)}</div>
+          <div class="cat-tile-count">${counts[c.id] || 0} items</div>
+        </div>
+      </a>`).join('');
   }
 
   async function loadFeatured() {
-    const grid = document.getElementById('featuredGrid')
-    grid.innerHTML = skeletonCards(4)
-
-    const { data, error } = await window.supabaseClient
-      .from('listings')
-      .select('*')
-      .eq('status', 'active')
-      .eq('is_featured', true)
-      .order('created_at', { ascending: false })
-      .limit(8)
-
-    if (error) {
-      grid.innerHTML = emptyState()
-      return
-    }
-
-    let listings = data || []
+    const grid = document.getElementById('featuredGrid');
+    const { data } = await window.supabaseClient
+      .from('listings').select('*').eq('status', 'active').eq('is_featured', true)
+      .order('created_at', { ascending: false }).limit(8);
+    let listings = data || [];
     if (!listings.length) {
-      const { data: fallback } = await window.supabaseClient
-        .from('listings')
-        .select('*')
-        .eq('status', 'active')
-        .order('created_at', { ascending: false })
-        .limit(4)
-      listings = fallback || []
+      const fallback = await window.supabaseClient
+        .from('listings').select('*').eq('status', 'active')
+        .order('created_at', { ascending: false }).limit(4);
+      listings = fallback.data || [];
     }
-
-    if (!listings.length) { grid.innerHTML = emptyState(); return }
-    grid.innerHTML = listings.map(renderCard).join('')
+    if (!listings.length) { grid.innerHTML = emptyState(); return; }
+    grid.innerHTML = listings.map(renderCard).join('');
   }
 
   async function loadRecent() {
-    const grid = document.getElementById('recentGrid')
-    grid.innerHTML = skeletonCards(4)
-
-    const { data, error } = await window.supabaseClient
-      .from('listings')
-      .select('*')
-      .eq('status', 'active')
-      .order('created_at', { ascending: false })
-      .limit(8)
-
-    if (error) {
-      grid.innerHTML = emptyState()
-      return
-    }
-
-    if (!data || !data.length) { grid.innerHTML = emptyState(); return }
-    grid.innerHTML = data.map(renderCard).join('')
+    const grid = document.getElementById('recentGrid');
+    const { data } = await window.supabaseClient
+      .from('listings').select('*').eq('status', 'active')
+      .order('created_at', { ascending: false }).limit(8);
+    if (!data || !data.length) { grid.innerHTML = emptyState(); return; }
+    grid.innerHTML = data.map(renderCard).join('');
   }
 
-  // ============================================
   // CATEGORY CAROUSELS
-  // Only categories with listings shown.
-  // Each carousel slides at its own random interval.
-  // ============================================
   async function loadCategoryCarousels(categories) {
-    const container = document.getElementById('categoryCarousels')
-    container.innerHTML = ''
+    const container = document.getElementById('categoryCarousels');
+    container.innerHTML = '';
 
     for (const cat of categories) {
       const { data } = await window.supabaseClient
-        .from('listings')
-        .select('*')
-        .eq('status', 'active')
-        .eq('category_id', cat.id)
-        .order('created_at', { ascending: false })
-        .limit(20)
+        .from('listings').select('*').eq('status', 'active').eq('category_id', cat.id)
+        .order('created_at', { ascending: false }).limit(20);
 
-      const listings = data || []
-      if (listings.length < 1) continue
+      const listings = data || [];
+      if (listings.length < 1) continue;
 
-      const section = document.createElement('section')
-      section.className = 'carousel-section'
+      const section = document.createElement('section');
+      section.className = 'carousel-section';
       section.innerHTML = `
         <div class="carousel-head">
           <h2 class="carousel-title">
-            <span class="carousel-title-icon">${escapeHtml(cat.icon || '📦')}</span>
-            ${escapeHtml(cat.name)}
+            <span class="carousel-title-icon">${esc(cat.icon || '📦')}</span>
+            ${esc(cat.name)}
           </h2>
           <a href="catalog.html?category=${encodeURIComponent(cat.slug)}" class="carousel-view-all">View all →</a>
         </div>
@@ -918,104 +857,87 @@
           <button class="carousel-arrow prev" aria-label="Scroll left">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
           </button>
-          <div class="carousel-track">
-            ${listings.map(renderCard).join('')}
-          </div>
+          <div class="carousel-track">${listings.map(renderCard).join('')}</div>
           <button class="carousel-arrow next" aria-label="Scroll right">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
           </button>
-        </div>
-      `
-      container.appendChild(section)
+        </div>`;
+      container.appendChild(section);
 
-      const trackEl = section.querySelector('.carousel-track')
-      const prevBtn = section.querySelector('.carousel-arrow.prev')
-      const nextBtn = section.querySelector('.carousel-arrow.next')
+      const trackEl = section.querySelector('.carousel-track');
+      const prevBtn = section.querySelector('.carousel-arrow.prev');
+      const nextBtn = section.querySelector('.carousel-arrow.next');
 
-      prevBtn.addEventListener('click', () => trackEl.scrollBy({ left: -trackEl.clientWidth * 0.9, behavior: 'smooth' }))
-      nextBtn.addEventListener('click', () => trackEl.scrollBy({ left: trackEl.clientWidth * 0.9, behavior: 'smooth' }))
+      prevBtn.addEventListener('click', () => trackEl.scrollBy({ left: -trackEl.clientWidth * 0.9, behavior: 'smooth' }));
+      nextBtn.addEventListener('click', () => trackEl.scrollBy({ left: trackEl.clientWidth * 0.9, behavior: 'smooth' }));
 
-      // AUTO-SLIDE — each category gets its own random interval (4-9s)
-      const interval = 4000 + Math.floor(Math.random() * 5000)
-      let userPaused = false
-
-      trackEl.addEventListener('mouseenter', () => { userPaused = true })
-      trackEl.addEventListener('mouseleave', () => { userPaused = false })
-      trackEl.addEventListener('touchstart', () => { userPaused = true }, { passive: true })
-      trackEl.addEventListener('touchend', () => { setTimeout(() => { userPaused = false }, 3000) }, { passive: true })
+      const interval = 4000 + Math.floor(Math.random() * 5000);
+      let userPaused = false;
+      trackEl.addEventListener('mouseenter', () => { userPaused = true; });
+      trackEl.addEventListener('mouseleave', () => { userPaused = false; });
+      trackEl.addEventListener('touchstart', () => { userPaused = true; }, { passive: true });
+      trackEl.addEventListener('touchend', () => { setTimeout(() => { userPaused = false; }, 3000); }, { passive: true });
 
       const timer = setInterval(() => {
-        if (userPaused) return
-        const maxScroll = trackEl.scrollWidth - trackEl.clientWidth
+        if (userPaused) return;
+        const maxScroll = trackEl.scrollWidth - trackEl.clientWidth;
         if (trackEl.scrollLeft >= maxScroll - 20) {
-          trackEl.scrollTo({ left: 0, behavior: 'smooth' })
+          trackEl.scrollTo({ left: 0, behavior: 'smooth' });
         } else {
-          trackEl.scrollBy({ left: trackEl.clientWidth * 0.9, behavior: 'smooth' })
+          trackEl.scrollBy({ left: trackEl.clientWidth * 0.9, behavior: 'smooth' });
         }
-      }, interval)
+      }, interval);
 
-      carouselTimers.push(timer)
+      carouselTimers.push(timer);
     }
   }
 
   async function toggleWishlist(listingId, btn) {
-    const { data: { session } } = await window.supabaseClient.auth.getSession()
-    if (!session) { window.location.href = 'login.html'; return }
-
+    const { data: { session } } = await window.supabaseClient.auth.getSession();
+    if (!session) { window.location.href = 'login.html'; return; }
     const { data: existing } = await window.supabaseClient
-      .from('wishlists')
-      .select('id')
-      .eq('user_id', session.user.id)
-      .eq('listing_id', listingId)
-      .maybeSingle()
-
+      .from('wishlists').select('id')
+      .eq('user_id', session.user.id).eq('listing_id', listingId).maybeSingle();
     if (existing) {
-      await window.supabaseClient.from('wishlists').delete().eq('id', existing.id)
-      btn.classList.remove('active')
-      btn.querySelector('svg').setAttribute('fill', 'none')
+      await window.supabaseClient.from('wishlists').delete().eq('id', existing.id);
+      btn.classList.remove('active');
+      btn.querySelector('svg').setAttribute('fill', 'none');
     } else {
-      await window.supabaseClient.from('wishlists').insert({ user_id: session.user.id, listing_id: listingId })
-      btn.classList.add('active')
-      btn.querySelector('svg').setAttribute('fill', 'var(--coral)')
+      await window.supabaseClient.from('wishlists').insert({ user_id: session.user.id, listing_id: listingId });
+      btn.classList.add('active');
+      btn.querySelector('svg').setAttribute('fill', 'var(--coral)');
     }
   }
 
-  async function checkAuth() {
-    const { data: { session } } = await window.supabaseClient.auth.getSession()
-    if (session) document.getElementById('notifDot').style.display = 'block'
-  }
-
-  // LANGUAGE SELECTOR
+  // LANGUAGE
   function handleLanguageChange(lang) {
-    localStorage.setItem('relovly_lang', lang)
-    document.documentElement.lang = lang
-    // Actual translation wiring to be added later
+    localStorage.setItem('relovly_lang', lang);
+    document.documentElement.lang = lang;
   }
-
   function restoreLanguage() {
-    const saved = localStorage.getItem('relovly_lang') || 'en'
-    const sel = document.getElementById('langSelect')
-    if (sel) sel.value = saved
-    document.documentElement.lang = saved
+    const saved = localStorage.getItem('relovly_lang') || 'en';
+    const sel = document.getElementById('langSelect');
+    if (sel) sel.value = saved;
+    document.documentElement.lang = saved;
   }
 
   window.addEventListener('supabase-ready', async () => {
-    let tries = 0
+    let tries = 0;
     while (!window.supabaseClient && tries < 50) {
-      await new Promise(r => setTimeout(r, 100))
-      tries++
+      await new Promise(r => setTimeout(r, 100));
+      tries++;
     }
-    if (!window.supabaseClient) return
+    if (!window.supabaseClient) return;
 
-    restoreLanguage()
-    checkAuth()
+    restoreLanguage();
 
-    const categories = await loadCategories()
-    renderCategoryRow(categories)
+    const categories = await loadCategories();
+    renderCategoryRow(categories);
+    renderCategoryTiles(categories);
 
-    await Promise.all([loadFeatured(), loadRecent()])
-    await loadCategoryCarousels(categories)
-  })
+    await Promise.all([loadFeatured(), loadRecent()]);
+    await loadCategoryCarousels(categories);
+  });
 </script>
 
 </body>

@@ -39,13 +39,10 @@
   img { display: block; max-width: 100%; }
   button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
-  /* ============================================
-     NAVIGATION
-     ============================================ */
+  /* NAV */
   .nav { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 0 16px; }
-  .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 16px; height: 64px; }
+  .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 12px; height: 64px; }
 
-  /* LOGO — The Halo */
   .logo { display: flex; align-items: center; gap: 11px; flex-shrink: 0; line-height: 1; }
   .halo { width: 34px; height: 34px; flex-shrink: 0; }
   .halo svg { width: 100%; height: 100%; display: block; }
@@ -58,12 +55,7 @@
     line-height: 1;
     padding-bottom: 2px;
   }
-  .wordmark em {
-    font-style: italic;
-    font-weight: 500;
-    color: var(--coral);
-    letter-spacing: -1.4px;
-  }
+  .wordmark em { font-style: italic; font-weight: 500; color: var(--coral); letter-spacing: -1.4px; }
 
   .nav-search { flex: 1; max-width: 480px; position: relative; display: none; }
   .nav-search input {
@@ -79,11 +71,10 @@
 
   .nav-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
 
-  /* Language selector — replaces the bell */
+  /* LANGUAGE SELECTOR — always visible */
   .lang-select {
-    display: none;
+    display: flex;
     align-items: center;
-    gap: 6px;
     height: 38px;
     padding: 0 26px 0 12px;
     border: 1px solid var(--border);
@@ -91,23 +82,23 @@
     border-radius: var(--r-pill);
     font-size: 13px;
     font-weight: 500;
-    color: var(--text-2);
+    color: var(--text);
     font-family: inherit;
     cursor: pointer;
     appearance: none;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%239A9A9A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");
     background-repeat: no-repeat;
     background-position: right 10px center;
     transition: border-color 0.15s;
   }
-  .lang-select:hover { border-color: var(--border-strong); }
+  .lang-select:hover { border-color: var(--coral); }
   .lang-select:focus { outline: none; border-color: var(--coral); }
 
   .icon-btn {
     width: 40px; height: 40px; border-radius: var(--r-pill);
     display: flex; align-items: center; justify-content: center;
     color: var(--text-2); transition: background 0.15s, color 0.15s;
-    position: relative;
   }
   .icon-btn:hover { background: var(--bg); color: var(--text); }
 
@@ -119,11 +110,8 @@
     transition: background 0.15s, transform 0.1s;
   }
   .btn-buy:hover { background: var(--coral-dark); }
-  .btn-buy:active { transform: scale(0.98); }
 
-  /* ============================================
-     HERO SLIDER — REDUCED HEIGHT
-     ============================================ */
+  /* HERO SLIDER */
   .hero-slider { position: relative; max-width: 1400px; margin: 12px auto 0; padding: 0 16px; }
   .slider-viewport {
     position: relative; width: 100%; height: 160px;
@@ -133,7 +121,6 @@
   .slides-track { display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); will-change: transform; }
   .slide { flex: 0 0 100%; height: 100%; position: relative; overflow: hidden; }
   .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
   .slider-arrow {
     position: absolute; top: 50%; transform: translateY(-50%);
     width: 36px; height: 36px; border-radius: 50%;
@@ -145,14 +132,11 @@
   .slider-arrow:hover { background: white; transform: translateY(-50%) scale(1.06); }
   .slider-arrow.prev { left: 12px; }
   .slider-arrow.next { right: 12px; }
-
   .slider-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 5; }
   .slider-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.55); transition: background 0.2s, width 0.2s; cursor: pointer; }
   .slider-dot.active { background: white; width: 20px; border-radius: var(--r-pill); }
 
-  /* ============================================
-     CATEGORY ROW (pills)
-     ============================================ */
+  /* CATEGORY ROW */
   .categories { max-width: 1400px; margin: 0 auto; padding: 20px 0 4px; overflow-x: auto; scrollbar-width: none; }
   .categories::-webkit-scrollbar { display: none; }
   .categories-inner { display: flex; gap: 10px; padding: 0 16px; min-width: max-content; }
@@ -172,20 +156,15 @@
   }
   .cat-label { font-size: 11px; font-weight: 500; color: var(--text); text-align: center; line-height: 1.2; }
 
-  /* ============================================
-     SECTIONS + GRID
-     ============================================ */
+  /* SECTIONS */
   .section { max-width: 1400px; margin: 0 auto; padding: 28px 16px; }
   .section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; gap: 16px; }
   .section-title { font-family: var(--font-display); font-size: clamp(20px, 3vw, 24px); font-weight: 700; letter-spacing: -0.6px; color: var(--text); }
   .section-link { font-size: 13px; font-weight: 600; color: var(--coral); white-space: nowrap; }
   .section-link:hover { color: var(--coral-dark); }
-
   .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
-  /* ============================================
-     PRODUCT CARD — NO BADGES
-     ============================================ */
+  /* PRODUCT CARD */
   .card {
     background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md);
     overflow: hidden; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
@@ -195,7 +174,6 @@
   .card-media { position: relative; aspect-ratio: 1 / 1; background: linear-gradient(135deg, #F5F2ED 0%, #EBE7E0 100%); overflow: hidden; }
   .card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
   .card:hover .card-media img { transform: scale(1.03); }
-
   .card-like {
     position: absolute; top: 10px; right: 10px;
     width: 32px; height: 32px; border-radius: 50%;
@@ -205,7 +183,6 @@
     transition: color 0.15s, transform 0.15s; backdrop-filter: blur(6px);
   }
   .card-like:hover { color: var(--coral); transform: scale(1.08); }
-
   .card-body { padding: 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
   .card-seller { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-2); }
   .card-avatar {
@@ -227,105 +204,105 @@
   .chip-pickup { background: #EEF1F5; color: #5A6B7D; }
 
   /* ============================================
-     POPULAR CATEGORIES — SMALL SQUARE TILES (RESTORED)
+     POPULAR CATEGORIES — TILES WITH LISTING IMAGES
      ============================================ */
   .cat-tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .cat-tile {
-    position: relative; aspect-ratio: 4 / 3;
-    border-radius: var(--r-md); overflow: hidden;
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--r-md);
+    overflow: hidden;
     background: linear-gradient(135deg, #F5F2ED, #E4DFD6);
-    display: flex; align-items: flex-end; padding: 16px;
-    cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-decoration: none;
   }
   .cat-tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-  .cat-tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.55) 100%); }
-  .cat-tile-content { position: relative; z-index: 2; color: white; }
-  .cat-tile-name { font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: -0.3px; }
-  .cat-tile-count { font-size: 12px; opacity: 0.85; margin-top: 2px; }
 
-  /* ============================================
-     CATEGORY CAROUSELS — SEPARATE SECTION
-     ============================================ */
-  .carousel-section {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 16px;
-    margin-bottom: 28px;
-  }
-  .carousel-head {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
-    padding: 0 4px;
-  }
-  .carousel-title {
-    font-family: var(--font-display);
-    font-size: clamp(18px, 2.4vw, 22px);
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: var(--text);
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .carousel-title-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: var(--r-sm);
-    background: var(--coral-soft);
-    color: var(--coral);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-  .carousel-view-all {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--coral);
-    white-space: nowrap;
-  }
-  .carousel-view-all:hover { color: var(--coral-dark); }
-
-  .carousel-wrap { position: relative; }
-  .carousel-track {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    padding-bottom: 4px;
-  }
-  .carousel-track::-webkit-scrollbar { display: none; }
-  .carousel-track .card { min-width: 180px; max-width: 180px; flex-shrink: 0; }
-
-  .carousel-arrow {
+  /* Slide track inside tile */
+  .cat-tile-track {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--card);
-    border: 1px solid var(--border);
-    display: none;
+    inset: 0;
+    display: flex;
+    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
+  }
+  .cat-tile-slide {
+    flex: 0 0 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .cat-tile-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Fallback when no images */
+  .cat-tile-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text);
-    box-shadow: var(--shadow-md);
-    z-index: 5;
-    transition: background 0.15s, transform 0.15s;
+    font-size: 48px;
+    background: linear-gradient(135deg, #F5F2ED, #E4DFD6);
   }
-  .carousel-arrow:hover { background: var(--coral); color: white; border-color: var(--coral); transform: translateY(-50%) scale(1.06); }
-  .carousel-arrow.prev { left: -8px; }
-  .carousel-arrow.next { right: -8px; }
 
-  /* ============================================
-     EMPTY STATE
-     ============================================ */
+  /* Overlay gradient for text legibility */
+  .cat-tile-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.65) 100%);
+    z-index: 2;
+  }
+
+  .cat-tile-content {
+    position: relative;
+    z-index: 3;
+    color: white;
+  }
+  .cat-tile-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+  .cat-tile-count {
+    font-size: 12px;
+    opacity: 0.92;
+    margin-top: 2px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+
+  /* Small tile dots indicator */
+  .cat-tile-dots {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    gap: 4px;
+    z-index: 3;
+  }
+  .cat-tile-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    transition: background 0.2s, width 0.2s;
+  }
+  .cat-tile-dot.active {
+    background: white;
+    width: 14px;
+    border-radius: var(--r-pill);
+  }
+
+  /* EMPTY STATE */
   .empty-block {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 48px 24px;
@@ -350,10 +327,7 @@
   }
   .empty-btn:hover { background: var(--coral-dark); }
 
-  /* Skeleton */
-  .skeleton {
-    background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden;
-  }
+  .skeleton { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
   .skeleton-media { aspect-ratio: 1 / 1; background: linear-gradient(90deg, #F5F2ED, #EBE7E0, #F5F2ED); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
   .skeleton-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
   .skeleton-line { height: 12px; background: linear-gradient(90deg, #F5F2ED, #EBE7E0, #F5F2ED); background-size: 200% 100%; border-radius: 4px; animation: shimmer 1.5s infinite; }
@@ -361,9 +335,7 @@
   .skeleton-line.price { height: 20px; width: 40%; }
   @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-  /* ============================================
-     FOOTER
-     ============================================ */
+  /* FOOTER */
   .footer { background: var(--card); border-top: 1px solid var(--border); margin-top: 40px; padding: 48px 16px 32px; }
   .footer-inner { max-width: 1400px; margin: 0 auto; }
   .footer-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
@@ -373,20 +345,16 @@
   .footer-col li { margin-bottom: 10px; }
   .footer-col a { font-size: 14px; color: var(--text-2); transition: color 0.15s; }
   .footer-col a:hover { color: var(--coral); }
-
   .footer-trending { padding-top: 32px; border-top: 1px solid var(--border); }
   .footer-trending h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-2); margin-bottom: 14px; }
   .trend-chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .trend-chip { padding: 6px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-pill); font-size: 12px; color: var(--text-2); transition: border-color 0.15s, color 0.15s; cursor: pointer; }
   .trend-chip:hover { border-color: var(--coral); color: var(--coral); }
-
   .footer-bottom { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text-3); }
   .footer-bottom-links { display: flex; flex-wrap: wrap; gap: 16px; }
   .footer-bottom-links a:hover { color: var(--coral); }
 
-  /* ============================================
-     MOBILE BOTTOM BAR
-     ============================================ */
+  /* MOBILE BAR */
   .mobile-bar {
     position: fixed; bottom: 0; left: 0; right: 0;
     background: var(--card); border-top: 1px solid var(--border);
@@ -402,15 +370,11 @@
     margin-top: -18px;
     box-shadow: 0 4px 12px rgba(232,90,79,0.35);
   }
-
   @media (max-width: 767px) { body { padding-bottom: 72px; } }
 
-  /* ============================================
-     RESPONSIVE
-     ============================================ */
+  /* RESPONSIVE */
   @media (min-width: 768px) {
     .nav-search { display: block; }
-    .lang-select { display: flex; }
     .grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .cat-tiles { grid-template-columns: repeat(3, 1fr); }
     .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
@@ -418,17 +382,21 @@
     body { padding-bottom: 0; }
     .slider-viewport { height: 200px; }
     .slider-arrow { display: flex; }
-    .carousel-track .card { min-width: 220px; max-width: 220px; }
-    .carousel-arrow { display: flex; }
   }
 
   @media (min-width: 1200px) {
     .grid { grid-template-columns: repeat(4, 1fr); }
     .cat-tiles { grid-template-columns: repeat(4, 1fr); }
     .section { padding: 36px 24px; }
-    .carousel-section { padding: 0 24px; }
     .slider-viewport { height: 240px; }
-    .carousel-track .card { min-width: 240px; max-width: 240px; }
+  }
+
+  /* Hide language label text on very small phones */
+  @media (max-width: 420px) {
+    .lang-select {
+      font-size: 12px;
+      padding: 0 22px 0 8px;
+    }
   }
 
   :focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 4px; }
@@ -440,9 +408,7 @@
 </head>
 <body>
 
-<!-- ============================================
-     NAV
-     ============================================ -->
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="logo">
@@ -459,7 +425,7 @@
       <span class="nav-search-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       </span>
-      <input type="text" id="navSearchInput" placeholder="Search cameras, watches, bicycles..." onkeydown="if(event.key==='Enter'){window.location.href='catalog.html?q='+encodeURIComponent(this.value)}">
+      <input type="text" placeholder="Search cameras, watches, bicycles..." onkeydown="if(event.key==='Enter'){window.location.href='catalog.html?q='+encodeURIComponent(this.value)}">
     </div>
 
     <div class="nav-actions">
@@ -516,7 +482,7 @@
   <div class="categories-inner" id="categoriesRow"></div>
 </div>
 
-<!-- FEATURED PRODUCTS -->
+<!-- FEATURED -->
 <section class="section">
   <div class="section-head">
     <h2 class="section-title">Featured Products</h2>
@@ -534,7 +500,7 @@
   <div class="grid" id="recentGrid"></div>
 </section>
 
-<!-- POPULAR CATEGORIES — SMALL SQUARE TILES (RESTORED) -->
+<!-- POPULAR CATEGORIES — TILES WITH LISTING IMAGES -->
 <section class="section">
   <div class="section-head">
     <h2 class="section-title">Popular Categories</h2>
@@ -542,9 +508,6 @@
   </div>
   <div class="cat-tiles" id="categoryTiles"></div>
 </section>
-
-<!-- CATEGORY CAROUSELS — SEPARATE SECTION -->
-<div id="categoryCarousels"></div>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -564,33 +527,17 @@
       </div>
       <div class="footer-col">
         <h4>Buy</h4>
-        <ul>
-          <li><a href="#">How to Buy</a></li>
-          <li><a href="#">Buyer Protection</a></li>
-          <li><a href="#">Shipping Info</a></li>
-          <li><a href="#">Returns</a></li>
-        </ul>
+        <ul><li><a href="#">How to Buy</a></li><li><a href="#">Buyer Protection</a></li><li><a href="#">Shipping Info</a></li><li><a href="#">Returns</a></li></ul>
       </div>
       <div class="footer-col">
         <h4>Sell</h4>
-        <ul>
-          <li><a href="#">Start Selling</a></li>
-          <li><a href="#">Seller Fees</a></li>
-          <li><a href="#">Verification</a></li>
-          <li><a href="#">Seller Guide</a></li>
-        </ul>
+        <ul><li><a href="#">Start Selling</a></li><li><a href="#">Seller Fees</a></li><li><a href="#">Verification</a></li><li><a href="#">Seller Guide</a></li></ul>
       </div>
       <div class="footer-col">
         <h4>Support</h4>
-        <ul>
-          <li><a href="#">Help Centre</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Disputes</a></li>
-          <li><a href="#">Report Listing</a></li>
-        </ul>
+        <ul><li><a href="#">Help Centre</a></li><li><a href="#">Contact Us</a></li><li><a href="#">Disputes</a></li><li><a href="#">Report Listing</a></li></ul>
       </div>
     </div>
-
     <div class="footer-trending">
       <h4>Trending Searches</h4>
       <div class="trend-chips">
@@ -606,7 +553,6 @@
         <a href="catalog.html?q=nintendo" class="trend-chip">Nintendo Switch</a>
       </div>
     </div>
-
     <div class="footer-bottom">
       <span>© 2026 relovly. All rights reserved.</span>
       <div class="footer-bottom-links">
@@ -692,7 +638,7 @@
 </script>
 
 <script>
-  let carouselTimers = [];
+  let categoryTileTimers = [];
 
   function formatPrice(price, currency) {
     const n = parseFloat(price || 0);
@@ -785,24 +731,86 @@
       </a>`).join('');
   }
 
-  // POPULAR CATEGORY TILES
+  // ============================================
+  // POPULAR CATEGORY TILES — with listing images
+  // ============================================
   async function renderCategoryTiles(categories) {
     const wrap = document.getElementById('categoryTiles');
-    const counts = {};
-    await Promise.all(categories.map(async c => {
-      const { count } = await window.supabaseClient
-        .from('listings').select('*', { count: 'exact', head: true })
-        .eq('category_id', c.id).eq('status', 'active');
-      counts[c.id] = count || 0;
-    }));
+    wrap.innerHTML = '';
 
-    wrap.innerHTML = categories.slice(0, 8).map(c => `
-      <a href="catalog.html?category=${encodeURIComponent(c.slug)}" class="cat-tile">
-        <div class="cat-tile-content">
-          <div class="cat-tile-name">${esc(c.name)}</div>
-          <div class="cat-tile-count">${counts[c.id] || 0} items</div>
-        </div>
-      </a>`).join('');
+    // Fetch listings per category
+    for (const cat of categories.slice(0, 8)) {
+      const { data } = await window.supabaseClient
+        .from('listings')
+        .select('id, images')
+        .eq('status', 'active')
+        .eq('category_id', cat.id)
+        .order('created_at', { ascending: false })
+        .limit(10);
+
+      const listings = (data || []).filter(l => Array.isArray(l.images) && l.images[0]);
+      const images = listings.map(l => l.images[0]);
+      const count = listings.length;
+
+      // Build tile HTML
+      const tile = document.createElement('a');
+      tile.href = `catalog.html?category=${encodeURIComponent(cat.slug)}`;
+      tile.className = 'cat-tile';
+      tile.dataset.tileIndex = categoryTileTimers.length;
+
+      let tileInner = '';
+
+      if (images.length > 0) {
+        // Track of slides
+        const slidesHtml = images.map(src => `
+          <div class="cat-tile-slide">
+            <img src="${esc(src)}" alt="${esc(cat.name)}" loading="lazy">
+          </div>`).join('');
+
+        const dotsHtml = images.length > 1
+          ? `<div class="cat-tile-dots">${images.map((_, i) => `<span class="cat-tile-dot${i === 0 ? ' active' : ''}"></span>`).join('')}</div>`
+          : '';
+
+        tileInner = `
+          <div class="cat-tile-track" data-track>${slidesHtml}</div>
+          <div class="cat-tile-overlay"></div>
+          ${dotsHtml}
+          <div class="cat-tile-content">
+            <div class="cat-tile-name">${esc(cat.name)}</div>
+            <div class="cat-tile-count">${count} ${count === 1 ? 'item' : 'items'}</div>
+          </div>`;
+      } else {
+        // No images — fallback icon
+        tileInner = `
+          <div class="cat-tile-fallback">${esc(cat.icon || '📦')}</div>
+          <div class="cat-tile-overlay"></div>
+          <div class="cat-tile-content">
+            <div class="cat-tile-name">${esc(cat.name)}</div>
+            <div class="cat-tile-count">No items yet</div>
+          </div>`;
+      }
+
+      tile.innerHTML = tileInner;
+      wrap.appendChild(tile);
+
+      // Auto-slide inside tile if multiple images
+      if (images.length > 1) {
+        const trackEl = tile.querySelector('[data-track]');
+        const dotEls = tile.querySelectorAll('.cat-tile-dot');
+        let idx = 0;
+
+        // Random interval per tile: 3s – 6s
+        const interval = 3000 + Math.floor(Math.random() * 3000);
+
+        const timer = setInterval(() => {
+          idx = (idx + 1) % images.length;
+          trackEl.style.transform = `translateX(-${idx * 100}%)`;
+          dotEls.forEach((d, i) => d.classList.toggle('active', i === idx));
+        }, interval);
+
+        categoryTileTimers.push(timer);
+      }
+    }
   }
 
   async function loadFeatured() {
@@ -830,68 +838,6 @@
     grid.innerHTML = data.map(renderCard).join('');
   }
 
-  // CATEGORY CAROUSELS
-  async function loadCategoryCarousels(categories) {
-    const container = document.getElementById('categoryCarousels');
-    container.innerHTML = '';
-
-    for (const cat of categories) {
-      const { data } = await window.supabaseClient
-        .from('listings').select('*').eq('status', 'active').eq('category_id', cat.id)
-        .order('created_at', { ascending: false }).limit(20);
-
-      const listings = data || [];
-      if (listings.length < 1) continue;
-
-      const section = document.createElement('section');
-      section.className = 'carousel-section';
-      section.innerHTML = `
-        <div class="carousel-head">
-          <h2 class="carousel-title">
-            <span class="carousel-title-icon">${esc(cat.icon || '📦')}</span>
-            ${esc(cat.name)}
-          </h2>
-          <a href="catalog.html?category=${encodeURIComponent(cat.slug)}" class="carousel-view-all">View all →</a>
-        </div>
-        <div class="carousel-wrap">
-          <button class="carousel-arrow prev" aria-label="Scroll left">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
-          </button>
-          <div class="carousel-track">${listings.map(renderCard).join('')}</div>
-          <button class="carousel-arrow next" aria-label="Scroll right">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-          </button>
-        </div>`;
-      container.appendChild(section);
-
-      const trackEl = section.querySelector('.carousel-track');
-      const prevBtn = section.querySelector('.carousel-arrow.prev');
-      const nextBtn = section.querySelector('.carousel-arrow.next');
-
-      prevBtn.addEventListener('click', () => trackEl.scrollBy({ left: -trackEl.clientWidth * 0.9, behavior: 'smooth' }));
-      nextBtn.addEventListener('click', () => trackEl.scrollBy({ left: trackEl.clientWidth * 0.9, behavior: 'smooth' }));
-
-      const interval = 4000 + Math.floor(Math.random() * 5000);
-      let userPaused = false;
-      trackEl.addEventListener('mouseenter', () => { userPaused = true; });
-      trackEl.addEventListener('mouseleave', () => { userPaused = false; });
-      trackEl.addEventListener('touchstart', () => { userPaused = true; }, { passive: true });
-      trackEl.addEventListener('touchend', () => { setTimeout(() => { userPaused = false; }, 3000); }, { passive: true });
-
-      const timer = setInterval(() => {
-        if (userPaused) return;
-        const maxScroll = trackEl.scrollWidth - trackEl.clientWidth;
-        if (trackEl.scrollLeft >= maxScroll - 20) {
-          trackEl.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          trackEl.scrollBy({ left: trackEl.clientWidth * 0.9, behavior: 'smooth' });
-        }
-      }, interval);
-
-      carouselTimers.push(timer);
-    }
-  }
-
   async function toggleWishlist(listingId, btn) {
     const { data: { session } } = await window.supabaseClient.auth.getSession();
     if (!session) { window.location.href = 'login.html'; return; }
@@ -909,7 +855,6 @@
     }
   }
 
-  // LANGUAGE
   function handleLanguageChange(lang) {
     localStorage.setItem('relovly_lang', lang);
     document.documentElement.lang = lang;
@@ -933,10 +878,8 @@
 
     const categories = await loadCategories();
     renderCategoryRow(categories);
-    renderCategoryTiles(categories);
-
     await Promise.all([loadFeatured(), loadRecent()]);
-    await loadCategoryCarousels(categories);
+    await renderCategoryTiles(categories);
   });
 </script>
 

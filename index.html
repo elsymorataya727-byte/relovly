@@ -71,7 +71,7 @@
 
   .nav-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
 
-  /* LANGUAGE SELECTOR — always visible */
+  /* LANGUAGE SELECTOR */
   .lang-select {
     display: flex;
     align-items: center;
@@ -108,7 +108,6 @@
   .btn-buy:hover { background: var(--coral-dark); }
   .btn-buy:active { transform: scale(0.98); }
 
-  /* Hide the cart icon and Buy text on very small screens to fit */
   .btn-buy span { display: inline; }
   @media (max-width: 400px) {
     .btn-buy span { display: none; }
@@ -168,6 +167,71 @@
   .section-link:hover { color: var(--coral-dark); }
   .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
+  /* INLINE SEARCH BAR (above Featured) */
+  .search-inline {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 16px 0;
+  }
+  .search-inline-form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .search-inline-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-3);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .search-inline input {
+    width: 100%;
+    height: 52px;
+    padding: 0 130px 0 50px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: var(--r-pill);
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--text);
+    outline: none;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .search-inline input:focus {
+    border-color: var(--coral);
+    box-shadow: 0 0 0 4px rgba(232,90,79,0.10);
+  }
+  .search-inline input::placeholder { color: var(--text-3); }
+  .search-inline-btn {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 40px;
+    padding: 0 20px;
+    background: var(--coral);
+    color: white;
+    border-radius: var(--r-pill);
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.15s;
+  }
+  .search-inline-btn:hover { background: var(--coral-dark); }
+  @media (max-width: 480px) {
+    .search-inline input { padding: 0 60px 0 46px; height: 48px; font-size: 14px; }
+    .search-inline-btn { padding: 0 14px; }
+    .search-inline-btn span { display: none; }
+  }
+
   /* PRODUCT CARD */
   .card {
     background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md);
@@ -217,7 +281,7 @@
     background: linear-gradient(135deg, #F5F2ED, #E4DFD6);
     display: flex;
     align-items: flex-end;
-    padding: 16px;
+    padding: 14px;
     cursor: pointer;
     transition: transform 0.15s, box-shadow 0.15s;
     text-decoration: none;
@@ -234,29 +298,33 @@
   .cat-tile-fallback {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
-    font-size: 48px;
+    font-size: 44px;
     background: linear-gradient(135deg, #F5F2ED, #E4DFD6);
   }
   .cat-tile-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.65) 100%);
+    background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.72) 100%);
     z-index: 2;
   }
   .cat-tile-content { position: relative; z-index: 3; color: white; }
   .cat-tile-name {
-    font-family: var(--font-display);
-    font-size: 18px; font-weight: 600;
-    letter-spacing: -0.3px;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    font-family: var(--font-ui);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    line-height: 1.2;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
   }
   .cat-tile-count {
-    font-size: 12px;
-    opacity: 0.92;
-    margin-top: 2px;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.88;
+    margin-top: 3px;
+    letter-spacing: 0.2px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
   }
   .cat-tile-dots {
-    position: absolute; bottom: 12px; right: 12px;
+    position: absolute; bottom: 10px; right: 10px;
     display: flex; gap: 4px; z-index: 3;
   }
   .cat-tile-dot {
@@ -266,7 +334,7 @@
   }
   .cat-tile-dot.active { background: white; width: 14px; border-radius: var(--r-pill); }
 
-  /* EMPTY / SKELETON */
+  /* EMPTY */
   .empty-block {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 48px 24px;
@@ -422,6 +490,24 @@
 <!-- CATEGORY ROW -->
 <div class="categories">
   <div class="categories-inner" id="categoriesRow"></div>
+</div>
+
+<!-- INLINE SEARCH (above Featured) -->
+<div class="search-inline">
+  <form class="search-inline-form" onsubmit="event.preventDefault(); const v = this.querySelector('input').value.trim(); if(v){window.location.href='catalog.html?q='+encodeURIComponent(v);}">
+    <span class="search-inline-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    </span>
+    <input
+      type="text"
+      data-i18n-placeholder="search_placeholder"
+      placeholder="Search cameras, watches, bicycles..."
+      aria-label="Search products">
+    <button type="submit" class="search-inline-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <span>Search</span>
+    </button>
+  </form>
 </div>
 
 <!-- FEATURED -->
@@ -623,6 +709,15 @@
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
+  // Fisher–Yates shuffle (in place)
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
   function conditionChip(condition) {
     const map = {
       brand_new: { label: 'Brand new', cls: 'chip-new' },
@@ -695,9 +790,19 @@
     }).join('');
   }
 
+  /**
+   * Popular Categories tiles:
+   *  - ONE tile per category
+   *  - Slides = only the FIRST image of each listing in that category
+   *  - Count label = "N available"
+   */
   async function renderCategoryTiles(categories) {
     const wrap = document.getElementById('categoryTiles');
     wrap.innerHTML = '';
+
+    // clear old timers
+    categoryTileTimers.forEach(clearInterval);
+    categoryTileTimers = [];
 
     for (const cat of categories.slice(0, 8)) {
       const { data } = await window.supabaseClient
@@ -706,12 +811,17 @@
         .eq('status', 'active')
         .eq('category_id', cat.id)
         .order('created_at', { ascending: false })
-        .limit(10);
+        .limit(20);
 
-      const listings = (data || []).filter(l => Array.isArray(l.images) && l.images[0]);
-      const images = listings.map(l => l.images[0]);
-      const count = listings.length;
-      const translatedName = window.relovlyI18n ? window.relovlyI18n.translateCategoryName(cat.name) : cat.name;
+      // Take only the FIRST image of each listing (one slide per item)
+      const firstImages = (data || [])
+        .map(l => (Array.isArray(l.images) && l.images[0]) ? l.images[0] : null)
+        .filter(Boolean);
+
+      const count = firstImages.length;
+      const translatedName = window.relovlyI18n
+        ? window.relovlyI18n.translateCategoryName(cat.name)
+        : cat.name;
 
       const tile = document.createElement('a');
       tile.href = `catalog.html?category=${encodeURIComponent(cat.slug)}`;
@@ -719,14 +829,14 @@
 
       let tileInner = '';
 
-      if (images.length > 0) {
-        const slidesHtml = images.map(src => `
+      if (count > 0) {
+        const slidesHtml = firstImages.map(src => `
           <div class="cat-tile-slide">
             <img src="${esc(src)}" alt="${esc(translatedName)}" loading="lazy">
           </div>`).join('');
 
-        const dotsHtml = images.length > 1
-          ? `<div class="cat-tile-dots">${images.map((_, i) => `<span class="cat-tile-dot${i === 0 ? ' active' : ''}"></span>`).join('')}</div>`
+        const dotsHtml = count > 1
+          ? `<div class="cat-tile-dots">${firstImages.map((_, i) => `<span class="cat-tile-dot${i === 0 ? ' active' : ''}"></span>`).join('')}</div>`
           : '';
 
         tileInner = `
@@ -735,7 +845,7 @@
           ${dotsHtml}
           <div class="cat-tile-content">
             <div class="cat-tile-name">${esc(translatedName)}</div>
-            <div class="cat-tile-count">${count} ${count === 1 ? 'item' : 'items'}</div>
+            <div class="cat-tile-count">${count} available</div>
           </div>`;
       } else {
         tileInner = `
@@ -750,7 +860,7 @@
       tile.innerHTML = tileInner;
       wrap.appendChild(tile);
 
-      if (images.length > 1) {
+      if (count > 1) {
         const trackEl = tile.querySelector('[data-track]');
         const dotEls = tile.querySelectorAll('.cat-tile-dot');
         let idx = 0;
@@ -758,7 +868,7 @@
         const interval = 3000 + Math.floor(Math.random() * 3000);
 
         const timer = setInterval(() => {
-          idx = (idx + 1) % images.length;
+          idx = (idx + 1) % count;
           trackEl.style.transform = `translateX(-${idx * 100}%)`;
           dotEls.forEach((d, i) => d.classList.toggle('active', i === idx));
         }, interval);
@@ -768,27 +878,41 @@
     }
   }
 
+  /**
+   * Featured Products — shuffled random order on every page load.
+   * Shows ALL active listings (featured ones first if any, then the rest),
+   * but shuffled so it feels fresh each visit.
+   */
   async function loadFeatured() {
     const grid = document.getElementById('featuredGrid');
+
     const { data } = await window.supabaseClient
-      .from('listings').select('*').eq('status', 'active').eq('is_featured', true)
-      .order('created_at', { ascending: false }).limit(8);
+      .from('listings')
+      .select('*')
+      .eq('status', 'active')
+      .limit(200);
+
     let listings = data || [];
+
     if (!listings.length) {
-      const fallback = await window.supabaseClient
-        .from('listings').select('*').eq('status', 'active')
-        .order('created_at', { ascending: false }).limit(4);
-      listings = fallback.data || [];
+      grid.innerHTML = emptyState();
+      return;
     }
-    if (!listings.length) { grid.innerHTML = emptyState(); return; }
+
+    // Shuffle so order changes on every page load
+    listings = shuffle(listings);
+
     grid.innerHTML = listings.map(renderCard).join('');
   }
 
+  /**
+   * Recently Added — first 10 newest items (time-based, this is correct here).
+   */
   async function loadRecent() {
     const grid = document.getElementById('recentGrid');
     const { data } = await window.supabaseClient
       .from('listings').select('*').eq('status', 'active')
-      .order('created_at', { ascending: false }).limit(8);
+      .order('created_at', { ascending: false }).limit(10);
     if (!data || !data.length) { grid.innerHTML = emptyState(); return; }
     grid.innerHTML = data.map(renderCard).join('');
   }

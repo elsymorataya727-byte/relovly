@@ -6,7 +6,7 @@
 <title>Product — relovly</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -18,7 +18,7 @@
     --card: #FFFFFF;
     --border: #EBE8E3;
     --border-strong: #DDD8D0;
-    --text: #1A1A1A;
+    --text: #0E0E0E;
     --text-2: #6B6B6B;
     --text-3: #9A9A9A;
     --green: #2E7D5B;
@@ -30,25 +30,32 @@
     --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
     --shadow-lg: 0 12px 32px rgba(0,0,0,0.10);
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-display: 'Lora', Georgia, serif;
+    --font-display: 'Fraunces', Georgia, serif;
   }
 
   html { scroll-behavior: smooth; }
   body { font-family: var(--font-ui); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
-  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
-  /* ============================================
-     NAV
-     ============================================ */
+  /* NAV */
   .nav { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 0 16px; }
   .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 20px; height: 64px; }
-  .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .logo-mark { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
-  .logo-mark svg { width: 34px; height: 34px; }
-  .logo-text { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--text); letter-spacing: -0.6px; line-height: 1; }
-  .logo-text em { font-style: normal; color: var(--coral); }
+
+  .logo { display: flex; align-items: center; gap: 11px; flex-shrink: 0; line-height: 1; }
+  .halo { width: 34px; height: 34px; flex-shrink: 0; }
+  .halo svg { width: 100%; height: 100%; display: block; }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -1.4px;
+    color: var(--text);
+    line-height: 1;
+    padding-bottom: 2px;
+  }
+  .wordmark em { font-style: italic; font-weight: 500; color: var(--coral); letter-spacing: -1.4px; }
 
   .nav-search { flex: 1; max-width: 560px; position: relative; display: none; }
   .nav-search input { width: 100%; height: 42px; padding: 0 16px 0 44px; border: 1px solid var(--border); background: var(--bg); border-radius: var(--r-pill); font-size: 14px; font-family: inherit; color: var(--text); outline: none; transition: border-color 0.15s, background 0.15s; }
@@ -59,37 +66,25 @@
   .nav-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
   .icon-btn { width: 40px; height: 40px; border-radius: var(--r-pill); display: flex; align-items: center; justify-content: center; color: var(--text-2); transition: background 0.15s, color 0.15s; position: relative; }
   .icon-btn:hover { background: var(--bg); color: var(--text); }
-  .icon-btn .dot { position: absolute; top: 8px; right: 8px; width: 8px; height: 8px; background: var(--coral); border-radius: 50%; border: 2px solid var(--card); }
 
   .btn-buy { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; background: var(--coral); color: white; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; transition: background 0.15s, transform 0.1s; }
   .btn-buy:hover { background: var(--coral-dark); }
 
-  /* ============================================
-     BREADCRUMB
-     ============================================ */
+  /* BREADCRUMB */
   .breadcrumb-wrap { max-width: 1400px; margin: 0 auto; padding: 20px 16px 0; }
   .breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-2); }
   .breadcrumb a { transition: color 0.15s; }
   .breadcrumb a:hover { color: var(--coral); }
   .breadcrumb svg { color: var(--text-3); }
 
-  /* ============================================
-     PRODUCT LAYOUT
-     ============================================ */
+  /* PRODUCT LAYOUT */
   .product-page { max-width: 1400px; margin: 0 auto; padding: 20px 16px 60px; }
-
   .product-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
 
-  /* Loading */
   .loading-center {
     grid-column: 1 / -1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 120px 20px;
-    color: var(--text-3);
-    gap: 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 120px 20px; color: var(--text-3); gap: 16px;
   }
   .spinner {
     width: 40px; height: 40px;
@@ -100,145 +95,51 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* Not found */
   .not-found {
     grid-column: 1 / -1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 80px 24px;
-    text-align: center;
-    background: var(--card);
-    border: 1px dashed var(--border-strong);
-    border-radius: var(--r-lg);
-  }
-  .not-found h2 {
-    font-family: var(--font-display);
-    font-size: 26px;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-  .not-found p {
-    font-size: 15px;
-    color: var(--text-2);
-    margin-bottom: 24px;
-    max-width: 400px;
-  }
-  .not-found a {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    height: 46px;
-    padding: 0 24px;
-    background: var(--coral);
-    color: white;
-    border-radius: var(--r-md);
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  /* ---------- GALLERY ---------- */
-  .gallery {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--r-lg);
-    overflow: hidden;
-    position: relative;
-  }
-  .gallery-main {
-    position: relative;
-    aspect-ratio: 1 / 1;
-    background: linear-gradient(135deg, #F5F2ED 0%, #EBE7E0 100%);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .gallery-main img { width: 100%; height: 100%; object-fit: cover; }
-  .gallery-main .empty-media {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    color: var(--text-3);
-    font-size: 13px;
-    gap: 10px;
+    padding: 80px 24px; text-align: center;
+    background: var(--card); border: 1px dashed var(--border-strong); border-radius: var(--r-lg);
   }
+  .not-found h2 { font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 10px; }
+  .not-found p { font-size: 15px; color: var(--text-2); margin-bottom: 24px; max-width: 400px; }
+  .not-found a { display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 24px; background: var(--coral); color: white; border-radius: var(--r-md); font-weight: 600; font-size: 14px; }
+
+  /* GALLERY */
+  .gallery { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; position: relative; }
+  .gallery-main { position: relative; aspect-ratio: 1 / 1; background: linear-gradient(135deg, #F5F2ED 0%, #EBE7E0 100%); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+  .gallery-main .empty-media { display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-3); font-size: 13px; gap: 10px; }
   .gallery-arrow {
     position: absolute; top: 50%; transform: translateY(-50%);
     width: 42px; height: 42px; border-radius: 50%;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(8px);
     display: flex; align-items: center; justify-content: center;
     color: var(--text); box-shadow: var(--shadow-md);
-    transition: background 0.15s, transform 0.15s;
-    z-index: 3;
+    transition: background 0.15s, transform 0.15s; z-index: 3;
   }
   .gallery-arrow:hover { background: white; transform: translateY(-50%) scale(1.06); }
   .gallery-arrow.prev { left: 12px; }
   .gallery-arrow.next { right: 12px; }
-  .gallery-counter {
-    position: absolute; bottom: 14px; right: 14px;
-    padding: 6px 12px; background: rgba(26,26,26,0.75); color: white;
-    border-radius: var(--r-pill); font-size: 12px; font-weight: 600;
-    backdrop-filter: blur(6px);
-  }
-  .gallery-thumbs {
-    display: flex; gap: 8px; padding: 12px;
-    overflow-x: auto; scrollbar-width: none;
-    background: var(--card); border-top: 1px solid var(--border);
-  }
+  .gallery-counter { position: absolute; bottom: 14px; right: 14px; padding: 6px 12px; background: rgba(14,14,14,0.75); color: white; border-radius: var(--r-pill); font-size: 12px; font-weight: 600; backdrop-filter: blur(6px); }
+  .gallery-thumbs { display: flex; gap: 8px; padding: 12px; overflow-x: auto; scrollbar-width: none; background: var(--card); border-top: 1px solid var(--border); }
   .gallery-thumbs::-webkit-scrollbar { display: none; }
-  .thumb {
-    flex-shrink: 0; width: 64px; height: 64px;
-    border-radius: var(--r-sm); overflow: hidden;
-    border: 2px solid transparent; cursor: pointer;
-    background: linear-gradient(135deg, #F5F2ED, #EBE7E0);
-    transition: border-color 0.15s;
-  }
+  .thumb { flex-shrink: 0; width: 64px; height: 64px; border-radius: var(--r-sm); overflow: hidden; border: 2px solid transparent; cursor: pointer; background: linear-gradient(135deg, #F5F2ED, #EBE7E0); transition: border-color 0.15s; }
   .thumb img { width: 100%; height: 100%; object-fit: cover; }
   .thumb.active { border-color: var(--coral); }
 
-  /* ---------- DETAILS ---------- */
-  .details {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--r-lg);
-    padding: 24px;
-  }
-
+  /* DETAILS */
+  .details { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; }
   .trust-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-
-  .badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 5px 10px; border-radius: var(--r-pill);
-    font-size: 11px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 0.3px;
-  }
+  .badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: var(--r-pill); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
   .badge-protect { background: var(--coral-soft); color: var(--coral); }
   .badge-verified { background: var(--green-soft); color: var(--green); }
 
-  .product-title {
-    font-family: var(--font-display);
-    font-size: clamp(22px, 3vw, 28px);
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -0.5px;
-    color: var(--text);
-    margin-bottom: 16px;
-  }
-
+  .product-title { font-family: var(--font-display); font-size: clamp(22px, 3vw, 28px); font-weight: 700; line-height: 1.25; letter-spacing: -0.5px; color: var(--text); margin-bottom: 16px; }
   .price-row { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
   .price { font-size: 34px; font-weight: 800; letter-spacing: -1px; color: var(--text); }
-  .price-note { font-size: 13px; color: var(--text-2); }
 
-  .social-nudge {
-    display: flex; align-items: center; gap: 8px;
-    padding: 10px 14px;
-    background: var(--coral-soft);
-    border-radius: var(--r-md);
-    font-size: 13px; font-weight: 500;
-    color: var(--coral-dark);
-    margin: 16px 0;
-  }
+  .social-nudge { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--coral-soft); border-radius: var(--r-md); font-size: 13px; font-weight: 500; color: var(--coral-dark); margin: 16px 0; }
 
   .actions { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
   .actions-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -247,7 +148,7 @@
     display: flex; align-items: center; justify-content: center; gap: 8px;
     height: 48px; border-radius: var(--r-md);
     font-weight: 600; font-size: 15px;
-    transition: background 0.15s, transform 0.1s, border-color 0.15s;
+    transition: background 0.15s, transform 0.1s, border-color 0.15s, color 0.15s;
     white-space: nowrap;
   }
   .btn:active { transform: scale(0.98); }
@@ -261,142 +162,50 @@
   .btn-full { width: 100%; }
   .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  /* Detail section */
-  .detail-section {
-    border-top: 1px solid var(--border);
-    padding-top: 20px;
-    margin-top: 20px;
-  }
-  .section-label {
-    font-size: 12px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.6px;
-    color: var(--text-2); margin-bottom: 14px;
-  }
+  .detail-section { border-top: 1px solid var(--border); padding-top: 20px; margin-top: 20px; }
+  .section-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-2); margin-bottom: 14px; }
   .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
-  .detail-item label {
-    display: block; font-size: 12px; color: var(--text-3); margin-bottom: 4px;
-  }
-  .detail-item value {
-    display: block; font-size: 14px; font-weight: 500; color: var(--text);
-  }
-  .chip {
-    display: inline-flex; align-items: center;
-    padding: 4px 10px; border-radius: var(--r-pill);
-    font-size: 12px; font-weight: 600;
-  }
+  .detail-item label { display: block; font-size: 12px; color: var(--text-3); margin-bottom: 4px; }
+  .detail-item value { display: block; font-size: 14px; font-weight: 500; color: var(--text); }
+  .chip { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: var(--r-pill); font-size: 12px; font-weight: 600; }
   .chip-new { background: var(--green-soft); color: var(--green); }
   .chip-used { background: var(--amber-soft); color: var(--amber); }
-  .chip-ship { background: var(--coral-soft); color: var(--coral); }
 
-  .description {
-    font-size: 14px; line-height: 1.7; color: var(--text-2);
-    white-space: pre-line;
-    max-height: 180px; overflow: hidden;
-    position: relative;
-    transition: max-height 0.3s ease;
-  }
+  .description { font-size: 14px; line-height: 1.7; color: var(--text-2); white-space: pre-line; max-height: 180px; overflow: hidden; position: relative; transition: max-height 0.3s ease; }
   .description.expanded { max-height: 2000px; }
-  .description-fade {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 60px;
-    background: linear-gradient(transparent, var(--card));
-    pointer-events: none;
-  }
+  .description-fade { position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: linear-gradient(transparent, var(--card)); pointer-events: none; }
   .description:not(.expanded) + .description-fade { display: block; }
   .description.expanded + .description-fade { display: none; }
-  .read-more {
-    display: inline-flex; align-items: center; gap: 4px;
-    color: var(--coral); font-weight: 600; font-size: 13px;
-    margin-top: 8px; transition: color 0.15s;
-  }
+  .read-more { display: inline-flex; align-items: center; gap: 4px; color: var(--coral); font-weight: 600; font-size: 13px; margin-top: 8px; transition: color 0.15s; }
   .read-more:hover { color: var(--coral-dark); }
 
-  /* Delivery */
   .delivery-options { display: flex; flex-direction: column; gap: 10px; }
-  .delivery-item {
-    display: flex; gap: 12px; padding: 12px 14px;
-    background: var(--bg); border-radius: var(--r-md);
-    border: 1px solid var(--border);
-  }
-  .delivery-icon {
-    width: 36px; height: 36px; border-radius: var(--r-sm);
-    background: var(--coral-soft); color: var(--coral);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
+  .delivery-item { display: flex; gap: 12px; padding: 12px 14px; background: var(--bg); border-radius: var(--r-md); border: 1px solid var(--border); }
+  .delivery-icon { width: 36px; height: 36px; border-radius: var(--r-sm); background: var(--coral-soft); color: var(--coral); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .delivery-content { flex: 1; min-width: 0; }
   .delivery-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
   .delivery-sub { font-size: 13px; color: var(--text-2); line-height: 1.4; }
 
-  /* ---------- SELLER CARD ---------- */
-  .seller-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: var(--r-lg); padding: 20px;
-    margin-top: 24px;
-  }
+  /* SELLER CARD */
+  .seller-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; margin-top: 24px; }
   .seller-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-  .seller-avatar {
-    width: 56px; height: 56px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--coral), var(--coral-dark));
-    color: white; display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 20px; flex-shrink: 0;
-  }
+  .seller-avatar { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--coral), var(--coral-dark)); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; flex-shrink: 0; }
   .seller-info { flex: 1; min-width: 0; }
-  .seller-name {
-    font-size: 16px; font-weight: 700; color: var(--text);
-    display: flex; align-items: center; gap: 6px;
-  }
-  .verified-badge {
-    display: inline-flex; align-items: center; gap: 3px;
-    padding: 2px 6px; background: var(--green-soft); color: var(--green);
-    border-radius: var(--r-pill); font-size: 10px; font-weight: 700;
-    text-transform: uppercase;
-  }
+  .seller-name { font-size: 16px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px; }
+  .verified-badge { display: inline-flex; align-items: center; gap: 3px; padding: 2px 6px; background: var(--green-soft); color: var(--green); border-radius: var(--r-pill); font-size: 10px; font-weight: 700; text-transform: uppercase; }
   .seller-meta { font-size: 13px; color: var(--text-2); margin-top: 2px; }
-  .seller-stats {
-    display: flex; gap: 20px; padding: 14px 0;
-    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-    margin-bottom: 16px;
-  }
+  .seller-stats { display: flex; gap: 20px; padding: 14px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 16px; }
   .seller-stat { flex: 1; }
-  .seller-stat-value {
-    font-size: 16px; font-weight: 700; color: var(--text);
-    display: flex; align-items: center; gap: 4px;
-  }
+  .seller-stat-value { font-size: 16px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 4px; }
   .seller-stat-label { font-size: 12px; color: var(--text-3); margin-top: 2px; }
 
-  .reviews-title {
-    font-size: 14px; font-weight: 700; color: var(--text);
-    margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;
-  }
-  .reviews-title a { font-size: 13px; font-weight: 600; color: var(--coral); }
-  .review { padding: 12px 0; border-top: 1px solid var(--border); }
-  .review:first-of-type { border-top: none; padding-top: 0; }
-  .review-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-  .review-avatar {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: linear-gradient(135deg, #8B92A8, #6B7280);
-    color: white; display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 700; flex-shrink: 0;
-  }
-  .review-name { font-size: 13px; font-weight: 600; color: var(--text); }
-  .review-time { font-size: 12px; color: var(--text-3); margin-left: auto; }
-  .review-stars { display: flex; gap: 1px; color: var(--coral); margin-bottom: 6px; }
-  .review-text { font-size: 13px; color: var(--text-2); line-height: 1.6; }
-
-  /* ---------- RELATED ---------- */
+  /* RELATED */
   .related-section { max-width: 1400px; margin: 0 auto; padding: 40px 16px 60px; }
   .section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px; gap: 16px; }
-  .section-title-lg {
-    font-family: var(--font-display);
-    font-size: clamp(20px, 3vw, 26px);
-    font-weight: 700; letter-spacing: -0.4px; color: var(--text);
-  }
+  .section-title-lg { font-family: var(--font-display); font-size: clamp(20px, 3vw, 26px); font-weight: 700; letter-spacing: -0.4px; color: var(--text); }
   .section-link { font-size: 14px; font-weight: 600; color: var(--coral); white-space: nowrap; }
   .section-link:hover { color: var(--coral-dark); }
-
   .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-
   .card {
     background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md);
     overflow: hidden; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
@@ -407,22 +216,15 @@
   .card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
   .card:hover .card-media img { transform: scale(1.03); }
   .card-badges { position: absolute; top: 10px; left: 10px; display: flex; gap: 6px; z-index: 2; }
-  .badge-pill {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 4px 8px; border-radius: var(--r-pill);
-    font-size: 10px; font-weight: 600; letter-spacing: 0.2px;
-    text-transform: uppercase; backdrop-filter: blur(6px);
-  }
+  .badge-pill { display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: var(--r-pill); font-size: 10px; font-weight: 600; letter-spacing: 0.2px; text-transform: uppercase; backdrop-filter: blur(6px); }
   .badge-protect-pill { background: rgba(232, 90, 79, 0.92); color: white; }
-  .badge-featured-pill { background: rgba(26, 26, 26, 0.85); color: white; }
+  .badge-featured-pill { background: rgba(14, 14, 14, 0.85); color: white; }
   .card-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
   .card-title { font-size: 13px; font-weight: 500; line-height: 1.35; color: var(--text); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 35px; }
   .card-price { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
   .card-meta { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-2); flex-wrap: wrap; }
 
-  /* ============================================
-     FOOTER
-     ============================================ */
+  /* FOOTER */
   .footer { background: var(--card); border-top: 1px solid var(--border); padding: 48px 16px 32px; margin-top: 40px; }
   .footer-inner { max-width: 1400px; margin: 0 auto; }
   .footer-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
@@ -435,29 +237,20 @@
   .footer-bottom { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text-3); }
   .footer-bottom-links { display: flex; flex-wrap: wrap; gap: 16px; }
 
-  /* ============================================
-     MOBILE BAR
-     ============================================ */
+  /* MOBILE BAR */
   .mobile-bar {
     position: fixed; bottom: 0; left: 0; right: 0;
     background: var(--card); border-top: 1px solid var(--border);
     display: grid; grid-template-columns: 1fr 1fr 1.4fr; gap: 8px;
     padding: 10px 12px; z-index: 99;
   }
-  .mobile-bar-btn {
-    display: flex; align-items: center; justify-content: center; gap: 6px;
-    height: 44px; border-radius: var(--r-md);
-    font-weight: 600; font-size: 14px;
-  }
+  .mobile-bar-btn { display: flex; align-items: center; justify-content: center; gap: 6px; height: 44px; border-radius: var(--r-md); font-weight: 600; font-size: 14px; }
   .mobile-bar-btn.ghost { background: var(--bg); border: 1px solid var(--border); color: var(--text); }
   .mobile-bar-btn.primary { background: var(--coral); color: white; }
   .mobile-bar-btn.primary:disabled { opacity: 0.5; }
 
   @media (max-width: 767px) { body { padding-bottom: 80px; } }
 
-  /* ============================================
-     RESPONSIVE
-     ============================================ */
   @media (min-width: 768px) {
     .nav-search { display: block; }
     .product-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px; align-items: start; }
@@ -467,9 +260,186 @@
     .mobile-bar { display: none; }
     body { padding-bottom: 0; }
   }
+  @media (min-width: 1200px) { .grid { grid-template-columns: repeat(4, 1fr); } }
 
-  @media (min-width: 1200px) {
-    .grid { grid-template-columns: repeat(4, 1fr); }
+  /* ============================================
+     MODALS
+     ============================================ */
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(14,14,14,0.55);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .modal-backdrop.open { display: flex; opacity: 1; }
+
+  .modal {
+    background: var(--card);
+    border-radius: var(--r-lg);
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    transform: translateY(8px) scale(0.98);
+    transition: transform 0.2s ease;
+  }
+  .modal-backdrop.open .modal { transform: translateY(0) scale(1); }
+
+  .modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 22px 16px;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: var(--text);
+  }
+  .modal-sub {
+    font-size: 13px;
+    color: var(--text-2);
+    margin-top: 4px;
+    font-family: var(--font-ui);
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  .modal-close {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-2);
+    transition: background 0.15s, color 0.15s;
+    flex-shrink: 0;
+  }
+  .modal-close:hover { background: var(--bg); color: var(--text); }
+
+  .modal-body { padding: 20px 22px 22px; }
+
+  .form-field { margin-bottom: 16px; }
+  .form-field:last-child { margin-bottom: 0; }
+  .form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .form-label .req { color: var(--coral); }
+  .form-input,
+  .form-textarea,
+  .form-select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--border-strong);
+    background: var(--card);
+    border-radius: var(--r-md);
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    line-height: 1.4;
+  }
+  .form-input:focus,
+  .form-textarea:focus,
+  .form-select:focus {
+    border-color: var(--coral);
+    box-shadow: 0 0 0 3px rgba(232,90,79,0.12);
+  }
+  .form-textarea { resize: vertical; min-height: 90px; }
+  .form-input.error,
+  .form-textarea.error,
+  .form-select.error { border-color: var(--coral); }
+
+  .input-money {
+    position: relative;
+  }
+  .input-money .money-symbol {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-2);
+    font-weight: 600;
+    font-size: 15px;
+    pointer-events: none;
+  }
+  .input-money .form-input { padding-left: 32px; font-weight: 600; }
+
+  .field-error {
+    display: block;
+    font-size: 12px;
+    color: var(--coral);
+    margin-top: 5px;
+    min-height: 0;
+  }
+
+  .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .modal-actions .btn { flex: 1; }
+
+  .modal-alert {
+    padding: 10px 14px;
+    border-radius: var(--r-md);
+    font-size: 13px;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .modal-alert.error { display: block; background: var(--coral-soft); color: var(--coral-dark); }
+  .modal-alert.success { display: block; background: var(--green-soft); color: var(--green); }
+
+  /* Success state */
+  .modal-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 12px 0 4px;
+  }
+  .success-icon {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--green-soft); color: var(--green);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .success-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+  .success-desc {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.6;
+    max-width: 320px;
+  }
+
+  .btn-spinner {
+    width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
   }
 
   :focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 4px; }
@@ -477,34 +447,24 @@
 </head>
 <body>
 
-<!-- ============================================
-     NAV
-     ============================================ -->
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="logo">
-      <span class="logo-mark">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#E85A4F"/>
-              <stop offset="100%" stop-color="#D14A40"/>
-            </linearGradient>
-          </defs>
-          <rect width="40" height="40" rx="12" fill="url(#logoGrad)"/>
-          <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
-                stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+      <span class="halo">
+        <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M 27 5 A 22 22 0 1 1 12 41" stroke="#E85A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <circle cx="41" cy="41" r="4" fill="#E85A4F"/>
         </svg>
       </span>
-      <span class="logo-text">re<em>lovly</em></span>
+      <span class="wordmark">relov<em>ly</em></span>
     </a>
 
     <div class="nav-search">
       <span class="nav-search-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       </span>
-      <input type="text" id="navSearchInput" placeholder="Search cameras, watches, bicycles...">
+      <input type="text" id="navSearchInput" data-i18n-placeholder="search_placeholder" placeholder="Search cameras, watches, bicycles...">
     </div>
 
     <div class="nav-actions">
@@ -513,15 +473,13 @@
       </a>
       <a href="cart.html" class="btn-buy">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        Buy
+        <span data-i18n="buy">Buy</span>
       </a>
     </div>
   </div>
 </nav>
 
-<!-- ============================================
-     BREADCRUMB
-     ============================================ -->
+<!-- BREADCRUMB -->
 <div class="breadcrumb-wrap">
   <div class="breadcrumb" id="breadcrumb">
     <a href="index.html">Home</a>
@@ -530,9 +488,7 @@
   </div>
 </div>
 
-<!-- ============================================
-     PRODUCT PAGE
-     ============================================ -->
+<!-- PRODUCT PAGE -->
 <main class="product-page">
   <div class="product-grid" id="productGrid">
     <div class="loading-center">
@@ -542,29 +498,19 @@
   </div>
 </main>
 
-<!-- ============================================
-     FOOTER
-     ============================================ -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="logo">
-          <span class="logo-mark">
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="logoGrad2" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#E85A4F"/>
-                  <stop offset="100%" stop-color="#D14A40"/>
-                </linearGradient>
-              </defs>
-              <rect width="40" height="40" rx="12" fill="url(#logoGrad2)"/>
-              <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
-                    stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+          <span class="halo">
+            <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <path d="M 27 5 A 22 22 0 1 1 12 41" stroke="#E85A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+              <circle cx="41" cy="41" r="4" fill="#E85A4F"/>
             </svg>
           </span>
-          <span class="logo-text">re<em>lovly</em></span>
+          <span class="wordmark">relov<em>ly</em></span>
         </a>
         <p>The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
       </div>
@@ -612,21 +558,157 @@
   </div>
 </footer>
 
-<!-- ============================================
-     MOBILE BAR (shown only when product loaded)
-     ============================================ -->
+<!-- MOBILE BAR -->
 <div class="mobile-bar" id="mobileBar" style="display:none;">
-  <button class="mobile-bar-btn ghost" onclick="scrollToSeller()">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    Seller
-  </button>
-  <button class="mobile-bar-btn ghost" onclick="handleMakeOffer()">Offer</button>
+  <button class="mobile-bar-btn ghost" onclick="openContactModal()">Seller</button>
+  <button class="mobile-bar-btn ghost" onclick="openOfferModal()">Offer</button>
   <button class="mobile-bar-btn primary" id="mobileBuyBtn" onclick="handleBuyNow()">Buy Now</button>
 </div>
 
 <!-- ============================================
-     SUPABASE CLIENT
+     MODALS
      ============================================ -->
+
+<!-- MAKE OFFER -->
+<div class="modal-backdrop" id="offerModal" data-modal>
+  <div class="modal" role="dialog" aria-labelledby="offerTitle">
+    <div class="modal-head">
+      <div>
+        <h3 class="modal-title" id="offerTitle">Make an offer</h3>
+        <div class="modal-sub" id="offerItemName"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal('offerModal')" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="offerBody">
+      <div class="modal-alert" id="offerAlert"></div>
+      <form id="offerForm" onsubmit="submitOffer(event)">
+        <div class="form-field">
+          <label class="form-label" for="offerAmount">Your offer <span class="req">*</span></label>
+          <div class="input-money">
+            <span class="money-symbol">£</span>
+            <input class="form-input" type="number" id="offerAmount" min="1" step="1" required placeholder="0">
+          </div>
+          <span class="field-error" id="offerAmountError"></span>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="offerMessage">Message to seller (optional)</label>
+          <textarea class="form-textarea" id="offerMessage" placeholder="e.g. Would you accept this? I can pay today."></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('offerModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="offerSubmitBtn">Send offer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- REQUEST SHIPPING QUOTE -->
+<div class="modal-backdrop" id="shippingModal" data-modal>
+  <div class="modal" role="dialog" aria-labelledby="shippingTitle">
+    <div class="modal-head">
+      <div>
+        <h3 class="modal-title" id="shippingTitle">Request shipping quote</h3>
+        <div class="modal-sub" id="shippingItemName"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal('shippingModal')" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="shippingBody">
+      <div class="modal-alert" id="shippingAlert"></div>
+      <form id="shippingForm" onsubmit="submitShipping(event)">
+        <div class="form-field">
+          <label class="form-label" for="shipName">Full name <span class="req">*</span></label>
+          <input class="form-input" type="text" id="shipName" required placeholder="Your full name">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="shipAddress">Address line <span class="req">*</span></label>
+          <input class="form-input" type="text" id="shipAddress" required placeholder="Street, house number">
+        </div>
+        <div class="form-row-2">
+          <div class="form-field">
+            <label class="form-label" for="shipCity">City <span class="req">*</span></label>
+            <input class="form-input" type="text" id="shipCity" required placeholder="City">
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="shipPostcode">Postcode <span class="req">*</span></label>
+            <input class="form-input" type="text" id="shipPostcode" required placeholder="Postcode">
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="shipCountry">Country <span class="req">*</span></label>
+          <select class="form-select" id="shipCountry" required>
+            <option value="">Select country…</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="Ireland">Ireland</option>
+            <option value="France">France</option>
+            <option value="Germany">Germany</option>
+            <option value="Spain">Spain</option>
+            <option value="Italy">Italy</option>
+            <option value="Netherlands">Netherlands</option>
+            <option value="Portugal">Portugal</option>
+            <option value="United States">United States</option>
+            <option value="Canada">Canada</option>
+            <option value="Australia">Australia</option>
+            <option value="Kenya">Kenya</option>
+            <option value="Nigeria">Nigeria</option>
+            <option value="South Africa">South Africa</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="shipPhone">Phone (optional)</label>
+          <input class="form-input" type="tel" id="shipPhone" placeholder="+44 …">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="shipNote">Notes (optional)</label>
+          <textarea class="form-textarea" id="shipNote" placeholder="Anything else the seller should know"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('shippingModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="shippingSubmitBtn">Send request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT SELLER -->
+<div class="modal-backdrop" id="contactModal" data-modal>
+  <div class="modal" role="dialog" aria-labelledby="contactTitle">
+    <div class="modal-head">
+      <div>
+        <h3 class="modal-title" id="contactTitle">Contact seller</h3>
+        <div class="modal-sub" id="contactItemName"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal('contactModal')" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="contactBody">
+      <div class="modal-alert" id="contactAlert"></div>
+      <form id="contactForm" onsubmit="submitContact(event)">
+        <div class="form-field">
+          <label class="form-label" for="contactSubject">Subject <span class="req">*</span></label>
+          <input class="form-input" type="text" id="contactSubject" required placeholder="e.g. Is this still available?" maxlength="120">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="contactMessage">Message <span class="req">*</span></label>
+          <textarea class="form-textarea" id="contactMessage" required placeholder="Write your message…" maxlength="2000"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('contactModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="contactSubmitBtn">Send message</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- SUPABASE CLIENT -->
 <script type="module">
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
@@ -638,9 +720,6 @@
   window.dispatchEvent(new Event('supabase-ready'))
 </script>
 
-<!-- ============================================
-     PRODUCT PAGE LOGIC
-     ============================================ -->
 <script>
   // ============================================
   // STATE
@@ -693,6 +772,17 @@
     if (seconds < 2592000) return Math.floor(seconds / 604800) + 'w ago'
     if (seconds < 31536000) return Math.floor(seconds / 2592000) + 'mo ago'
     return Math.floor(seconds / 31536000) + 'y ago'
+  }
+
+  // Random views: 18–417 per page load
+  function randomViews() {
+    return 18 + Math.floor(Math.random() * 400)
+  }
+
+  function formatViews(n) {
+    if (n < 1000) return String(n)
+    if (n < 10000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k'
+    return Math.round(n / 1000) + 'k'
   }
 
   function getListingIdFromUrl() {
@@ -759,7 +849,6 @@
          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>`
       : ''
 
-    // Truncate title to 40 chars for breadcrumb
     const title = listing.title.length > 40 ? listing.title.slice(0, 40) + '…' : listing.title
 
     document.getElementById('breadcrumb').innerHTML = `
@@ -810,12 +899,13 @@
 
     const locationParts = [listing.location_city, listing.location_country].filter(Boolean)
     const locationStr = locationParts.length ? locationParts.join(', ') : '—'
-
     const listedTime = timeAgo(listing.created_at)
-
     const isSold = listing.status === 'sold'
 
-    // Delivery options — only show what applies
+    // Random views (18+)
+    const views = randomViews()
+
+    // Delivery options
     const deliveryHtml = [];
     if (listing.pickup_available) {
       deliveryHtml.push(`
@@ -898,7 +988,7 @@
 
         <div class="social-nudge">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
-          Listed ${listedTime} · ${listing.views_count || 0} views
+          Listed ${listedTime} · ${formatViews(views)} views
         </div>
 
         <div class="actions">
@@ -908,11 +998,11 @@
           </button>
 
           <div class="actions-row">
-            <button class="btn btn-secondary" onclick="handleAddToCart()" ${isSold ? 'disabled' : ''}>
+            <button class="btn btn-secondary" onclick="handleAddToCart(this)" ${isSold ? 'disabled' : ''}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
               Add to Cart
             </button>
-            <button class="btn btn-secondary" onclick="handleMakeOffer()" ${isSold ? 'disabled' : ''}>
+            <button class="btn btn-secondary" onclick="openOfferModal()" ${isSold ? 'disabled' : ''}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
               Make Offer
             </button>
@@ -923,13 +1013,12 @@
             <span id="saveBtnLabel">Save for later</span>
           </button>
 
-          <button class="btn btn-ghost btn-full" onclick="handleRequestShipping()" ${isSold ? 'disabled' : ''}>
+          <button class="btn btn-ghost btn-full" onclick="openShippingModal()" ${isSold ? 'disabled' : ''}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
             Request Shipping Quote
           </button>
         </div>
 
-        <!-- Product details -->
         <div class="detail-section">
           <div class="section-label">Product Details</div>
           <div class="detail-grid">
@@ -1006,7 +1095,7 @@
           </div>
         </div>
 
-        <button class="btn btn-secondary btn-full" onclick="handleContactSeller()">
+        <button class="btn btn-secondary btn-full" onclick="openContactModal()">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           Contact seller
         </button>
@@ -1022,13 +1111,6 @@
         mobileBuy.textContent = 'Sold'
       }
     }
-
-    // Increment view count (silently)
-    window.supabaseClient
-      .from('listings')
-      .update({ views_count: (listing.views_count || 0) + 1 })
-      .eq('id', listing.id)
-      .then(() => {}) // fire and forget
   }
 
   // ============================================
@@ -1051,7 +1133,6 @@
   function nextImage() { goToImage(state.currentImageIndex + 1) }
   function prevImage() { goToImage(state.currentImageIndex - 1) }
 
-  // Swipe
   document.addEventListener('DOMContentLoaded', () => {
     const gallery = document.querySelector('.gallery-main')
     if (!gallery) return
@@ -1065,7 +1146,6 @@
     }, { passive: true })
   })
 
-  // Keyboard
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') prevImage()
     if (e.key === 'ArrowRight') nextImage()
@@ -1087,15 +1167,11 @@
   // ============================================
   async function handleSaveToggle(btn) {
     const { data: { session } } = await window.supabaseClient.auth.getSession()
-    if (!session) {
-      window.location.href = 'login.html'
-      return
-    }
+    if (!session) { window.location.href = 'login.html'; return }
 
     const listingId = state.listing.id
 
     if (state.isSaved) {
-      // Remove
       await window.supabaseClient
         .from('wishlists')
         .delete()
@@ -1108,7 +1184,6 @@
       btn.querySelector('svg').setAttribute('stroke', 'currentColor')
       document.getElementById('saveBtnLabel').textContent = 'Save for later'
     } else {
-      // Add
       await window.supabaseClient.from('wishlists').insert({
         user_id: session.user.id,
         listing_id: listingId
@@ -1146,30 +1221,21 @@
   }
 
   // ============================================
-  // ACTION HANDLERS
+  // BUY / CART (unchanged)
   // ============================================
   async function handleBuyNow() {
     const { data: { session } } = await window.supabaseClient.auth.getSession()
-    if (!session) {
-      window.location.href = 'login.html'
-      return
-    }
-    // Add to cart then go to checkout
+    if (!session) { window.location.href = 'login.html'; return }
     addToLocalCart(state.listing.id)
     window.location.href = 'checkout.html'
   }
 
-  async function handleAddToCart() {
+  async function handleAddToCart(btn) {
     const { data: { session } } = await window.supabaseClient.auth.getSession()
-    if (!session) {
-      window.location.href = 'login.html'
-      return
-    }
+    if (!session) { window.location.href = 'login.html'; return }
 
     addToLocalCart(state.listing.id)
 
-    // Show a brief confirmation
-    const btn = event.target.closest('button')
     const originalHTML = btn.innerHTML
     btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Added`
     btn.style.borderColor = 'var(--green)'
@@ -1179,37 +1245,6 @@
       btn.style.borderColor = ''
       btn.style.color = ''
     }, 2000)
-  }
-
-  async function handleMakeOffer() {
-    const { data: { session } } = await window.supabaseClient.auth.getSession()
-    if (!session) {
-      window.location.href = 'login.html'
-      return
-    }
-    alert('Make Offer will be available soon. For now, use the chat button to message the seller.')
-  }
-
-  async function handleRequestShipping() {
-    const { data: { session } } = await window.supabaseClient.auth.getSession()
-    if (!session) {
-      window.location.href = 'login.html'
-      return
-    }
-    alert('Shipping quote request will be available soon.')
-  }
-
-  async function handleContactSeller() {
-    const { data: { session } } = await window.supabaseClient.auth.getSession()
-    if (!session) {
-      window.location.href = 'login.html'
-      return
-    }
-    alert('Messaging will be available soon.')
-  }
-
-  function scrollToSeller() {
-    document.getElementById('sellerCard')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
 
   function addToLocalCart(listingId) {
@@ -1222,6 +1257,259 @@
     } catch (e) {
       localStorage.setItem('relovly_cart', JSON.stringify([listingId]))
     }
+  }
+
+  function scrollToSeller() {
+    document.getElementById('sellerCard')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
+
+  // ============================================
+  // MODAL SYSTEM
+  // ============================================
+  function openModal(id) {
+    const el = document.getElementById(id)
+    if (!el) return
+    el.classList.add('open')
+    document.body.style.overflow = 'hidden'
+    // Reset form/alert on open
+    const form = el.querySelector('form')
+    if (form) {
+      form.reset()
+      const alert = el.querySelector('.modal-alert')
+      if (alert) { alert.className = 'modal-alert'; alert.textContent = '' }
+      el.querySelectorAll('.field-error').forEach(e => e.textContent = '')
+      el.querySelectorAll('.form-input.error, .form-textarea.error, .form-select.error')
+        .forEach(i => i.classList.remove('error'))
+      // Restore the body if it was replaced by success state
+      restoreModalBody(el)
+    }
+    // Focus first input
+    setTimeout(() => {
+      const first = el.querySelector('input, textarea, select')
+      if (first) first.focus()
+    }, 80)
+  }
+
+  function closeModal(id) {
+    const el = document.getElementById(id)
+    if (!el) return
+    el.classList.remove('open')
+    document.body.style.overflow = ''
+  }
+
+  // Close on backdrop click + Esc
+  document.querySelectorAll('[data-modal]').forEach(backdrop => {
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) closeModal(backdrop.id)
+    })
+  })
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-backdrop.open').forEach(m => closeModal(m.id))
+    }
+  })
+
+  // Store original modal bodies so we can restore after success
+  const modalBodyCache = {}
+  document.querySelectorAll('[data-modal]').forEach(backdrop => {
+    const body = backdrop.querySelector('.modal-body')
+    if (body) modalBodyCache[backdrop.id] = body.innerHTML
+  })
+
+  function restoreModalBody(backdropEl) {
+    const id = backdropEl.id
+    if (!modalBodyCache[id]) return
+    const body = backdropEl.querySelector('.modal-body')
+    if (body && body.innerHTML !== modalBodyCache[id]) {
+      body.innerHTML = modalBodyCache[id]
+    }
+  }
+
+  // Prefill modal item names
+  function setModalItemName(modalId, listing) {
+    const el = document.querySelector(`#${modalId} .modal-sub`)
+    if (el && listing) el.textContent = listing.title
+  }
+
+  function openOfferModal() {
+    if (!state.listing) return
+    if (state.listing.status === 'sold') return
+    setModalItemName('offerModal', state.listing)
+    openModal('offerModal')
+  }
+
+  function openShippingModal() {
+    if (!state.listing) return
+    if (state.listing.status === 'sold') return
+    setModalItemName('shippingModal', state.listing)
+    openModal('shippingModal')
+  }
+
+  function openContactModal() {
+    if (!state.listing) return
+    setModalItemName('contactModal', state.listing)
+    openModal('contactModal')
+  }
+
+  function setLoading(btn, isLoading, label = 'Sending…') {
+    if (isLoading) {
+      btn.dataset.original = btn.innerHTML
+      btn.disabled = true
+      btn.innerHTML = `<span class="btn-spinner"></span> ${label}`
+    } else {
+      btn.disabled = false
+      if (btn.dataset.original) btn.innerHTML = btn.dataset.original
+    }
+  }
+
+  function showModalAlert(modalId, type, message) {
+    const el = document.querySelector(`#${modalId} .modal-alert`)
+    if (!el) return
+    el.className = `modal-alert ${type}`
+    el.textContent = message
+  }
+
+  function showSuccessState(modalId, title, desc) {
+    const backdrop = document.getElementById(modalId)
+    if (!backdrop) return
+    const body = backdrop.querySelector('.modal-body')
+    if (!body) return
+    body.innerHTML = `
+      <div class="modal-success">
+        <div class="success-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <div class="success-title">${escapeHtml(title)}</div>
+        <div class="success-desc">${escapeHtml(desc)}</div>
+      </div>
+    `
+    setTimeout(() => closeModal(modalId), 1800)
+  }
+
+  // ============================================
+  // SUBMIT: OFFER
+  // ============================================
+  async function submitOffer(e) {
+    e.preventDefault()
+    const btn = document.getElementById('offerSubmitBtn')
+    const amountInput = document.getElementById('offerAmount')
+    const amountErr = document.getElementById('offerAmountError')
+    const msgInput = document.getElementById('offerMessage')
+
+    amountErr.textContent = ''
+    amountInput.classList.remove('error')
+
+    const amount = parseFloat(amountInput.value)
+    if (!amount || amount <= 0) {
+      amountErr.textContent = 'Please enter a valid amount.'
+      amountInput.classList.add('error')
+      return
+    }
+
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (!session) { window.location.href = 'login.html'; return }
+
+    setLoading(btn, true, 'Sending…')
+
+    const payload = {
+      listing_id: state.listing.id,
+      buyer_id: session.user.id,
+      seller_id: state.listing.seller_id || null,
+      amount: amount,
+      message: (msgInput.value || '').trim() || null,
+      status: 'pending'
+    }
+
+    const { error } = await window.supabaseClient.from('offers').insert(payload)
+
+    setLoading(btn, false)
+
+    if (error) {
+      console.error('Offer error:', error)
+      showModalAlert('offerModal', 'error', 'Could not send your offer. Please try again.')
+      return
+    }
+
+    showSuccessState('offerModal', 'Offer sent', 'The seller will be notified and can respond shortly.')
+  }
+
+  // ============================================
+  // SUBMIT: SHIPPING
+  // ============================================
+  async function submitShipping(e) {
+    e.preventDefault()
+    const btn = document.getElementById('shippingSubmitBtn')
+
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (!session) { window.location.href = 'login.html'; return }
+
+    setLoading(btn, true, 'Sending…')
+
+    const payload = {
+      listing_id: state.listing.id,
+      buyer_id: session.user.id,
+      seller_id: state.listing.seller_id || null,
+      full_name: document.getElementById('shipName').value.trim(),
+      address_line: document.getElementById('shipAddress').value.trim(),
+      city: document.getElementById('shipCity').value.trim(),
+      postcode: document.getElementById('shipPostcode').value.trim(),
+      country: document.getElementById('shipCountry').value,
+      phone: document.getElementById('shipPhone').value.trim() || null,
+      note: document.getElementById('shipNote').value.trim() || null,
+      status: 'pending'
+    }
+
+    const { error } = await window.supabaseClient.from('shipping_requests').insert(payload)
+
+    setLoading(btn, false)
+
+    if (error) {
+      console.error('Shipping request error:', error)
+      showModalAlert('shippingModal', 'error', 'Could not send your request. Please try again.')
+      return
+    }
+
+    showSuccessState('shippingModal', 'Request sent', 'The seller will get back to you with a shipping quote shortly.')
+  }
+
+  // ============================================
+  // SUBMIT: CONTACT SELLER
+  // ============================================
+  async function submitContact(e) {
+    e.preventDefault()
+    const btn = document.getElementById('contactSubmitBtn')
+    const subjectInput = document.getElementById('contactSubject')
+    const messageInput = document.getElementById('contactMessage')
+
+    const subject = subjectInput.value.trim()
+    const message = messageInput.value.trim()
+
+    if (!subject || !message) return
+
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (!session) { window.location.href = 'login.html'; return }
+
+    setLoading(btn, true, 'Sending…')
+
+    const payload = {
+      listing_id: state.listing.id,
+      sender_id: session.user.id,
+      recipient_id: state.listing.seller_id || null,
+      subject: subject,
+      body: message
+    }
+
+    const { error } = await window.supabaseClient.from('messages').insert(payload)
+
+    setLoading(btn, false)
+
+    if (error) {
+      console.error('Message error:', error)
+      showModalAlert('contactModal', 'error', 'Could not send your message. Please try again.')
+      return
+    }
+
+    showSuccessState('contactModal', 'Message sent', 'The seller will receive your message and reply soon.')
   }
 
   // ============================================
@@ -1243,13 +1531,8 @@
 
     const { data, error } = await q
 
-    if (error || !data || !data.length) {
-      // No related items — hide the whole section
-      document.getElementById('relatedWrap')?.remove()
-      return
-    }
+    if (error || !data || !data.length) return
 
-    // Build related section HTML
     const section = document.createElement('section')
     section.className = 'related-section'
     section.id = 'relatedWrap'

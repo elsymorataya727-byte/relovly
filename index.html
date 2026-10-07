@@ -6,7 +6,7 @@
 <title>relovly — Quality Pre-Owned Items. Better Value.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -18,7 +18,7 @@
     --card: #FFFFFF;
     --border: #EBE8E3;
     --border-strong: #DDD8D0;
-    --text: #1A1A1A;
+    --text: #0E0E0E;
     --text-2: #6B6B6B;
     --text-3: #9A9A9A;
     --green: #2E7D5B;
@@ -30,94 +30,162 @@
     --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
     --shadow-lg: 0 12px 32px rgba(0,0,0,0.10);
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-display: 'Lora', Georgia, serif;
+    --font-display: 'Fraunces', Georgia, serif;
   }
 
   html { scroll-behavior: smooth; }
   body { font-family: var(--font-ui); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
-  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
   /* ============================================
      NAVIGATION
      ============================================ */
   .nav { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 0 16px; }
-  .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 20px; height: 64px; }
-  .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .logo-mark { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
-  .logo-mark svg { width: 34px; height: 34px; }
-  .logo-text { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--text); letter-spacing: -0.6px; line-height: 1; }
-  .logo-text em { font-style: normal; color: var(--coral); }
+  .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 16px; height: 64px; }
 
-  .nav-search { flex: 1; max-width: 560px; position: relative; display: none; }
-  .nav-search input { width: 100%; height: 42px; padding: 0 16px 0 44px; border: 1px solid var(--border); background: var(--bg); border-radius: var(--r-pill); font-size: 14px; font-family: inherit; color: var(--text); outline: none; transition: border-color 0.15s, background 0.15s; }
+  /* LOGO — The Halo */
+  .logo { display: flex; align-items: center; gap: 11px; flex-shrink: 0; line-height: 1; }
+  .halo { width: 34px; height: 34px; flex-shrink: 0; }
+  .halo svg { width: 100%; height: 100%; display: block; }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -1.4px;
+    color: var(--text);
+    line-height: 1;
+    padding-bottom: 2px;
+  }
+  .wordmark em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--coral);
+    letter-spacing: -1.4px;
+  }
+
+  .nav-search { flex: 1; max-width: 480px; position: relative; display: none; }
+  .nav-search input {
+    width: 100%; height: 42px; padding: 0 16px 0 44px;
+    border: 1px solid var(--border); background: var(--bg);
+    border-radius: var(--r-pill); font-size: 14px; font-family: inherit;
+    color: var(--text); outline: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
   .nav-search input:focus { border-color: var(--coral); background: var(--card); }
   .nav-search input::placeholder { color: var(--text-3); }
   .nav-search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-3); pointer-events: none; }
 
-  .nav-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
-  .icon-btn { width: 40px; height: 40px; border-radius: var(--r-pill); display: flex; align-items: center; justify-content: center; color: var(--text-2); transition: background 0.15s, color 0.15s; position: relative; }
+  .nav-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+
+  /* Language selector */
+  .lang-select {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    height: 38px;
+    padding: 0 26px 0 12px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: var(--r-pill);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-2);
+    font-family: inherit;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%239A9A9A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    transition: border-color 0.15s;
+  }
+  .lang-select:hover { border-color: var(--border-strong); }
+  .lang-select:focus { outline: none; border-color: var(--coral); }
+
+  .icon-btn {
+    width: 40px; height: 40px; border-radius: var(--r-pill);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-2); transition: background 0.15s, color 0.15s;
+    position: relative;
+  }
   .icon-btn:hover { background: var(--bg); color: var(--text); }
   .icon-btn .dot { position: absolute; top: 8px; right: 8px; width: 8px; height: 8px; background: var(--coral); border-radius: 50%; border: 2px solid var(--card); }
 
-  .btn-buy { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; background: var(--coral); color: white; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; transition: background 0.15s, transform 0.1s; }
+  .btn-buy {
+    display: flex; align-items: center; gap: 6px;
+    height: 40px; padding: 0 18px;
+    background: var(--coral); color: white;
+    border-radius: var(--r-pill); font-weight: 600; font-size: 14px;
+    transition: background 0.15s, transform 0.1s;
+  }
   .btn-buy:hover { background: var(--coral-dark); }
   .btn-buy:active { transform: scale(0.98); }
 
   /* ============================================
-     HERO SLIDER
+     HERO SLIDER — REDUCED HEIGHT
      ============================================ */
-  .hero-slider { position: relative; max-width: 1400px; margin: 16px auto 0; padding: 0 16px; }
-  .slider-viewport { position: relative; width: 100%; height: 280px; border-radius: var(--r-lg); overflow: hidden; background: #EFEBE4; box-shadow: var(--shadow-md); }
+  .hero-slider { position: relative; max-width: 1400px; margin: 12px auto 0; padding: 0 16px; }
+  .slider-viewport {
+    position: relative; width: 100%; height: 160px;
+    border-radius: var(--r-lg); overflow: hidden;
+    background: #EFEBE4; box-shadow: var(--shadow-sm);
+  }
   .slides-track { display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); will-change: transform; }
   .slide { flex: 0 0 100%; height: 100%; position: relative; overflow: hidden; }
   .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; color: var(--text); box-shadow: var(--shadow-md); transition: background 0.15s, transform 0.15s; z-index: 5; }
+  .slider-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(8px);
+    display: none; align-items: center; justify-content: center;
+    color: var(--text); box-shadow: var(--shadow-md);
+    transition: background 0.15s, transform 0.15s; z-index: 5;
+  }
   .slider-arrow:hover { background: white; transform: translateY(-50%) scale(1.06); }
-  .slider-arrow.prev { left: 16px; }
-  .slider-arrow.next { right: 16px; }
+  .slider-arrow.prev { left: 12px; }
+  .slider-arrow.next { right: 12px; }
 
-  .slider-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; }
-  .slider-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.55); transition: background 0.2s, width 0.2s; cursor: pointer; }
-  .slider-dot.active { background: white; width: 24px; border-radius: var(--r-pill); }
+  .slider-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 5; }
+  .slider-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.55); transition: background 0.2s, width 0.2s; cursor: pointer; }
+  .slider-dot.active { background: white; width: 20px; border-radius: var(--r-pill); }
 
   /* ============================================
      CATEGORIES
      ============================================ */
-  .categories { max-width: 1400px; margin: 0 auto; padding: 24px 0 8px; overflow-x: auto; scrollbar-width: none; }
+  .categories { max-width: 1400px; margin: 0 auto; padding: 20px 0 4px; overflow-x: auto; scrollbar-width: none; }
   .categories::-webkit-scrollbar { display: none; }
-  .categories-inner { display: flex; gap: 12px; padding: 0 16px; min-width: max-content; }
+  .categories-inner { display: flex; gap: 10px; padding: 0 16px; min-width: max-content; }
   .cat-pill {
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    min-width: 88px; padding: 14px 8px;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    min-width: 80px; padding: 12px 8px;
     background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md);
     transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
     cursor: pointer;
   }
   .cat-pill:hover { border-color: var(--coral); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
   .cat-icon {
-    width: 40px; height: 40px; border-radius: var(--r-sm);
+    width: 36px; height: 36px; border-radius: var(--r-sm);
     background: var(--coral-soft); color: var(--coral);
     display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
+    font-size: 18px;
   }
-  .cat-label { font-size: 12px; font-weight: 500; color: var(--text); text-align: center; line-height: 1.2; }
+  .cat-label { font-size: 11px; font-weight: 500; color: var(--text); text-align: center; line-height: 1.2; }
 
   /* ============================================
      SECTIONS + GRID
      ============================================ */
-  .section { max-width: 1400px; margin: 0 auto; padding: 32px 16px; }
-  .section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px; gap: 16px; }
-  .section-title { font-family: var(--font-display); font-size: clamp(20px, 3vw, 26px); font-weight: 700; letter-spacing: -0.4px; color: var(--text); }
-  .section-link { font-size: 14px; font-weight: 600; color: var(--coral); white-space: nowrap; }
+  .section { max-width: 1400px; margin: 0 auto; padding: 28px 16px; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; gap: 16px; }
+  .section-title { font-family: var(--font-display); font-size: clamp(20px, 3vw, 24px); font-weight: 700; letter-spacing: -0.6px; color: var(--text); }
+  .section-link { font-size: 13px; font-weight: 600; color: var(--coral); white-space: nowrap; }
   .section-link:hover { color: var(--coral-dark); }
 
   .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
   /* ============================================
-     PRODUCT CARD
+     PRODUCT CARD — NO BADGES
      ============================================ */
   .card {
     background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md);
@@ -129,16 +197,6 @@
   .card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
   .card:hover .card-media img { transform: scale(1.03); }
 
-  .card-badges { position: absolute; top: 10px; left: 10px; display: flex; gap: 6px; z-index: 2; }
-  .badge {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 4px 8px; border-radius: var(--r-pill);
-    font-size: 10px; font-weight: 600; letter-spacing: 0.2px;
-    text-transform: uppercase; backdrop-filter: blur(6px);
-  }
-  .badge-protect { background: rgba(232, 90, 79, 0.92); color: white; }
-  .badge-featured { background: rgba(26, 26, 26, 0.85); color: white; }
-
   .card-like {
     position: absolute; top: 10px; right: 10px;
     width: 32px; height: 32px; border-radius: 50%;
@@ -149,7 +207,7 @@
   }
   .card-like:hover { color: var(--coral); transform: scale(1.08); }
 
-  .card-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .card-body { padding: 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
   .card-seller { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-2); }
   .card-avatar {
     width: 20px; height: 20px; border-radius: 50%;
@@ -170,114 +228,127 @@
   .chip-pickup { background: #EEF1F5; color: #5A6B7D; }
 
   /* ============================================
-     CATEGORY TILES
+     CATEGORY CAROUSELS
      ============================================ */
-  .cat-tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .cat-tile {
-    position: relative; aspect-ratio: 4 / 3;
-    border-radius: var(--r-md); overflow: hidden;
-    background: linear-gradient(135deg, #F5F2ED, #E4DFD6);
-    display: flex; align-items: flex-end; padding: 16px;
-    cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+  .carousel-section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 16px;
+    margin-bottom: 28px;
   }
-  .cat-tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-  .cat-tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.55) 100%); }
-  .cat-tile-content { position: relative; z-index: 2; color: white; }
-  .cat-tile-name { font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: -0.3px; }
-  .cat-tile-count { font-size: 12px; opacity: 0.85; margin-top: 2px; }
+  .carousel-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding: 0 4px;
+  }
+  .carousel-title {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.4vw, 22px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .carousel-title-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--r-sm);
+    background: var(--coral-soft);
+    color: var(--coral);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .carousel-view-all {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--coral);
+    white-space: nowrap;
+  }
+  .carousel-view-all:hover { color: var(--coral-dark); }
+
+  .carousel-wrap { position: relative; }
+  .carousel-track {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-track .card { min-width: 180px; max-width: 180px; flex-shrink: 0; }
+
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    box-shadow: var(--shadow-md);
+    z-index: 5;
+    transition: background 0.15s, transform 0.15s;
+  }
+  .carousel-arrow:hover { background: var(--coral); color: white; border-color: var(--coral); transform: translateY(-50%) scale(1.06); }
+  .carousel-arrow.prev { left: -8px; }
+  .carousel-arrow.next { right: -8px; }
 
   /* ============================================
      EMPTY STATE
      ============================================ */
   .empty-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 24px;
-    background: var(--card);
-    border: 1px dashed var(--border-strong);
-    border-radius: var(--r-lg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 48px 24px;
+    background: var(--card); border: 1px dashed var(--border-strong); border-radius: var(--r-lg);
     text-align: center;
     grid-column: 1 / -1;
   }
   .empty-icon {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    background: var(--coral-soft);
-    color: var(--coral);
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--coral-soft); color: var(--coral);
     display: flex; align-items: center; justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
-  .empty-title {
-    font-family: var(--font-display);
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.4px;
-    margin-bottom: 6px;
-  }
-  .empty-desc {
-    font-size: 14px;
-    color: var(--text-2);
-    max-width: 400px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
+  .empty-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.4px; margin-bottom: 6px; }
+  .empty-desc { font-size: 14px; color: var(--text-2); max-width: 380px; line-height: 1.6; margin-bottom: 18px; }
   .empty-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    height: 42px;
-    padding: 0 20px;
-    background: var(--coral);
-    color: white;
-    border-radius: var(--r-md);
-    font-weight: 600;
-    font-size: 14px;
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 40px; padding: 0 18px;
+    background: var(--coral); color: white;
+    border-radius: var(--r-md); font-weight: 600; font-size: 14px;
     transition: background 0.15s;
   }
   .empty-btn:hover { background: var(--coral-dark); }
 
-  /* Loading skeleton */
-  .skeleton-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
+  /* Skeleton */
   .skeleton {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--r-md);
-    overflow: hidden;
-    animation: pulse 1.5s ease-in-out infinite;
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden;
   }
-  .skeleton-media {
-    aspect-ratio: 1 / 1;
-    background: linear-gradient(90deg, #F5F2ED, #EBE7E0, #F5F2ED);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-  }
+  .skeleton-media { aspect-ratio: 1 / 1; background: linear-gradient(90deg, #F5F2ED, #EBE7E0, #F5F2ED); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
   .skeleton-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-  .skeleton-line {
-    height: 12px;
-    background: linear-gradient(90deg, #F5F2ED, #EBE7E0, #F5F2ED);
-    background-size: 200% 100%;
-    border-radius: 4px;
-    animation: shimmer 1.5s infinite;
-  }
+  .skeleton-line { height: 12px; background: linear-gradient(90deg, #F5F2ED, #EBE7E0, #F5F2ED); background-size: 200% 100%; border-radius: 4px; animation: shimmer 1.5s infinite; }
   .skeleton-line.short { width: 60%; }
   .skeleton-line.price { height: 20px; width: 40%; }
-
-  @keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
   /* ============================================
      FOOTER
      ============================================ */
-  .footer { background: var(--card); border-top: 1px solid var(--border); margin-top: 48px; padding: 48px 16px 32px; }
+  .footer { background: var(--card); border-top: 1px solid var(--border); margin-top: 40px; padding: 48px 16px 32px; }
   .footer-inner { max-width: 1400px; margin: 0 auto; }
   .footer-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
   .footer-brand p { font-size: 14px; color: var(--text-2); margin-top: 12px; max-width: 300px; line-height: 1.6; }
@@ -325,31 +396,29 @@
      ============================================ */
   @media (min-width: 768px) {
     .nav-search { display: block; }
+    .lang-select { display: flex; }
     .grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .skeleton-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .cat-tiles { grid-template-columns: repeat(3, 1fr); }
     .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
     .mobile-bar { display: none; }
     body { padding-bottom: 0; }
-    .slider-viewport { height: 380px; }
+    .slider-viewport { height: 200px; }
     .slider-arrow { display: flex; }
+    .carousel-track .card { min-width: 220px; max-width: 220px; }
+    .carousel-arrow { display: flex; }
   }
 
   @media (min-width: 1200px) {
     .grid { grid-template-columns: repeat(4, 1fr); }
-    .skeleton-grid { grid-template-columns: repeat(4, 1fr); }
-    .cat-tiles { grid-template-columns: repeat(4, 1fr); }
-    .section { padding: 40px 24px; }
-    .slider-viewport { height: 420px; }
+    .section { padding: 36px 24px; }
+    .carousel-section { padding: 0 24px; }
+    .slider-viewport { height: 240px; }
+    .carousel-track .card { min-width: 240px; max-width: 240px; }
   }
 
   :focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 4px; }
 
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
-    }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   }
 </style>
 </head>
@@ -361,21 +430,13 @@
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="logo">
-      <span class="logo-mark">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#E85A4F"/>
-              <stop offset="100%" stop-color="#D14A40"/>
-            </linearGradient>
-          </defs>
-          <rect width="40" height="40" rx="12" fill="url(#logoGrad)"/>
-          <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
-                stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+      <span class="halo">
+        <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M 27 5 A 22 22 0 1 1 12 41" stroke="#E85A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <circle cx="41" cy="41" r="4" fill="#E85A4F"/>
         </svg>
       </span>
-      <span class="logo-text">re<em>lovly</em></span>
+      <span class="wordmark">relov<em>ly</em></span>
     </a>
 
     <div class="nav-search">
@@ -386,6 +447,16 @@
     </div>
 
     <div class="nav-actions">
+      <select class="lang-select" id="langSelect" aria-label="Language" onchange="handleLanguageChange(this.value)">
+        <option value="en">🇬🇧 English</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="it">🇮🇹 Italiano</option>
+        <option value="nl">🇳🇱 Nederlands</option>
+        <option value="pt">🇵🇹 Português</option>
+      </select>
+
       <button class="icon-btn" aria-label="Notifications">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
         <span class="dot" id="notifDot" style="display:none;"></span>
@@ -405,35 +476,22 @@
 </nav>
 
 <!-- ============================================
-     HERO SLIDER
+     HERO SLIDER — REDUCED
      ============================================ -->
 <section class="hero-slider">
   <div class="slider-viewport">
     <div class="slides-track" id="slidesTrack">
-
-      <div class="slide">
-        <img src="https://images.unsplash.com/photo-1653896776084-d311e7042d78?w=1600&q=80&auto=format&fit=crop" alt="Photography gear flat lay">
-      </div>
-
-      <div class="slide">
-        <img src="https://plus.unsplash.com/premium_photo-1676968002945-c8f74e0e27d8?w=1600&q=80&auto=format&fit=crop" alt="Premium lifestyle">
-      </div>
-
-      <div class="slide">
-        <img src="https://plus.unsplash.com/premium_photo-1755422107149-e47860ae16bb?w=1600&q=80&auto=format&fit=crop" alt="Curated collection">
-      </div>
-
-      <div class="slide">
-        <img src="https://images.unsplash.com/photo-1604586362294-e6a98fb96401?w=1600&q=80&auto=format&fit=crop" alt="Lifestyle goods">
-      </div>
-
+      <div class="slide"><img src="https://images.unsplash.com/photo-1653896776084-d311e7042d78?w=1600&q=80&auto=format&fit=crop" alt="Photography gear flat lay"></div>
+      <div class="slide"><img src="https://plus.unsplash.com/premium_photo-1676968002945-c8f74e0e27d8?w=1600&q=80&auto=format&fit=crop" alt="Premium lifestyle"></div>
+      <div class="slide"><img src="https://plus.unsplash.com/premium_photo-1755422107149-e47860ae16bb?w=1600&q=80&auto=format&fit=crop" alt="Curated collection"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1604586362294-e6a98fb96401?w=1600&q=80&auto=format&fit=crop" alt="Lifestyle goods"></div>
     </div>
 
     <button class="slider-arrow prev" aria-label="Previous slide" onclick="slidePrev()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
     </button>
     <button class="slider-arrow next" aria-label="Next slide" onclick="slideNext()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
     </button>
 
     <div class="slider-dots" id="sliderDots"></div>
@@ -444,9 +502,7 @@
      CATEGORIES
      ============================================ -->
 <div class="categories">
-  <div class="categories-inner" id="categoriesRow">
-    <!-- Loaded from Supabase -->
-  </div>
+  <div class="categories-inner" id="categoriesRow"></div>
 </div>
 
 <!-- ============================================
@@ -457,24 +513,7 @@
     <h2 class="section-title">Featured Products</h2>
     <a href="catalog.html" class="section-link">View all →</a>
   </div>
-
-  <div class="grid" id="featuredGrid">
-    <!-- Loaded from Supabase -->
-  </div>
-</section>
-
-<!-- ============================================
-     POPULAR CATEGORIES (TILES)
-     ============================================ -->
-<section class="section">
-  <div class="section-head">
-    <h2 class="section-title">Popular Categories</h2>
-    <a href="catalog.html" class="section-link">All categories →</a>
-  </div>
-
-  <div class="cat-tiles" id="categoryTiles">
-    <!-- Loaded from Supabase -->
-  </div>
+  <div class="grid" id="featuredGrid"></div>
 </section>
 
 <!-- ============================================
@@ -485,11 +524,12 @@
     <h2 class="section-title">Recently Added</h2>
     <a href="catalog.html" class="section-link">View all →</a>
   </div>
-
-  <div class="grid" id="recentGrid">
-    <!-- Loaded from Supabase -->
-  </div>
+  <div class="grid" id="recentGrid"></div>
 </section>
+
+<!-- ============================================
+     CATEGORY CAROUSELS     ============================================ -->
+<div id="categoryCarousels"></div>
 
 <!-- ============================================
      FOOTER
@@ -500,21 +540,13 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="logo">
-          <span class="logo-mark">
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="logoGrad2" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#E85A4F"/>
-                  <stop offset="100%" stop-color="#D14A40"/>
-                </linearGradient>
-              </defs>
-              <rect width="40" height="40" rx="12" fill="url(#logoGrad2)"/>
-              <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
-                    stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+          <span class="halo">
+            <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <path d="M 27 5 A 22 22 0 1 1 12 41" stroke="#E85A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+              <circle cx="41" cy="41" r="4" fill="#E85A4F"/>
             </svg>
           </span>
-          <span class="logo-text">re<em>lovly</em></span>
+          <span class="wordmark">relov<em>ly</em></span>
         </a>
         <p>The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
       </div>
@@ -676,9 +708,8 @@
      HOMEPAGE DATA LOADING
      ============================================ -->
 <script>
-  // ============================================
-  // HELPERS
-  // ============================================
+  let carouselTimers = [];
+
   function formatPrice(price, currency) {
     const n = parseFloat(price || 0)
     const symbols = { GBP: '£', USD: '$', EUR: '€' }
@@ -700,12 +731,7 @@
 
   function escapeHtml(str) {
     if (!str) return ''
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;')
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
   }
 
   function conditionChip(condition) {
@@ -719,9 +745,6 @@
     return `<span class="chip ${c.cls}">${c.label}</span>`
   }
 
-  // ============================================
-  // SKELETON LOADER
-  // ============================================
   function skeletonCards(count = 4) {
     return Array.from({ length: count }).map(() => `
       <div class="skeleton">
@@ -736,41 +759,30 @@
     `).join('')
   }
 
-  // ============================================
-  // EMPTY STATE
-  // ============================================
   function emptyState() {
     return `
       <div class="empty-block">
         <div class="empty-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
         <h3 class="empty-title">Nothing here yet</h3>
-        <p class="empty-desc">Listings will appear here as soon as they're uploaded. Check back soon or browse our categories.</p>
+        <p class="empty-desc">Listings will appear here as soon as they're uploaded.</p>
         <a href="catalog.html" class="empty-btn">
           Browse all categories
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
         </a>
-      </div>
-    `
+      </div>`
   }
 
-  // ============================================
-  // PRODUCT CARD RENDER
-  // ============================================
+  // PRODUCT CARD — no badges
   function renderCard(listing) {
     const img = Array.isArray(listing.images) && listing.images[0] ? listing.images[0] : ''
-    const isFeatured = listing.is_featured
     const sellerName = listing.seller_name || 'relovly'
     const sellerInitial = sellerName[0].toUpperCase()
 
     return `
       <article class="card" onclick="window.location.href='product.html?id=${listing.id}'">
         <div class="card-media">
-          <div class="card-badges">
-            <span class="badge badge-protect">✓ Protected</span>
-            ${isFeatured ? '<span class="badge badge-featured">Featured</span>' : ''}
-          </div>
           <button class="card-like" onclick="event.stopPropagation(); toggleWishlist(${listing.id}, this)" aria-label="Save">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </button>
@@ -794,9 +806,6 @@
     `
   }
 
-  // ============================================
-  // LOAD CATEGORIES
-  // ============================================
   async function loadCategories() {
     const { data, error } = await window.supabaseClient
       .from('categories')
@@ -813,10 +822,7 @@
 
   function renderCategoryRow(categories) {
     const row = document.getElementById('categoriesRow')
-    if (!categories.length) {
-      row.innerHTML = ''
-      return
-    }
+    if (!categories.length) { row.innerHTML = ''; return }
     row.innerHTML = categories.map(c => `
       <a href="catalog.html?category=${encodeURIComponent(c.slug)}" class="cat-pill">
         <span class="cat-icon">${escapeHtml(c.icon || '📦')}</span>
@@ -825,38 +831,6 @@
     `).join('')
   }
 
-  async function renderCategoryTiles(categories) {
-    const wrap = document.getElementById('categoryTiles')
-
-    // Get listing counts per category
-    const counts = {}
-    await Promise.all(categories.map(async c => {
-      const { count } = await window.supabaseClient
-        .from('listings')
-        .select('*', { count: 'exact', head: true })
-        .eq('category_id', c.id)
-        .eq('status', 'active')
-      counts[c.id] = count || 0
-    }))
-
-    if (!categories.length) {
-      wrap.innerHTML = ''
-      return
-    }
-
-    wrap.innerHTML = categories.slice(0, 8).map(c => `
-      <a href="catalog.html?category=${encodeURIComponent(c.slug)}" class="cat-tile">
-        <div class="cat-tile-content">
-          <div class="cat-tile-name">${escapeHtml(c.name)}</div>
-          <div class="cat-tile-count">${counts[c.id] || 0} items</div>
-        </div>
-      </a>
-    `).join('')
-  }
-
-  // ============================================
-  // LOAD LISTINGS
-  // ============================================
   async function loadFeatured() {
     const grid = document.getElementById('featuredGrid')
     grid.innerHTML = skeletonCards(4)
@@ -870,12 +844,10 @@
       .limit(8)
 
     if (error) {
-      console.error('Featured error:', error)
       grid.innerHTML = emptyState()
       return
     }
 
-    // If no featured listings, fall back to latest 4
     let listings = data || []
     if (!listings.length) {
       const { data: fallback } = await window.supabaseClient
@@ -887,11 +859,7 @@
       listings = fallback || []
     }
 
-    if (!listings.length) {
-      grid.innerHTML = emptyState()
-      return
-    }
-
+    if (!listings.length) { grid.innerHTML = emptyState(); return }
     grid.innerHTML = listings.map(renderCard).join('')
   }
 
@@ -907,32 +875,93 @@
       .limit(8)
 
     if (error) {
-      console.error('Recent error:', error)
       grid.innerHTML = emptyState()
       return
     }
 
-    if (!data || !data.length) {
-      grid.innerHTML = emptyState()
-      return
-    }
-
+    if (!data || !data.length) { grid.innerHTML = emptyState(); return }
     grid.innerHTML = data.map(renderCard).join('')
   }
 
   // ============================================
-  // WISHLIST TOGGLE
+  // CATEGORY CAROUSELS
+  // Only categories with listings shown.
+  // Each carousel slides at its own random interval.
   // ============================================
+  async function loadCategoryCarousels(categories) {
+    const container = document.getElementById('categoryCarousels')
+    container.innerHTML = ''
+
+    for (const cat of categories) {
+      const { data } = await window.supabaseClient
+        .from('listings')
+        .select('*')
+        .eq('status', 'active')
+        .eq('category_id', cat.id)
+        .order('created_at', { ascending: false })
+        .limit(20)
+
+      const listings = data || []
+      if (listings.length < 1) continue
+
+      const section = document.createElement('section')
+      section.className = 'carousel-section'
+      section.innerHTML = `
+        <div class="carousel-head">
+          <h2 class="carousel-title">
+            <span class="carousel-title-icon">${escapeHtml(cat.icon || '📦')}</span>
+            ${escapeHtml(cat.name)}
+          </h2>
+          <a href="catalog.html?category=${encodeURIComponent(cat.slug)}" class="carousel-view-all">View all →</a>
+        </div>
+        <div class="carousel-wrap">
+          <button class="carousel-arrow prev" aria-label="Scroll left">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <div class="carousel-track">
+            ${listings.map(renderCard).join('')}
+          </div>
+          <button class="carousel-arrow next" aria-label="Scroll right">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+      `
+      container.appendChild(section)
+
+      const trackEl = section.querySelector('.carousel-track')
+      const prevBtn = section.querySelector('.carousel-arrow.prev')
+      const nextBtn = section.querySelector('.carousel-arrow.next')
+
+      prevBtn.addEventListener('click', () => trackEl.scrollBy({ left: -trackEl.clientWidth * 0.9, behavior: 'smooth' }))
+      nextBtn.addEventListener('click', () => trackEl.scrollBy({ left: trackEl.clientWidth * 0.9, behavior: 'smooth' }))
+
+      // AUTO-SLIDE — each category gets its own random interval (4-9s)
+      const interval = 4000 + Math.floor(Math.random() * 5000)
+      let userPaused = false
+
+      trackEl.addEventListener('mouseenter', () => { userPaused = true })
+      trackEl.addEventListener('mouseleave', () => { userPaused = false })
+      trackEl.addEventListener('touchstart', () => { userPaused = true }, { passive: true })
+      trackEl.addEventListener('touchend', () => { setTimeout(() => { userPaused = false }, 3000) }, { passive: true })
+
+      const timer = setInterval(() => {
+        if (userPaused) return
+        const maxScroll = trackEl.scrollWidth - trackEl.clientWidth
+        if (trackEl.scrollLeft >= maxScroll - 20) {
+          trackEl.scrollTo({ left: 0, behavior: 'smooth' })
+        } else {
+          trackEl.scrollBy({ left: trackEl.clientWidth * 0.9, behavior: 'smooth' })
+        }
+      }, interval)
+
+      carouselTimers.push(timer)
+    }
+  }
+
   async function toggleWishlist(listingId, btn) {
     const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (!session) { window.location.href = 'login.html'; return }
 
-    if (!session) {
-      // Not logged in — redirect to login
-      window.location.href = 'login.html'
-      return
-    }
-
-    // Check if already saved
     const { data: existing } = await window.supabaseClient
       .from('wishlists')
       .select('id')
@@ -941,36 +970,36 @@
       .maybeSingle()
 
     if (existing) {
-      // Remove
       await window.supabaseClient.from('wishlists').delete().eq('id', existing.id)
       btn.classList.remove('active')
       btn.querySelector('svg').setAttribute('fill', 'none')
     } else {
-      // Add
-      await window.supabaseClient.from('wishlists').insert({
-        user_id: session.user.id,
-        listing_id: listingId
-      })
+      await window.supabaseClient.from('wishlists').insert({ user_id: session.user.id, listing_id: listingId })
       btn.classList.add('active')
       btn.querySelector('svg').setAttribute('fill', 'var(--coral)')
     }
   }
 
-  // ============================================
-  // CHECK AUTH (update nav state)
-  // ============================================
   async function checkAuth() {
     const { data: { session } } = await window.supabaseClient.auth.getSession()
-    if (session) {
-      document.getElementById('notifDot').style.display = 'block'
-    }
+    if (session) document.getElementById('notifDot').style.display = 'block'
   }
 
-  // ============================================
-  // BOOT
-  // ============================================
+  // LANGUAGE SELECTOR
+  function handleLanguageChange(lang) {
+    localStorage.setItem('relovly_lang', lang)
+    document.documentElement.lang = lang
+    // Actual translation wiring to be added later
+  }
+
+  function restoreLanguage() {
+    const saved = localStorage.getItem('relovly_lang') || 'en'
+    const sel = document.getElementById('langSelect')
+    if (sel) sel.value = saved
+    document.documentElement.lang = saved
+  }
+
   window.addEventListener('supabase-ready', async () => {
-    // Wait for client to attach
     let tries = 0
     while (!window.supabaseClient && tries < 50) {
       await new Promise(r => setTimeout(r, 100))
@@ -978,13 +1007,14 @@
     }
     if (!window.supabaseClient) return
 
+    restoreLanguage()
     checkAuth()
 
     const categories = await loadCategories()
     renderCategoryRow(categories)
-    renderCategoryTiles(categories)
 
     await Promise.all([loadFeatured(), loadRecent()])
+    await loadCategoryCarousels(categories)
   })
 </script>
 

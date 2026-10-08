@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create your account — relovly</title>
+<title data-i18n-title="register_page_title">Create your account — relovly</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -18,7 +18,7 @@
     --card: #FFFFFF;
     --border: #EBE8E3;
     --border-strong: #DDD8D0;
-    --text: #1A1A1A;
+    --text: #0E0E0E;
     --text-2: #6B6B6B;
     --text-3: #9A9A9A;
     --green: #2E7D5B;
@@ -31,14 +31,14 @@
     --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
     --shadow-lg: 0 12px 32px rgba(0,0,0,0.10);
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-display: 'Lora', Georgia, serif;
+    --font-display: 'Fraunces', Georgia, serif;
   }
 
   html { scroll-behavior: smooth; }
   body { font-family: var(--font-ui); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; min-height: 100vh; }
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
-  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
   .auth-page { display: grid; grid-template-columns: 1fr; min-height: 100vh; }
 
@@ -52,7 +52,7 @@
 
   .auth-brand-panel {
     display: none;
-    background: linear-gradient(135deg, #1A1A1A 0%, #2C2C2D 100%);
+    background: linear-gradient(135deg, #0E0E0E 0%, #2C2C2D 100%);
     position: relative;
     overflow: hidden;
     order: 1;
@@ -72,7 +72,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(26,26,26,0.3) 0%, rgba(26,26,26,0.75) 100%);
+    background: linear-gradient(180deg, rgba(14,14,14,0.3) 0%, rgba(14,14,14,0.75) 100%);
   }
 
   .auth-brand-content {
@@ -89,14 +89,17 @@
   .auth-brand-logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 11px;
     font-family: var(--font-display);
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -0.6px;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -1.4px;
     color: white;
+    line-height: 1;
   }
-  .auth-brand-logo em { font-style: normal; color: var(--coral); }
+  .auth-brand-logo .halo { width: 34px; height: 34px; flex-shrink: 0; }
+  .auth-brand-logo .halo svg { width: 100%; height: 100%; display: block; }
+  .auth-brand-logo em { font-style: italic; font-weight: 500; color: var(--coral); letter-spacing: -1.4px; }
 
   .auth-brand-quote { max-width: 480px; }
 
@@ -139,21 +142,55 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 32px;
+    gap: 12px;
   }
 
   .auth-logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 11px;
     font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 28px;
+    font-weight: 600;
     color: var(--text);
-    letter-spacing: -0.6px;
+    letter-spacing: -1.4px;
+    line-height: 1;
   }
-  .auth-logo-mark { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
-  .auth-logo-mark svg { width: 32px; height: 32px; }
-  .auth-logo em { font-style: normal; color: var(--coral); }
+  .auth-logo .halo { width: 34px; height: 34px; flex-shrink: 0; }
+  .auth-logo .halo svg { width: 100%; height: 100%; display: block; }
+  .auth-logo em { font-style: italic; font-weight: 500; color: var(--coral); letter-spacing: -1.4px; }
+
+  .auth-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Language selector pill */
+  .lang-select {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 24px 0 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: var(--r-pill);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    font-family: inherit;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    transition: border-color 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .lang-select:hover { border-color: var(--coral); }
+  .lang-select:focus { outline: none; border-color: var(--coral); }
 
   .auth-back {
     display: flex;
@@ -322,7 +359,6 @@
   .btn-submit.loading svg { animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* Alert */
   .alert {
     display: none;
     align-items: flex-start;
@@ -400,7 +436,6 @@
     .auth-page { grid-template-columns: 1fr 1fr; }
     .auth-brand-panel { display: block; order: 1; }
     .auth-form-panel { order: 2; padding: 40px 60px; }
-    .auth-top-bar { display: none; }
   }
 
   @media (min-width: 1200px) {
@@ -422,32 +457,32 @@
     <div class="auth-brand-content">
 
       <div class="auth-brand-logo">
-        <svg width="34" height="34" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="40" height="40" rx="12" fill="#E85A4F"/>
-          <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
-                stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <circle cx="28" cy="13.5" r="2.2" fill="white"/>
-        </svg>
-        re<em>lovly</em>
+        <span class="halo">
+          <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <path d="M 27 5 A 22 22 0 1 1 12 41" stroke="#E85A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <circle cx="41" cy="41" r="4" fill="#E85A4F"/>
+          </svg>
+        </span>
+        relov<em>ly</em>
       </div>
 
       <div class="auth-brand-quote">
-        <h2>Join the marketplace built for quality pre-owned items.</h2>
-        <p>Create your account in seconds. Buy with confidence, or start selling to a global audience — all with buyer protection built in.</p>
+        <h2 data-i18n="register_brand_quote">Join the marketplace built for quality pre-owned items.</h2>
+        <p data-i18n="register_brand_sub">Create your account in seconds. Buy with confidence, or start selling to a global audience — all with buyer protection built in.</p>
       </div>
 
       <div class="auth-brand-trust">
         <span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-          Free to join
+          <span data-i18n="register_trust_free">Free to join</span>
         </span>
         <span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Buyer Protection
+          <span data-i18n="register_trust_buyer">Buyer Protection</span>
         </span>
         <span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          24/7 Support
+          <span data-i18n="register_trust_support">24/7 Support</span>
         </span>
       </div>
 
@@ -459,24 +494,39 @@
 
       <div class="auth-top-bar">
         <a href="index.html" class="auth-logo">
-          <span class="auth-logo-mark">
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="40" height="40" rx="12" fill="#E85A4F"/>
-              <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
-                    stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+          <span class="halo">
+            <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <path d="M 27 5 A 22 22 0 1 1 12 41" stroke="#E85A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+              <circle cx="41" cy="41" r="4" fill="#E85A4F"/>
             </svg>
           </span>
-          re<em>lovly</em>
+          relov<em>ly</em>
         </a>
-        <a href="login.html" class="auth-back">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
-          Back
-        </a>
+
+        <div class="auth-top-actions">
+          <select class="lang-select" id="langSelect" aria-label="Language" onchange="handleLanguageChange(this.value)">
+            <option value="en">🇬🇧 EN</option>
+            <option value="fr">🇫🇷 FR</option>
+            <option value="de">🇩🇪 DE</option>
+            <option value="es">🇪🇸 ES</option>
+            <option value="it">🇮🇹 IT</option>
+            <option value="nl">🇳🇱 NL</option>
+            <option value="pt">🇵🇹 PT</option>
+            <option value="ru">🇷🇺 RU</option>
+            <option value="ja">🇯🇵 JA</option>
+            <option value="zh">🇨🇳 ZH</option>
+            <option value="ar">🇸🇦 AR</option>
+            <option value="ko">🇰🇷 KO</option>
+          </select>
+          <a href="login.html" class="auth-back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
+            <span data-i18n="login_back">Back</span>
+          </a>
+        </div>
       </div>
 
-      <h1 class="auth-title">Create your account</h1>
-      <p class="auth-sub">Join thousands of buyers and sellers across the UK and Europe.</p>
+      <h1 class="auth-title" data-i18n="register_title">Create your account</h1>
+      <p class="auth-sub" data-i18n="register_sub">Join thousands of buyers and sellers across the UK and Europe.</p>
 
       <div class="alert alert-error" id="errorAlert">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -492,22 +542,22 @@
 
         <div class="form-row-2">
           <div class="form-group">
-            <label class="form-label" for="firstName">First name</label>
+            <label class="form-label" for="firstName" data-i18n="checkout_first_name">First name</label>
             <input class="form-input" type="text" id="firstName" placeholder="Jane" autocomplete="given-name" required>
           </div>
           <div class="form-group">
-            <label class="form-label" for="lastName">Last name</label>
+            <label class="form-label" for="lastName" data-i18n="checkout_last_name">Last name</label>
             <input class="form-input" type="text" id="lastName" placeholder="Doe" autocomplete="family-name" required>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="email">Email address</label>
+          <label class="form-label" for="email" data-i18n="login_email">Email address</label>
           <input class="form-input" type="email" id="email" placeholder="you@example.com" autocomplete="email" required>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="password">Password</label>
+          <label class="form-label" for="password" data-i18n="login_password">Password</label>
           <div class="form-input-wrap">
             <input
               class="form-input has-icon"
@@ -530,11 +580,11 @@
             <div class="strength-bar"></div>
             <div class="strength-bar"></div>
           </div>
-          <div class="password-hint" id="strengthHint">Use 8+ characters with letters, numbers, and symbols</div>
+          <div class="password-hint" id="strengthHint" data-i18n="register_strength_hint">Use 8+ characters with letters, numbers, and symbols</div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="confirmPassword">Confirm password</label>
+          <label class="form-label" for="confirmPassword" data-i18n="register_confirm">Confirm password</label>
           <div class="form-input-wrap">
             <input
               class="form-input has-icon"
@@ -558,18 +608,22 @@
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
           </span>
           <span>
-            I agree to relovly's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I confirm I have read the Buyer Protection policy.
+            <span data-i18n="register_terms_agree">I agree to relovly's</span>
+            <a href="#" data-i18n="footer_terms">Terms of Service</a>
+            <span data-i18n="register_and">and</span>
+            <a href="#" data-i18n="footer_privacy">Privacy Policy</a>.
+            <span data-i18n="register_terms_note">I confirm I have read the Buyer Protection policy.</span>
           </span>
         </label>
 
         <button type="submit" class="btn-submit" id="submitBtn">
-          <span id="submitText">Create account</span>
+          <span id="submitText" data-i18n="register_submit">Create account</span>
           <svg id="submitIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </button>
 
       </form>
 
-      <div class="divider">or continue with</div>
+      <div class="divider" data-i18n="login_or">or continue with</div>
 
       <div class="social-buttons">
         <button class="social-btn" type="button" onclick="handleOAuth('google')">
@@ -579,28 +633,29 @@
             <path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84Z"/>
             <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A11 11 0 0 0 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52Z"/>
           </svg>
-          Sign up with Google
+          <span data-i18n="register_google">Sign up with Google</span>
         </button>
         <button class="social-btn" type="button" onclick="handleOAuth('facebook')">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2">
             <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07Z"/>
           </svg>
-          Sign up with Facebook
+          <span data-i18n="register_facebook">Sign up with Facebook</span>
         </button>
       </div>
 
       <div class="auth-footer">
-        Already have an account? <a href="login.html">Log in</a>
+        <span data-i18n="register_have_account">Already have an account?</span>
+        <a href="login.html" data-i18n="register_login">Log in</a>
       </div>
 
       <div class="auth-trust-footer">
         <span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Secure signup
+          <span data-i18n="register_secure">Secure signup</span>
         </span>
         <span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Protected by relovly
+          <span data-i18n="login_protected">Protected by relovly</span>
         </span>
       </div>
 
@@ -609,9 +664,7 @@
 
 </div>
 
-<!-- ============================================
-     SUPABASE CLIENT
-     ============================================ -->
+<!-- SUPABASE CLIENT -->
 <script type="module">
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
@@ -619,11 +672,8 @@
   const SUPABASE_KEY = 'sb_publishable_vggy-_2xeONhcsSbiQklsw_hvLC_cgG'
 
   const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
-
-  // Expose globally so the other script block can use it
   window.supabaseClient = supabase
 
-  // If already logged in, send them to account page
   supabase.auth.getSession().then(({ data: { session } }) => {
     if (session) {
       window.location.href = 'account.html'
@@ -631,11 +681,12 @@
   })
 </script>
 
-<!-- ============================================
-     FORM LOGIC
-     ============================================ -->
+<!-- FORM LOGIC -->
 <script>
-  // PASSWORD VISIBILITY TOGGLE
+  function t(key) {
+    return window.relovlyI18n ? window.relovlyI18n.t(key) : key
+  }
+
   function togglePassword(inputId, btn) {
     const input = document.getElementById(inputId);
     const isPassword = input.type === 'password';
@@ -648,7 +699,6 @@
     btn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
   }
 
-  // PASSWORD STRENGTH
   function checkStrength(val) {
     const bars = document.querySelectorAll('#strengthBar .strength-bar');
     const hint = document.getElementById('strengthHint');
@@ -665,24 +715,23 @@
     }
 
     if (!val) {
-      hint.textContent = 'Use 8+ characters with letters, numbers, and symbols';
+      hint.textContent = t('register_strength_hint') || 'Use 8+ characters with letters, numbers, and symbols';
       hint.style.color = 'var(--text-3)';
     } else if (score <= 1) {
-      hint.textContent = 'Weak — try adding uppercase, numbers, or symbols';
+      hint.textContent = t('register_strength_weak') || 'Weak — try adding uppercase, numbers, or symbols';
       hint.style.color = 'var(--coral)';
     } else if (score === 2) {
-      hint.textContent = 'Medium — could be stronger';
+      hint.textContent = t('register_strength_medium') || 'Medium — could be stronger';
       hint.style.color = 'var(--amber)';
     } else if (score === 3) {
-      hint.textContent = 'Good password';
+      hint.textContent = t('register_strength_good') || 'Good password';
       hint.style.color = 'var(--green)';
     } else {
-      hint.textContent = 'Excellent password';
+      hint.textContent = t('register_strength_excellent') || 'Excellent password';
       hint.style.color = 'var(--green)';
     }
   }
 
-  // ALERT HELPERS
   function showError(msg) {
     const el = document.getElementById('errorAlert');
     document.getElementById('errorMessage').textContent = msg;
@@ -694,7 +743,23 @@
     document.getElementById('successAlert').classList.remove('show');
   }
 
-  // FORM SUBMIT
+  function handleLanguageChange(lang) {
+    if (window.relovlyI18n) {
+      window.relovlyI18n.setLanguage(lang);
+    } else {
+      localStorage.setItem('relovly_lang', lang);
+      document.documentElement.lang = lang;
+    }
+  }
+
+  function restoreLanguage() {
+    const saved = (window.relovlyI18n && window.relovlyI18n.getCurrentLanguage()) || localStorage.getItem('relovly_lang') || 'en';
+    const sel = document.getElementById('langSelect');
+    if (sel) sel.value = saved;
+    document.documentElement.lang = saved;
+    if (window.relovlyI18n) window.relovlyI18n.applyTranslations();
+  }
+
   document.getElementById('registerForm').addEventListener('submit', async function (e) {
     e.preventDefault();
     hideAlerts();
@@ -706,14 +771,12 @@
     const confirm = document.getElementById('confirmPassword').value;
     const terms = document.getElementById('termsCheckbox').checked;
 
-    // Validate
     if (!firstName || !lastName) return showError('Please enter your first and last name.');
     if (!email || !email.includes('@')) return showError('Please enter a valid email address.');
     if (password.length < 8) return showError('Password must be at least 8 characters.');
     if (password !== confirm) return showError('Passwords do not match.');
     if (!terms) return showError('Please agree to the Terms of Service to continue.');
 
-    // Disable button
     const btn = document.getElementById('submitBtn');
     const btnText = document.getElementById('submitText');
     const btnIcon = document.getElementById('submitIcon');
@@ -735,9 +798,7 @@
 
       if (error) throw error;
 
-      // Check if email confirmation is required
       if (data.user && !data.session) {
-        // Email confirmation is ON
         const successAlert = document.getElementById('successAlert');
         document.getElementById('successMessage').textContent =
           'Account created! Please check your email to confirm your address before logging in.';
@@ -745,17 +806,14 @@
         btnText.textContent = 'Account created';
         btnIcon.innerHTML = '<path d="M20 6 9 17l-5-5"/>';
 
-        // Disable form
         document.getElementById('registerForm').querySelectorAll('input, button').forEach(el => {
           if (el.type !== 'button') el.disabled = true;
         });
 
-        // Redirect to login after 3 seconds
         setTimeout(() => {
           window.location.href = 'login.html';
         }, 3000);
       } else {
-        // Email confirmation is OFF — user is signed in
         const successAlert = document.getElementById('successAlert');
         document.getElementById('successMessage').textContent =
           'Account created! Redirecting to your account...';
@@ -763,7 +821,6 @@
         btnText.textContent = 'Welcome to relovly!';
         btnIcon.innerHTML = '<path d="M20 6 9 17l-5-5"/>';
 
-        // Redirect to account page
         setTimeout(() => {
           window.location.href = 'account.html';
         }, 1200);
@@ -787,15 +844,13 @@
       }
       showError(msg);
 
-      // Re-enable button
       btn.disabled = false;
       btn.classList.remove('loading');
-      btnText.textContent = 'Create account';
+      btnText.textContent = t('register_submit') || 'Create account';
       btnIcon.innerHTML = '<path d="m9 18 6-6-6-6"/>';
     }
   });
 
-  // OAUTH (Google / Facebook)
   async function handleOAuth(provider) {
     try {
       const { error } = await window.supabaseClient.auth.signInWithOAuth({
@@ -810,7 +865,17 @@
       showError(`${provider} sign-in is not available yet. Please use email.`);
     }
   }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    restoreLanguage();
+  });
+  if (document.readyState !== 'loading') {
+    restoreLanguage();
+  }
 </script>
+
+<!-- i18n -->
+<script src="i18n.js"></script>
 
 </body>
 </html>

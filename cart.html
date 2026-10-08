@@ -6,7 +6,7 @@
 <title>Your Cart — relovly</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -18,7 +18,7 @@
     --card: #FFFFFF;
     --border: #EBE8E3;
     --border-strong: #DDD8D0;
-    --text: #1A1A1A;
+    --text: #0E0E0E;
     --text-2: #6B6B6B;
     --text-3: #9A9A9A;
     --green: #2E7D5B;
@@ -30,25 +30,32 @@
     --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
     --shadow-lg: 0 12px 32px rgba(0,0,0,0.10);
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-display: 'Lora', Georgia, serif;
+    --font-display: 'Fraunces', Georgia, serif;
   }
 
   html { scroll-behavior: smooth; }
   body { font-family: var(--font-ui); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
-  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
-  /* ============================================
-     NAV
-     ============================================ */
+  /* NAV */
   .nav { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 0 16px; }
   .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 20px; height: 64px; }
-  .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .logo-mark { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
-  .logo-mark svg { width: 34px; height: 34px; }
-  .logo-text { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--text); letter-spacing: -0.6px; line-height: 1; }
-  .logo-text em { font-style: normal; color: var(--coral); }
+
+  .logo { display: flex; align-items: center; gap: 11px; flex-shrink: 0; line-height: 1; }
+  .halo { width: 34px; height: 34px; flex-shrink: 0; }
+  .halo svg { width: 100%; height: 100%; display: block; }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -1.4px;
+    color: var(--text);
+    line-height: 1;
+    padding-bottom: 2px;
+  }
+  .wordmark em { font-style: italic; font-weight: 500; color: var(--coral); letter-spacing: -1.4px; }
 
   .nav-search { flex: 1; max-width: 560px; position: relative; display: none; }
   .nav-search input { width: 100%; height: 42px; padding: 0 16px 0 44px; border: 1px solid var(--border); background: var(--bg); border-radius: var(--r-pill); font-size: 14px; font-family: inherit; color: var(--text); outline: none; }
@@ -60,7 +67,7 @@
   .icon-btn { width: 40px; height: 40px; border-radius: var(--r-pill); display: flex; align-items: center; justify-content: center; color: var(--text-2); transition: background 0.15s, color 0.15s; }
   .icon-btn:hover { background: var(--bg); color: var(--text); }
 
-  .btn-buy { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; background: var(--coral); color: white; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; position: relative; }
+  .btn-buy { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; background: var(--coral); color: white; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; position: relative; transition: background 0.15s; }
   .btn-buy:hover { background: var(--coral-dark); }
   .btn-buy .cart-count {
     display: inline-flex; align-items: center; justify-content: center;
@@ -70,9 +77,7 @@
     margin-left: 4px;
   }
 
-  /* ============================================
-     PAGE HEADER
-     ============================================ */
+  /* PAGE HEADER */
   .page-header { max-width: 1400px; margin: 0 auto; padding: 32px 16px 8px; }
   .breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-2); margin-bottom: 20px; }
   .breadcrumb a:hover { color: var(--coral); }
@@ -86,15 +91,12 @@
   .page-count { font-size: 14px; color: var(--text-2); }
   .page-count strong { color: var(--text); font-weight: 700; }
 
-  /* ============================================
-     LAYOUT
-     ============================================ */
+  /* LAYOUT */
   .layout {
     max-width: 1400px; margin: 0 auto; padding: 20px 16px 60px;
     display: grid; grid-template-columns: 1fr; gap: 24px; align-items: start;
   }
 
-  /* Loading */
   .loading-center {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 80px 20px; color: var(--text-3); gap: 16px;
@@ -109,9 +111,7 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ============================================
-     CART ITEMS
-     ============================================ */
+  /* CART ITEMS */
   .cart-list { display: flex; flex-direction: column; gap: 12px; }
 
   .seller-group {
@@ -213,9 +213,7 @@
     font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.3px;
   }
 
-  /* ============================================
-     SIDEBAR
-     ============================================ */
+  /* SIDEBAR */
   .sidebar { display: flex; flex-direction: column; gap: 16px; }
 
   .summary {
@@ -295,9 +293,7 @@
   }
   .trust-row span { display: flex; align-items: center; gap: 5px; }
 
-  /* ============================================
-     EMPTY CART
-     ============================================ */
+  /* EMPTY CART */
   .empty-cart {
     max-width: 480px; margin: 40px auto;
     padding: 60px 24px;
@@ -329,9 +325,7 @@
   }
   .btn-primary-lg:hover { background: var(--coral-dark); }
 
-  /* ============================================
-     FOOTER
-     ============================================ */
+  /* FOOTER */
   .footer { background: var(--card); border-top: 1px solid var(--border); padding: 48px 16px 32px; margin-top: 40px; }
   .footer-inner { max-width: 1400px; margin: 0 auto; }
   .footer-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
@@ -344,9 +338,7 @@
   .footer-bottom { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text-3); }
   .footer-bottom-links { display: flex; flex-wrap: wrap; gap: 16px; }
 
-  /* ============================================
-     MOBILE CHECKOUT BAR
-     ============================================ */
+  /* MOBILE CHECKOUT BAR */
   .mobile-checkout {
     position: fixed; bottom: 0; left: 0; right: 0;
     background: var(--card); border-top: 1px solid var(--border);
@@ -368,9 +360,7 @@
 
   @media (max-width: 1023px) { body { padding-bottom: 84px; } }
 
-  /* ============================================
-     RESPONSIVE
-     ============================================ */
+  /* RESPONSIVE */
   @media (min-width: 768px) {
     .nav-search { display: block; }
     .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
@@ -395,34 +385,24 @@
 </head>
 <body>
 
-<!-- ============================================
-     NAV
-     ============================================ -->
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="logo">
-      <span class="logo-mark">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#E85A4F"/>
-              <stop offset="100%" stop-color="#D14A40"/>
-            </linearGradient>
-          </defs>
-          <rect width="40" height="40" rx="12" fill="url(#logoGrad)"/>
-          <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
-                stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+      <span class="halo">
+        <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M 27 5 A 22 22 0 1 1 12 41" stroke="#E85A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <circle cx="41" cy="41" r="4" fill="#E85A4F"/>
         </svg>
       </span>
-      <span class="logo-text">re<em>lovly</em></span>
+      <span class="wordmark">relov<em>ly</em></span>
     </a>
 
     <div class="nav-search">
       <span class="nav-search-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       </span>
-      <input type="text" id="navSearchInput" placeholder="Search cameras, watches, bicycles...">
+      <input type="text" id="navSearchInput" data-i18n-placeholder="search_placeholder" placeholder="Search cameras, watches, bicycles...">
     </div>
 
     <div class="nav-actions">
@@ -431,44 +411,40 @@
       </a>
       <a href="cart.html" class="btn-buy">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        Cart
+        <span data-i18n="buy">Buy</span>
         <span class="cart-count" id="navCartCount">0</span>
       </a>
     </div>
   </div>
 </nav>
 
-<!-- ============================================
-     PAGE HEADER
-     ============================================ -->
+<!-- PAGE HEADER -->
 <header class="page-header">
   <div class="breadcrumb">
-    <a href="index.html">Home</a>
+    <a href="index.html" data-i18n="breadcrumb_home">Home</a>
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-    <span>Cart</span>
+    <span data-i18n="cart_title">Cart</span>
   </div>
 
   <div class="page-title-row">
-    <h1 class="page-title">Your Cart</h1>
+    <h1 class="page-title" data-i18n="cart_title">Your Cart</h1>
     <span class="page-count" id="pageCount"><strong>0</strong> items</span>
   </div>
 </header>
 
-<!-- ============================================
-     LAYOUT
-     ============================================ -->
+<!-- LAYOUT -->
 <div class="layout" id="layout">
 
   <div class="cart-list" id="cartList">
     <div class="loading-center">
       <div class="spinner"></div>
-      <span>Loading your cart...</span>
+      <span data-i18n="cart_loading">Loading your cart...</span>
     </div>
   </div>
 
   <aside class="sidebar" id="sidebar" style="display:none;">
     <div class="summary">
-      <h2 class="summary-title">Order Summary</h2>
+      <h2 class="summary-title" data-i18n="cart_summary">Order Summary</h2>
 
       <div class="summary-row">
         <span id="subtotalLabel">Subtotal (0 items)</span>
@@ -476,47 +452,47 @@
       </div>
 
       <div class="summary-row">
-        <span>Shipping</span>
-        <span class="value free" id="shippingValue">Calculated at checkout</span>
+        <span data-i18n="cart_shipping">Shipping</span>
+        <span class="value free" id="shippingValue" data-i18n="cart_shipping_calc">Calculated at checkout</span>
       </div>
 
       <div class="summary-row">
-        <span>Buyer Protection</span>
-        <span class="value free">Included</span>
+        <span data-i18n="cart_buyer_protect">Buyer Protection</span>
+        <span class="value free" data-i18n="cart_included">Included</span>
       </div>
 
       <div class="summary-divider"></div>
 
       <div class="summary-total">
-        <span class="label">Total</span>
+        <span class="label" data-i18n="cart_total">Total</span>
         <span class="amount" id="totalValue">£0</span>
       </div>
 
-      <div class="summary-vat">Including VAT where applicable</div>
+      <div class="summary-vat" data-i18n="cart_vat">Including VAT where applicable</div>
 
       <div class="promo">
-        <input type="text" id="promoInput" placeholder="Promo code">
-        <button onclick="applyPromo()">Apply</button>
+        <input type="text" id="promoInput" data-i18n-placeholder="cart_promo_placeholder" placeholder="Promo code">
+        <button onclick="applyPromo()" data-i18n="cart_promo_apply">Apply</button>
       </div>
 
       <a href="checkout.html" class="btn-checkout" id="checkoutBtn">
-        Proceed to Checkout
+        <span data-i18n="cart_checkout">Proceed to Checkout</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
       </a>
 
       <a href="catalog.html" class="btn-continue">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
-        Continue shopping
+        <span data-i18n="cart_continue">Continue shopping</span>
       </a>
 
       <div class="trust-row">
         <span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Secure checkout
+          <span data-i18n="cart_secure">Secure checkout</span>
         </span>
         <span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Buyer Protection
+          <span data-i18n="cart_buyer_protect">Buyer Protection</span>
         </span>
       </div>
     </div>
@@ -524,93 +500,79 @@
 
 </div>
 
-<!-- ============================================
-     FOOTER
-     ============================================ -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="logo">
-          <span class="logo-mark">
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="logoGrad2" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#E85A4F"/>
-                  <stop offset="100%" stop-color="#D14A40"/>
-                </linearGradient>
-              </defs>
-              <rect width="40" height="40" rx="12" fill="url(#logoGrad2)"/>
-              <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
-                    stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+          <span class="halo">
+            <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <path d="M 27 5 A 22 22 0 1 1 12 41" stroke="#E85A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+              <circle cx="41" cy="41" r="4" fill="#E85A4F"/>
             </svg>
           </span>
-          <span class="logo-text">re<em>lovly</em></span>
+          <span class="wordmark">relov<em>ly</em></span>
         </a>
-        <p>The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
+        <p data-i18n="footer_tagline">The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
       </div>
 
       <div class="footer-col">
-        <h4>Buy</h4>
+        <h4 data-i18n="footer_buy">Buy</h4>
         <ul>
-          <li><a href="#">How to Buy</a></li>
-          <li><a href="#">Buyer Protection</a></li>
-          <li><a href="#">Shipping Info</a></li>
-          <li><a href="#">Returns</a></li>
+          <li><a href="#" data-i18n="footer_how_to_buy">How to Buy</a></li>
+          <li><a href="#" data-i18n="footer_buyer_protection">Buyer Protection</a></li>
+          <li><a href="#" data-i18n="footer_shipping_info">Shipping Info</a></li>
+          <li><a href="#" data-i18n="footer_returns">Returns</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Sell</h4>
+        <h4 data-i18n="footer_sell">Sell</h4>
         <ul>
-          <li><a href="#">Start Selling</a></li>
-          <li><a href="#">Seller Fees</a></li>
-          <li><a href="#">Verification</a></li>
-          <li><a href="#">Seller Guide</a></li>
+          <li><a href="#" data-i18n="footer_start_selling">Start Selling</a></li>
+          <li><a href="#" data-i18n="footer_seller_fees">Seller Fees</a></li>
+          <li><a href="#" data-i18n="footer_verification">Verification</a></li>
+          <li><a href="#" data-i18n="footer_seller_guide">Seller Guide</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Support</h4>
+        <h4 data-i18n="footer_support">Support</h4>
         <ul>
-          <li><a href="#">Help Centre</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Disputes</a></li>
-          <li><a href="#">Report Listing</a></li>
+          <li><a href="#" data-i18n="footer_help">Help Centre</a></li>
+          <li><a href="#" data-i18n="footer_contact">Contact Us</a></li>
+          <li><a href="#" data-i18n="footer_disputes">Disputes</a></li>
+          <li><a href="#" data-i18n="footer_report">Report Listing</a></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <span>© 2026 relovly. All rights reserved.</span>
+      <span data-i18n="footer_rights">© 2026 relovly. All rights reserved.</span>
       <div class="footer-bottom-links">
         <a href="#">United Kingdom · GBP £</a>
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="#">Cookies</a>
+        <a href="#" data-i18n="footer_terms">Terms</a>
+        <a href="#" data-i18n="footer_privacy">Privacy</a>
+        <a href="#" data-i18n="footer_cookies">Cookies</a>
       </div>
     </div>
   </div>
 </footer>
 
-<!-- ============================================
-     MOBILE CHECKOUT BAR
-     ============================================ -->
+<!-- MOBILE CHECKOUT BAR -->
 <div class="mobile-checkout" id="mobileCheckout" style="display:none;">
   <div class="mobile-checkout-total">
-    <div class="mobile-checkout-label">Total</div>
+    <div class="mobile-checkout-label" data-i18n="cart_total">Total</div>
     <div class="mobile-checkout-amount" id="mobileTotal">£0</div>
   </div>
   <a href="checkout.html" class="mobile-checkout-btn" id="mobileCheckoutBtn">
-    Checkout
+    <span data-i18n="cart_checkout_short">Checkout</span>
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
   </a>
 </div>
 
-<!-- ============================================
-     SUPABASE CLIENT
-     ============================================ -->
+<!-- SUPABASE CLIENT -->
 <script type="module">
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
@@ -622,13 +584,8 @@
   window.dispatchEvent(new Event('supabase-ready'))
 </script>
 
-<!-- ============================================
-     CART LOGIC
-     ============================================ -->
+<!-- CART LOGIC -->
 <script>
-  // ============================================
-  // CART STORAGE (localStorage)
-  // ============================================
   const CART_KEY = 'relovly_cart'
 
   function getCart() {
@@ -636,11 +593,9 @@
       const raw = localStorage.getItem(CART_KEY)
       if (!raw) return []
       const parsed = JSON.parse(raw)
-      // New format: array of {id, quantity}
       if (Array.isArray(parsed) && parsed.length && typeof parsed[0] === 'object') {
         return parsed
       }
-      // Old format: array of ids
       if (Array.isArray(parsed)) {
         return parsed.map(id => ({ id: parseInt(id, 10), quantity: 1 }))
       }
@@ -658,12 +613,10 @@
   function updateNavCount() {
     const cart = getCart()
     const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0)
-    document.getElementById('navCartCount').textContent = count
+    const el = document.getElementById('navCartCount')
+    if (el) el.textContent = count
   }
 
-  // ============================================
-  // HELPERS
-  // ============================================
   function formatPrice(price, currency) {
     const n = parseFloat(price || 0)
     const symbols = { GBP: '£', USD: '$', EUR: '€' }
@@ -691,16 +644,10 @@
     return map[condition] || { label: 'Used', cls: 'chip-used' }
   }
 
-  // ============================================
-  // STATE
-  // ============================================
-  let cartItems = [] // [{id, quantity, listing}]
+  let cartItems = []
   let subtotal = 0
   let currency = 'GBP'
 
-  // ============================================
-  // LOAD CART FROM SUPABASE
-  // ============================================
   async function loadCart() {
     const cart = getCart()
 
@@ -722,7 +669,6 @@
       return
     }
 
-    // Merge quantities + filter out items that no longer exist or aren't active
     const validListings = data || []
     cartItems = cart
       .map(c => {
@@ -732,12 +678,10 @@
       })
       .filter(Boolean)
 
-    // Clean cart if some items were removed
     if (cartItems.length !== cart.length) {
       saveCart(cartItems.map(c => ({ id: c.id, quantity: c.quantity })))
     }
 
-    // Use the currency of the first item
     if (cartItems.length) {
       currency = cartItems[0].listing.currency || 'GBP'
     }
@@ -745,19 +689,16 @@
     renderCart()
   }
 
-  // ============================================
-  // RENDER EMPTY
-  // ============================================
   function renderEmptyCart() {
     document.getElementById('cartList').innerHTML = `
       <div class="empty-cart">
         <div class="empty-icon">
           <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         </div>
-        <h2>Your cart is empty</h2>
-        <p>Browse our marketplace to find quality pre-owned items from trusted sellers.</p>
+        <h2 data-i18n="cart_empty_title">Your cart is empty</h2>
+        <p data-i18n="cart_empty_desc">Browse our marketplace to find quality pre-owned items from trusted sellers.</p>
         <a href="catalog.html" class="btn-primary-lg">
-          Start shopping
+          <span data-i18n="cart_empty_btn">Start shopping</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
         </a>
       </div>
@@ -766,18 +707,15 @@
     document.getElementById('mobileCheckout').style.display = 'none'
     document.getElementById('pageCount').innerHTML = '<strong>0</strong> items'
     updateNavCount()
+    if (window.relovlyI18n) window.relovlyI18n.applyTranslations()
   }
 
-  // ============================================
-  // RENDER CART
-  // ============================================
   function renderCart() {
     if (!cartItems.length) {
       renderEmptyCart()
       return
     }
 
-    // Group items by seller
     const groups = {}
     cartItems.forEach(item => {
       const seller = item.listing.seller_name || 'relovly'
@@ -811,25 +749,23 @@
       `
     })
 
-    // Continue shopping link
     html += `
       <a href="catalog.html" class="btn-continue" style="margin-top: 8px;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
-        Continue shopping
+        <span data-i18n="cart_continue">Continue shopping</span>
       </a>
     `
 
     document.getElementById('cartList').innerHTML = html
-
-    // Show sidebar + mobile bar
     document.getElementById('sidebar').style.display = 'flex'
     document.getElementById('mobileCheckout').style.display = 'flex'
 
-    // Update counts + totals
     const totalItems = cartItems.reduce((sum, i) => sum + i.quantity, 0)
     document.getElementById('pageCount').innerHTML = `<strong>${totalItems}</strong> ${totalItems === 1 ? 'item' : 'items'}`
     updateNavCount()
     recalculateTotals()
+
+    if (window.relovlyI18n) window.relovlyI18n.applyTranslations()
   }
 
   function renderCartItem(item) {
@@ -866,11 +802,11 @@
             <div class="cart-item-actions">
               <button onclick="saveForLater(${l.id})">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                Save
+                <span data-i18n="cart_save">Save</span>
               </button>
               <button class="remove" onclick="removeItem(${l.id})">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                Remove
+                <span data-i18n="cart_remove">Remove</span>
               </button>
             </div>
           </div>
@@ -883,9 +819,6 @@
     `
   }
 
-  // ============================================
-  // RECALCULATE TOTALS
-  // ============================================
   function recalculateTotals() {
     subtotal = cartItems.reduce((sum, i) => {
       return sum + (parseFloat(i.listing.price) || 0) * i.quantity
@@ -900,9 +833,6 @@
     document.getElementById('mobileTotal').textContent = formatted
   }
 
-  // ============================================
-  // ACTIONS
-  // ============================================
   function changeQty(listingId, delta) {
     const item = cartItems.find(i => i.listing.id === listingId)
     if (!item) return
@@ -911,17 +841,15 @@
     if (newQty < 1) return
 
     item.quantity = newQty
-
-    // Save to localStorage
     saveCart(cartItems.map(i => ({ id: i.listing.id, quantity: i.quantity })))
 
-    // Re-render item
     const itemEl = document.querySelector(`.cart-item[data-id="${listingId}"]`)
     if (itemEl) {
       const newItemHtml = renderCartItem(item)
       const temp = document.createElement('div')
       temp.innerHTML = newItemHtml
       itemEl.replaceWith(temp.firstElementChild)
+      if (window.relovlyI18n) window.relovlyI18n.applyTranslations()
     }
 
     recalculateTotals()
@@ -976,9 +904,6 @@
     alert('Promo code "' + code + '" — promotions are not yet available.')
   }
 
-  // ============================================
-  // NAV SEARCH
-  // ============================================
   document.getElementById('navSearchInput').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       const val = e.target.value.trim()
@@ -986,9 +911,6 @@
     }
   })
 
-  // ============================================
-  // BOOT
-  // ============================================
   window.addEventListener('supabase-ready', async () => {
     let tries = 0
     while (!window.supabaseClient && tries < 50) {
@@ -999,8 +921,12 @@
 
     updateNavCount()
     await loadCart()
+    if (window.relovlyI18n) window.relovlyI18n.applyTranslations()
   })
 </script>
+
+<!-- i18n -->
+<script src="i18n.js"></script>
 
 </body>
 </html>

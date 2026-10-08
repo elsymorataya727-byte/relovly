@@ -6,7 +6,7 @@
 <title>Browse — relovly</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -18,7 +18,7 @@
     --card: #FFFFFF;
     --border: #EBE8E3;
     --border-strong: #DDD8D0;
-    --text: #1A1A1A;
+    --text: #0E0E0E;
     --text-2: #6B6B6B;
     --text-3: #9A9A9A;
     --green: #2E7D5B;
@@ -30,25 +30,32 @@
     --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
     --shadow-lg: 0 12px 32px rgba(0,0,0,0.10);
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-display: 'Lora', Georgia, serif;
+    --font-display: 'Fraunces', Georgia, serif;
   }
 
   html { scroll-behavior: smooth; }
   body { font-family: var(--font-ui); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
-  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
-  /* ============================================
-     NAV
-     ============================================ */
+  /* NAV */
   .nav { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 0 16px; }
   .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 20px; height: 64px; }
-  .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .logo-mark { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
-  .logo-mark svg { width: 34px; height: 34px; }
-  .logo-text { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--text); letter-spacing: -0.6px; line-height: 1; }
-  .logo-text em { font-style: normal; color: var(--coral); }
+
+  .logo { display: flex; align-items: center; gap: 11px; flex-shrink: 0; line-height: 1; }
+  .halo { width: 34px; height: 34px; flex-shrink: 0; }
+  .halo svg { width: 100%; height: 100%; display: block; }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -1.4px;
+    color: var(--text);
+    line-height: 1;
+    padding-bottom: 2px;
+  }
+  .wordmark em { font-style: italic; font-weight: 500; color: var(--coral); letter-spacing: -1.4px; }
 
   .nav-search { flex: 1; max-width: 560px; position: relative; display: none; }
   .nav-search input { width: 100%; height: 42px; padding: 0 16px 0 44px; border: 1px solid var(--border); background: var(--bg); border-radius: var(--r-pill); font-size: 14px; font-family: inherit; color: var(--text); outline: none; transition: border-color 0.15s, background 0.15s; }
@@ -60,12 +67,17 @@
   .icon-btn { width: 40px; height: 40px; border-radius: var(--r-pill); display: flex; align-items: center; justify-content: center; color: var(--text-2); transition: background 0.15s, color 0.15s; position: relative; }
   .icon-btn:hover { background: var(--bg); color: var(--text); }
 
-  .btn-buy { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; background: var(--coral); color: white; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; transition: background 0.15s, transform 0.1s; }
+  .btn-buy { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; background: var(--coral); color: white; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; transition: background 0.15s; position: relative; }
   .btn-buy:hover { background: var(--coral-dark); }
+  .btn-buy .cart-count {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 20px; height: 20px; padding: 0 6px;
+    background: white; color: var(--coral);
+    border-radius: var(--r-pill); font-size: 11px; font-weight: 700;
+    margin-left: 4px;
+  }
 
-  /* ============================================
-     PAGE HEADER
-     ============================================ */
+  /* PAGE HEADER */
   .page-header { max-width: 1400px; margin: 0 auto; padding: 24px 16px 8px; }
   .breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-2); margin-bottom: 16px; }
   .breadcrumb a { transition: color 0.15s; }
@@ -73,272 +85,131 @@
   .breadcrumb svg { color: var(--text-3); }
 
   .page-title-row {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 6px;
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap; margin-bottom: 6px;
   }
-
-  .page-title {
-    font-family: var(--font-display);
-    font-size: clamp(24px, 4vw, 34px);
-    font-weight: 700;
-    letter-spacing: -0.6px;
-    color: var(--text);
-  }
-
-  .page-count {
-    font-size: 14px;
-    color: var(--text-2);
-  }
-
+  .page-title { font-family: var(--font-display); font-size: clamp(24px, 4vw, 34px); font-weight: 700; letter-spacing: -0.6px; color: var(--text); }
+  .page-count { font-size: 14px; color: var(--text-2); }
   .page-count strong { color: var(--text); font-weight: 700; }
 
-  /* ============================================
-     TOOLBAR
-     ============================================ */
+  /* TOOLBAR */
   .toolbar {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 16px 20px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
+    max-width: 1400px; margin: 0 auto; padding: 0 16px 20px;
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
     border-bottom: 1px solid var(--border);
   }
-
   .filter-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    height: 42px;
-    padding: 0 16px;
-    background: var(--card);
-    border: 1px solid var(--border-strong);
-    border-radius: var(--r-md);
-    font-weight: 600;
-    font-size: 14px;
-    color: var(--text);
-    transition: border-color 0.15s;
-    flex-shrink: 0;
+    display: flex; align-items: center; gap: 8px;
+    height: 42px; padding: 0 16px;
+    background: var(--card); border: 1px solid var(--border-strong);
+    border-radius: var(--r-md); font-weight: 600; font-size: 14px;
+    color: var(--text); transition: border-color 0.15s; flex-shrink: 0;
   }
   .filter-btn:hover { border-color: var(--text); }
   .filter-btn-count {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 20px;
-    height: 20px;
-    padding: 0 6px;
-    background: var(--coral);
-    color: white;
-    border-radius: var(--r-pill);
-    font-size: 11px;
-    font-weight: 700;
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 20px; height: 20px; padding: 0 6px;
+    background: var(--coral); color: white;
+    border-radius: var(--r-pill); font-size: 11px; font-weight: 700;
   }
 
   .sort-select {
-    height: 42px;
-    padding: 0 36px 0 14px;
-    background: var(--card);
-    border: 1px solid var(--border-strong);
-    border-radius: var(--r-md);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    font-family: inherit;
-    cursor: pointer;
-    appearance: none;
+    height: 42px; padding: 0 36px 0 14px;
+    background: var(--card); border: 1px solid var(--border-strong);
+    border-radius: var(--r-md); font-size: 14px; font-weight: 500;
+    color: var(--text); font-family: inherit; cursor: pointer;
+    appearance: none; -webkit-appearance: none;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    outline: none;
-    transition: border-color 0.15s;
+    background-repeat: no-repeat; background-position: right 12px center;
+    outline: none; transition: border-color 0.15s;
   }
   .sort-select:focus { border-color: var(--coral); }
 
   .toolbar-spacer { flex: 1; }
-
-  .active-filters {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
+  .active-filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .filter-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    display: inline-flex; align-items: center; gap: 6px;
     padding: 6px 10px 6px 12px;
-    background: var(--coral-soft);
-    color: var(--coral-dark);
-    border-radius: var(--r-pill);
-    font-size: 12px;
-    font-weight: 600;
+    background: var(--coral-soft); color: var(--coral-dark);
+    border-radius: var(--r-pill); font-size: 12px; font-weight: 600;
   }
-
   .filter-tag button {
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--coral-dark);
-    transition: background 0.15s;
+    width: 16px; height: 16px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--coral-dark); transition: background 0.15s;
   }
   .filter-tag button:hover { background: rgba(232,90,79,0.15); }
 
-  /* ============================================
-     LAYOUT
-     ============================================ */
+  /* LAYOUT */
   .layout {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 20px 16px 60px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
+    max-width: 1400px; margin: 0 auto; padding: 20px 16px 60px;
+    display: grid; grid-template-columns: 1fr; gap: 24px;
   }
 
-  /* ---------- SIDEBAR ---------- */
+  /* SIDEBAR */
   .filters { display: none; }
   .filters.visible-desktop { display: block; }
 
   .filter-block {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--r-md);
-    padding: 16px;
-    margin-bottom: 12px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--r-md); padding: 16px; margin-bottom: 12px;
   }
-
   .filter-block-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    user-select: none;
-    margin-bottom: 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; user-select: none; margin-bottom: 14px;
   }
-
-  .filter-block-head h4 {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text);
-  }
-
-  .filter-block-head svg {
-    transition: transform 0.2s;
-    color: var(--text-3);
-  }
-
+  .filter-block-head h4 { font-size: 14px; font-weight: 700; color: var(--text); }
+  .filter-block-head svg { transition: transform 0.2s; color: var(--text-3); }
   .filter-block.collapsed .filter-block-head svg { transform: rotate(-90deg); }
   .filter-block.collapsed .filter-body { display: none; }
-
   .filter-body { display: flex; flex-direction: column; gap: 10px; }
 
   .checkbox {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--text);
-    user-select: none;
+    display: flex; align-items: center; gap: 10px;
+    cursor: pointer; font-size: 14px; color: var(--text); user-select: none;
   }
-
   .checkbox input { display: none; }
-
   .checkbox-box {
-    width: 18px; height: 18px;
-    border-radius: 4px;
-    border: 1.5px solid var(--border-strong);
-    background: var(--card);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: border-color 0.15s, background 0.15s;
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 1.5px solid var(--border-strong); background: var(--card);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: border-color 0.15s, background 0.15s;
   }
-
   .checkbox-box svg { opacity: 0; color: white; transition: opacity 0.15s; }
-
-  .checkbox input:checked + .checkbox-box {
-    background: var(--coral);
-    border-color: var(--coral);
-  }
+  .checkbox input:checked + .checkbox-box { background: var(--coral); border-color: var(--coral); }
   .checkbox input:checked + .checkbox-box svg { opacity: 1; }
-
   .checkbox-label { flex: 1; }
 
   .price-row { display: flex; gap: 8px; align-items: center; }
-
   .price-input {
-    flex: 1;
-    height: 38px;
-    padding: 0 12px;
-    border: 1px solid var(--border-strong);
-    border-radius: var(--r-sm);
-    background: var(--card);
-    font-family: inherit;
-    font-size: 14px;
-    color: var(--text);
-    outline: none;
-    transition: border-color 0.15s;
-    min-width: 0;
+    flex: 1; height: 38px; padding: 0 12px;
+    border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+    background: var(--card); font-family: inherit; font-size: 14px;
+    color: var(--text); outline: none; transition: border-color 0.15s; min-width: 0;
   }
   .price-input:focus { border-color: var(--coral); }
-
   .price-dash { color: var(--text-3); }
-
   .price-apply {
-    height: 38px;
-    padding: 0 16px;
-    background: var(--text);
-    color: white;
-    border-radius: var(--r-sm);
-    font-weight: 600;
-    font-size: 13px;
+    height: 38px; padding: 0 16px;
+    background: var(--text); color: white;
+    border-radius: var(--r-sm); font-weight: 600; font-size: 13px;
     transition: background 0.15s;
   }
   .price-apply:hover { background: #000; }
 
-  /* ---------- MAIN ---------- */
+  /* MAIN GRID */
   .main { min-width: 0; }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
   .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--r-md);
-    overflow: hidden;
-    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md);
+    overflow: hidden; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    cursor: pointer; display: flex; flex-direction: column;
   }
   .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
   .card-media { position: relative; aspect-ratio: 1 / 1; background: linear-gradient(135deg, #F5F2ED 0%, #EBE7E0 100%); overflow: hidden; }
   .card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
   .card:hover .card-media img { transform: scale(1.03); }
-  .card-badges { position: absolute; top: 10px; left: 10px; display: flex; gap: 6px; z-index: 2; }
-  .badge {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 4px 8px; border-radius: var(--r-pill);
-    font-size: 10px; font-weight: 600; letter-spacing: 0.2px;
-    text-transform: uppercase; backdrop-filter: blur(6px);
-  }
-  .badge-protect { background: rgba(232, 90, 79, 0.92); color: white; }
-  .badge-featured { background: rgba(26, 26, 26, 0.85); color: white; }
 
   .card-like {
     position: absolute; top: 10px; right: 10px;
@@ -352,7 +223,7 @@
   .card-like.active { color: var(--coral); }
   .card-like.active svg { fill: var(--coral); stroke: var(--coral); }
 
-  .card-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .card-body { padding: 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
   .card-seller { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-2); }
   .card-avatar { width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, var(--coral), var(--coral-dark)); color: white; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; flex-shrink: 0; }
   .card-seller-name { font-weight: 500; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -367,26 +238,17 @@
   .chip-ship { background: var(--coral-soft); color: var(--coral); }
   .chip-pickup { background: #EEF1F5; color: #5A6B7D; }
 
-  /* Empty state */
+  /* EMPTY */
   .empty-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 60px 24px;
-    background: var(--card);
-    border: 1px dashed var(--border-strong);
-    border-radius: var(--r-lg);
-    text-align: center;
-    grid-column: 1 / -1;
+    background: var(--card); border: 1px dashed var(--border-strong); border-radius: var(--r-lg);
+    text-align: center; grid-column: 1 / -1;
   }
   .empty-icon {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    background: var(--coral-soft);
-    color: var(--coral);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 20px;
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--coral-soft); color: var(--coral);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
   }
   .empty-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.4px; margin-bottom: 6px; }
   .empty-desc { font-size: 14px; color: var(--text-2); max-width: 400px; line-height: 1.6; margin-bottom: 20px; }
@@ -399,44 +261,11 @@
   }
   .empty-btn:hover { background: var(--coral-dark); }
 
-  /* Skeleton */
-  .skeleton {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--r-md);
-    overflow: hidden;
-  }
-  .skeleton-media {
-    aspect-ratio: 1 / 1;
-    background: linear-gradient(90deg, #F5F2ED, #EBE7E0, #F5F2ED);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-  }
-  .skeleton-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-  .skeleton-line {
-    height: 12px;
-    background: linear-gradient(90deg, #F5F2ED, #EBE7E0, #F5F2ED);
-    background-size: 200% 100%;
-    border-radius: 4px;
-    animation: shimmer 1.5s infinite;
-  }
-  .skeleton-line.short { width: 60%; }
-  .skeleton-line.price { height: 20px; width: 40%; }
-  @keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
-
-  /* Loading */
+  /* LOADING */
   .loading-center {
     grid-column: 1 / -1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 80px 20px;
-    color: var(--text-3);
-    gap: 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 80px 20px; color: var(--text-3); gap: 16px;
   }
   .spinner {
     width: 36px; height: 36px;
@@ -447,135 +276,66 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ============================================
-     PAGINATION
-     ============================================ */
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-  }
+  /* PAGINATION */
+  .pagination { display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: 40px; flex-wrap: wrap; }
   .page-btn {
-    min-width: 40px;
-    height: 40px;
-    padding: 0 12px;
+    min-width: 40px; height: 40px; padding: 0 12px;
     border-radius: var(--r-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 14px;
-    color: var(--text);
-    background: var(--card);
-    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 14px; color: var(--text);
+    background: var(--card); border: 1px solid var(--border);
     transition: border-color 0.15s, background 0.15s, color 0.15s;
   }
   .page-btn:hover { border-color: var(--text); }
   .page-btn.active { background: var(--coral); color: white; border-color: var(--coral); }
   .page-btn.disabled { opacity: 0.4; pointer-events: none; }
 
-  /* ============================================
-     MOBILE DRAWER
-     ============================================ */
+  /* DRAWER */
   .drawer-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.4);
-    z-index: 200;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
+    position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+    z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.2s;
   }
   .drawer-overlay.open { opacity: 1; pointer-events: all; }
-
   .drawer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    max-height: 88vh;
-    background: var(--card);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    z-index: 201;
-    transform: translateY(100%);
+    position: fixed; bottom: 0; left: 0; right: 0;
+    max-height: 88vh; background: var(--card);
+    border-top-left-radius: 20px; border-top-right-radius: 20px;
+    z-index: 201; transform: translateY(100%);
     transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
     box-shadow: 0 -8px 32px rgba(0,0,0,0.12);
   }
   .drawer.open { transform: translateY(0); }
-
   .drawer-head {
-    position: relative;
-    padding: 20px 16px 14px;
+    position: relative; padding: 20px 16px 14px;
     border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
   }
   .drawer-head::before {
-    content: "";
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 36px;
-    height: 4px;
-    background: var(--border-strong);
-    border-radius: 2px;
+    content: ""; position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+    width: 36px; height: 4px; background: var(--border-strong); border-radius: 2px;
   }
   .drawer-title { font-size: 17px; font-weight: 700; }
   .drawer-close {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-2);
-    transition: background 0.15s;
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-2); transition: background 0.15s;
   }
   .drawer-close:hover { background: var(--bg); }
-  .drawer-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: 16px;
-    -webkit-overflow-scrolling: touch;
-  }
+  .drawer-body { flex: 1; overflow-y: auto; padding: 16px; -webkit-overflow-scrolling: touch; }
   .drawer-foot {
-    padding: 14px 16px;
-    border-top: 1px solid var(--border);
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 10px;
-    flex-shrink: 0;
+    padding: 14px 16px; border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; flex-shrink: 0;
   }
   .drawer-foot button {
-    height: 46px;
-    border-radius: var(--r-md);
-    font-weight: 600;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 46px; border-radius: var(--r-md);
+    font-weight: 600; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
   }
-  .drawer-foot .clear {
-    background: var(--card);
-    border: 1px solid var(--border-strong);
-    color: var(--text);
-  }
-  .drawer-foot .apply {
-    background: var(--coral);
-    color: white;
-  }
+  .drawer-foot .clear { background: var(--card); border: 1px solid var(--border-strong); color: var(--text); }
+  .drawer-foot .apply { background: var(--coral); color: white; }
 
-  /* ============================================
-     FOOTER
-     ============================================ */
+  /* FOOTER */
   .footer { background: var(--card); border-top: 1px solid var(--border); padding: 48px 16px 32px; margin-top: 20px; }
   .footer-inner { max-width: 1400px; margin: 0 auto; }
   .footer-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
@@ -588,24 +348,16 @@
   .footer-bottom { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text-3); }
   .footer-bottom-links { display: flex; flex-wrap: wrap; gap: 16px; }
 
-  /* ============================================
-     MOBILE BAR
-     ============================================ */
+  /* MOBILE BAR */
   .mobile-bar {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    background: var(--card);
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 8px 0 10px;
-    z-index: 99;
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--card); border-top: 1px solid var(--border);
+    display: flex; justify-content: space-around; align-items: center;
+    padding: 8px 0 10px; z-index: 99;
   }
   .mobile-bar-item {
     display: flex; flex-direction: column; align-items: center; gap: 3px;
-    font-size: 10px; color: var(--text-3);
-    padding: 4px 12px;
+    font-size: 10px; color: var(--text-3); padding: 4px 12px;
     transition: color 0.15s;
   }
   .mobile-bar-item.active { color: var(--coral); }
@@ -613,15 +365,11 @@
     width: 48px; height: 48px; border-radius: 50%;
     background: var(--coral); color: white;
     display: flex; align-items: center; justify-content: center;
-    margin-top: -18px;
-    box-shadow: 0 4px 12px rgba(232,90,79,0.35);
+    margin-top: -18px; box-shadow: 0 4px 12px rgba(232,90,79,0.35);
   }
-
   @media (max-width: 767px) { body { padding-bottom: 72px; } }
 
-  /* ============================================
-     RESPONSIVE
-     ============================================ */
+  /* RESPONSIVE */
   @media (min-width: 768px) {
     .nav-search { display: block; }
     .grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -629,7 +377,6 @@
     .mobile-bar { display: none; }
     body { padding-bottom: 0; }
   }
-
   @media (min-width: 1024px) {
     .layout { grid-template-columns: 260px 1fr; gap: 32px; align-items: start; }
     .filters { display: block; position: sticky; top: 84px; }
@@ -637,44 +384,31 @@
     .drawer, .drawer-overlay { display: none; }
     .grid { grid-template-columns: repeat(3, 1fr); }
   }
-
-  @media (min-width: 1200px) {
-    .grid { grid-template-columns: repeat(4, 1fr); }
-  }
+  @media (min-width: 1200px) { .grid { grid-template-columns: repeat(4, 1fr); } }
 
   :focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 4px; }
 </style>
 </head>
 <body>
 
-<!-- ============================================
-     NAV
-     ============================================ -->
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="logo">
-      <span class="logo-mark">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#E85A4F"/>
-              <stop offset="100%" stop-color="#D14A40"/>
-            </linearGradient>
-          </defs>
-          <rect width="40" height="40" rx="12" fill="url(#logoGrad)"/>
-          <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
-                stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+      <span class="halo">
+        <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M 27 5 A 22 22 0 1 1 12 41" stroke="#E85A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <circle cx="41" cy="41" r="4" fill="#E85A4F"/>
         </svg>
       </span>
-      <span class="logo-text">re<em>lovly</em></span>
+      <span class="wordmark">relov<em>ly</em></span>
     </a>
 
     <div class="nav-search">
       <span class="nav-search-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       </span>
-      <input type="text" id="navSearchInput" placeholder="Search cameras, watches, bicycles...">
+      <input type="text" id="navSearchInput" data-i18n-placeholder="search_placeholder" placeholder="Search cameras, watches, bicycles...">
     </div>
 
     <div class="nav-actions">
@@ -683,20 +417,19 @@
       </a>
       <a href="cart.html" class="btn-buy">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        Buy
+        <span data-i18n="buy">Buy</span>
+        <span class="cart-count" id="navCartCount">0</span>
       </a>
     </div>
   </div>
 </nav>
 
-<!-- ============================================
-     PAGE HEADER
-     ============================================ -->
+<!-- PAGE HEADER -->
 <header class="page-header">
   <div class="breadcrumb" id="breadcrumb">
-    <a href="index.html">Home</a>
+    <a href="index.html" data-i18n="breadcrumb_home">Home</a>
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-    <span>All Items</span>
+    <span id="breadcrumbCurrent">All Items</span>
   </div>
 
   <div class="page-title-row">
@@ -705,21 +438,19 @@
   </div>
 </header>
 
-<!-- ============================================
-     TOOLBAR
-     ============================================ -->
+<!-- TOOLBAR -->
 <div class="toolbar">
   <button class="filter-btn" onclick="openDrawer()">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-    Filters
+    <span data-i18n="catalog_filters">Filters</span>
     <span class="filter-btn-count" id="mobileFilterCount" style="display:none;">0</span>
   </button>
 
   <select class="sort-select" id="sortSelect" aria-label="Sort by">
-    <option value="newest">Newest First</option>
-    <option value="price_asc">Price: Low to High</option>
-    <option value="price_desc">Price: High to Low</option>
-    <option value="popular">Most Liked</option>
+    <option value="newest" data-i18n="catalog_sort_newest">Newest First</option>
+    <option value="price_asc" data-i18n="catalog_sort_price_asc">Price: Low to High</option>
+    <option value="price_desc" data-i18n="catalog_sort_price_desc">Price: High to Low</option>
+    <option value="popular" data-i18n="catalog_sort_popular">Most Liked</option>
   </select>
 
   <div class="toolbar-spacer"></div>
@@ -727,111 +458,92 @@
   <div class="active-filters" id="activeFilters"></div>
 </div>
 
-<!-- ============================================
-     LAYOUT
-     ============================================ -->
+<!-- LAYOUT -->
 <div class="layout">
 
-  <!-- ---------- SIDEBAR FILTERS ---------- -->
-  <aside class="filters" id="filtersDesktop">
-    <!-- Populated dynamically -->
-  </aside>
+  <aside class="filters" id="filtersDesktop"></aside>
 
-  <!-- ---------- MAIN GRID ---------- -->
   <main class="main">
     <div class="grid" id="productGrid">
       <div class="loading-center">
         <div class="spinner"></div>
-        <span>Loading items...</span>
+        <span data-i18n="catalog_loading">Loading items...</span>
       </div>
     </div>
-
     <div class="pagination" id="pagination"></div>
   </main>
 
 </div>
 
-<!-- ============================================
-     FOOTER
-     ============================================ -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="logo">
-          <span class="logo-mark">
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="logoGrad2" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#E85A4F"/>
-                  <stop offset="100%" stop-color="#D14A40"/>
-                </linearGradient>
-              </defs>
-              <rect width="40" height="40" rx="12" fill="url(#logoGrad2)"/>
-              <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
-                    stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+          <span class="halo">
+            <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <path d="M 27 5 A 22 22 0 1 1 12 41" stroke="#E85A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+              <circle cx="41" cy="41" r="4" fill="#E85A4F"/>
             </svg>
           </span>
-          <span class="logo-text">re<em>lovly</em></span>
+          <span class="wordmark">relov<em>ly</em></span>
         </a>
-        <p>The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
+        <p data-i18n="footer_tagline">The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
       </div>
 
       <div class="footer-col">
-        <h4>Buy</h4>
+        <h4 data-i18n="footer_buy">Buy</h4>
         <ul>
-          <li><a href="#">How to Buy</a></li>
-          <li><a href="#">Buyer Protection</a></li>
-          <li><a href="#">Shipping Info</a></li>
-          <li><a href="#">Returns</a></li>
+          <li><a href="#" data-i18n="footer_how_to_buy">How to Buy</a></li>
+          <li><a href="#" data-i18n="footer_buyer_protection">Buyer Protection</a></li>
+          <li><a href="#" data-i18n="footer_shipping_info">Shipping Info</a></li>
+          <li><a href="#" data-i18n="footer_returns">Returns</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Sell</h4>
+        <h4 data-i18n="footer_sell">Sell</h4>
         <ul>
-          <li><a href="#">Start Selling</a></li>
-          <li><a href="#">Seller Fees</a></li>
-          <li><a href="#">Verification</a></li>
-          <li><a href="#">Seller Guide</a></li>
+          <li><a href="#" data-i18n="footer_start_selling">Start Selling</a></li>
+          <li><a href="#" data-i18n="footer_seller_fees">Seller Fees</a></li>
+          <li><a href="#" data-i18n="footer_verification">Verification</a></li>
+          <li><a href="#" data-i18n="footer_seller_guide">Seller Guide</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Support</h4>
+        <h4 data-i18n="footer_support">Support</h4>
         <ul>
-          <li><a href="#">Help Centre</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Disputes</a></li>
-          <li><a href="#">Report Listing</a></li>
+          <li><a href="#" data-i18n="footer_help">Help Centre</a></li>
+          <li><a href="#" data-i18n="footer_contact">Contact Us</a></li>
+          <li><a href="#" data-i18n="footer_disputes">Disputes</a></li>
+          <li><a href="#" data-i18n="footer_report">Report Listing</a></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <span>© 2026 relovly. All rights reserved.</span>
+      <span data-i18n="footer_rights">© 2026 relovly. All rights reserved.</span>
       <div class="footer-bottom-links">
         <a href="#">United Kingdom · GBP £</a>
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="#">Cookies</a>
+        <a href="#" data-i18n="footer_terms">Terms</a>
+        <a href="#" data-i18n="footer_privacy">Privacy</a>
+        <a href="#" data-i18n="footer_cookies">Cookies</a>
       </div>
     </div>
   </div>
 </footer>
 
-<!-- ============================================
-     MOBILE BAR
-     ============================================ -->
+<!-- MOBILE BAR -->
 <nav class="mobile-bar">
   <a href="index.html" class="mobile-bar-item">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    Home
+    <span data-i18n="mobile_home">Home</span>
   </a>
   <a href="catalog.html" class="mobile-bar-item active">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-    Browse
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <span data-i18n="mobile_browse">Browse</span>
   </a>
   <a href="cart.html" class="mobile-bar-item">
     <span class="mobile-bar-buy">
@@ -840,35 +552,33 @@
   </a>
   <a href="#" class="mobile-bar-item">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    Chat
+    <span data-i18n="mobile_chat">Chat</span>
   </a>
   <a href="account.html" class="mobile-bar-item">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    Me
+    <span data-i18n="mobile_me">Me</span>
   </a>
 </nav>
 
-<!-- ============================================
-     MOBILE DRAWER
-     ============================================ -->
+<!-- MOBILE DRAWER -->
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 <aside class="drawer" id="drawer" role="dialog" aria-label="Filters">
   <div class="drawer-head">
-    <span class="drawer-title">Filters</span>
+    <span class="drawer-title" data-i18n="catalog_filters">Filters</span>
     <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
     </button>
   </div>
   <div class="drawer-body" id="drawerBody"></div>
   <div class="drawer-foot">
-    <button class="clear" onclick="clearAllFilters()">Clear all</button>
-    <button class="apply" onclick="closeDrawer()">Show <span id="drawerCount">0</span> results</button>
+    <button class="clear" onclick="clearAllFilters()" data-i18n="catalog_clear_all">Clear all</button>
+    <button class="apply" onclick="closeDrawer()">
+      <span data-i18n="catalog_show">Show</span> <span id="drawerCount">0</span> <span data-i18n="catalog_results">results</span>
+    </button>
   </div>
 </aside>
 
-<!-- ============================================
-     SUPABASE CLIENT
-     ============================================ -->
+<!-- SUPABASE CLIENT -->
 <script type="module">
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
@@ -880,13 +590,8 @@
   window.dispatchEvent(new Event('supabase-ready'))
 </script>
 
-<!-- ============================================
-     CATALOG LOGIC
-     ============================================ -->
+<!-- CATALOG LOGIC -->
 <script>
-  // ============================================
-  // STATE
-  // ============================================
   const state = {
     categories: [],
     filters: {
@@ -906,9 +611,6 @@
     listings: []
   }
 
-  // ============================================
-  // HELPERS
-  // ============================================
   function formatPrice(price, currency) {
     const n = parseFloat(price || 0)
     const symbols = { GBP: '£', USD: '$', EUR: '€' }
@@ -949,9 +651,18 @@
     return `<span class="chip ${c.cls}">${c.label}</span>`
   }
 
-  // ============================================
-  // READ URL PARAMS
-  // ============================================
+  function updateNavCartCount() {
+    try {
+      const raw = localStorage.getItem('relovly_cart')
+      const cart = raw ? JSON.parse(raw) : []
+      const count = Array.isArray(cart)
+        ? cart.reduce((sum, i) => sum + (typeof i === 'object' ? (i.quantity || 1) : 1), 0)
+        : 0
+      const el = document.getElementById('navCartCount')
+      if (el) el.textContent = count
+    } catch {}
+  }
+
   function readUrlParams() {
     const params = new URLSearchParams(window.location.search)
     state.filters.categorySlug = params.get('category') || null
@@ -966,14 +677,10 @@
     if (state.filters.q) params.set('q', state.filters.q)
     if (state.sort !== 'newest') params.set('sort', state.sort)
     if (state.page > 1) params.set('page', state.page)
-
     const url = params.toString() ? `?${params.toString()}` : window.location.pathname
     window.history.replaceState({}, '', url)
   }
 
-  // ============================================
-  // LOAD CATEGORIES
-  // ============================================
   async function loadCategories() {
     const { data, error } = await window.supabaseClient
       .from('categories')
@@ -987,44 +694,41 @@
     }
     state.categories = data || []
 
-    // If we have a category slug from URL, resolve to ID
     if (state.filters.categorySlug) {
       const cat = state.categories.find(c => c.slug === state.filters.categorySlug)
       if (cat) {
         state.filters.categoryId = cat.id
         document.getElementById('pageTitle').textContent = cat.name
-        document.getElementById('breadcrumb').innerHTML = `
-          <a href="index.html">Home</a>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-          <span>${escapeHtml(cat.name)}</span>
-        `
+        document.getElementById('breadcrumbCurrent').textContent = cat.name
       }
     } else if (state.filters.q) {
       document.getElementById('pageTitle').textContent = `Search: "${state.filters.q}"`
+      document.getElementById('breadcrumbCurrent').textContent = `Search`
     }
 
     return state.categories
   }
 
-  // ============================================
-  // BUILD FILTER UI (sidebar + drawer)
-  // ============================================
   function renderFilters() {
     const html = buildFilterHTML()
     document.getElementById('filtersDesktop').innerHTML = html
     document.getElementById('drawerBody').innerHTML = html
+    if (window.relovlyI18n) window.relovlyI18n.applyTranslations()
   }
 
   function buildFilterHTML() {
-    const catsHtml = state.categories.map(c => `
-      <label class="checkbox">
-        <input type="checkbox" ${state.filters.categoryId === c.id ? 'checked' : ''} onchange="toggleCategory(${c.id}, this.checked)">
-        <span class="checkbox-box">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-        </span>
-        <span class="checkbox-label">${escapeHtml(c.name)}</span>
-      </label>
-    `).join('')
+    const catsHtml = state.categories.map(c => {
+      const name = window.relovlyI18n ? window.relovlyI18n.translateCategoryName(c.name) : c.name
+      return `
+        <label class="checkbox">
+          <input type="checkbox" ${state.filters.categoryId === c.id ? 'checked' : ''} onchange="toggleCategory(${c.id}, this.checked)">
+          <span class="checkbox-box">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <span class="checkbox-label">${escapeHtml(name)}</span>
+        </label>
+      `
+    }).join('')
 
     const conditions = [
       { key: 'brand_new', label: 'Brand new' },
@@ -1100,12 +804,7 @@
     `
   }
 
-  // ============================================
-  // FILTER EVENTS
-  // ============================================
-  function toggleBlock(head) {
-    head.parentElement.classList.toggle('collapsed')
-  }
+  function toggleBlock(head) { head.parentElement.classList.toggle('collapsed') }
 
   function toggleCategory(id, checked) {
     if (checked) {
@@ -1123,9 +822,7 @@
 
   function toggleCondition(key, checked) {
     if (checked) {
-      if (!state.filters.conditions.includes(key)) {
-        state.filters.conditions.push(key)
-      }
+      if (!state.filters.conditions.includes(key)) state.filters.conditions.push(key)
     } else {
       state.filters.conditions = state.filters.conditions.filter(c => c !== key)
     }
@@ -1140,28 +837,13 @@
     applyAndRender()
   }
 
-  function toggleShipping(checked) {
-    state.filters.shipping = checked
-    state.page = 1
-    applyAndRender()
-  }
-
-  function togglePickup(checked) {
-    state.filters.pickup = checked
-    state.page = 1
-    applyAndRender()
-  }
+  function toggleShipping(checked) { state.filters.shipping = checked; state.page = 1; applyAndRender() }
+  function togglePickup(checked) { state.filters.pickup = checked; state.page = 1; applyAndRender() }
 
   function clearAllFilters() {
     state.filters = {
-      categorySlug: null,
-      categoryId: null,
-      conditions: [],
-      priceMin: null,
-      priceMax: null,
-      shipping: false,
-      pickup: false,
-      q: null
+      categorySlug: null, categoryId: null, conditions: [],
+      priceMin: null, priceMax: null, shipping: false, pickup: false, q: null
     }
     state.page = 1
     updateUrl()
@@ -1169,23 +851,19 @@
     renderActiveFilterTags()
     applyAndRender()
     document.getElementById('pageTitle').textContent = 'All Items'
-    document.getElementById('breadcrumb').innerHTML = `
-      <a href="index.html">Home</a>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-      <span>All Items</span>
-    `
+    document.getElementById('breadcrumbCurrent').textContent = 'All Items'
   }
 
-  // ============================================
-  // RENDER ACTIVE FILTERS
-  // ============================================
   function renderActiveFilterTags() {
     const wrap = document.getElementById('activeFilters')
     const tags = []
 
     if (state.filters.categoryId) {
       const cat = state.categories.find(c => c.id === state.filters.categoryId)
-      if (cat) tags.push({ label: cat.name, action: 'toggleCategory(' + cat.id + ', false)' })
+      if (cat) {
+        const name = window.relovlyI18n ? window.relovlyI18n.translateCategoryName(cat.name) : cat.name
+        tags.push({ label: name, action: 'toggleCategory(' + cat.id + ', false)' })
+      }
     }
     state.filters.conditions.forEach(c => {
       const labels = { brand_new: 'Brand new', like_new: 'Like new', lightly_used: 'Lightly used', well_used: 'Well used' }
@@ -1235,51 +913,28 @@
     renderActiveFilterTags()
     applyAndRender()
     document.getElementById('pageTitle').textContent = 'All Items'
+    document.getElementById('breadcrumbCurrent').textContent = 'All Items'
   }
 
-  // ============================================
-  // BUILD QUERY
-  // ============================================
   function buildQuery() {
     let q = window.supabaseClient
       .from('listings')
       .select('*', { count: 'exact' })
       .eq('status', 'active')
 
-    if (state.filters.categoryId) {
-      q = q.eq('category_id', state.filters.categoryId)
-    }
-    if (state.filters.conditions.length) {
-      q = q.in('condition', state.filters.conditions)
-    }
-    if (state.filters.priceMin !== null) {
-      q = q.gte('price', state.filters.priceMin)
-    }
-    if (state.filters.priceMax !== null) {
-      q = q.lte('price', state.filters.priceMax)
-    }
-    if (state.filters.shipping) {
-      q = q.eq('shipping_available', true)
-    }
-    if (state.filters.pickup) {
-      q = q.eq('pickup_available', true)
-    }
-    if (state.filters.q) {
-      q = q.ilike('title', `%${state.filters.q}%`)
-    }
+    if (state.filters.categoryId) q = q.eq('category_id', state.filters.categoryId)
+    if (state.filters.conditions.length) q = q.in('condition', state.filters.conditions)
+    if (state.filters.priceMin !== null) q = q.gte('price', state.filters.priceMin)
+    if (state.filters.priceMax !== null) q = q.lte('price', state.filters.priceMax)
+    if (state.filters.shipping) q = q.eq('shipping_available', true)
+    if (state.filters.pickup) q = q.eq('pickup_available', true)
+    if (state.filters.q) q = q.ilike('title', `%${state.filters.q}%`)
 
-    // Sort
-    if (state.sort === 'newest') {
-      q = q.order('created_at', { ascending: false })
-    } else if (state.sort === 'price_asc') {
-      q = q.order('price', { ascending: true })
-    } else if (state.sort === 'price_desc') {
-      q = q.order('price', { ascending: false })
-    } else if (state.sort === 'popular') {
-      q = q.order('likes_count', { ascending: false })
-    }
+    if (state.sort === 'newest') q = q.order('created_at', { ascending: false })
+    else if (state.sort === 'price_asc') q = q.order('price', { ascending: true })
+    else if (state.sort === 'price_desc') q = q.order('price', { ascending: false })
+    else if (state.sort === 'popular') q = q.order('likes_count', { ascending: false })
 
-    // Pagination
     const from = (state.page - 1) * state.perPage
     const to = from + state.perPage - 1
     q = q.range(from, to)
@@ -1287,9 +942,6 @@
     return q
   }
 
-  // ============================================
-  // FETCH + RENDER
-  // ============================================
   async function applyAndRender() {
     const grid = document.getElementById('productGrid')
     grid.innerHTML = `
@@ -1310,7 +962,6 @@
     state.listings = data || []
     state.totalCount = count || 0
 
-    // Update counts
     document.getElementById('resultCount').textContent = state.totalCount.toLocaleString()
     document.getElementById('resultWord').textContent = state.totalCount === 1 ? 'item' : 'items'
     document.getElementById('drawerCount').textContent = state.totalCount.toLocaleString()
@@ -1329,30 +980,23 @@
         </div>
       `
       document.getElementById('pagination').innerHTML = ''
+      if (window.relovlyI18n) window.relovlyI18n.applyTranslations()
       return
     }
 
     grid.innerHTML = state.listings.map(renderCard).join('')
-
     renderPagination()
+    if (window.relovlyI18n) window.relovlyI18n.applyTranslations()
   }
 
-  // ============================================
-  // RENDER CARD
-  // ============================================
   function renderCard(listing) {
     const img = Array.isArray(listing.images) && listing.images[0] ? listing.images[0] : ''
-    const isFeatured = listing.is_featured
     const sellerName = listing.seller_name || 'relovly'
     const sellerInitial = sellerName[0].toUpperCase()
 
     return `
       <article class="card" onclick="window.location.href='product.html?id=${listing.id}'">
         <div class="card-media">
-          <div class="card-badges">
-            <span class="badge badge-protect">✓ Protected</span>
-            ${isFeatured ? '<span class="badge badge-featured">Featured</span>' : ''}
-          </div>
           <button class="card-like" onclick="event.stopPropagation(); toggleWishlist(${listing.id}, this)" aria-label="Save">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </button>
@@ -1376,59 +1020,41 @@
     `
   }
 
-  // ============================================
-  // PAGINATION
-  // ============================================
   function renderPagination() {
     const totalPages = Math.ceil(state.totalCount / state.perPage)
     const wrap = document.getElementById('pagination')
 
-    if (totalPages <= 1) {
-      wrap.innerHTML = ''
-      return
-    }
+    if (totalPages <= 1) { wrap.innerHTML = ''; return }
 
     const pages = []
     const current = state.page
 
-    // Always show first
     pages.push(1)
-
-    // Middle range
     let start = Math.max(2, current - 1)
     let end = Math.min(totalPages - 1, current + 1)
-
     if (start > 2) pages.push('...')
     for (let i = start; i <= end; i++) pages.push(i)
     if (end < totalPages - 1) pages.push('...')
-
-    // Always show last
     if (totalPages > 1) pages.push(totalPages)
 
     const html = []
-
     html.push(`
       <button class="page-btn ${current === 1 ? 'disabled' : ''}" onclick="goToPage(${current - 1})" aria-label="Previous">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
       </button>
     `)
-
     pages.forEach(p => {
       if (p === '...') {
         html.push(`<span style="padding: 0 4px; color: var(--text-3);">…</span>`)
       } else {
-        html.push(`
-          <button class="page-btn ${p === current ? 'active' : ''}" onclick="goToPage(${p})">${p}</button>
-        `)
+        html.push(`<button class="page-btn ${p === current ? 'active' : ''}" onclick="goToPage(${p})">${p}</button>`)
       }
     })
-
     html.push(`
       <button class="page-btn ${current === totalPages ? 'disabled' : ''}" onclick="goToPage(${current + 1})" aria-label="Next">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
       </button>
     `)
-
     wrap.innerHTML = html.join('')
   }
 
@@ -1439,9 +1065,6 @@
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // ============================================
-  // SORT
-  // ============================================
   document.getElementById('sortSelect').addEventListener('change', (e) => {
     state.sort = e.target.value
     state.page = 1
@@ -1449,9 +1072,6 @@
     applyAndRender()
   })
 
-  // ============================================
-  // SEARCH FROM NAV
-  // ============================================
   document.getElementById('navSearchInput').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       const val = e.target.value.trim()
@@ -1460,23 +1080,18 @@
       updateUrl()
       if (val) {
         document.getElementById('pageTitle').textContent = `Search: "${val}"`
+        document.getElementById('breadcrumbCurrent').textContent = `Search`
       } else {
         document.getElementById('pageTitle').textContent = 'All Items'
+        document.getElementById('breadcrumbCurrent').textContent = 'All Items'
       }
       applyAndRender()
     }
   })
 
-  // ============================================
-  // WISHLIST
-  // ============================================
   async function toggleWishlist(listingId, btn) {
     const { data: { session } } = await window.supabaseClient.auth.getSession()
-
-    if (!session) {
-      window.location.href = 'login.html'
-      return
-    }
+    if (!session) { window.location.href = 'login.html'; return }
 
     const { data: existing } = await window.supabaseClient
       .from('wishlists')
@@ -1499,9 +1114,6 @@
     }
   }
 
-  // ============================================
-  // MOBILE DRAWER
-  // ============================================
   const drawer = document.getElementById('drawer')
   const drawerOverlay = document.getElementById('drawerOverlay')
 
@@ -1515,13 +1127,8 @@
     drawerOverlay.classList.remove('open')
     document.body.style.overflow = ''
   }
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeDrawer()
-  })
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer() })
 
-  // ============================================
-  // BOOT
-  // ============================================
   window.addEventListener('supabase-ready', async () => {
     let tries = 0
     while (!window.supabaseClient && tries < 50) {
@@ -1530,23 +1137,20 @@
     }
     if (!window.supabaseClient) return
 
-    // Sync UI with current sort state
+    updateNavCartCount()
     document.getElementById('sortSelect').value = state.sort
-    if (state.filters.q) {
-      document.getElementById('navSearchInput').value = state.filters.q
-    }
+    if (state.filters.q) document.getElementById('navSearchInput').value = state.filters.q
 
-    // Load data
     await loadCategories()
     renderFilters()
     await applyAndRender()
   })
 
-  // ============================================
-  // INIT — read URL params first, then boot
-  // ============================================
   readUrlParams()
 </script>
+
+<!-- i18n -->
+<script src="i18n.js"></script>
 
 </body>
 </html>

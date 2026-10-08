@@ -6,7 +6,7 @@
 <title>Order Confirmed — relovly</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -18,7 +18,7 @@
     --card: #FFFFFF;
     --border: #EBE8E3;
     --border-strong: #DDD8D0;
-    --text: #1A1A1A;
+    --text: #0E0E0E;
     --text-2: #6B6B6B;
     --text-3: #9A9A9A;
     --green: #2E7D5B;
@@ -31,31 +31,37 @@
     --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
     --shadow-lg: 0 12px 32px rgba(0,0,0,0.10);
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-display: 'Lora', Georgia, serif;
+    --font-display: 'Fraunces', Georgia, serif;
   }
 
   html { scroll-behavior: smooth; }
   body { font-family: var(--font-ui); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
-  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
-  /* ============================================
-     NAV
-     ============================================ */
+  /* NAV */
   .nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 0 16px; position: sticky; top: 0; z-index: 100; }
   .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 68px; }
-  .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .logo-mark { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
-  .logo-mark svg { width: 34px; height: 34px; }
-  .logo-text { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.6px; line-height: 1; }
-  .logo-text em { font-style: normal; color: var(--coral); }
+
+  .logo { display: flex; align-items: center; gap: 11px; flex-shrink: 0; line-height: 1; }
+  .halo { width: 34px; height: 34px; flex-shrink: 0; }
+  .halo svg { width: 100%; height: 100%; display: block; }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -1.4px;
+    color: var(--text);
+    line-height: 1;
+    padding-bottom: 2px;
+  }
+  .wordmark em { font-style: italic; font-weight: 500; color: var(--coral); letter-spacing: -1.4px; }
+
   .nav-secure { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-2); font-weight: 500; }
   .nav-secure svg { color: var(--green); }
 
-  /* ============================================
-     STEPS
-     ============================================ */
+  /* STEPS */
   .steps-wrap { max-width: 1200px; margin: 0 auto; padding: 24px 16px 8px; }
   .steps { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-3); }
   .step { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
@@ -75,9 +81,7 @@
     .step.active span:not(.step-dot) { display: inline; }
   }
 
-  /* ============================================
-     HERO
-     ============================================ */
+  /* HERO */
   .hero { max-width: 720px; margin: 0 auto; padding: 40px 16px 32px; text-align: center; }
   .hero-icon {
     width: 88px; height: 88px; margin: 0 auto 24px;
@@ -116,15 +120,12 @@
   }
   .order-number button:hover { color: var(--coral); }
 
-  /* ============================================
-     CONTENT
-     ============================================ */
+  /* CONTENT */
   .content {
     max-width: 1200px; margin: 0 auto; padding: 0 16px 60px;
     display: grid; grid-template-columns: 1fr; gap: 24px; align-items: start;
   }
 
-  /* Loading */
   .loading-center {
     grid-column: 1 / -1;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -139,7 +140,6 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* Not found */
   .not-found {
     grid-column: 1 / -1;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -147,15 +147,8 @@
     background: var(--card); border: 1px dashed var(--border-strong);
     border-radius: var(--r-lg);
   }
-  .not-found h2 {
-    font-family: var(--font-display);
-    font-size: 26px; font-weight: 700;
-    margin-bottom: 10px;
-  }
-  .not-found p {
-    font-size: 15px; color: var(--text-2);
-    margin-bottom: 24px; max-width: 400px;
-  }
+  .not-found h2 { font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 10px; }
+  .not-found p { font-size: 15px; color: var(--text-2); margin-bottom: 24px; max-width: 400px; }
   .not-found a {
     display: inline-flex; align-items: center; gap: 8px;
     height: 46px; padding: 0 24px;
@@ -163,9 +156,7 @@
     border-radius: var(--r-md); font-weight: 600; font-size: 14px;
   }
 
-  /* ============================================
-     BLOCKS
-     ============================================ */
+  /* BLOCKS */
   .block {
     background: var(--card); border: 1px solid var(--border);
     border-radius: var(--r-md); margin-bottom: 16px; overflow: hidden;
@@ -186,9 +177,7 @@
   }
   .block-body { padding: 20px; }
 
-  /* ============================================
-     TIMELINE
-     ============================================ */
+  /* TIMELINE */
   .timeline { padding: 20px; display: flex; flex-direction: column; gap: 0; }
   .timeline-item {
     display: grid; grid-template-columns: 32px 1fr; gap: 14px;
@@ -218,9 +207,7 @@
   .timeline-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; }
   .timeline-time { font-size: 12px; color: var(--text-3); margin-top: 4px; }
 
-  /* ============================================
-     ORDER ITEM
-     ============================================ */
+  /* ORDER ITEM */
   .order-item {
     display: grid; grid-template-columns: 64px 1fr auto;
     gap: 14px; padding: 14px 20px;
@@ -251,9 +238,7 @@
     letter-spacing: -0.2px; text-align: right; flex-shrink: 0;
   }
 
-  /* ============================================
-     DETAIL ROWS
-     ============================================ */
+  /* DETAIL ROWS */
   .detail-row {
     display: flex; justify-content: space-between; align-items: flex-start;
     gap: 16px; padding: 12px 0;
@@ -266,11 +251,8 @@
   .detail-value { color: var(--text); font-weight: 500; text-align: right; }
   .detail-value.address { text-align: right; line-height: 1.6; }
 
-  /* ============================================
-     SIDEBAR
-     ============================================ */
+  /* SIDEBAR */
   .sidebar { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 88px; }
-
   .summary {
     background: var(--card); border: 1px solid var(--border);
     border-radius: var(--r-md); padding: 20px;
@@ -327,22 +309,23 @@
   .help-box a { color: var(--coral); font-weight: 600; }
   .help-box a:hover { color: var(--coral-dark); }
 
-  /* ============================================
-     FOOTER
-     ============================================ */
-  .footer { background: var(--card); border-top: 1px solid var(--border); padding: 32px 16px; margin-top: 40px; }
-  .footer-inner {
-    max-width: 1200px; margin: 0 auto;
-    display: flex; flex-wrap: wrap; gap: 16px;
-    align-items: center; justify-content: space-between;
-    font-size: 13px; color: var(--text-3);
-  }
-  .footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
-  .footer-links a:hover { color: var(--coral); }
+  /* FOOTER (matches other pages) */
+  .footer { background: var(--card); border-top: 1px solid var(--border); padding: 48px 16px 32px; margin-top: 40px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
+  .footer-brand p { font-size: 14px; color: var(--text-2); margin-top: 12px; max-width: 300px; line-height: 1.6; }
+  .footer-col h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text); margin-bottom: 14px; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 10px; }
+  .footer-col a { font-size: 14px; color: var(--text-2); transition: color 0.15s; }
+  .footer-col a:hover { color: var(--coral); }
+  .footer-bottom { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text-3); }
+  .footer-bottom-links { display: flex; flex-wrap: wrap; gap: 16px; }
 
-  /* ============================================
-     RESPONSIVE
-     ============================================ */
+  @media (min-width: 768px) {
+    .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+  }
+
   @media (min-width: 900px) {
     .content { grid-template-columns: 1fr 360px; gap: 32px; }
   }
@@ -360,65 +343,51 @@
 </head>
 <body>
 
-<!-- ============================================
-     NAV
-     ============================================ -->
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="logo">
-      <span class="logo-mark">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#E85A4F"/>
-              <stop offset="100%" stop-color="#D14A40"/>
-            </linearGradient>
-          </defs>
-          <rect width="40" height="40" rx="12" fill="url(#logoGrad)"/>
-          <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
-                stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+      <span class="halo">
+        <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M 27 5 A 22 22 0 1 1 12 41" stroke="#E85A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <circle cx="41" cy="41" r="4" fill="#E85A4F"/>
         </svg>
       </span>
-      <span class="logo-text">re<em>lovly</em></span>
+      <span class="wordmark">relov<em>ly</em></span>
     </a>
     <div class="nav-secure">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      Order secured
+      <span data-i18n="order_secure">Order secured</span>
     </div>
   </div>
 </nav>
 
-<!-- ============================================
-     STEPS
-     ============================================ -->
+<!-- STEPS -->
 <div class="steps-wrap">
   <div class="steps">
     <div class="step done">
       <span class="step-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-      <span>Cart</span>
+      <span data-i18n="checkout_step_cart">Cart</span>
     </div>
     <div class="step-line done"></div>
     <div class="step done">
       <span class="step-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-      <span>Checkout</span>
+      <span data-i18n="checkout_step_checkout">Checkout</span>
     </div>
     <div class="step-line done"></div>
     <div class="step done">
       <span class="step-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-      <span>Payment</span>
+      <span data-i18n="checkout_step_payment">Payment</span>
     </div>
     <div class="step-line done"></div>
     <div class="step active">
       <span class="step-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-      <span>Confirmation</span>
+      <span data-i18n="checkout_step_confirm">Confirmation</span>
     </div>
   </div>
 </div>
 
-<!-- ============================================
-     HERO
-     ============================================ -->
+<!-- HERO -->
 <section class="hero" id="hero" style="display:none;">
   <div class="hero-icon">
     <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -426,48 +395,89 @@
     </svg>
   </div>
 
-  <h1>Thank you for your order!</h1>
-  <p>Your purchase was successful. We've sent a confirmation to your email, and the seller has been notified.</p>
+  <h1 data-i18n="order_thanks">Thank you for your order!</h1>
+  <p data-i18n="order_thanks_sub">Your purchase was successful. We've sent a confirmation to your email, and the seller has been notified.</p>
 
   <div class="order-number">
-    <span>Order #</span>
+    <span data-i18n="order_number_label">Order #</span>
     <strong id="orderNumber">—</strong>
     <button onclick="copyOrderNumber()" aria-label="Copy order number">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
     </button>
   </div>
 
-  <p style="margin-top: 16px; font-size: 14px;" id="emailConfirm">A confirmation email has been sent.</p>
+  <p style="margin-top: 16px; font-size: 14px;" id="emailConfirm"></p>
 </section>
 
-<!-- ============================================
-     CONTENT
-     ============================================ -->
+<!-- CONTENT -->
 <div class="content" id="content">
   <div class="loading-center">
     <div class="spinner"></div>
-    <span>Loading your order...</span>
+    <span data-i18n="order_loading">Loading your order...</span>
   </div>
 </div>
 
-<!-- ============================================
-     FOOTER
-     ============================================ -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
-    <span>© 2026 relovly. All rights reserved.</span>
-    <div class="footer-links">
-      <a href="#">Terms</a>
-      <a href="#">Privacy</a>
-      <a href="#">Buyer Protection</a>
-      <a href="#">Help</a>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="halo">
+            <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <path d="M 27 5 A 22 22 0 1 1 12 41" stroke="#E85A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+              <circle cx="41" cy="41" r="4" fill="#E85A4F"/>
+            </svg>
+          </span>
+          <span class="wordmark">relov<em>ly</em></span>
+        </a>
+        <p data-i18n="footer_tagline">The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer_buy">Buy</h4>
+        <ul>
+          <li><a href="#" data-i18n="footer_how_to_buy">How to Buy</a></li>
+          <li><a href="#" data-i18n="footer_buyer_protection">Buyer Protection</a></li>
+          <li><a href="#" data-i18n="footer_shipping_info">Shipping Info</a></li>
+          <li><a href="#" data-i18n="footer_returns">Returns</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer_sell">Sell</h4>
+        <ul>
+          <li><a href="#" data-i18n="footer_start_selling">Start Selling</a></li>
+          <li><a href="#" data-i18n="footer_seller_fees">Seller Fees</a></li>
+          <li><a href="#" data-i18n="footer_verification">Verification</a></li>
+          <li><a href="#" data-i18n="footer_seller_guide">Seller Guide</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer_support">Support</h4>
+        <ul>
+          <li><a href="#" data-i18n="footer_help">Help Centre</a></li>
+          <li><a href="#" data-i18n="footer_contact">Contact Us</a></li>
+          <li><a href="#" data-i18n="footer_disputes">Disputes</a></li>
+          <li><a href="#" data-i18n="footer_report">Report Listing</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span data-i18n="footer_rights">© 2026 relovly. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="#">United Kingdom · GBP £</a>
+        <a href="#" data-i18n="footer_terms">Terms</a>
+        <a href="#" data-i18n="footer_privacy">Privacy</a>
+        <a href="#" data-i18n="footer_cookies">Cookies</a>
+      </div>
     </div>
   </div>
 </footer>
 
-<!-- ============================================
-     SUPABASE CLIENT
-     ============================================ -->
+<!-- SUPABASE CLIENT -->
 <script type="module">
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
@@ -479,22 +489,18 @@
   window.dispatchEvent(new Event('supabase-ready'))
 </script>
 
-<!-- ============================================
-     ORDER CONFIRMATION LOGIC
-     ============================================ -->
+<!-- ORDER CONFIRMATION LOGIC -->
 <script>
-  // ============================================
-  // STATE
-  // ============================================
   const state = {
     user: null,
     orderNumber: null,
     orders: []
   }
 
-  // ============================================
-  // HELPERS
-  // ============================================
+  function t(key) {
+    return window.relovlyI18n ? window.relovlyI18n.t(key) : key
+  }
+
   function formatPrice(price, currency) {
     const n = parseFloat(price || 0)
     const symbols = { GBP: '£', USD: '$', EUR: '€' }
@@ -514,7 +520,9 @@
 
   function formatDate(dateStr) {
     if (!dateStr) return '—'
-    return new Date(dateStr).toLocaleDateString('en-GB', {
+    const lang = (window.relovlyI18n && window.relovlyI18n.getCurrentLanguage()) || 'en'
+    const localeMap = { en: 'en-GB', fr: 'fr-FR', de: 'de-DE', es: 'es-ES', it: 'it-IT', nl: 'nl-NL', pt: 'pt-PT', ru: 'ru-RU', ja: 'ja-JP', zh: 'zh-CN', ar: 'ar-EG', ko: 'ko-KR' }
+    return new Date(dateStr).toLocaleDateString(localeMap[lang] || 'en-GB', {
       day: 'numeric', month: 'short', year: 'numeric'
     })
   }
@@ -524,26 +532,21 @@
     return params.get('order')
   }
 
-  // ============================================
-  // NOT FOUND
-  // ============================================
   function renderNotFound(msg) {
     document.getElementById('hero').style.display = 'none'
     document.getElementById('content').innerHTML = `
       <div class="not-found">
-        <h2>Order not found</h2>
+        <h2>${escapeHtml(t('order_not_found_title') || 'Order not found')}</h2>
         <p>${escapeHtml(msg)}</p>
         <a href="catalog.html">
-          Browse items
+          <span data-i18n="checkout_empty_btn">Browse items</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
         </a>
       </div>
     `
+    if (window.relovlyI18n) window.relovlyI18n.applyTranslations()
   }
 
-  // ============================================
-  // LOAD ORDER
-  // ============================================
   async function loadOrder(orderNumber) {
     const { data: { session } } = await window.supabaseClient.auth.getSession()
 
@@ -554,7 +557,6 @@
 
     state.user = session.user
 
-    // Try to fetch from Supabase first
     const { data, error } = await window.supabaseClient
       .from('orders')
       .select('*')
@@ -577,25 +579,21 @@
     return data
   }
 
-  // ============================================
-  // RENDER
-  // ============================================
   function renderConfirmation() {
     const orders = state.orders
     const firstOrder = orders[0]
     const currency = firstOrder.currency || 'GBP'
 
-    // Show hero
     document.getElementById('hero').style.display = 'block'
     document.getElementById('orderNumber').textContent = firstOrder.order_number
 
     const email = state.user.email || ''
     if (email) {
+      const emailTpl = t('order_email_sent') || 'A confirmation email has been sent to {email}'
       document.getElementById('emailConfirm').innerHTML =
-        `A confirmation email has been sent to <strong>${escapeHtml(email)}</strong>`
+        emailTpl.replace('{email}', `<strong>${escapeHtml(email)}</strong>`)
     }
 
-    // Compute totals
     const subtotal = orders.reduce((sum, o) => sum + (parseFloat(o.price_paid) || 0), 0)
     const shippingCost = orders.reduce((sum, o) => sum + (parseFloat(o.shipping_price) || 0), 0)
     const total = subtotal + shippingCost
@@ -603,7 +601,6 @@
 
     const orderDate = formatDate(firstOrder.created_at)
 
-    // Items HTML
     const itemsHtml = orders.map(o => `
       <div class="order-item">
         <div class="order-item-img">
@@ -621,20 +618,17 @@
       </div>
     `).join('')
 
-    // Delivery method label
     const deliveryLabel = {
-      standard: 'Standard Delivery · Free',
-      express: `Express Delivery · ${formatPrice(shippingCost, currency)}`,
-      pickup: 'Local Pickup · Free'
-    }[firstOrder.shipping_method] || 'Standard Delivery'
+      standard: t('checkout_delivery_standard') + ' · ' + t('checkout_free'),
+      express: t('checkout_delivery_express') + ' · ' + formatPrice(shippingCost, currency),
+      pickup: t('checkout_delivery_pickup') + ' · ' + t('checkout_free')
+    }[firstOrder.shipping_method] || t('checkout_delivery_standard')
 
-    // Payment method label
     const paymentLabel = {
-      card: 'Credit / Debit Card',
-      paypal: 'PayPal'
-    }[firstOrder.payment_method] || 'Card'
+      card: t('checkout_pay_card'),
+      mobile_money: t('checkout_pay_momo')
+    }[firstOrder.payment_method] || t('checkout_pay_card')
 
-    // Status label
     const statusLabel = {
       processing: 'Processing',
       shipped: 'Shipped',
@@ -643,18 +637,14 @@
       refunded: 'Refunded'
     }[firstOrder.status] || 'Processing'
 
-    const statusClass = firstOrder.status || 'processing'
-
     document.getElementById('content').innerHTML = `
-      <!-- LEFT -->
       <div>
 
-        <!-- Delivery timeline -->
         <section class="block">
           <div class="block-head">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-            <h2 class="block-title">Delivery Progress</h2>
-            <a href="account.html" class="block-edit">Track order →</a>
+            <h2 class="block-title" data-i18n="order_delivery_progress">Delivery Progress</h2>
+            <a href="account.html" class="block-edit" data-i18n="order_track">Track order →</a>
           </div>
 
           <div class="timeline">
@@ -664,8 +654,8 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
               </div>
               <div class="timeline-content">
-                <div class="timeline-title">Order Confirmed</div>
-                <div class="timeline-desc">Payment received and order placed successfully</div>
+                <div class="timeline-title" data-i18n="order_step_confirmed">Order Confirmed</div>
+                <div class="timeline-desc" data-i18n="order_step_confirmed_desc">Payment received and order placed successfully</div>
                 <div class="timeline-time">${orderDate}</div>
               </div>
             </div>
@@ -675,9 +665,9 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
               </div>
               <div class="timeline-content">
-                <div class="timeline-title">Preparing for dispatch</div>
-                <div class="timeline-desc">The item is being prepared for shipment</div>
-                <div class="timeline-time">Expected within 1–2 business days</div>
+                <div class="timeline-title" data-i18n="order_step_preparing">Preparing for dispatch</div>
+                <div class="timeline-desc" data-i18n="order_step_preparing_desc">The item is being prepared for shipment</div>
+                <div class="timeline-time" data-i18n="order_step_preparing_time">Expected within 1–2 business days</div>
               </div>
             </div>
 
@@ -686,9 +676,9 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
               </div>
               <div class="timeline-content">
-                <div class="timeline-title">Shipped</div>
-                <div class="timeline-desc">Your item will be dispatched with tracking</div>
-                <div class="timeline-time">Estimated: 2–3 business days</div>
+                <div class="timeline-title" data-i18n="order_step_shipped">Shipped</div>
+                <div class="timeline-desc" data-i18n="order_step_shipped_desc">Your item will be dispatched with tracking</div>
+                <div class="timeline-time" data-i18n="order_step_shipped_time">Estimated: 2–3 business days</div>
               </div>
             </div>
 
@@ -697,9 +687,9 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               </div>
               <div class="timeline-content">
-                <div class="timeline-title">Out for delivery</div>
-                <div class="timeline-desc">Your order will arrive at your address</div>
-                <div class="timeline-time">Estimated: 3–5 business days</div>
+                <div class="timeline-title" data-i18n="order_step_out">Out for delivery</div>
+                <div class="timeline-desc" data-i18n="order_step_out_desc">Your order will arrive at your address</div>
+                <div class="timeline-time" data-i18n="order_step_out_time">Estimated: 3–5 business days</div>
               </div>
             </div>
 
@@ -708,39 +698,37 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
               </div>
               <div class="timeline-content">
-                <div class="timeline-title">Delivered</div>
-                <div class="timeline-desc">Confirm receipt and release payment</div>
-                <div class="timeline-time">Estimated: within 5 business days</div>
+                <div class="timeline-title" data-i18n="order_step_delivered">Delivered</div>
+                <div class="timeline-desc" data-i18n="order_step_delivered_desc">Confirm receipt and release payment</div>
+                <div class="timeline-time" data-i18n="order_step_delivered_time">Estimated: within 5 business days</div>
               </div>
             </div>
 
           </div>
         </section>
 
-        <!-- Order items -->
         <section class="block">
           <div class="block-head">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
-            <h2 class="block-title">Items in this order (${totalItems})</h2>
+            <h2 class="block-title"><span data-i18n="order_items_title">Items in this order</span> (${totalItems})</h2>
           </div>
           <div style="padding: 0;">
             ${itemsHtml}
           </div>
         </section>
 
-        <!-- Shipping -->
         <section class="block">
           <div class="block-head">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <h2 class="block-title">Shipping Details</h2>
+            <h2 class="block-title" data-i18n="order_shipping_title">Shipping Details</h2>
           </div>
           <div class="block-body">
             <div class="detail-row">
-              <span class="detail-label">Recipient</span>
+              <span class="detail-label" data-i18n="order_recipient">Recipient</span>
               <span class="detail-value">${escapeHtml(state.user.user_metadata?.first_name || '')} ${escapeHtml(state.user.user_metadata?.last_name || '')}</span>
             </div>
             <div class="detail-row">
-              <span class="detail-label">Address</span>
+              <span class="detail-label" data-i18n="checkout_street">Address</span>
               <span class="detail-value address">
                 ${escapeHtml(firstOrder.shipping_address || '—')}<br>
                 ${escapeHtml(firstOrder.shipping_city || '')}${firstOrder.shipping_postcode ? ', ' + escapeHtml(firstOrder.shipping_postcode) : ''}<br>
@@ -748,47 +736,40 @@
               </span>
             </div>
             <div class="detail-row">
-              <span class="detail-label">Delivery method</span>
+              <span class="detail-label" data-i18n="order_delivery_method">Delivery method</span>
               <span class="detail-value">${escapeHtml(deliveryLabel)}</span>
             </div>
             <div class="detail-row">
-              <span class="detail-label">Estimated arrival</span>
-              <span class="detail-value">3–5 business days</span>
+              <span class="detail-label" data-i18n="order_eta">Estimated arrival</span>
+              <span class="detail-value" data-i18n="order_eta_value">3–5 business days</span>
             </div>
           </div>
         </section>
 
-        <!-- Payment -->
         <section class="block">
           <div class="block-head">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-            <h2 class="block-title">Payment Method</h2>
+            <h2 class="block-title" data-i18n="order_payment_title">Payment Method</h2>
           </div>
           <div class="block-body">
             <div class="detail-row">
-              <span class="detail-label">Paid with</span>
-              <span class="detail-value" style="display: flex; align-items: center; gap: 8px; justify-content: flex-end;">
-                <svg width="20" height="20" viewBox="0 0 24 24">
-                  <rect width="24" height="24" rx="3" fill="#1A1F71"/>
-                  <text x="12" y="16" text-anchor="middle" font-family="Arial" font-size="8" font-weight="700" fill="white">VISA</text>
-                </svg>
-                ${escapeHtml(paymentLabel)}
-              </span>
+              <span class="detail-label" data-i18n="order_paid_with">Paid with</span>
+              <span class="detail-value">${escapeHtml(paymentLabel)}</span>
             </div>
             <div class="detail-row">
-              <span class="detail-label">Amount charged</span>
+              <span class="detail-label" data-i18n="order_amount_charged">Amount charged</span>
               <span class="detail-value">${formatPrice(total, currency)}</span>
             </div>
             <div class="detail-row">
-              <span class="detail-label">Transaction ID</span>
+              <span class="detail-label" data-i18n="order_txn_id">Transaction ID</span>
               <span class="detail-value" style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px;">${escapeHtml(firstOrder.payment_reference || '—')}</span>
             </div>
             <div class="detail-row">
-              <span class="detail-label">Status</span>
+              <span class="detail-label" data-i18n="order_status">Status</span>
               <span class="detail-value">
                 <span style="display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; background: var(--green-soft); color: var(--green); border-radius: var(--r-pill); font-size: 12px; font-weight: 700;">
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                  ${statusLabel}
+                  ${escapeHtml(statusLabel)}
                 </span>
               </span>
             </div>
@@ -797,57 +778,57 @@
 
       </div>
 
-      <!-- RIGHT: SUMMARY -->
       <aside class="sidebar">
         <div class="summary">
-          <h2 class="summary-title">Order Summary</h2>
+          <h2 class="summary-title" data-i18n="cart_summary">Order Summary</h2>
 
           <div class="summary-row">
-            <span>Subtotal (${totalItems} ${totalItems === 1 ? 'item' : 'items'})</span>
+            <span><span data-i18n="cart_subtotal">Subtotal</span> (${totalItems} ${totalItems === 1 ? 'item' : 'items'})</span>
             <span class="value">${formatPrice(subtotal, currency)}</span>
           </div>
 
           <div class="summary-row">
-            <span>Shipping</span>
-            <span class="value ${shippingCost > 0 ? '' : 'free'}">${shippingCost > 0 ? formatPrice(shippingCost, currency) : 'Free'}</span>
+            <span data-i18n="cart_shipping">Shipping</span>
+            <span class="value ${shippingCost > 0 ? '' : 'free'}">${shippingCost > 0 ? formatPrice(shippingCost, currency) : (t('checkout_free') || 'Free')}</span>
           </div>
 
           <div class="summary-row">
-            <span>Buyer Protection</span>
-            <span class="value free">Included</span>
+            <span data-i18n="cart_buyer_protect">Buyer Protection</span>
+            <span class="value free" data-i18n="cart_included">Included</span>
           </div>
 
           <div class="summary-divider"></div>
 
           <div class="summary-total">
-            <span class="label">Total Paid</span>
+            <span class="label" data-i18n="order_total_paid">Total Paid</span>
             <span class="amount">${formatPrice(total, currency)}</span>
           </div>
 
-          <div class="summary-vat">Including VAT where applicable</div>
+          <div class="summary-vat" data-i18n="cart_vat">Including VAT where applicable</div>
 
           <a href="account.html" class="btn-primary">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-            Track your order
+            <span data-i18n="order_track_btn">Track your order</span>
           </a>
 
           <a href="catalog.html" class="btn-secondary">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            Continue shopping
+            <span data-i18n="cart_continue">Continue shopping</span>
           </a>
         </div>
 
         <div class="help-box">
-          <strong>Need help with your order?</strong>
-          Our support team is available 24/7. <a href="#">Contact us</a> or check the <a href="#">Help Centre</a> for answers to common questions.
+          <strong data-i18n="order_help_title">Need help with your order?</strong>
+          <span data-i18n="order_help_desc">Our support team is available 24/7.</span>
+          <a href="#" data-i18n="footer_contact">Contact us</a> ·
+          <a href="#" data-i18n="footer_help">Help Centre</a>
         </div>
       </aside>
     `
+
+    if (window.relovlyI18n) window.relovlyI18n.applyTranslations()
   }
 
-  // ============================================
-  // COPY ORDER NUMBER
-  // ============================================
   function copyOrderNumber() {
     const text = document.getElementById('orderNumber').textContent
     navigator.clipboard.writeText(text).then(() => {
@@ -858,9 +839,6 @@
     })
   }
 
-  // ============================================
-  // BOOT
-  // ============================================
   window.addEventListener('supabase-ready', async () => {
     let tries = 0
     while (!window.supabaseClient && tries < 50) {
@@ -883,6 +861,9 @@
     renderConfirmation()
   })
 </script>
+
+<!-- i18n -->
+<script src="i18n.js"></script>
 
 </body>
 </html>

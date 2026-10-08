@@ -641,8 +641,7 @@
       return false
     }
 
-    state.cartItems = cart
-      .map(c => {
+    state.cartItems = cart      .map(c => {
         const listing = data.find(l => l.id === c.id)
         if (!listing || listing.status !== 'active') return null
         return { ...c, listing }
@@ -985,19 +984,24 @@
     return data
   }
 
+  // ✅ FIXED: use resumeTransaction with access_code
+  // This respects the currency set on the backend (USD) instead of the
+  // public key's default currency (KES), which was causing
+  // "Currency not supported by merchant".
   function openPaystackPopup(accessCode) {
     return new Promise((resolve, reject) => {
-      const handler = PaystackPop.setup({
-        key: PAYSTACK_PUBLIC_KEY,
-        access_code: accessCode,
-        callback: function (response) {
-          resolve(response.reference)
-        },
-        onClose: function () {
-          reject(new Error('Payment window closed before completion.'))
-        }
-      })
-      handler.openIframe()
+      try {
+        const handler = PaystackPop.resumeTransaction(accessCode, {
+          onSuccess: function (response) {
+            resolve(response.reference)
+          },
+          onCancel: function () {
+            reject(new Error('Payment window closed before completion.'))
+          }
+        })
+      } catch (err) {
+        reject(err)
+      }
     })
   }
 

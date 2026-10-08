@@ -200,9 +200,6 @@
     border-color: var(--coral); background: var(--coral-soft);
     box-shadow: 0 0 0 3px rgba(232,90,79,0.08);
   }
-  .option.disabled {
-    opacity: 0.6; cursor: not-allowed;
-  }
   .option input { display: none; }
   .option-radio {
     width: 20px; height: 20px; border-radius: 50%;
@@ -219,12 +216,11 @@
   .option.selected .option-radio::after { opacity: 1; transform: scale(1); }
   .option-content { flex: 1; min-width: 0; }
   .option-line { font-size: 14px; color: var(--text); line-height: 1.5; font-weight: 500; }
-  .option-line-sub { font-size: 12px; color: var(--text-3); margin-top: 3px; }
   .option-price { font-size: 14px; font-weight: 700; color: var(--text); margin-left: auto; text-align: right; flex-shrink: 0; }
   .option-price.free { color: var(--green); }
 
-  /* Paystack card logos inside option */
-  .pay-logos { display: flex; gap: 5px; margin-top: 6px; align-items: center; }
+  /* Card logos */
+  .pay-logos { display: flex; gap: 5px; margin-top: 6px; align-items: center; flex-wrap: wrap; }
   .pay-logo {
     display: inline-flex; align-items: center; justify-content: center;
     height: 20px; padding: 0 6px; border-radius: 4px;
@@ -233,7 +229,7 @@
     color: var(--text-2);
   }
 
-  /* "Request other methods" note */
+  /* Other methods note */
   .pay-note {
     display: flex; align-items: center; gap: 8px;
     padding: 12px 14px; margin-top: 10px;
@@ -523,9 +519,7 @@
   // CONFIG
   // ============================================
   const RELOVLY_API = 'https://relovly-production.up.railway.app'
-
-  // ⚠️ Switch to pk_live_... when you go live
-  const PAYSTACK_PUBLIC_KEY = 'pk_test_9c6301ee11665e40cfd623334fc33ecc65d09864'
+  const PAYSTACK_PUBLIC_KEY = 'pk_live_4fb6e4cd39c85021b0ea1f07731619714dfbeab3'
 
   // ============================================
   // STATE
@@ -660,7 +654,6 @@
       return false
     }
 
-    // USD everywhere
     state.currency = 'USD'
 
     state.subtotal = state.cartItems.reduce((sum, i) => {
@@ -721,7 +714,6 @@
     document.getElementById('layout').innerHTML = `
       <div>
 
-        <!-- 1. Shipping Address -->
         <section class="block">
           <div class="block-head">
             <span class="block-num">1</span>
@@ -773,7 +765,6 @@
           </div>
         </section>
 
-        <!-- 2. Delivery Method — titles removed, only 2 options -->
         <section class="block">
           <div class="block-head">
             <span class="block-num">2</span>
@@ -804,7 +795,6 @@
           </div>
         </section>
 
-        <!-- 3. Payment Method — card only -->
         <section class="block">
           <div class="block-head">
             <span class="block-num">3</span>
@@ -822,7 +812,7 @@
                     <span class="pay-logo">VISA</span>
                     <span class="pay-logo">MC</span>
                     <span class="pay-logo">AMEX</span>
-                    <span class="pay-logo"> Pay</span>
+                    <span class="pay-logo">Pay</span>
                     <span class="pay-logo">G Pay</span>
                   </div>
                 </div>
@@ -841,7 +831,6 @@
           </div>
         </section>
 
-        <!-- 4. Order Review -->
         <section class="block">
           <div class="block-head">
             <span class="block-num">4</span>
@@ -922,7 +911,6 @@
       </aside>
     `
 
-    // Delivery options
     document.querySelectorAll('#deliveryOptions .option').forEach(opt => {
       opt.addEventListener('click', () => {
         document.querySelectorAll('#deliveryOptions .option').forEach(o => o.classList.remove('selected'))
@@ -933,7 +921,6 @@
       })
     })
 
-    // Payment options
     document.querySelectorAll('#paymentOptions .option[data-method]').forEach(opt => {
       opt.addEventListener('click', () => {
         document.querySelectorAll('#paymentOptions .option').forEach(o => o.classList.remove('selected'))
@@ -1047,14 +1034,11 @@
     btnText.textContent = 'Initializing payment…'
 
     try {
-      // 1. Init Paystack
       const initData = await initPaystack(address.email, state.total)
 
-      // 2. Open popup
       btnText.textContent = 'Waiting for payment…'
       const reference = await openPaystackPopup(initData.access_code)
 
-      // 3. Verify on backend
       btnText.textContent = 'Verifying payment…'
       const verifyData = await verifyPaystack(reference)
 
@@ -1062,7 +1046,6 @@
         throw new Error('Payment was not successful.')
       }
 
-      // 4. Save order(s) to Supabase with real payment reference
       btnText.textContent = 'Saving your order…'
       const ordersToInsert = state.cartItems.map(item => {
         const l = item.listing

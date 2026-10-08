@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
-<script src="https://js.paystack.co/v1/inline.js"></script>
+<script src="https://js.paystack.co/v2/inline.js"></script>
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -641,7 +641,8 @@
       return false
     }
 
-    state.cartItems = cart      .map(c => {
+    state.cartItems = cart
+      .map(c => {
         const listing = data.find(l => l.id === c.id)
         if (!listing || listing.status !== 'active') return null
         return { ...c, listing }
@@ -984,19 +985,20 @@
     return data
   }
 
-  // ✅ FIXED: use resumeTransaction with access_code
-  // This respects the currency set on the backend (USD) instead of the
-  // public key's default currency (KES), which was causing
-  // "Currency not supported by merchant".
+  // ✅ Paystack InlineJS V2 — resumeTransaction
   function openPaystackPopup(accessCode) {
     return new Promise((resolve, reject) => {
       try {
-        const handler = PaystackPop.resumeTransaction(accessCode, {
+        const paystack = new PaystackPop()
+        paystack.resumeTransaction(accessCode, {
           onSuccess: function (response) {
             resolve(response.reference)
           },
           onCancel: function () {
             reject(new Error('Payment window closed before completion.'))
+          },
+          onError: function (error) {
+            reject(new Error((error && error.message) || 'Payment failed to load.'))
           }
         })
       } catch (err) {

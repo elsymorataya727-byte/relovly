@@ -170,6 +170,8 @@
   .chip { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: var(--r-pill); font-size: 12px; font-weight: 600; }
   .chip-new { background: var(--green-soft); color: var(--green); }
   .chip-used { background: var(--amber-soft); color: var(--amber); }
+  .chip-ship   { background: var(--coral-soft); color: var(--coral); }
+  .chip-pickup { background: #EEF1F5; color: #5A6B7D; }
 
   .description { font-size: 14px; line-height: 1.7; color: var(--text-2); white-space: pre-line; max-height: 180px; overflow: hidden; position: relative; transition: max-height 0.3s ease; }
   .description.expanded { max-height: 2000px; }
@@ -215,13 +217,28 @@
   .card-media { position: relative; aspect-ratio: 1 / 1; background: linear-gradient(135deg, #F5F2ED 0%, #EBE7E0 100%); overflow: hidden; }
   .card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
   .card:hover .card-media img { transform: scale(1.03); }
-  .card-badges { position: absolute; top: 10px; left: 10px; display: flex; gap: 6px; z-index: 2; }
-  .badge-pill { display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: var(--r-pill); font-size: 10px; font-weight: 600; letter-spacing: 0.2px; text-transform: uppercase; backdrop-filter: blur(6px); }
-  .badge-protect-pill { background: rgba(232, 90, 79, 0.92); color: white; }
-  .badge-featured-pill { background: rgba(14, 14, 14, 0.85); color: white; }
-  .card-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .card-like {
+    position: absolute; top: 10px; right: 10px;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-2); z-index: 2;
+    transition: color 0.15s, transform 0.15s; backdrop-filter: blur(6px);
+  }
+  .card-like:hover { color: var(--coral); transform: scale(1.08); }
+  .card-body { padding: 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .card-seller { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-2); }
+  .card-avatar {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--coral), var(--coral-dark));
+    color: white; display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 600; flex-shrink: 0;
+  }
+  .card-seller-name { font-weight: 500; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .card-time { margin-left: auto; font-size: 11px; color: var(--text-3); flex-shrink: 0; }
   .card-title { font-size: 13px; font-weight: 500; line-height: 1.35; color: var(--text); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 35px; }
   .card-price { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+  .card-location { font-size: 11px; color: var(--text-3); display: flex; align-items: center; gap: 4px; margin-top: -2px; }
   .card-meta { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-2); flex-wrap: wrap; }
 
   /* FOOTER */
@@ -362,9 +379,7 @@
   .form-textarea.error,
   .form-select.error { border-color: var(--coral); }
 
-  .input-money {
-    position: relative;
-  }
+  .input-money { position: relative; }
   .input-money .money-symbol {
     position: absolute;
     left: 14px;
@@ -387,11 +402,7 @@
 
   .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-  .modal-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-  }
+  .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
   .modal-actions .btn { flex: 1; }
 
   .modal-alert {
@@ -404,7 +415,6 @@
   .modal-alert.error { display: block; background: var(--coral-soft); color: var(--coral-dark); }
   .modal-alert.success { display: block; background: var(--green-soft); color: var(--green); }
 
-  /* Success state */
   .modal-success {
     display: flex;
     flex-direction: column;
@@ -902,10 +912,8 @@
     const listedTime = timeAgo(listing.created_at)
     const isSold = listing.status === 'sold'
 
-    // Random views (18+)
     const views = randomViews()
 
-    // Delivery options
     const deliveryHtml = [];
     if (listing.pickup_available) {
       deliveryHtml.push(`
@@ -956,7 +964,6 @@
     }
 
     document.getElementById('productGrid').innerHTML = `
-      <!-- GALLERY -->
       <div class="gallery">
         <div class="gallery-main">
           ${galleryMainHtml}
@@ -965,7 +972,6 @@
         ${state.images.length > 1 ? `<div class="gallery-thumbs" id="thumbs">${thumbsHtml}</div>` : ''}
       </div>
 
-      <!-- DETAILS -->
       <div class="details">
 
         <div class="trust-row">
@@ -1061,7 +1067,6 @@
 
       </div>
 
-      <!-- SELLER CARD -->
       <div class="seller-card" id="sellerCard" style="grid-column: 1 / -1;">
         <div class="seller-head">
           <div class="seller-avatar">${escapeHtml(sellerInitial)}</div>
@@ -1102,7 +1107,6 @@
       </div>
     `
 
-    // Show mobile bar
     document.getElementById('mobileBar').style.display = 'grid'
     if (isSold) {
       const mobileBuy = document.getElementById('mobileBuyBtn')
@@ -1221,7 +1225,7 @@
   }
 
   // ============================================
-  // BUY / CART (unchanged)
+  // BUY / CART
   // ============================================
   async function handleBuyNow() {
     const { data: { session } } = await window.supabaseClient.auth.getSession()
@@ -1271,7 +1275,6 @@
     if (!el) return
     el.classList.add('open')
     document.body.style.overflow = 'hidden'
-    // Reset form/alert on open
     const form = el.querySelector('form')
     if (form) {
       form.reset()
@@ -1280,10 +1283,8 @@
       el.querySelectorAll('.field-error').forEach(e => e.textContent = '')
       el.querySelectorAll('.form-input.error, .form-textarea.error, .form-select.error')
         .forEach(i => i.classList.remove('error'))
-      // Restore the body if it was replaced by success state
       restoreModalBody(el)
     }
-    // Focus first input
     setTimeout(() => {
       const first = el.querySelector('input, textarea, select')
       if (first) first.focus()
@@ -1297,7 +1298,6 @@
     document.body.style.overflow = ''
   }
 
-  // Close on backdrop click + Esc
   document.querySelectorAll('[data-modal]').forEach(backdrop => {
     backdrop.addEventListener('click', (e) => {
       if (e.target === backdrop) closeModal(backdrop.id)
@@ -1309,7 +1309,6 @@
     }
   })
 
-  // Store original modal bodies so we can restore after success
   const modalBodyCache = {}
   document.querySelectorAll('[data-modal]').forEach(backdrop => {
     const body = backdrop.querySelector('.modal-body')
@@ -1325,7 +1324,6 @@
     }
   }
 
-  // Prefill modal item names
   function setModalItemName(modalId, listing) {
     const el = document.querySelector(`#${modalId} .modal-sub`)
     if (el && listing) el.textContent = listing.title
@@ -1513,7 +1511,7 @@
   }
 
   // ============================================
-  // RELATED PRODUCTS
+  // RELATED PRODUCTS (matches index.html card style)
   // ============================================
   async function loadRelated() {
     if (!state.listing) return
@@ -1523,7 +1521,7 @@
       .select('*')
       .eq('status', 'active')
       .neq('id', state.listing.id)
-      .limit(4)
+      .limit(8)
 
     if (state.listing.category_id) {
       q = q.eq('category_id', state.listing.category_id)
@@ -1554,24 +1552,69 @@
     const cond = conditionLabel(listing.condition)
     const currency = listing.currency || 'GBP'
 
+    const sellerName = listing.seller_name || 'relovly'
+    const sellerInitial = sellerName[0].toUpperCase()
+
+    const locationParts = [listing.location_city, listing.location_country].filter(Boolean)
+    const locationStr = locationParts.length ? locationParts.join(', ') : ''
+
     return `
       <article class="card" onclick="window.location.href='product.html?id=${listing.id}'">
         <div class="card-media">
-          <div class="card-badges">
-            <span class="badge-pill badge-protect-pill">✓ Protected</span>
-            ${listing.is_featured ? '<span class="badge-pill badge-featured-pill">Featured</span>' : ''}
-          </div>
+          <button class="card-like" onclick="event.stopPropagation(); toggleWishlistCard(${listing.id}, this)" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
           ${img ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(listing.title)}" loading="lazy">` : ''}
         </div>
         <div class="card-body">
+          <div class="card-seller">
+            <span class="card-avatar">${escapeHtml(sellerInitial)}</span>
+            <span class="card-seller-name">${escapeHtml(sellerName)}</span>
+            <span class="card-time">${timeAgo(listing.created_at)}</span>
+          </div>
           <h3 class="card-title">${escapeHtml(listing.title)}</h3>
           <div class="card-price">${formatPrice(listing.price, currency)}</div>
+          ${locationStr ? `<div class="card-location">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            ${escapeHtml(locationStr)}
+          </div>` : ''}
           <div class="card-meta">
             <span class="chip ${cond.cls}">${cond.label}</span>
+            ${listing.shipping_available ? '<span class="chip chip-ship">Shipping</span>' : ''}
+            ${listing.pickup_available ? '<span class="chip chip-pickup">Pickup</span>' : ''}
           </div>
         </div>
       </article>
     `
+  }
+
+  async function toggleWishlistCard(listingId, btn) {
+    const { data: { session } } = await window.supabaseClient.auth.getSession()
+    if (!session) { window.location.href = 'login.html'; return }
+
+    const { data: existing } = await window.supabaseClient
+      .from('wishlists')
+      .select('id')
+      .eq('user_id', session.user.id)
+      .eq('listing_id', listingId)
+      .maybeSingle()
+
+    const svg = btn.querySelector('svg')
+
+    if (existing) {
+      await window.supabaseClient.from('wishlists').delete().eq('id', existing.id)
+      svg.setAttribute('fill', 'none')
+      svg.setAttribute('stroke', 'currentColor')
+      btn.style.color = ''
+    } else {
+      await window.supabaseClient.from('wishlists').insert({
+        user_id: session.user.id,
+        listing_id: listingId
+      })
+      svg.setAttribute('fill', 'var(--coral)')
+      svg.setAttribute('stroke', 'var(--coral)')
+      btn.style.color = 'var(--coral)'
+    }
   }
 
   // ============================================

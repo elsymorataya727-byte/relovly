@@ -6,7 +6,7 @@
 <title>Checkout — relovly</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -18,7 +18,7 @@
     --card: #FFFFFF;
     --border: #EBE8E3;
     --border-strong: #DDD8D0;
-    --text: #1A1A1A;
+    --text: #0E0E0E;
     --text-2: #6B6B6B;
     --text-3: #9A9A9A;
     --green: #2E7D5B;
@@ -31,25 +31,32 @@
     --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
     --shadow-lg: 0 12px 32px rgba(0,0,0,0.10);
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-display: 'Lora', Georgia, serif;
+    --font-display: 'Fraunces', Georgia, serif;
   }
 
   html { scroll-behavior: smooth; }
   body { font-family: var(--font-ui); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
-  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
-  /* ============================================
-     NAV
-     ============================================ */
+  /* NAV */
   .nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 0 16px; position: sticky; top: 0; z-index: 100; }
   .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 68px; }
-  .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .logo-mark { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
-  .logo-mark svg { width: 34px; height: 34px; }
-  .logo-text { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.6px; line-height: 1; }
-  .logo-text em { font-style: normal; color: var(--coral); }
+
+  .logo { display: flex; align-items: center; gap: 11px; flex-shrink: 0; line-height: 1; }
+  .halo { width: 34px; height: 34px; flex-shrink: 0; }
+  .halo svg { width: 100%; height: 100%; display: block; }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -1.4px;
+    color: var(--text);
+    line-height: 1;
+    padding-bottom: 2px;
+  }
+  .wordmark em { font-style: italic; font-weight: 500; color: var(--coral); letter-spacing: -1.4px; }
 
   .nav-secure {
     display: flex; align-items: center; gap: 6px;
@@ -57,9 +64,7 @@
   }
   .nav-secure svg { color: var(--green); }
 
-  /* ============================================
-     STEPS
-     ============================================ */
+  /* STEPS */
   .steps-wrap { max-width: 1200px; margin: 0 auto; padding: 24px 16px 8px; }
   .steps { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-3); }
   .step { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
@@ -81,38 +86,26 @@
     .step.active span:not(.step-dot) { display: inline; }
   }
 
-  /* ============================================
-     PAGE HEADER
-     ============================================ */
+  /* HEADER */
   .page-header { max-width: 1200px; margin: 0 auto; padding: 16px 16px 0; }
   .page-title { font-family: var(--font-display); font-size: clamp(24px, 4vw, 32px); font-weight: 700; letter-spacing: -0.6px; color: var(--text); margin-bottom: 6px; }
   .page-sub { font-size: 14px; color: var(--text-2); }
 
-  /* Alert */
   .alert {
-    max-width: 1200px;
-    margin: 16px auto 0;
-    padding: 12px 16px;
-    border-radius: var(--r-md);
-    font-size: 14px;
-    display: none;
-    align-items: flex-start;
-    gap: 10px;
-    line-height: 1.5;
+    max-width: 1200px; margin: 16px auto 0; padding: 12px 16px;
+    border-radius: var(--r-md); font-size: 14px;
+    display: none; align-items: flex-start; gap: 10px; line-height: 1.5;
   }
   .alert.show { display: flex; }
   .alert-error { background: #FDE9E7; color: var(--red); border: 1px solid #F8D5D2; }
   .alert svg { flex-shrink: 0; margin-top: 1px; }
 
-  /* ============================================
-     LAYOUT
-     ============================================ */
+  /* LAYOUT */
   .layout {
     max-width: 1200px; margin: 0 auto; padding: 24px 16px 60px;
     display: grid; grid-template-columns: 1fr; gap: 24px; align-items: start;
   }
 
-  /* Loading */
   .loading-center {
     grid-column: 1 / -1;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -127,7 +120,6 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* Empty */
   .empty-checkout {
     grid-column: 1 / -1;
     max-width: 480px; margin: 40px auto;
@@ -141,11 +133,7 @@
     display: flex; align-items: center; justify-content: center;
     color: var(--coral);
   }
-  .empty-checkout h2 {
-    font-family: var(--font-display);
-    font-size: 26px; font-weight: 700; color: var(--text);
-    letter-spacing: -0.5px; margin-bottom: 10px;
-  }
+  .empty-checkout h2 { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--text); letter-spacing: -0.5px; margin-bottom: 10px; }
   .empty-checkout p { font-size: 15px; color: var(--text-2); margin-bottom: 24px; line-height: 1.6; }
   .empty-checkout a {
     display: inline-flex; align-items: center; gap: 8px;
@@ -155,9 +143,7 @@
   }
   .empty-checkout a:hover { background: var(--coral-dark); }
 
-  /* ============================================
-     BLOCKS
-     ============================================ */
+  /* BLOCKS */
   .block {
     background: var(--card); border: 1px solid var(--border);
     border-radius: var(--r-md); margin-bottom: 16px; overflow: hidden;
@@ -172,18 +158,12 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 13px; font-weight: 700; flex-shrink: 0;
   }
-  .block-title {
-    font-family: var(--font-display);
-    font-size: 17px; font-weight: 700; color: var(--text);
-    letter-spacing: -0.3px; flex: 1;
-  }
+  .block-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; flex: 1; }
   .block-edit { font-size: 13px; font-weight: 600; color: var(--coral); }
   .block-edit:hover { color: var(--coral-dark); }
   .block-body { padding: 20px; }
 
-  /* ============================================
-     ADDRESS FORM
-     ============================================ */
+  /* FORM */
   .form-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
   .form-grid.col-2 { grid-template-columns: 1fr 1fr; }
   .form-field label {
@@ -205,11 +185,8 @@
   .form-field input:disabled { background: var(--bg); color: var(--text-2); cursor: not-allowed; }
   @media (max-width: 640px) { .form-grid.col-2 { grid-template-columns: 1fr; } }
 
-  /* ============================================
-     DELIVERY / PAYMENT OPTIONS
-     ============================================ */
+  /* OPTIONS */
   .option-list { display: flex; flex-direction: column; gap: 10px; }
-
   .option {
     display: flex; align-items: flex-start; gap: 12px;
     padding: 14px 16px; background: var(--bg);
@@ -243,15 +220,10 @@
     margin-bottom: 3px; flex-wrap: wrap;
   }
   .option-line { font-size: 13px; color: var(--text-2); line-height: 1.5; }
-  .option-price {
-    font-size: 14px; font-weight: 700; color: var(--text);
-    margin-left: auto; text-align: right; flex-shrink: 0;
-  }
+  .option-price { font-size: 14px; font-weight: 700; color: var(--text); margin-left: auto; text-align: right; flex-shrink: 0; }
   .option-price.free { color: var(--green); }
 
-  /* ============================================
-     ORDER REVIEW
-     ============================================ */
+  /* ORDER REVIEW */
   .order-item {
     display: grid; grid-template-columns: 64px 1fr auto;
     gap: 14px; padding: 14px 20px;
@@ -282,20 +254,13 @@
     letter-spacing: -0.2px; text-align: right; flex-shrink: 0;
   }
 
-  /* ============================================
-     SIDEBAR
-     ============================================ */
+  /* SIDEBAR */
   .sidebar { position: sticky; top: 88px; display: flex; flex-direction: column; gap: 16px; }
-
   .summary {
     background: var(--card); border: 1px solid var(--border);
     border-radius: var(--r-md); padding: 20px;
   }
-  .summary-title {
-    font-family: var(--font-display);
-    font-size: 18px; font-weight: 700; color: var(--text);
-    letter-spacing: -0.3px; margin-bottom: 16px;
-  }
+  .summary-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; margin-bottom: 16px; }
   .summary-row {
     display: flex; justify-content: space-between; align-items: baseline;
     font-size: 14px; padding: 6px 0; color: var(--text-2);
@@ -303,15 +268,9 @@
   .summary-row .value { color: var(--text); font-weight: 500; }
   .summary-row .value.free { color: var(--green); font-weight: 600; }
   .summary-divider { border-top: 1px solid var(--border); margin: 12px 0; }
-  .summary-total {
-    display: flex; justify-content: space-between; align-items: baseline;
-    padding: 8px 0 4px;
-  }
+  .summary-total { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0 4px; }
   .summary-total .label { font-size: 15px; font-weight: 700; color: var(--text); }
-  .summary-total .amount {
-    font-family: var(--font-display);
-    font-size: 26px; font-weight: 700; color: var(--text); letter-spacing: -0.6px;
-  }
+  .summary-total .amount { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--text); letter-spacing: -0.6px; }
   .summary-vat { font-size: 12px; color: var(--text-3); text-align: right; margin-bottom: 20px; }
 
   .btn-place {
@@ -335,33 +294,28 @@
   }
   .btn-back:hover { color: var(--coral); }
 
-  .trust-list {
-    display: flex; flex-direction: column; gap: 10px;
-    padding: 16px 0 0; border-top: 1px solid var(--border); margin-top: 16px;
-  }
-  .trust-item {
-    display: flex; align-items: flex-start; gap: 10px;
-    font-size: 13px; color: var(--text-2); line-height: 1.5;
-  }
+  .trust-list { display: flex; flex-direction: column; gap: 10px; padding: 16px 0 0; border-top: 1px solid var(--border); margin-top: 16px; }
+  .trust-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--text-2); line-height: 1.5; }
   .trust-item svg { color: var(--green); flex-shrink: 0; margin-top: 2px; }
   .trust-item strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 2px; }
 
-  /* ============================================
-     FOOTER
-     ============================================ */
-  .footer { background: var(--card); border-top: 1px solid var(--border); padding: 32px 16px; margin-top: 40px; }
-  .footer-inner {
-    max-width: 1200px; margin: 0 auto;
-    display: flex; flex-wrap: wrap; gap: 16px;
-    align-items: center; justify-content: space-between;
-    font-size: 13px; color: var(--text-3);
-  }
-  .footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
-  .footer-links a:hover { color: var(--coral); }
+  /* FOOTER */
+  .footer { background: var(--card); border-top: 1px solid var(--border); padding: 48px 16px 32px; margin-top: 40px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
+  .footer-brand p { font-size: 14px; color: var(--text-2); margin-top: 12px; max-width: 300px; line-height: 1.6; }
+  .footer-col h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text); margin-bottom: 14px; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 10px; }
+  .footer-col a { font-size: 14px; color: var(--text-2); transition: color 0.15s; }
+  .footer-col a:hover { color: var(--coral); }
+  .footer-bottom { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text-3); }
+  .footer-bottom-links { display: flex; flex-wrap: wrap; gap: 16px; }
 
-  /* ============================================
-     RESPONSIVE
-     ============================================ */
+  @media (min-width: 768px) {
+    .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+  }
+
   @media (min-width: 1024px) {
     .layout { grid-template-columns: 1fr 400px; gap: 32px; }
   }
@@ -377,71 +331,57 @@
 </head>
 <body>
 
-<!-- ============================================
-     NAV
-     ============================================ -->
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="logo">
-      <span class="logo-mark">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#E85A4F"/>
-              <stop offset="100%" stop-color="#D14A40"/>
-            </linearGradient>
-          </defs>
-          <rect width="40" height="40" rx="12" fill="url(#logoGrad)"/>
-          <path d="M28 13.5C27 12 25 11 22.5 11C19 11 16.5 13.2 16.5 16.2C16.5 19.4 19 20.7 22.5 21.7C26 22.7 28 24 28 27C28 30.2 25.2 32 21.8 32C19.2 32 17 31 15.8 29.3"
-                stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <circle cx="28" cy="13.5" r="2.2" fill="white"/>
+      <span class="halo">
+        <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M 27 5 A 22 22 0 1 1 12 41" stroke="#E85A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <circle cx="41" cy="41" r="4" fill="#E85A4F"/>
         </svg>
       </span>
-      <span class="logo-text">re<em>lovly</em></span>
+      <span class="wordmark">relov<em>ly</em></span>
     </a>
 
     <div class="nav-secure">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      Secure checkout
+      <span data-i18n="checkout_secure">Secure checkout</span>
     </div>
   </div>
 </nav>
 
-<!-- ============================================
-     STEPS
-     ============================================ -->
+<!-- STEPS -->
 <div class="steps-wrap">
   <div class="steps">
     <div class="step done">
       <span class="step-dot">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
       </span>
-      <span>Cart</span>
+      <span data-i18n="checkout_step_cart">Cart</span>
     </div>
     <div class="step-line done"></div>
     <div class="step active">
       <span class="step-dot">2</span>
-      <span>Checkout</span>
+      <span data-i18n="checkout_step_checkout">Checkout</span>
     </div>
     <div class="step-line"></div>
     <div class="step">
       <span class="step-dot">3</span>
-      <span>Payment</span>
+      <span data-i18n="checkout_step_payment">Payment</span>
     </div>
     <div class="step-line"></div>
     <div class="step">
       <span class="step-dot">4</span>
-      <span>Confirmation</span>
+      <span data-i18n="checkout_step_confirm">Confirmation</span>
     </div>
   </div>
 </div>
 
-<!-- ============================================
-     HEADER
-     ============================================ -->
+<!-- HEADER -->
 <header class="page-header">
-  <h1 class="page-title">Checkout</h1>
-  <p class="page-sub">Review your order and complete your purchase securely.</p>
+  <h1 class="page-title" data-i18n="checkout_title">Checkout</h1>
+  <p class="page-sub" data-i18n="checkout_sub">Review your order and complete your purchase securely.</p>
 </header>
 
 <div class="alert alert-error" id="errorAlert">
@@ -449,34 +389,75 @@
   <span id="errorMessage"></span>
 </div>
 
-<!-- ============================================
-     LAYOUT
-     ============================================ -->
+<!-- LAYOUT -->
 <div class="layout" id="layout">
   <div class="loading-center">
     <div class="spinner"></div>
-    <span>Loading checkout...</span>
+    <span data-i18n="checkout_loading">Loading checkout...</span>
   </div>
 </div>
 
-<!-- ============================================
-     FOOTER
-     ============================================ -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
-    <span>© 2026 relovly. All rights reserved.</span>
-    <div class="footer-links">
-      <a href="#">Terms</a>
-      <a href="#">Privacy</a>
-      <a href="#">Buyer Protection</a>
-      <a href="#">Help</a>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="halo">
+            <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <path d="M 27 5 A 22 22 0 1 1 12 41" stroke="#E85A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+              <circle cx="41" cy="41" r="4" fill="#E85A4F"/>
+            </svg>
+          </span>
+          <span class="wordmark">relov<em>ly</em></span>
+        </a>
+        <p data-i18n="footer_tagline">The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer_buy">Buy</h4>
+        <ul>
+          <li><a href="#" data-i18n="footer_how_to_buy">How to Buy</a></li>
+          <li><a href="#" data-i18n="footer_buyer_protection">Buyer Protection</a></li>
+          <li><a href="#" data-i18n="footer_shipping_info">Shipping Info</a></li>
+          <li><a href="#" data-i18n="footer_returns">Returns</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer_sell">Sell</h4>
+        <ul>
+          <li><a href="#" data-i18n="footer_start_selling">Start Selling</a></li>
+          <li><a href="#" data-i18n="footer_seller_fees">Seller Fees</a></li>
+          <li><a href="#" data-i18n="footer_verification">Verification</a></li>
+          <li><a href="#" data-i18n="footer_seller_guide">Seller Guide</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer_support">Support</h4>
+        <ul>
+          <li><a href="#" data-i18n="footer_help">Help Centre</a></li>
+          <li><a href="#" data-i18n="footer_contact">Contact Us</a></li>
+          <li><a href="#" data-i18n="footer_disputes">Disputes</a></li>
+          <li><a href="#" data-i18n="footer_report">Report Listing</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span data-i18n="footer_rights">© 2026 relovly. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="#">United Kingdom · GBP £</a>
+        <a href="#" data-i18n="footer_terms">Terms</a>
+        <a href="#" data-i18n="footer_privacy">Privacy</a>
+        <a href="#" data-i18n="footer_cookies">Cookies</a>
+      </div>
     </div>
   </div>
 </footer>
 
-<!-- ============================================
-     SUPABASE CLIENT
-     ============================================ -->
+<!-- SUPABASE -->
 <script type="module">
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
@@ -488,13 +469,8 @@
   window.dispatchEvent(new Event('supabase-ready'))
 </script>
 
-<!-- ============================================
-     CHECKOUT LOGIC
-     ============================================ -->
+<!-- CHECKOUT LOGIC -->
 <script>
-  // ============================================
-  // STATE
-  // ============================================
   const state = {
     user: null,
     profile: null,
@@ -509,9 +485,10 @@
     orderNumber: null
   }
 
-  // ============================================
-  // HELPERS
-  // ============================================
+  function t(key) {
+    return window.relovlyI18n ? window.relovlyI18n.t(key) : key
+  }
+
   function formatPrice(price, currency) {
     const n = parseFloat(price || 0)
     const symbols = { GBP: '£', USD: '$', EUR: '€' }
@@ -562,9 +539,6 @@
     document.getElementById('errorAlert').classList.remove('show')
   }
 
-  // ============================================
-  // AUTH CHECK
-  // ============================================
   async function checkAuth() {
     const { data: { session } } = await window.supabaseClient.auth.getSession()
     if (!session) {
@@ -573,7 +547,6 @@
     }
     state.user = session.user
 
-    // Load profile
     const { data: profile } = await window.supabaseClient
       .from('profiles')
       .select('*')
@@ -592,9 +565,6 @@
     return true
   }
 
-  // ============================================
-  // LOAD CART
-  // ============================================
   async function loadCartItems() {
     const cart = getCart()
 
@@ -636,31 +606,25 @@
     return true
   }
 
-  // ============================================
-  // RENDER EMPTY
-  // ============================================
   function renderEmpty() {
     document.getElementById('layout').innerHTML = `
       <div class="empty-checkout">
         <div class="empty-icon">
           <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         </div>
-        <h2>Your cart is empty</h2>
-        <p>Add some items before checking out.</p>
+        <h2 data-i18n="checkout_empty_title">Your cart is empty</h2>
+        <p data-i18n="checkout_empty_desc">Add some items before checking out.</p>
         <a href="catalog.html">
-          Browse items
+          <span data-i18n="checkout_empty_btn">Browse items</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
         </a>
       </div>
     `
+    if (window.relovlyI18n) window.relovlyI18n.applyTranslations()
   }
 
-  // ============================================
-  // RENDER CHECKOUT
-  // ============================================
   function renderCheckout() {
     const p = state.profile
-    const addressLine = [p.city, p.country].filter(Boolean).join(', ') || 'Add your address below'
 
     const orderItemsHtml = state.cartItems.map(item => {
       const l = item.listing
@@ -688,66 +652,63 @@
     const totalItems = state.cartItems.reduce((s, i) => s + i.quantity, 0)
 
     document.getElementById('layout').innerHTML = `
-      <!-- LEFT: FORM -->
       <div>
 
-        <!-- 1. Shipping Address -->
         <section class="block">
           <div class="block-head">
             <span class="block-num">1</span>
-            <h2 class="block-title">Shipping Address</h2>
-            <a href="account.html" class="block-edit">Manage</a>
+            <h2 class="block-title" data-i18n="checkout_addr_title">Shipping Address</h2>
+            <a href="account.html" class="block-edit" data-i18n="checkout_manage">Manage</a>
           </div>
           <div class="block-body">
             <div class="form-grid col-2">
               <div class="form-field">
-                <label>First name</label>
+                <label data-i18n="checkout_first_name">First name</label>
                 <input type="text" id="shipFirstName" value="${escapeHtml(p.first_name || '')}" placeholder="Jane">
               </div>
               <div class="form-field">
-                <label>Last name</label>
+                <label data-i18n="checkout_last_name">Last name</label>
                 <input type="text" id="shipLastName" value="${escapeHtml(p.last_name || '')}" placeholder="Doe">
               </div>
             </div>
 
             <div class="form-field" style="margin-top: 12px;">
-              <label>Email address</label>
+              <label data-i18n="checkout_email">Email address</label>
               <input type="email" id="shipEmail" value="${escapeHtml(p.email || '')}" placeholder="you@example.com">
             </div>
 
             <div class="form-field" style="margin-top: 12px;">
-              <label>Phone number</label>
+              <label data-i18n="checkout_phone">Phone number</label>
               <input type="tel" id="shipPhone" value="${escapeHtml(p.phone || '')}" placeholder="+44 7700 900000">
             </div>
 
             <div class="form-field" style="margin-top: 12px;">
-              <label>Street address</label>
+              <label data-i18n="checkout_street">Street address</label>
               <input type="text" id="shipStreet" placeholder="42 Oxford Road">
             </div>
 
             <div class="form-grid col-2" style="margin-top: 12px;">
               <div class="form-field">
-                <label>City</label>
+                <label data-i18n="checkout_city">City</label>
                 <input type="text" id="shipCity" value="${escapeHtml(p.city || '')}" placeholder="Manchester">
               </div>
               <div class="form-field">
-                <label>Postcode</label>
+                <label data-i18n="checkout_postcode">Postcode</label>
                 <input type="text" id="shipPostcode" placeholder="M1 5QA">
               </div>
             </div>
 
             <div class="form-field" style="margin-top: 12px;">
-              <label>Country</label>
+              <label data-i18n="checkout_country">Country</label>
               <input type="text" id="shipCountry" value="${escapeHtml(p.country || '')}" placeholder="United Kingdom">
             </div>
           </div>
         </section>
 
-        <!-- 2. Delivery Method -->
         <section class="block">
           <div class="block-head">
             <span class="block-num">2</span>
-            <h2 class="block-title">Delivery Method</h2>
+            <h2 class="block-title" data-i18n="checkout_delivery_title">Delivery Method</h2>
           </div>
           <div class="block-body">
             <div class="option-list" id="deliveryOptions">
@@ -756,18 +717,18 @@
                 <input type="radio" name="delivery" value="standard" checked>
                 <span class="option-radio"></span>
                 <div class="option-content">
-                  <div class="option-title">Standard Delivery</div>
-                  <div class="option-line">3–5 business days · Tracked</div>
+                  <div class="option-title" data-i18n="checkout_delivery_standard">Standard Delivery</div>
+                  <div class="option-line" data-i18n="checkout_delivery_standard_desc">3–5 business days · Tracked</div>
                 </div>
-                <div class="option-price free">Free</div>
+                <div class="option-price free" data-i18n="checkout_free">Free</div>
               </label>
 
               <label class="option" data-method="express" data-cost="12.99">
                 <input type="radio" name="delivery" value="express">
                 <span class="option-radio"></span>
                 <div class="option-content">
-                  <div class="option-title">Express Delivery</div>
-                  <div class="option-line">1–2 business days · Tracked + insured</div>
+                  <div class="option-title" data-i18n="checkout_delivery_express">Express Delivery</div>
+                  <div class="option-line" data-i18n="checkout_delivery_express_desc">1–2 business days · Tracked + insured</div>
                 </div>
                 <div class="option-price">${formatPrice(12.99, state.currency)}</div>
               </label>
@@ -776,21 +737,20 @@
                 <input type="radio" name="delivery" value="pickup">
                 <span class="option-radio"></span>
                 <div class="option-content">
-                  <div class="option-title">Local Pickup</div>
-                  <div class="option-line">Exact address shared after purchase</div>
+                  <div class="option-title" data-i18n="checkout_delivery_pickup">Local Pickup</div>
+                  <div class="option-line" data-i18n="checkout_delivery_pickup_desc">Exact address shared after purchase</div>
                 </div>
-                <div class="option-price free">Free</div>
+                <div class="option-price free" data-i18n="checkout_free">Free</div>
               </label>
 
             </div>
           </div>
         </section>
 
-        <!-- 3. Payment Method -->
         <section class="block">
           <div class="block-head">
             <span class="block-num">3</span>
-            <h2 class="block-title">Payment Method</h2>
+            <h2 class="block-title" data-i18n="checkout_payment_title">Payment Method</h2>
           </div>
           <div class="block-body">
             <div class="option-list" id="paymentOptions">
@@ -799,48 +759,31 @@
                 <input type="radio" name="payment" value="card" checked>
                 <span class="option-radio"></span>
                 <div class="option-content">
-                  <div class="option-title">
-                    <svg width="22" height="22" viewBox="0 0 24 24" style="vertical-align: middle;">
-                      <rect width="24" height="24" rx="3" fill="#1A1F71"/>
-                      <text x="12" y="16" text-anchor="middle" font-family="Arial" font-size="8" font-weight="700" fill="white">VISA</text>
-                    </svg>
-                    Credit or Debit Card
-                  </div>
-                  <div class="option-line">Visa, Mastercard, Amex, Apple Pay, Google Pay</div>
+                  <div class="option-title" data-i18n="checkout_pay_card">Credit or Debit Card</div>
+                  <div class="option-line" data-i18n="checkout_pay_card_desc">Visa, Mastercard, Apple Pay, Google Pay</div>
                 </div>
               </label>
 
-              <label class="option" data-method="paypal">
-                <input type="radio" name="payment" value="paypal">
+              <label class="option" data-method="mobile_money">
+                <input type="radio" name="payment" value="mobile_money">
                 <span class="option-radio"></span>
                 <div class="option-content">
-                  <div class="option-title">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; color: var(--coral);">
-                      <path d="M3 5h18v14H3z"/><path d="M3 10h18"/>
-                    </svg>
-                    Pay with PayPal
-                  </div>
-                  <div class="option-line">You'll be redirected to PayPal to complete payment</div>
+                  <div class="option-title" data-i18n="checkout_pay_momo">Mobile Money</div>
+                  <div class="option-line" data-i18n="checkout_pay_momo_desc">M-PESA, Airtel Money, MTN MoMo</div>
                 </div>
               </label>
-
-              <div class="option" style="border-style: dashed; background: transparent; cursor: default;">
-                <span class="option-radio" style="opacity: 0;"></span>
-                <div class="option-content">
-                  <div class="option-line">More payment methods coming soon</div>
-                </div>
-              </div>
 
             </div>
           </div>
         </section>
 
-        <!-- 4. Order Review -->
         <section class="block">
           <div class="block-head">
             <span class="block-num">4</span>
-            <h2 class="block-title">Order Review (${totalItems} ${totalItems === 1 ? 'item' : 'items'})</h2>
-            <a href="cart.html" class="block-edit">Edit cart</a>
+            <h2 class="block-title">
+              <span data-i18n="checkout_review_title">Order Review</span> (${totalItems} ${totalItems === 1 ? 'item' : 'items'})
+            </h2>
+            <a href="cart.html" class="block-edit" data-i18n="checkout_edit_cart">Edit cart</a>
           </div>
           <div style="padding: 0;">
             ${orderItemsHtml}
@@ -849,65 +792,64 @@
 
       </div>
 
-      <!-- RIGHT: SUMMARY -->
       <aside class="sidebar">
         <div class="summary">
-          <h2 class="summary-title">Order Summary</h2>
+          <h2 class="summary-title" data-i18n="checkout_summary">Order Summary</h2>
 
           <div class="summary-row">
-            <span>Subtotal</span>
+            <span data-i18n="checkout_subtotal">Subtotal</span>
             <span class="value" id="summarySubtotal">${formatPrice(state.subtotal, state.currency)}</span>
           </div>
 
           <div class="summary-row">
-            <span>Shipping</span>
-            <span class="value free" id="summaryShipping">Free</span>
+            <span data-i18n="checkout_shipping">Shipping</span>
+            <span class="value free" id="summaryShipping" data-i18n="checkout_free">Free</span>
           </div>
 
           <div class="summary-row">
-            <span>Buyer Protection</span>
-            <span class="value free">Included</span>
+            <span data-i18n="checkout_buyer_protect">Buyer Protection</span>
+            <span class="value free" data-i18n="checkout_included">Included</span>
           </div>
 
           <div class="summary-divider"></div>
 
           <div class="summary-total">
-            <span class="label">Total</span>
+            <span class="label" data-i18n="checkout_total">Total</span>
             <span class="amount" id="summaryTotal">${formatPrice(state.subtotal, state.currency)}</span>
           </div>
 
-          <div class="summary-vat">Including VAT where applicable</div>
+          <div class="summary-vat" data-i18n="checkout_vat">Including VAT where applicable</div>
 
           <button class="btn-place" id="placeOrderBtn" onclick="placeOrder()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <span id="placeOrderText">Place Order Securely</span>
+            <span id="placeOrderText" data-i18n="checkout_place">Place Order Securely</span>
           </button>
 
           <a href="cart.html" class="btn-back">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
-            Back to cart
+            <span data-i18n="checkout_back_cart">Back to cart</span>
           </a>
 
           <div class="trust-list">
             <div class="trust-item">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               <div>
-                <strong>Buyer Protection</strong>
-                Money held securely until you confirm delivery
+                <strong data-i18n="checkout_trust_buyer">Buyer Protection</strong>
+                <span data-i18n="checkout_trust_buyer_desc">Money held securely until you confirm delivery</span>
               </div>
             </div>
             <div class="trust-item">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
               <div>
-                <strong>Encrypted Payment</strong>
-                256-bit SSL encryption on every transaction
+                <strong data-i18n="checkout_trust_encrypted">Encrypted Payment</strong>
+                <span data-i18n="checkout_trust_encrypted_desc">256-bit SSL encryption on every transaction</span>
               </div>
             </div>
             <div class="trust-item">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
               <div>
-                <strong>Free Returns</strong>
-                14-day returns on every item
+                <strong data-i18n="checkout_trust_returns">Free Returns</strong>
+                <span data-i18n="checkout_trust_returns_desc">14-day returns on every item</span>
               </div>
             </div>
           </div>
@@ -915,7 +857,6 @@
       </aside>
     `
 
-    // Wire up delivery options
     document.querySelectorAll('#deliveryOptions .option').forEach(opt => {
       opt.addEventListener('click', () => {
         document.querySelectorAll('#deliveryOptions .option').forEach(o => o.classList.remove('selected'))
@@ -926,7 +867,6 @@
       })
     })
 
-    // Wire up payment options
     document.querySelectorAll('#paymentOptions .option[data-method]').forEach(opt => {
       opt.addEventListener('click', () => {
         document.querySelectorAll('#paymentOptions .option').forEach(o => o.classList.remove('selected'))
@@ -935,12 +875,10 @@
       })
     })
 
+    if (window.relovlyI18n) window.relovlyI18n.applyTranslations()
     updateTotals()
   }
 
-  // ============================================
-  // UPDATE TOTALS
-  // ============================================
   function updateTotals() {
     state.total = state.subtotal + state.shippingCost
 
@@ -949,7 +887,7 @@
       shippingEl.textContent = formatPrice(state.shippingCost, state.currency)
       shippingEl.classList.remove('free')
     } else {
-      shippingEl.textContent = 'Free'
+      shippingEl.textContent = t('checkout_free') || 'Free'
       shippingEl.classList.add('free')
     }
 
@@ -957,14 +895,10 @@
     document.getElementById('summaryTotal').textContent = formatPrice(state.total, state.currency)
   }
 
-  // ============================================
-  // PLACE ORDER
-  // ============================================
   async function placeOrder() {
     if (state.placing) return
     hideError()
 
-    // Validate address
     const address = {
       first_name: document.getElementById('shipFirstName').value.trim(),
       last_name: document.getElementById('shipLastName').value.trim(),
@@ -983,7 +917,6 @@
     if (!address.postcode) return showError('Please enter your postcode.')
     if (!address.country) return showError('Please enter your country.')
 
-    // Disable button
     const btn = document.getElementById('placeOrderBtn')
     const btnText = document.getElementById('placeOrderText')
     state.placing = true
@@ -992,7 +925,6 @@
     btnText.textContent = 'Placing your order...'
 
     try {
-      // Create one order per cart item
       const ordersToInsert = state.cartItems.map(item => {
         const l = item.listing
         return {
@@ -1023,7 +955,6 @@
 
       if (error) throw error
 
-      // Save the first order number for confirmation page
       const orderNumber = ordersToInsert[0].order_number
       sessionStorage.setItem('relovly_last_order', JSON.stringify({
         order_number: orderNumber,
@@ -1033,7 +964,6 @@
         created_at: new Date().toISOString()
       }))
 
-      // Clear cart
       clearCart()
 
       btnText.textContent = 'Order placed!'
@@ -1047,13 +977,10 @@
       state.placing = false
       btn.disabled = false
       btn.classList.remove('loading')
-      btnText.textContent = 'Place Order Securely'
+      btnText.textContent = t('checkout_place') || 'Place Order Securely'
     }
   }
 
-  // ============================================
-  // BOOT
-  // ============================================
   window.addEventListener('supabase-ready', async () => {
     let tries = 0
     while (!window.supabaseClient && tries < 50) {
@@ -1071,6 +998,9 @@
     renderCheckout()
   })
 </script>
+
+<!-- i18n -->
+<script src="i18n.js"></script>
 
 </body>
 </html>

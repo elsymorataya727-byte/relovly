@@ -67,7 +67,7 @@
   .icon-btn { width: 40px; height: 40px; border-radius: var(--r-pill); display: flex; align-items: center; justify-content: center; color: var(--text-2); transition: background 0.15s, color 0.15s; position: relative; }
   .icon-btn:hover { background: var(--bg); color: var(--text); }
 
-  .btn-buy { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; background: var(--coral); color: white; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; transition: background 0.15s, transform 0.1s; }
+  .btn-buy { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; background: var(--coral); color: white; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; transition: background 0.15s; }
   .btn-buy:hover { background: var(--coral-dark); }
 
   /* BREADCRUMB */
@@ -440,7 +440,7 @@
     font-size: 14px;
     color: var(--text-2);
     line-height: 1.6;
-    max-width: 320px;
+    max-width: 340px;
   }
 
   .btn-spinner {
@@ -522,47 +522,47 @@
           </span>
           <span class="wordmark">relov<em>ly</em></span>
         </a>
-        <p>The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
+        <p data-i18n="footer_tagline">The international marketplace for quality pre-owned items. Trusted sellers, verified items, secure payments.</p>
       </div>
 
       <div class="footer-col">
-        <h4>Buy</h4>
+        <h4 data-i18n="footer_buy">Buy</h4>
         <ul>
-          <li><a href="#">How to Buy</a></li>
-          <li><a href="#">Buyer Protection</a></li>
-          <li><a href="#">Shipping Info</a></li>
-          <li><a href="#">Returns</a></li>
+          <li><a href="#" data-i18n="footer_how_to_buy">How to Buy</a></li>
+          <li><a href="#" data-i18n="footer_buyer_protection">Buyer Protection</a></li>
+          <li><a href="#" data-i18n="footer_shipping_info">Shipping Info</a></li>
+          <li><a href="#" data-i18n="footer_returns">Returns</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Sell</h4>
+        <h4 data-i18n="footer_sell">Sell</h4>
         <ul>
-          <li><a href="#">Start Selling</a></li>
-          <li><a href="#">Seller Fees</a></li>
-          <li><a href="#">Verification</a></li>
-          <li><a href="#">Seller Guide</a></li>
+          <li><a href="#" data-i18n="footer_start_selling">Start Selling</a></li>
+          <li><a href="#" data-i18n="footer_seller_fees">Seller Fees</a></li>
+          <li><a href="#" data-i18n="footer_verification">Verification</a></li>
+          <li><a href="#" data-i18n="footer_seller_guide">Seller Guide</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Support</h4>
+        <h4 data-i18n="footer_support">Support</h4>
         <ul>
-          <li><a href="#">Help Centre</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Disputes</a></li>
-          <li><a href="#">Report Listing</a></li>
+          <li><a href="#" data-i18n="footer_help">Help Centre</a></li>
+          <li><a href="#" data-i18n="footer_contact">Contact Us</a></li>
+          <li><a href="#" data-i18n="footer_disputes">Disputes</a></li>
+          <li><a href="#" data-i18n="footer_report">Report Listing</a></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <span>© 2026 relovly. All rights reserved.</span>
+      <span data-i18n="footer_rights">© 2026 relovly. All rights reserved.</span>
       <div class="footer-bottom-links">
         <a href="#">United Kingdom · GBP £</a>
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="#">Cookies</a>
+        <a href="#" data-i18n="footer_terms">Terms</a>
+        <a href="#" data-i18n="footer_privacy">Privacy</a>
+        <a href="#" data-i18n="footer_cookies">Cookies</a>
       </div>
     </div>
   </div>
@@ -686,7 +686,7 @@
   </div>
 </div>
 
-<!-- CONTACT SELLER -->
+<!-- CONTACT SELLER (with new fields) -->
 <div class="modal-backdrop" id="contactModal" data-modal>
   <div class="modal" role="dialog" aria-labelledby="contactTitle">
     <div class="modal-head">
@@ -701,6 +701,18 @@
     <div class="modal-body" id="contactBody">
       <div class="modal-alert" id="contactAlert"></div>
       <form id="contactForm" onsubmit="submitContact(event)">
+        <div class="form-field">
+          <label class="form-label" for="contactName">Your name <span class="req">*</span></label>
+          <input class="form-input" type="text" id="contactName" required placeholder="e.g. Jane Doe" maxlength="80">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="contactEmail">Email address <span class="req">*</span></label>
+          <input class="form-input" type="email" id="contactEmail" required placeholder="you@example.com" maxlength="120">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="contactPhone">Phone / WhatsApp <span class="req">*</span></label>
+          <input class="form-input" type="tel" id="contactPhone" required placeholder="+44 7700 900000" maxlength="30">
+        </div>
         <div class="form-field">
           <label class="form-label" for="contactSubject">Subject <span class="req">*</span></label>
           <input class="form-input" type="text" id="contactSubject" required placeholder="e.g. Is this still available?" maxlength="120">
@@ -732,6 +744,11 @@
 
 <script>
   // ============================================
+  // BACKEND CONFIG
+  // ============================================
+  const RELOVLY_API = 'https://relovly-production.up.railway.app'
+
+  // ============================================
   // STATE
   // ============================================
   const state = {
@@ -745,6 +762,10 @@
   // ============================================
   // HELPERS
   // ============================================
+  function t(key) {
+    return window.relovlyI18n ? window.relovlyI18n.t(key) : key
+  }
+
   function formatPrice(price, currency) {
     const n = parseFloat(price || 0)
     const symbols = { GBP: '£', USD: '$', EUR: '€' }
@@ -784,7 +805,6 @@
     return Math.floor(seconds / 31536000) + 'y ago'
   }
 
-  // Random views: 18–417 per page load
   function randomViews() {
     return 18 + Math.floor(Math.random() * 400)
   }
@@ -1155,9 +1175,6 @@
     if (e.key === 'ArrowRight') nextImage()
   })
 
-  // ============================================
-  // DESCRIPTION TOGGLE
-  // ============================================
   function toggleDescription(btn) {
     const desc = document.getElementById('description')
     desc.classList.toggle('expanded')
@@ -1381,7 +1398,34 @@
         <div class="success-desc">${escapeHtml(desc)}</div>
       </div>
     `
-    setTimeout(() => closeModal(modalId), 1800)
+    setTimeout(() => closeModal(modalId), 2200)
+  }
+
+  // ============================================
+  // FIRE-AND-FORGET: notify backend
+  // ============================================
+  async function notifyBackend(endpoint, payload) {
+    try {
+      const res = await fetch(RELOVLY_API + endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      if (!res.ok) {
+        console.warn('Backend returned non-OK:', res.status)
+      }
+    } catch (err) {
+      // Non-blocking — message already saved to Supabase
+      console.warn('Backend notification failed:', err)
+    }
+  }
+
+  function buildListingContext() {
+    return {
+      listing_id: state.listing?.id || null,
+      listing_title: state.listing?.title || null,
+      listing_url: state.listing ? window.location.href : null
+    }
   }
 
   // ============================================
@@ -1409,16 +1453,25 @@
 
     setLoading(btn, true, 'Sending…')
 
+    const message = (msgInput.value || '').trim() || null
+
     const payload = {
       listing_id: state.listing.id,
       buyer_id: session.user.id,
       seller_id: state.listing.seller_id || null,
       amount: amount,
-      message: (msgInput.value || '').trim() || null,
+      message: message,
       status: 'pending'
     }
 
     const { error } = await window.supabaseClient.from('offers').insert(payload)
+
+    // Fire-and-forget to Telegram
+    notifyBackend('/offer', {
+      amount,
+      message,
+      ...buildListingContext()
+    })
 
     setLoading(btn, false)
 
@@ -1459,6 +1512,18 @@
 
     const { error } = await window.supabaseClient.from('shipping_requests').insert(payload)
 
+    // Fire-and-forget to Telegram
+    notifyBackend('/shipping', {
+      full_name: payload.full_name,
+      address_line: payload.address_line,
+      city: payload.city,
+      postcode: payload.postcode,
+      country: payload.country,
+      phone: payload.phone,
+      note: payload.note,
+      ...buildListingContext()
+    })
+
     setLoading(btn, false)
 
     if (error) {
@@ -1471,33 +1536,64 @@
   }
 
   // ============================================
-  // SUBMIT: CONTACT SELLER
+  // SUBMIT: CONTACT SELLER (with name/email/phone)
   // ============================================
   async function submitContact(e) {
     e.preventDefault()
     const btn = document.getElementById('contactSubmitBtn')
+
+    const nameInput = document.getElementById('contactName')
+    const emailInput = document.getElementById('contactEmail')
+    const phoneInput = document.getElementById('contactPhone')
     const subjectInput = document.getElementById('contactSubject')
     const messageInput = document.getElementById('contactMessage')
 
+    const name = nameInput.value.trim()
+    const email = emailInput.value.trim()
+    const phone = phoneInput.value.trim()
     const subject = subjectInput.value.trim()
     const message = messageInput.value.trim()
 
-    if (!subject || !message) return
+    // Basic validation
+    if (!name) { nameInput.focus(); return }
+    if (!email || !email.includes('@')) { emailInput.focus(); return }
+    if (!phone) { phoneInput.focus(); return }
+    if (!subject) { subjectInput.focus(); return }
+    if (!message) { messageInput.focus(); return }
 
     const { data: { session } } = await window.supabaseClient.auth.getSession()
     if (!session) { window.location.href = 'login.html'; return }
 
     setLoading(btn, true, 'Sending…')
 
+    // 1) Save to Supabase
+    //    We store contact_name/email/phone inside the body so they're captured
+    //    even if the messages table doesn't have dedicated columns yet.
+    const combinedBody =
+      `Name: ${name}\n` +
+      `Email: ${email}\n` +
+      `Phone/WhatsApp: ${phone}\n` +
+      `\n${message}`
+
     const payload = {
       listing_id: state.listing.id,
       sender_id: session.user.id,
       recipient_id: state.listing.seller_id || null,
       subject: subject,
-      body: message
+      body: combinedBody
     }
 
     const { error } = await window.supabaseClient.from('messages').insert(payload)
+
+    // 2) Fire-and-forget to Telegram (with all fields)
+    notifyBackend('/contact', {
+      name,
+      email,
+      phone,
+      subject,
+      message,
+      ...buildListingContext()
+    })
 
     setLoading(btn, false)
 
@@ -1507,11 +1603,16 @@
       return
     }
 
-    showSuccessState('contactModal', 'Message sent', 'The seller will receive your message and reply soon.')
+    // 3) Sweet success message
+    showSuccessState(
+      'contactModal',
+      'Message sent 💌',
+      "Thank you for reaching out! We'll get back to you shortly via email or WhatsApp."
+    )
   }
 
   // ============================================
-  // RELATED PRODUCTS (matches index.html card style)
+  // RELATED PRODUCTS
   // ============================================
   async function loadRelated() {
     if (!state.listing) return
@@ -1654,6 +1755,9 @@
     await loadRelated()
   })
 </script>
+
+<!-- i18n -->
+<script src="i18n.js"></script>
 
 </body>
 </html>
